@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vietnamhistory_app/route_generator.dart';
-import 'package:vietnamhistory_app/screens/login_screen/mobile/login_screen.dart';
+import 'route_generator.dart';
 import 'package:get/get.dart';
-import 'package:vietnamhistory_app/widgets/header.dart';
 
 void main() {
   runApp(const MyApp());

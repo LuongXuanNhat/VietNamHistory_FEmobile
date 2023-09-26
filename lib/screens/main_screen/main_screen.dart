@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:vietnamhistory_app/common/storage/global_colors.dart';
-import 'package:vietnamhistory_app/common/storage/global_styles.dart';
-import 'package:vietnamhistory_app/components/build_image.dart';
-import 'package:vietnamhistory_app/widgets/bottom_navigation.dart';
-import 'package:vietnamhistory_app/widgets/custom_textfield.dart';
-import 'package:vietnamhistory_app/widgets/header.dart';
+import '../../common/storage/global_colors.dart';
+import '../../common/storage/global_styles.dart';
+
+import '../../widgets/bottom_navigation.dart';
+import '../../widgets/carouse.dart';
+import '../../widgets/custom_textfield.dart';
+
+import '../../widgets/header.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
 
 class MainScreen extends StatefulWidget {
   final TextEditingController? txtSearch;
@@ -54,29 +55,10 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 310,
-                child: Stack(
-                  alignment: AlignmentDirectional.bottomCenter,
-                  children: [
-                    Hero(
-                      tag: 'blue_card',
-                      child: Material(
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: 270,
-                          decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(15.0),
-                            ),
-                            color: Theme.of(context).primaryColor,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+              const SizedBox(
+                height: 12,
               ),
+              const CarouseClass(),
               const SizedBox(height: 20),
               SizedBox(
                 height: 100,
