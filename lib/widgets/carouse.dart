@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-import '../common/storage/global_colors.dart';
+import '../common/global_colors.dart';
 
 class CarouseClass extends StatefulWidget {
   const CarouseClass({super.key});

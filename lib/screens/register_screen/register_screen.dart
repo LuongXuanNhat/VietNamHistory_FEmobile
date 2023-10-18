@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:vietnamhistory_app/common/storage/global_styles.dart';
+import '../../common/global_styles.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:vietnamhistory_app/route_generator.dart';
+import '../../route_generator.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -91,7 +91,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () =>
+                        navigator!.pushNamed(RouteGenerator.signupScreen),
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
