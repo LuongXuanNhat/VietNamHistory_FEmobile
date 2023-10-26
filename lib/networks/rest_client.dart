@@ -4,6 +4,7 @@ import 'package:retrofit/http.dart';
 import '../common/global_configs.dart';
 import '../models/user/request/login_request.dart';
 import '../models/user/request/register_request.dart';
+import '../models/user/request/update_profile_request.dart';
 import '../models/user/response/login_response.dart';
 import '../models/user/response/register_response.dart';
 import '../models/user/response/user_response.dart';
@@ -23,4 +24,8 @@ abstract class RestClient {
 
   @GET('User')
   Future<UserResponse> loggedIn();
+
+  @PUT('User')
+  Future<UserResponse> updateProfile(
+      {@Body() required UpdateProfileRequest request});
 }

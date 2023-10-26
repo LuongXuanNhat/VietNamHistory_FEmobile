@@ -81,7 +81,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                           Text(
                             "Khám phá",
-                            style: GlobalStyles.titilliumBold(context),
+                            style: GlobalStyles.defualtFont(context),
                           ),
                         ],
                       ),

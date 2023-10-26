@@ -88,7 +88,7 @@ class CustomTextField extends StatelessWidget {
                 children: [
                   Text(
                     hintLabel ?? "",
-                    style: GlobalStyles.titilliumBold(context),
+                    style: GlobalStyles.defualtFont(context),
                     textScaleFactor: 1.5,
                   ),
                   Text(

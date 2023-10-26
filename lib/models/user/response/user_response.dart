@@ -1,9 +1,15 @@
 import 'dart:convert';
 
 class UserResponse {
-  UserResponse({this.data});
+  UserResponse({this.success, this.message, this.data});
+  bool? success;
+  String? message;
   User? data;
-  UserResponse copyWith({User? data}) => UserResponse(data: data ?? this.data);
+  UserResponse copyWith({bool? success, String? message, User? data}) =>
+      UserResponse(
+          success: success ?? this.success,
+          message: message ?? this.message,
+          data: data ?? this.data);
 
   factory UserResponse.fromRawJson(String str) =>
       UserResponse.fromJson(json.decode(str));
@@ -11,11 +17,16 @@ class UserResponse {
   String toRawJson() => json.encode(toJson());
 
   factory UserResponse.fromJson(Map<String, dynamic> json) => UserResponse(
+      success: json["isSuccessed"],
+      message: json["message"],
       data:
           json["resultObj"] == null ? null : User.fromJson(json["resultObj"]));
 
-  Map<String, dynamic> toJson() =>
-      {"resultObj": data == null ? null : data!.toJson()};
+  Map<String, dynamic> toJson() => {
+        "isSuccessed": success,
+        "message": message,
+        "resultObj": data == null ? null : data!.toJson()
+      };
 }
 
 class User {
@@ -59,7 +70,7 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> json) => User(
       fullname: json["fullname"],
-      username: json["username"],
+      username: json["userName"],
       email: json["email"],
       phoneNumber: json["phoneNumber"],
       dateOfBirth: json["dateOfBirth"],
@@ -68,7 +79,7 @@ class User {
 
   Map<String, dynamic> toJson() => {
         'fullname': fullname,
-        'username': username,
+        'userName': username,
         'email': email,
         'phoneNumber': phoneNumber,
         'dateOfBirth': dateOfBirth,

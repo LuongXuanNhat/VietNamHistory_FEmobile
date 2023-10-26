@@ -6,6 +6,7 @@ import 'package:get/get_navigation/src/extension_navigation.dart';
 import '../../../common/storage/app_prefs.dart';
 import '../../../common/ui_helpers.dart';
 import '../../../get_it.dart';
+import '../../../models/user/request/login_request.dart';
 import '../../../models/user/request/register_request.dart';
 import '../../../repositories/data_repository.dart';
 import '../../../route_generator.dart';
@@ -48,8 +49,21 @@ class SignupCubit extends Cubit<SignupState> {
         final request = RegisterRequest(
             email: email, password: password, confirmPassword: confirmPassword);
         final response = await dataRepository.register(request: request);
-        if (response.data!.isSuccess == true) {
-          navigator!.pushNamed(RouteGenerator.homeScreen);
+        if (response.isSuccessed == true) {
+          final requestLogin = LoginRequest(email: email, password: password);
+          final responseLogin =
+              await dataRepository.login(request: requestLogin);
+          if (responseLogin.isSuccess == true) {
+            emit(SignupState.getError(
+                data: state.data!.copyWith(error: 'Success')));
+            await appPref.saveToken(tokenJson: responseLogin.toRawJson());
+            navigator!.pushNamedAndRemoveUntil(
+                RouteGenerator.mainScreen, (route) => false);
+          } else {
+            emit(SignupState.getError(
+                data:
+                    state.data!.copyWith(error: responseLogin.message ?? '')));
+          }
         }
       }
     } catch (error) {

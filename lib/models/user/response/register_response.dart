@@ -1,17 +1,54 @@
 import 'dart:convert';
 
+// class RegisterResponse {
+//   RegisterResponse({this.isSuccess, this.message, this.token});
+
+//   bool? isSuccess;
+//   String? message;
+//   String? token;
+
+//   RegisterResponse coppyWith(
+//           {bool? isSuccess, String? message, String? token}) =>
+//       RegisterResponse(
+//           isSuccess: isSuccess ?? this.isSuccess,
+//           message: message ?? this.message,
+//           token: token ?? this.token);
+
+//   factory RegisterResponse.fromRawJson(String str) =>
+//       RegisterResponse.fromJson(json.decode(str));
+
+//   String toRawJson() => json.encode(toJson());
+
+//   factory RegisterResponse.fromJson(Map<String, dynamic> json) =>
+//       RegisterResponse(
+//           isSuccess: json["isSuccessed"],
+//           message: json["message"],
+//           token: json["resultObj"]);
+
+//   Map<String, dynamic> toJson() =>
+//       {"isSuccessed": isSuccess, "message": message, "resultObj": token};
+// }
+
 class RegisterResponse {
+  bool? isSuccessed;
+  String? message;
+  bool? resultObj;
+
   RegisterResponse({
-    this.data,
+    this.isSuccessed,
+    this.message,
+    this.resultObj,
   });
 
-  RegisterData? data;
-
   RegisterResponse copyWith({
-    RegisterData? data,
+    bool? isSuccessed,
+    String? message,
+    bool? resultObj,
   }) =>
       RegisterResponse(
-        data: data ?? this.data,
+        isSuccessed: isSuccessed ?? this.isSuccessed,
+        message: message ?? this.message,
+        resultObj: resultObj ?? this.resultObj,
       );
 
   factory RegisterResponse.fromRawJson(String str) =>
@@ -21,40 +58,10 @@ class RegisterResponse {
 
   factory RegisterResponse.fromJson(Map<String, dynamic> json) =>
       RegisterResponse(
-        data: json["data"] == null ? null : RegisterData.fromJson(json["data"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "data": data == null ? null : data!.toJson(),
-      };
-}
-
-class RegisterData {
-  RegisterData({this.isSuccess, this.message, this.token});
-  bool? isSuccess;
-  String? message;
-  String? token;
-
-  RegisterData copyWith({
-    bool? isSuccess,
-    String? message,
-    String? token,
-  }) =>
-      RegisterData(
-          isSuccess: isSuccess ?? this.isSuccess,
-          message: message ?? this.message,
-          token: token ?? this.token);
-
-  factory RegisterData.fromRawJson(String str) =>
-      RegisterData.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
-  factory RegisterData.fromJson(Map<String, dynamic> json) => RegisterData(
-        isSuccess: json["isSuccessed"],
-        message: json["message"],
-      );
+          isSuccessed: json["isSuccessed"],
+          message: json["message"],
+          resultObj: json["resultObj"]);
 
   Map<String, dynamic> toJson() =>
-      {"isSuccessed": isSuccess, "message": message, "resultObj": token};
+      {"isSuccessed": isSuccessed, "message": message, "resultObj": resultObj};
 }

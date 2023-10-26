@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../route_generator.dart';
 import '../home_screen/home_screen.dart';
 import '../user_screen/account_settings_screen.dart';
+import '../user_screen/update_profile_screen.dart';
 
 class MainScreen extends StatefulWidget {
   final TextEditingController? txtSearch;
@@ -20,12 +21,12 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int currentIndex = 0;
-  List<Widget> body = const [
-    HomeScreen(),
-    Icon(Icons.home),
-    Icon(Icons.menu),
-    Icon(Icons.person),
-    AccountSettingsScreen(),
+  List<Widget> body = [
+    const HomeScreen(),
+    const Icon(Icons.home),
+    const Icon(Icons.menu),
+    const Icon(Icons.person),
+    AccountSettingsScreen.provider(),
   ];
   @override
   Widget build(BuildContext context) {

@@ -13,7 +13,7 @@ class _RestClient implements RestClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://10.0.2.2:5001/';
+    baseUrl ??= 'https://10.0.2.2:7138/';
   }
 
   final Dio _dio;
@@ -85,6 +85,35 @@ class _RestClient implements RestClient {
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<UserResponse>(Options(
       method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'User',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = UserResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<UserResponse> updateProfile(
+      {required UpdateProfileRequest request}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<UserResponse>(Options(
+      method: 'PUT',
       headers: _headers,
       extra: _extra,
     )

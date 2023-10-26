@@ -7,6 +7,7 @@ import '../get_it.dart';
 import '../models/base/response/error_response.dart';
 import '../models/user/request/login_request.dart';
 import '../models/user/request/register_request.dart';
+import '../models/user/request/update_profile_request.dart';
 import '../models/user/response/login_response.dart';
 import '../models/user/response/register_response.dart';
 import '../models/user/response/user_response.dart';
@@ -74,5 +75,10 @@ class DataRepository implements RestClient {
   @override
   Future<UserResponse> loggedIn() {
     return client!.loggedIn();
+  }
+
+  @override
+  Future<UserResponse> updateProfile({required UpdateProfileRequest request}) {
+    return client!.updateProfile(request: request);
   }
 }

@@ -12,6 +12,8 @@ class GlobalColors {
   static Color background1 = HexColor('#F9FAFB');
   static Color colorBack = HexColor('#9095A0');
   static Color colorButton1 = HexColor('#00BDD6');
+  static Color colorbackgroundTF = HexColor('#F3F4F6');
+  static Color colorDefault = HexColor('#FFFFFF');
 }
 
 class HexColor extends Color {

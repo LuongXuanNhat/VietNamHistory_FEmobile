@@ -35,8 +35,7 @@ class LoginCubitCubit extends Cubit<LoginCubitState> {
           emit(LoginCubitState.getError(
               data: state.data!.copyWith(error: 'Success')));
           await appPrefs.saveToken(tokenJson: response.toRawJson());
-          final userResponse = await dataRepository.loggedIn();
-          await appPrefs.saveUser(userJson: userResponse.toRawJson());
+
           print(response.toRawJson());
         } else {
           emit(LoginCubitState.getError(

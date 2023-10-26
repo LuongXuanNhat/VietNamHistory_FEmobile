@@ -51,12 +51,12 @@ class RouteGenerator {
         );
       case accounsettingsScreen:
         return MaterialPageRoute(
-          builder: (context) => const AccountSettingsScreen(),
+          builder: (context) => AccountSettingsScreen.provider(),
           settings: settings,
         );
       case updateProfileScreen:
         return MaterialPageRoute(
-          builder: (context) => const UpdateProfileScreen(),
+          builder: (context) => UpdateProfileScreen.provider(),
           settings: settings,
         );
       case mainScreen:

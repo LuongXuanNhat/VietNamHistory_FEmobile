@@ -26,9 +26,8 @@ class _SplashScreenState extends State<SplashScreen> with AfterLayoutMixin {
   @override
   FutureOr<void> afterFirstLayout(BuildContext context) async {
     Future.delayed(const Duration(seconds: 2), () async {
-      final hasLoggedIn = await appPrefs.hasLoggedIn();
       final hasToken = await appPrefs.getToken();
-      if (hasLoggedIn) {
+      if (hasToken != null) {
         navigator!.pushNamedAndRemoveUntil(
             RouteGenerator.mainScreen, (route) => false);
       } else {
