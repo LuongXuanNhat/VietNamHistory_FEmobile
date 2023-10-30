@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vietnamhistory_app/common/storage/global_colors.dart';
+import '../common/global_colors.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -12,6 +12,7 @@ class BottomNavigation extends StatefulWidget {
 
 class _BottomNavigationState extends State<BottomNavigation> {
   int index = 0;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,7 +23,9 @@ class _BottomNavigationState extends State<BottomNavigation> {
         currentIndex: index,
         onTap: (value) {
           index = value;
-          setState(() {});
+          setState(() {
+            index = value;
+          });
         },
         showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,

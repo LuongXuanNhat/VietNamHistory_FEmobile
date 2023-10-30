@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vietnamhistory_app/common/storage/global_styles.dart';
+import 'package:vietnamhistory_app/common/global_styles.dart';
 
 class Header extends StatelessWidget {
   const Header({super.key});

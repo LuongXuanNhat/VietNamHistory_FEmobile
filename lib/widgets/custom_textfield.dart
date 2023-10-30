@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:vietnamhistory_app/common/storage/dimension.dart';
+import '../common/dimension.dart';
 
-import 'package:vietnamhistory_app/common/storage/global_styles.dart';
+import '../common/global_styles.dart';
 
 class CustomTextField extends StatelessWidget {
   final String? hintLabel;
@@ -66,8 +66,8 @@ class CustomTextField extends StatelessWidget {
         textInputAction: textInputAction,
         readOnly: readOnly,
         maxLength: maxLength,
-        onChanged: (value) => onchanged!(value),
-        style: const TextStyle(fontSize: Dimension.FONT_SIZE_TEXT_HINT),
+        //    onChanged: (value) => onchanged!(value),
+        style: const TextStyle(fontSize: Dimension.FONT_SIZE_DEFAULT),
         decoration: InputDecoration(
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
@@ -88,7 +88,7 @@ class CustomTextField extends StatelessWidget {
                 children: [
                   Text(
                     hintLabel ?? "",
-                    style: GlobalStyles.titilliumBold(context),
+                    style: GlobalStyles.defualtFont(context),
                     textScaleFactor: 1.5,
                   ),
                   Text(
