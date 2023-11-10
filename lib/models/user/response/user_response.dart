@@ -35,11 +35,13 @@ class User {
       this.username,
       this.email,
       this.phoneNumber,
+      this.introduction,
       this.dateOfBirth,
       this.gender,
       this.image});
   String? fullname;
   String? username;
+  String? introduction;
   String? email;
   String? phoneNumber;
   dynamic dateOfBirth;
@@ -50,6 +52,7 @@ class User {
     String? fullname,
     String? username,
     String? email,
+    String? introduction,
     String? phoneNumber,
     dynamic dateOfBirth,
     dynamic gender,
@@ -59,6 +62,7 @@ class User {
           fullname: fullname ?? this.fullname,
           username: username ?? this.username,
           email: email ?? this.email,
+          introduction: introduction ?? this.introduction,
           phoneNumber: phoneNumber ?? this.phoneNumber,
           dateOfBirth: dateOfBirth ?? this.dateOfBirth,
           gender: gender ?? this.gender,
@@ -72,6 +76,7 @@ class User {
       fullname: json["fullname"],
       username: json["userName"],
       email: json["email"],
+      introduction: json["introduction"],
       phoneNumber: json["phoneNumber"],
       dateOfBirth: json["dateOfBirth"],
       gender: json["gender"],
@@ -81,6 +86,7 @@ class User {
         'fullname': fullname,
         'userName': username,
         'email': email,
+        'introduction': introduction,
         'phoneNumber': phoneNumber,
         'dateOfBirth': dateOfBirth,
         'gender': gender,

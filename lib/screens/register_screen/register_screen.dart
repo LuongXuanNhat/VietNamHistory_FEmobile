@@ -28,7 +28,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ], color: Colors.white, borderRadius: BorderRadius.circular(8)),
           child: Center(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 24,
+              ),
               child: Column(
                 children: [
                   Padding(
@@ -154,8 +156,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                   const Text("Điều khoản & Điều kiện và Chính sách bảo mật"),
-                  const SizedBox(
-                    height: 180,
+                  SizedBox(
+                    height: navigator!.context.height * 0.1,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

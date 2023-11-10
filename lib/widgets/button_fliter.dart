@@ -4,20 +4,23 @@ import '../common/global_colors.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ButtonFilter extends StatefulWidget {
-  final String title = "";
+  final String? title;
   final FaIcon? icon;
-  final void Function()? onPressed;
+  final VoidCallback? onTap;
   final Color? background;
   final Color? colorWidget;
   final double? height;
+  final bool? isPrefix;
   final double? width;
 
   const ButtonFilter(
       {Key? key,
       this.icon,
-      this.onPressed,
+      this.onTap,
+      this.title = "",
       this.background,
       this.height,
+      this.isPrefix = false,
       this.width,
       this.colorWidget})
       : super(key: key);
@@ -30,7 +33,7 @@ class _ButtonFilterState extends State<ButtonFilter> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: widget.onTap,
       child: Container(
         height: 28,
         decoration: BoxDecoration(
@@ -39,30 +42,34 @@ class _ButtonFilterState extends State<ButtonFilter> {
           border: Border.all(
               color: widget.background != null
                   ? GlobalColors.colorButton1
-                  : Colors.black),
+                  : Colors.black54),
         ),
         padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            FaIcon(FontAwesomeIcons.plus,
-                size: 12,
-                color: widget.colorWidget != null
-                    ? GlobalColors.colorButton1
-                    : Colors.black),
+            if (widget.isPrefix == true)
+              FaIcon(FontAwesomeIcons.plus,
+                  size: 12,
+                  color: widget.colorWidget != null
+                      ? GlobalColors.colorButton1
+                      : Colors.black54),
             const SizedBox(
               width: 5,
             ),
-            Text(
-              widget.title,
-              style: TextStyle(
-                  fontFamily: "Inter",
-                  fontSize: 11,
-                  color: widget.colorWidget != null
-                      ? GlobalColors.colorButton1
-                      : Colors.black,
-                  fontWeight: FontWeight.w400),
+            Padding(
+              padding: const EdgeInsets.only(top: 1),
+              child: Text(
+                widget.title!,
+                style: TextStyle(
+                    fontFamily: "Inter",
+                    fontSize: 11,
+                    color: widget.colorWidget != null
+                        ? GlobalColors.colorButton1
+                        : Colors.black54,
+                    fontWeight: FontWeight.w400),
+              ),
             ),
           ],
         ),

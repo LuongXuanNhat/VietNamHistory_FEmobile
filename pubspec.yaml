@@ -37,6 +37,7 @@ dependencies:
   animated_custom_dropdown: 1.5.0
   cached_network_image: ^3.3.0
   intl: ^0.17.0
+  path_provider: ^2.0.5
 
 
   #storage

@@ -21,4 +21,9 @@ class GlobalStyles {
       fontFamily: 'Mulish', fontSize: 14.0, fontWeight: FontWeight.w400);
   static TextStyle primaryFont3(BuildContext context) => const TextStyle(
       fontFamily: 'Mulish', fontSize: 14.0, fontWeight: FontWeight.w600);
+  static TextStyle titilliumBold(BuildContext context) => const TextStyle(
+        fontFamily: 'Inter',
+        fontSize: 14,
+        fontWeight: FontWeight.w700,
+      );
 }

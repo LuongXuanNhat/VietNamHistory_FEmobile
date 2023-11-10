@@ -16,10 +16,14 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ProfileStateData {
-  String get error => throw _privateConstructorUsedError;
+  String? get error => throw _privateConstructorUsedError;
   int get success => throw _privateConstructorUsedError;
+  int get gender => throw _privateConstructorUsedError;
+  DateTime? get dateOfBirth => throw _privateConstructorUsedError;
   File? get image => throw _privateConstructorUsedError;
+  Uint8List? get bytes => throw _privateConstructorUsedError;
   UserResponse? get userResponse => throw _privateConstructorUsedError;
+  DateTime? get transactionDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProfileStateDataCopyWith<ProfileStateData> get copyWith =>
@@ -33,7 +37,14 @@ abstract class $ProfileStateDataCopyWith<$Res> {
       _$ProfileStateDataCopyWithImpl<$Res, ProfileStateData>;
   @useResult
   $Res call(
-      {String error, int success, File? image, UserResponse? userResponse});
+      {String? error,
+      int success,
+      int gender,
+      DateTime? dateOfBirth,
+      File? image,
+      Uint8List? bytes,
+      UserResponse? userResponse,
+      DateTime? transactionDate});
 }
 
 /// @nodoc
@@ -49,28 +60,48 @@ class _$ProfileStateDataCopyWithImpl<$Res, $Val extends ProfileStateData>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? error = null,
+    Object? error = freezed,
     Object? success = null,
+    Object? gender = null,
+    Object? dateOfBirth = freezed,
     Object? image = freezed,
+    Object? bytes = freezed,
     Object? userResponse = freezed,
+    Object? transactionDate = freezed,
   }) {
     return _then(_value.copyWith(
-      error: null == error
+      error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       success: null == success
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
               as int,
+      gender: null == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as int,
+      dateOfBirth: freezed == dateOfBirth
+          ? _value.dateOfBirth
+          : dateOfBirth // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as File?,
+      bytes: freezed == bytes
+          ? _value.bytes
+          : bytes // ignore: cast_nullable_to_non_nullable
+              as Uint8List?,
       userResponse: freezed == userResponse
           ? _value.userResponse
           : userResponse // ignore: cast_nullable_to_non_nullable
               as UserResponse?,
+      transactionDate: freezed == transactionDate
+          ? _value.transactionDate
+          : transactionDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -84,7 +115,14 @@ abstract class _$$ProfileStateDataImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String error, int success, File? image, UserResponse? userResponse});
+      {String? error,
+      int success,
+      int gender,
+      DateTime? dateOfBirth,
+      File? image,
+      Uint8List? bytes,
+      UserResponse? userResponse,
+      DateTime? transactionDate});
 }
 
 /// @nodoc
@@ -98,52 +136,104 @@ class __$$ProfileStateDataImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? error = null,
+    Object? error = freezed,
     Object? success = null,
+    Object? gender = null,
+    Object? dateOfBirth = freezed,
     Object? image = freezed,
+    Object? bytes = freezed,
     Object? userResponse = freezed,
+    Object? transactionDate = freezed,
   }) {
     return _then(_$ProfileStateDataImpl(
-      error: null == error
+      error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       success: null == success
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
               as int,
+      gender: null == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as int,
+      dateOfBirth: freezed == dateOfBirth
+          ? _value.dateOfBirth
+          : dateOfBirth // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as File?,
+      bytes: freezed == bytes
+          ? _value.bytes
+          : bytes // ignore: cast_nullable_to_non_nullable
+              as Uint8List?,
       userResponse: freezed == userResponse
           ? _value.userResponse
           : userResponse // ignore: cast_nullable_to_non_nullable
               as UserResponse?,
+      transactionDate: freezed == transactionDate
+          ? _value.transactionDate
+          : transactionDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$ProfileStateDataImpl implements _ProfileStateData {
+class _$ProfileStateDataImpl
+    with DiagnosticableTreeMixin
+    implements _ProfileStateData {
   const _$ProfileStateDataImpl(
-      {this.error = '', this.success = 0, this.image, this.userResponse});
+      {this.error,
+      this.success = 0,
+      this.gender = 0,
+      this.dateOfBirth,
+      this.image,
+      this.bytes,
+      this.userResponse,
+      this.transactionDate});
 
   @override
-  @JsonKey()
-  final String error;
+  final String? error;
   @override
   @JsonKey()
   final int success;
   @override
+  @JsonKey()
+  final int gender;
+  @override
+  final DateTime? dateOfBirth;
+  @override
   final File? image;
   @override
+  final Uint8List? bytes;
+  @override
   final UserResponse? userResponse;
+  @override
+  final DateTime? transactionDate;
 
   @override
-  String toString() {
-    return 'ProfileStateData(error: $error, success: $success, image: $image, userResponse: $userResponse)';
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ProfileStateData(error: $error, success: $success, gender: $gender, dateOfBirth: $dateOfBirth, image: $image, bytes: $bytes, userResponse: $userResponse, transactionDate: $transactionDate)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ProfileStateData'))
+      ..add(DiagnosticsProperty('error', error))
+      ..add(DiagnosticsProperty('success', success))
+      ..add(DiagnosticsProperty('gender', gender))
+      ..add(DiagnosticsProperty('dateOfBirth', dateOfBirth))
+      ..add(DiagnosticsProperty('image', image))
+      ..add(DiagnosticsProperty('bytes', bytes))
+      ..add(DiagnosticsProperty('userResponse', userResponse))
+      ..add(DiagnosticsProperty('transactionDate', transactionDate));
   }
 
   @override
@@ -153,14 +243,28 @@ class _$ProfileStateDataImpl implements _ProfileStateData {
             other is _$ProfileStateDataImpl &&
             (identical(other.error, error) || other.error == error) &&
             (identical(other.success, success) || other.success == success) &&
+            (identical(other.gender, gender) || other.gender == gender) &&
+            (identical(other.dateOfBirth, dateOfBirth) ||
+                other.dateOfBirth == dateOfBirth) &&
             (identical(other.image, image) || other.image == image) &&
+            const DeepCollectionEquality().equals(other.bytes, bytes) &&
             (identical(other.userResponse, userResponse) ||
-                other.userResponse == userResponse));
+                other.userResponse == userResponse) &&
+            (identical(other.transactionDate, transactionDate) ||
+                other.transactionDate == transactionDate));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, error, success, image, userResponse);
+  int get hashCode => Object.hash(
+      runtimeType,
+      error,
+      success,
+      gender,
+      dateOfBirth,
+      image,
+      const DeepCollectionEquality().hash(bytes),
+      userResponse,
+      transactionDate);
 
   @JsonKey(ignore: true)
   @override
@@ -172,19 +276,31 @@ class _$ProfileStateDataImpl implements _ProfileStateData {
 
 abstract class _ProfileStateData implements ProfileStateData {
   const factory _ProfileStateData(
-      {final String error,
+      {final String? error,
       final int success,
+      final int gender,
+      final DateTime? dateOfBirth,
       final File? image,
-      final UserResponse? userResponse}) = _$ProfileStateDataImpl;
+      final Uint8List? bytes,
+      final UserResponse? userResponse,
+      final DateTime? transactionDate}) = _$ProfileStateDataImpl;
 
   @override
-  String get error;
+  String? get error;
   @override
   int get success;
   @override
+  int get gender;
+  @override
+  DateTime? get dateOfBirth;
+  @override
   File? get image;
   @override
+  Uint8List? get bytes;
+  @override
   UserResponse? get userResponse;
+  @override
+  DateTime? get transactionDate;
   @override
   @JsonKey(ignore: true)
   _$$ProfileStateDataImplCopyWith<_$ProfileStateDataImpl> get copyWith =>
@@ -197,56 +313,80 @@ mixin _$ProfileState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(ProfileStateData? data) initial,
-    required TResult Function(ProfileStateData? data) error,
+    required TResult Function(ProfileStateData? data) getError,
     required TResult Function(ProfileStateData? data) success,
     required TResult Function(ProfileStateData? data) getImage,
     required TResult Function(ProfileStateData? data) userResponse,
+    required TResult Function(ProfileStateData? data) gender,
+    required TResult Function(ProfileStateData? data) dateOfBirth,
+    required TResult Function(ProfileStateData? data) bytes,
+    required TResult Function(ProfileStateData? data) setTransactionDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(ProfileStateData? data)? initial,
-    TResult? Function(ProfileStateData? data)? error,
+    TResult? Function(ProfileStateData? data)? getError,
     TResult? Function(ProfileStateData? data)? success,
     TResult? Function(ProfileStateData? data)? getImage,
     TResult? Function(ProfileStateData? data)? userResponse,
+    TResult? Function(ProfileStateData? data)? gender,
+    TResult? Function(ProfileStateData? data)? dateOfBirth,
+    TResult? Function(ProfileStateData? data)? bytes,
+    TResult? Function(ProfileStateData? data)? setTransactionDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(ProfileStateData? data)? initial,
-    TResult Function(ProfileStateData? data)? error,
+    TResult Function(ProfileStateData? data)? getError,
     TResult Function(ProfileStateData? data)? success,
     TResult Function(ProfileStateData? data)? getImage,
     TResult Function(ProfileStateData? data)? userResponse,
+    TResult Function(ProfileStateData? data)? gender,
+    TResult Function(ProfileStateData? data)? dateOfBirth,
+    TResult Function(ProfileStateData? data)? bytes,
+    TResult Function(ProfileStateData? data)? setTransactionDate,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(Error value) error,
+    required TResult Function(GetError value) getError,
     required TResult Function(Success value) success,
     required TResult Function(GetImage value) getImage,
     required TResult Function(Profile value) userResponse,
+    required TResult Function(GetGender value) gender,
+    required TResult Function(GetDateOfBirth value) dateOfBirth,
+    required TResult Function(GetBytes value) bytes,
+    required TResult Function(SetTransactionDate value) setTransactionDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
-    TResult? Function(Error value)? error,
+    TResult? Function(GetError value)? getError,
     TResult? Function(Success value)? success,
     TResult? Function(GetImage value)? getImage,
     TResult? Function(Profile value)? userResponse,
+    TResult? Function(GetGender value)? gender,
+    TResult? Function(GetDateOfBirth value)? dateOfBirth,
+    TResult? Function(GetBytes value)? bytes,
+    TResult? Function(SetTransactionDate value)? setTransactionDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(Error value)? error,
+    TResult Function(GetError value)? getError,
     TResult Function(Success value)? success,
     TResult Function(GetImage value)? getImage,
     TResult Function(Profile value)? userResponse,
+    TResult Function(GetGender value)? gender,
+    TResult Function(GetDateOfBirth value)? dateOfBirth,
+    TResult Function(GetBytes value)? bytes,
+    TResult Function(SetTransactionDate value)? setTransactionDate,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -341,15 +481,23 @@ class __$$InitialImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InitialImpl implements Initial {
+class _$InitialImpl with DiagnosticableTreeMixin implements Initial {
   const _$InitialImpl({this.data});
 
   @override
   final ProfileStateData? data;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ProfileState.initial(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ProfileState.initial'))
+      ..add(DiagnosticsProperty('data', data));
   }
 
   @override
@@ -373,10 +521,14 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(ProfileStateData? data) initial,
-    required TResult Function(ProfileStateData? data) error,
+    required TResult Function(ProfileStateData? data) getError,
     required TResult Function(ProfileStateData? data) success,
     required TResult Function(ProfileStateData? data) getImage,
     required TResult Function(ProfileStateData? data) userResponse,
+    required TResult Function(ProfileStateData? data) gender,
+    required TResult Function(ProfileStateData? data) dateOfBirth,
+    required TResult Function(ProfileStateData? data) bytes,
+    required TResult Function(ProfileStateData? data) setTransactionDate,
   }) {
     return initial(data);
   }
@@ -385,10 +537,14 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(ProfileStateData? data)? initial,
-    TResult? Function(ProfileStateData? data)? error,
+    TResult? Function(ProfileStateData? data)? getError,
     TResult? Function(ProfileStateData? data)? success,
     TResult? Function(ProfileStateData? data)? getImage,
     TResult? Function(ProfileStateData? data)? userResponse,
+    TResult? Function(ProfileStateData? data)? gender,
+    TResult? Function(ProfileStateData? data)? dateOfBirth,
+    TResult? Function(ProfileStateData? data)? bytes,
+    TResult? Function(ProfileStateData? data)? setTransactionDate,
   }) {
     return initial?.call(data);
   }
@@ -397,10 +553,14 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(ProfileStateData? data)? initial,
-    TResult Function(ProfileStateData? data)? error,
+    TResult Function(ProfileStateData? data)? getError,
     TResult Function(ProfileStateData? data)? success,
     TResult Function(ProfileStateData? data)? getImage,
     TResult Function(ProfileStateData? data)? userResponse,
+    TResult Function(ProfileStateData? data)? gender,
+    TResult Function(ProfileStateData? data)? dateOfBirth,
+    TResult Function(ProfileStateData? data)? bytes,
+    TResult Function(ProfileStateData? data)? setTransactionDate,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -413,10 +573,14 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(Error value) error,
+    required TResult Function(GetError value) getError,
     required TResult Function(Success value) success,
     required TResult Function(GetImage value) getImage,
     required TResult Function(Profile value) userResponse,
+    required TResult Function(GetGender value) gender,
+    required TResult Function(GetDateOfBirth value) dateOfBirth,
+    required TResult Function(GetBytes value) bytes,
+    required TResult Function(SetTransactionDate value) setTransactionDate,
   }) {
     return initial(this);
   }
@@ -425,10 +589,14 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
-    TResult? Function(Error value)? error,
+    TResult? Function(GetError value)? getError,
     TResult? Function(Success value)? success,
     TResult? Function(GetImage value)? getImage,
     TResult? Function(Profile value)? userResponse,
+    TResult? Function(GetGender value)? gender,
+    TResult? Function(GetDateOfBirth value)? dateOfBirth,
+    TResult? Function(GetBytes value)? bytes,
+    TResult? Function(SetTransactionDate value)? setTransactionDate,
   }) {
     return initial?.call(this);
   }
@@ -437,10 +605,14 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(Error value)? error,
+    TResult Function(GetError value)? getError,
     TResult Function(Success value)? success,
     TResult Function(GetImage value)? getImage,
     TResult Function(Profile value)? userResponse,
+    TResult Function(GetGender value)? gender,
+    TResult Function(GetDateOfBirth value)? dateOfBirth,
+    TResult Function(GetBytes value)? bytes,
+    TResult Function(SetTransactionDate value)? setTransactionDate,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -462,11 +634,11 @@ abstract class Initial implements ProfileState {
 }
 
 /// @nodoc
-abstract class _$$ErrorImplCopyWith<$Res>
+abstract class _$$GetErrorImplCopyWith<$Res>
     implements $ProfileStateCopyWith<$Res> {
-  factory _$$ErrorImplCopyWith(
-          _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
-      __$$ErrorImplCopyWithImpl<$Res>;
+  factory _$$GetErrorImplCopyWith(
+          _$GetErrorImpl value, $Res Function(_$GetErrorImpl) then) =
+      __$$GetErrorImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({ProfileStateData? data});
@@ -476,11 +648,11 @@ abstract class _$$ErrorImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$ProfileStateCopyWithImpl<$Res, _$ErrorImpl>
-    implements _$$ErrorImplCopyWith<$Res> {
-  __$$ErrorImplCopyWithImpl(
-      _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
+class __$$GetErrorImplCopyWithImpl<$Res>
+    extends _$ProfileStateCopyWithImpl<$Res, _$GetErrorImpl>
+    implements _$$GetErrorImplCopyWith<$Res> {
+  __$$GetErrorImplCopyWithImpl(
+      _$GetErrorImpl _value, $Res Function(_$GetErrorImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -488,7 +660,7 @@ class __$$ErrorImplCopyWithImpl<$Res>
   $Res call({
     Object? data = freezed,
   }) {
-    return _then(_$ErrorImpl(
+    return _then(_$GetErrorImpl(
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -499,22 +671,30 @@ class __$$ErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ErrorImpl implements Error {
-  const _$ErrorImpl({this.data});
+class _$GetErrorImpl with DiagnosticableTreeMixin implements GetError {
+  const _$GetErrorImpl({this.data});
 
   @override
   final ProfileStateData? data;
 
   @override
-  String toString() {
-    return 'ProfileState.error(data: $data)';
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ProfileState.getError(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ProfileState.getError'))
+      ..add(DiagnosticsProperty('data', data));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ErrorImpl &&
+            other is _$GetErrorImpl &&
             (identical(other.data, data) || other.data == data));
   }
 
@@ -524,45 +704,57 @@ class _$ErrorImpl implements Error {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
-      __$$ErrorImplCopyWithImpl<_$ErrorImpl>(this, _$identity);
+  _$$GetErrorImplCopyWith<_$GetErrorImpl> get copyWith =>
+      __$$GetErrorImplCopyWithImpl<_$GetErrorImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(ProfileStateData? data) initial,
-    required TResult Function(ProfileStateData? data) error,
+    required TResult Function(ProfileStateData? data) getError,
     required TResult Function(ProfileStateData? data) success,
     required TResult Function(ProfileStateData? data) getImage,
     required TResult Function(ProfileStateData? data) userResponse,
+    required TResult Function(ProfileStateData? data) gender,
+    required TResult Function(ProfileStateData? data) dateOfBirth,
+    required TResult Function(ProfileStateData? data) bytes,
+    required TResult Function(ProfileStateData? data) setTransactionDate,
   }) {
-    return error(data);
+    return getError(data);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(ProfileStateData? data)? initial,
-    TResult? Function(ProfileStateData? data)? error,
+    TResult? Function(ProfileStateData? data)? getError,
     TResult? Function(ProfileStateData? data)? success,
     TResult? Function(ProfileStateData? data)? getImage,
     TResult? Function(ProfileStateData? data)? userResponse,
+    TResult? Function(ProfileStateData? data)? gender,
+    TResult? Function(ProfileStateData? data)? dateOfBirth,
+    TResult? Function(ProfileStateData? data)? bytes,
+    TResult? Function(ProfileStateData? data)? setTransactionDate,
   }) {
-    return error?.call(data);
+    return getError?.call(data);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(ProfileStateData? data)? initial,
-    TResult Function(ProfileStateData? data)? error,
+    TResult Function(ProfileStateData? data)? getError,
     TResult Function(ProfileStateData? data)? success,
     TResult Function(ProfileStateData? data)? getImage,
     TResult Function(ProfileStateData? data)? userResponse,
+    TResult Function(ProfileStateData? data)? gender,
+    TResult Function(ProfileStateData? data)? dateOfBirth,
+    TResult Function(ProfileStateData? data)? bytes,
+    TResult Function(ProfileStateData? data)? setTransactionDate,
     required TResult orElse(),
   }) {
-    if (error != null) {
-      return error(data);
+    if (getError != null) {
+      return getError(data);
     }
     return orElse();
   }
@@ -571,51 +763,63 @@ class _$ErrorImpl implements Error {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(Error value) error,
+    required TResult Function(GetError value) getError,
     required TResult Function(Success value) success,
     required TResult Function(GetImage value) getImage,
     required TResult Function(Profile value) userResponse,
+    required TResult Function(GetGender value) gender,
+    required TResult Function(GetDateOfBirth value) dateOfBirth,
+    required TResult Function(GetBytes value) bytes,
+    required TResult Function(SetTransactionDate value) setTransactionDate,
   }) {
-    return error(this);
+    return getError(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
-    TResult? Function(Error value)? error,
+    TResult? Function(GetError value)? getError,
     TResult? Function(Success value)? success,
     TResult? Function(GetImage value)? getImage,
     TResult? Function(Profile value)? userResponse,
+    TResult? Function(GetGender value)? gender,
+    TResult? Function(GetDateOfBirth value)? dateOfBirth,
+    TResult? Function(GetBytes value)? bytes,
+    TResult? Function(SetTransactionDate value)? setTransactionDate,
   }) {
-    return error?.call(this);
+    return getError?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(Error value)? error,
+    TResult Function(GetError value)? getError,
     TResult Function(Success value)? success,
     TResult Function(GetImage value)? getImage,
     TResult Function(Profile value)? userResponse,
+    TResult Function(GetGender value)? gender,
+    TResult Function(GetDateOfBirth value)? dateOfBirth,
+    TResult Function(GetBytes value)? bytes,
+    TResult Function(SetTransactionDate value)? setTransactionDate,
     required TResult orElse(),
   }) {
-    if (error != null) {
-      return error(this);
+    if (getError != null) {
+      return getError(this);
     }
     return orElse();
   }
 }
 
-abstract class Error implements ProfileState {
-  const factory Error({final ProfileStateData? data}) = _$ErrorImpl;
+abstract class GetError implements ProfileState {
+  const factory GetError({final ProfileStateData? data}) = _$GetErrorImpl;
 
   @override
   ProfileStateData? get data;
   @override
   @JsonKey(ignore: true)
-  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+  _$$GetErrorImplCopyWith<_$GetErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -657,15 +861,23 @@ class __$$SuccessImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SuccessImpl implements Success {
+class _$SuccessImpl with DiagnosticableTreeMixin implements Success {
   const _$SuccessImpl({this.data});
 
   @override
   final ProfileStateData? data;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ProfileState.success(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ProfileState.success'))
+      ..add(DiagnosticsProperty('data', data));
   }
 
   @override
@@ -689,10 +901,14 @@ class _$SuccessImpl implements Success {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(ProfileStateData? data) initial,
-    required TResult Function(ProfileStateData? data) error,
+    required TResult Function(ProfileStateData? data) getError,
     required TResult Function(ProfileStateData? data) success,
     required TResult Function(ProfileStateData? data) getImage,
     required TResult Function(ProfileStateData? data) userResponse,
+    required TResult Function(ProfileStateData? data) gender,
+    required TResult Function(ProfileStateData? data) dateOfBirth,
+    required TResult Function(ProfileStateData? data) bytes,
+    required TResult Function(ProfileStateData? data) setTransactionDate,
   }) {
     return success(data);
   }
@@ -701,10 +917,14 @@ class _$SuccessImpl implements Success {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(ProfileStateData? data)? initial,
-    TResult? Function(ProfileStateData? data)? error,
+    TResult? Function(ProfileStateData? data)? getError,
     TResult? Function(ProfileStateData? data)? success,
     TResult? Function(ProfileStateData? data)? getImage,
     TResult? Function(ProfileStateData? data)? userResponse,
+    TResult? Function(ProfileStateData? data)? gender,
+    TResult? Function(ProfileStateData? data)? dateOfBirth,
+    TResult? Function(ProfileStateData? data)? bytes,
+    TResult? Function(ProfileStateData? data)? setTransactionDate,
   }) {
     return success?.call(data);
   }
@@ -713,10 +933,14 @@ class _$SuccessImpl implements Success {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(ProfileStateData? data)? initial,
-    TResult Function(ProfileStateData? data)? error,
+    TResult Function(ProfileStateData? data)? getError,
     TResult Function(ProfileStateData? data)? success,
     TResult Function(ProfileStateData? data)? getImage,
     TResult Function(ProfileStateData? data)? userResponse,
+    TResult Function(ProfileStateData? data)? gender,
+    TResult Function(ProfileStateData? data)? dateOfBirth,
+    TResult Function(ProfileStateData? data)? bytes,
+    TResult Function(ProfileStateData? data)? setTransactionDate,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -729,10 +953,14 @@ class _$SuccessImpl implements Success {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(Error value) error,
+    required TResult Function(GetError value) getError,
     required TResult Function(Success value) success,
     required TResult Function(GetImage value) getImage,
     required TResult Function(Profile value) userResponse,
+    required TResult Function(GetGender value) gender,
+    required TResult Function(GetDateOfBirth value) dateOfBirth,
+    required TResult Function(GetBytes value) bytes,
+    required TResult Function(SetTransactionDate value) setTransactionDate,
   }) {
     return success(this);
   }
@@ -741,10 +969,14 @@ class _$SuccessImpl implements Success {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
-    TResult? Function(Error value)? error,
+    TResult? Function(GetError value)? getError,
     TResult? Function(Success value)? success,
     TResult? Function(GetImage value)? getImage,
     TResult? Function(Profile value)? userResponse,
+    TResult? Function(GetGender value)? gender,
+    TResult? Function(GetDateOfBirth value)? dateOfBirth,
+    TResult? Function(GetBytes value)? bytes,
+    TResult? Function(SetTransactionDate value)? setTransactionDate,
   }) {
     return success?.call(this);
   }
@@ -753,10 +985,14 @@ class _$SuccessImpl implements Success {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(Error value)? error,
+    TResult Function(GetError value)? getError,
     TResult Function(Success value)? success,
     TResult Function(GetImage value)? getImage,
     TResult Function(Profile value)? userResponse,
+    TResult Function(GetGender value)? gender,
+    TResult Function(GetDateOfBirth value)? dateOfBirth,
+    TResult Function(GetBytes value)? bytes,
+    TResult Function(SetTransactionDate value)? setTransactionDate,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -815,15 +1051,23 @@ class __$$GetImageImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$GetImageImpl implements GetImage {
+class _$GetImageImpl with DiagnosticableTreeMixin implements GetImage {
   const _$GetImageImpl({this.data});
 
   @override
   final ProfileStateData? data;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ProfileState.getImage(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ProfileState.getImage'))
+      ..add(DiagnosticsProperty('data', data));
   }
 
   @override
@@ -847,10 +1091,14 @@ class _$GetImageImpl implements GetImage {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(ProfileStateData? data) initial,
-    required TResult Function(ProfileStateData? data) error,
+    required TResult Function(ProfileStateData? data) getError,
     required TResult Function(ProfileStateData? data) success,
     required TResult Function(ProfileStateData? data) getImage,
     required TResult Function(ProfileStateData? data) userResponse,
+    required TResult Function(ProfileStateData? data) gender,
+    required TResult Function(ProfileStateData? data) dateOfBirth,
+    required TResult Function(ProfileStateData? data) bytes,
+    required TResult Function(ProfileStateData? data) setTransactionDate,
   }) {
     return getImage(data);
   }
@@ -859,10 +1107,14 @@ class _$GetImageImpl implements GetImage {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(ProfileStateData? data)? initial,
-    TResult? Function(ProfileStateData? data)? error,
+    TResult? Function(ProfileStateData? data)? getError,
     TResult? Function(ProfileStateData? data)? success,
     TResult? Function(ProfileStateData? data)? getImage,
     TResult? Function(ProfileStateData? data)? userResponse,
+    TResult? Function(ProfileStateData? data)? gender,
+    TResult? Function(ProfileStateData? data)? dateOfBirth,
+    TResult? Function(ProfileStateData? data)? bytes,
+    TResult? Function(ProfileStateData? data)? setTransactionDate,
   }) {
     return getImage?.call(data);
   }
@@ -871,10 +1123,14 @@ class _$GetImageImpl implements GetImage {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(ProfileStateData? data)? initial,
-    TResult Function(ProfileStateData? data)? error,
+    TResult Function(ProfileStateData? data)? getError,
     TResult Function(ProfileStateData? data)? success,
     TResult Function(ProfileStateData? data)? getImage,
     TResult Function(ProfileStateData? data)? userResponse,
+    TResult Function(ProfileStateData? data)? gender,
+    TResult Function(ProfileStateData? data)? dateOfBirth,
+    TResult Function(ProfileStateData? data)? bytes,
+    TResult Function(ProfileStateData? data)? setTransactionDate,
     required TResult orElse(),
   }) {
     if (getImage != null) {
@@ -887,10 +1143,14 @@ class _$GetImageImpl implements GetImage {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(Error value) error,
+    required TResult Function(GetError value) getError,
     required TResult Function(Success value) success,
     required TResult Function(GetImage value) getImage,
     required TResult Function(Profile value) userResponse,
+    required TResult Function(GetGender value) gender,
+    required TResult Function(GetDateOfBirth value) dateOfBirth,
+    required TResult Function(GetBytes value) bytes,
+    required TResult Function(SetTransactionDate value) setTransactionDate,
   }) {
     return getImage(this);
   }
@@ -899,10 +1159,14 @@ class _$GetImageImpl implements GetImage {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
-    TResult? Function(Error value)? error,
+    TResult? Function(GetError value)? getError,
     TResult? Function(Success value)? success,
     TResult? Function(GetImage value)? getImage,
     TResult? Function(Profile value)? userResponse,
+    TResult? Function(GetGender value)? gender,
+    TResult? Function(GetDateOfBirth value)? dateOfBirth,
+    TResult? Function(GetBytes value)? bytes,
+    TResult? Function(SetTransactionDate value)? setTransactionDate,
   }) {
     return getImage?.call(this);
   }
@@ -911,10 +1175,14 @@ class _$GetImageImpl implements GetImage {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(Error value)? error,
+    TResult Function(GetError value)? getError,
     TResult Function(Success value)? success,
     TResult Function(GetImage value)? getImage,
     TResult Function(Profile value)? userResponse,
+    TResult Function(GetGender value)? gender,
+    TResult Function(GetDateOfBirth value)? dateOfBirth,
+    TResult Function(GetBytes value)? bytes,
+    TResult Function(SetTransactionDate value)? setTransactionDate,
     required TResult orElse(),
   }) {
     if (getImage != null) {
@@ -973,15 +1241,23 @@ class __$$ProfileImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ProfileImpl implements Profile {
+class _$ProfileImpl with DiagnosticableTreeMixin implements Profile {
   const _$ProfileImpl({this.data});
 
   @override
   final ProfileStateData? data;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ProfileState.userResponse(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ProfileState.userResponse'))
+      ..add(DiagnosticsProperty('data', data));
   }
 
   @override
@@ -1005,10 +1281,14 @@ class _$ProfileImpl implements Profile {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(ProfileStateData? data) initial,
-    required TResult Function(ProfileStateData? data) error,
+    required TResult Function(ProfileStateData? data) getError,
     required TResult Function(ProfileStateData? data) success,
     required TResult Function(ProfileStateData? data) getImage,
     required TResult Function(ProfileStateData? data) userResponse,
+    required TResult Function(ProfileStateData? data) gender,
+    required TResult Function(ProfileStateData? data) dateOfBirth,
+    required TResult Function(ProfileStateData? data) bytes,
+    required TResult Function(ProfileStateData? data) setTransactionDate,
   }) {
     return userResponse(data);
   }
@@ -1017,10 +1297,14 @@ class _$ProfileImpl implements Profile {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(ProfileStateData? data)? initial,
-    TResult? Function(ProfileStateData? data)? error,
+    TResult? Function(ProfileStateData? data)? getError,
     TResult? Function(ProfileStateData? data)? success,
     TResult? Function(ProfileStateData? data)? getImage,
     TResult? Function(ProfileStateData? data)? userResponse,
+    TResult? Function(ProfileStateData? data)? gender,
+    TResult? Function(ProfileStateData? data)? dateOfBirth,
+    TResult? Function(ProfileStateData? data)? bytes,
+    TResult? Function(ProfileStateData? data)? setTransactionDate,
   }) {
     return userResponse?.call(data);
   }
@@ -1029,10 +1313,14 @@ class _$ProfileImpl implements Profile {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(ProfileStateData? data)? initial,
-    TResult Function(ProfileStateData? data)? error,
+    TResult Function(ProfileStateData? data)? getError,
     TResult Function(ProfileStateData? data)? success,
     TResult Function(ProfileStateData? data)? getImage,
     TResult Function(ProfileStateData? data)? userResponse,
+    TResult Function(ProfileStateData? data)? gender,
+    TResult Function(ProfileStateData? data)? dateOfBirth,
+    TResult Function(ProfileStateData? data)? bytes,
+    TResult Function(ProfileStateData? data)? setTransactionDate,
     required TResult orElse(),
   }) {
     if (userResponse != null) {
@@ -1045,10 +1333,14 @@ class _$ProfileImpl implements Profile {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(Error value) error,
+    required TResult Function(GetError value) getError,
     required TResult Function(Success value) success,
     required TResult Function(GetImage value) getImage,
     required TResult Function(Profile value) userResponse,
+    required TResult Function(GetGender value) gender,
+    required TResult Function(GetDateOfBirth value) dateOfBirth,
+    required TResult Function(GetBytes value) bytes,
+    required TResult Function(SetTransactionDate value) setTransactionDate,
   }) {
     return userResponse(this);
   }
@@ -1057,10 +1349,14 @@ class _$ProfileImpl implements Profile {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
-    TResult? Function(Error value)? error,
+    TResult? Function(GetError value)? getError,
     TResult? Function(Success value)? success,
     TResult? Function(GetImage value)? getImage,
     TResult? Function(Profile value)? userResponse,
+    TResult? Function(GetGender value)? gender,
+    TResult? Function(GetDateOfBirth value)? dateOfBirth,
+    TResult? Function(GetBytes value)? bytes,
+    TResult? Function(SetTransactionDate value)? setTransactionDate,
   }) {
     return userResponse?.call(this);
   }
@@ -1069,10 +1365,14 @@ class _$ProfileImpl implements Profile {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(Error value)? error,
+    TResult Function(GetError value)? getError,
     TResult Function(Success value)? success,
     TResult Function(GetImage value)? getImage,
     TResult Function(Profile value)? userResponse,
+    TResult Function(GetGender value)? gender,
+    TResult Function(GetDateOfBirth value)? dateOfBirth,
+    TResult Function(GetBytes value)? bytes,
+    TResult Function(SetTransactionDate value)? setTransactionDate,
     required TResult orElse(),
   }) {
     if (userResponse != null) {
@@ -1090,5 +1390,773 @@ abstract class Profile implements ProfileState {
   @override
   @JsonKey(ignore: true)
   _$$ProfileImplCopyWith<_$ProfileImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GetGenderImplCopyWith<$Res>
+    implements $ProfileStateCopyWith<$Res> {
+  factory _$$GetGenderImplCopyWith(
+          _$GetGenderImpl value, $Res Function(_$GetGenderImpl) then) =
+      __$$GetGenderImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({ProfileStateData? data});
+
+  @override
+  $ProfileStateDataCopyWith<$Res>? get data;
+}
+
+/// @nodoc
+class __$$GetGenderImplCopyWithImpl<$Res>
+    extends _$ProfileStateCopyWithImpl<$Res, _$GetGenderImpl>
+    implements _$$GetGenderImplCopyWith<$Res> {
+  __$$GetGenderImplCopyWithImpl(
+      _$GetGenderImpl _value, $Res Function(_$GetGenderImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = freezed,
+  }) {
+    return _then(_$GetGenderImpl(
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as ProfileStateData?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GetGenderImpl with DiagnosticableTreeMixin implements GetGender {
+  const _$GetGenderImpl({this.data});
+
+  @override
+  final ProfileStateData? data;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ProfileState.gender(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ProfileState.gender'))
+      ..add(DiagnosticsProperty('data', data));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetGenderImpl &&
+            (identical(other.data, data) || other.data == data));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, data);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetGenderImplCopyWith<_$GetGenderImpl> get copyWith =>
+      __$$GetGenderImplCopyWithImpl<_$GetGenderImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ProfileStateData? data) initial,
+    required TResult Function(ProfileStateData? data) getError,
+    required TResult Function(ProfileStateData? data) success,
+    required TResult Function(ProfileStateData? data) getImage,
+    required TResult Function(ProfileStateData? data) userResponse,
+    required TResult Function(ProfileStateData? data) gender,
+    required TResult Function(ProfileStateData? data) dateOfBirth,
+    required TResult Function(ProfileStateData? data) bytes,
+    required TResult Function(ProfileStateData? data) setTransactionDate,
+  }) {
+    return gender(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ProfileStateData? data)? initial,
+    TResult? Function(ProfileStateData? data)? getError,
+    TResult? Function(ProfileStateData? data)? success,
+    TResult? Function(ProfileStateData? data)? getImage,
+    TResult? Function(ProfileStateData? data)? userResponse,
+    TResult? Function(ProfileStateData? data)? gender,
+    TResult? Function(ProfileStateData? data)? dateOfBirth,
+    TResult? Function(ProfileStateData? data)? bytes,
+    TResult? Function(ProfileStateData? data)? setTransactionDate,
+  }) {
+    return gender?.call(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ProfileStateData? data)? initial,
+    TResult Function(ProfileStateData? data)? getError,
+    TResult Function(ProfileStateData? data)? success,
+    TResult Function(ProfileStateData? data)? getImage,
+    TResult Function(ProfileStateData? data)? userResponse,
+    TResult Function(ProfileStateData? data)? gender,
+    TResult Function(ProfileStateData? data)? dateOfBirth,
+    TResult Function(ProfileStateData? data)? bytes,
+    TResult Function(ProfileStateData? data)? setTransactionDate,
+    required TResult orElse(),
+  }) {
+    if (gender != null) {
+      return gender(data);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(GetError value) getError,
+    required TResult Function(Success value) success,
+    required TResult Function(GetImage value) getImage,
+    required TResult Function(Profile value) userResponse,
+    required TResult Function(GetGender value) gender,
+    required TResult Function(GetDateOfBirth value) dateOfBirth,
+    required TResult Function(GetBytes value) bytes,
+    required TResult Function(SetTransactionDate value) setTransactionDate,
+  }) {
+    return gender(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(GetError value)? getError,
+    TResult? Function(Success value)? success,
+    TResult? Function(GetImage value)? getImage,
+    TResult? Function(Profile value)? userResponse,
+    TResult? Function(GetGender value)? gender,
+    TResult? Function(GetDateOfBirth value)? dateOfBirth,
+    TResult? Function(GetBytes value)? bytes,
+    TResult? Function(SetTransactionDate value)? setTransactionDate,
+  }) {
+    return gender?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(GetError value)? getError,
+    TResult Function(Success value)? success,
+    TResult Function(GetImage value)? getImage,
+    TResult Function(Profile value)? userResponse,
+    TResult Function(GetGender value)? gender,
+    TResult Function(GetDateOfBirth value)? dateOfBirth,
+    TResult Function(GetBytes value)? bytes,
+    TResult Function(SetTransactionDate value)? setTransactionDate,
+    required TResult orElse(),
+  }) {
+    if (gender != null) {
+      return gender(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetGender implements ProfileState {
+  const factory GetGender({final ProfileStateData? data}) = _$GetGenderImpl;
+
+  @override
+  ProfileStateData? get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$GetGenderImplCopyWith<_$GetGenderImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GetDateOfBirthImplCopyWith<$Res>
+    implements $ProfileStateCopyWith<$Res> {
+  factory _$$GetDateOfBirthImplCopyWith(_$GetDateOfBirthImpl value,
+          $Res Function(_$GetDateOfBirthImpl) then) =
+      __$$GetDateOfBirthImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({ProfileStateData? data});
+
+  @override
+  $ProfileStateDataCopyWith<$Res>? get data;
+}
+
+/// @nodoc
+class __$$GetDateOfBirthImplCopyWithImpl<$Res>
+    extends _$ProfileStateCopyWithImpl<$Res, _$GetDateOfBirthImpl>
+    implements _$$GetDateOfBirthImplCopyWith<$Res> {
+  __$$GetDateOfBirthImplCopyWithImpl(
+      _$GetDateOfBirthImpl _value, $Res Function(_$GetDateOfBirthImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = freezed,
+  }) {
+    return _then(_$GetDateOfBirthImpl(
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as ProfileStateData?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GetDateOfBirthImpl
+    with DiagnosticableTreeMixin
+    implements GetDateOfBirth {
+  const _$GetDateOfBirthImpl({this.data});
+
+  @override
+  final ProfileStateData? data;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ProfileState.dateOfBirth(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ProfileState.dateOfBirth'))
+      ..add(DiagnosticsProperty('data', data));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetDateOfBirthImpl &&
+            (identical(other.data, data) || other.data == data));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, data);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetDateOfBirthImplCopyWith<_$GetDateOfBirthImpl> get copyWith =>
+      __$$GetDateOfBirthImplCopyWithImpl<_$GetDateOfBirthImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ProfileStateData? data) initial,
+    required TResult Function(ProfileStateData? data) getError,
+    required TResult Function(ProfileStateData? data) success,
+    required TResult Function(ProfileStateData? data) getImage,
+    required TResult Function(ProfileStateData? data) userResponse,
+    required TResult Function(ProfileStateData? data) gender,
+    required TResult Function(ProfileStateData? data) dateOfBirth,
+    required TResult Function(ProfileStateData? data) bytes,
+    required TResult Function(ProfileStateData? data) setTransactionDate,
+  }) {
+    return dateOfBirth(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ProfileStateData? data)? initial,
+    TResult? Function(ProfileStateData? data)? getError,
+    TResult? Function(ProfileStateData? data)? success,
+    TResult? Function(ProfileStateData? data)? getImage,
+    TResult? Function(ProfileStateData? data)? userResponse,
+    TResult? Function(ProfileStateData? data)? gender,
+    TResult? Function(ProfileStateData? data)? dateOfBirth,
+    TResult? Function(ProfileStateData? data)? bytes,
+    TResult? Function(ProfileStateData? data)? setTransactionDate,
+  }) {
+    return dateOfBirth?.call(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ProfileStateData? data)? initial,
+    TResult Function(ProfileStateData? data)? getError,
+    TResult Function(ProfileStateData? data)? success,
+    TResult Function(ProfileStateData? data)? getImage,
+    TResult Function(ProfileStateData? data)? userResponse,
+    TResult Function(ProfileStateData? data)? gender,
+    TResult Function(ProfileStateData? data)? dateOfBirth,
+    TResult Function(ProfileStateData? data)? bytes,
+    TResult Function(ProfileStateData? data)? setTransactionDate,
+    required TResult orElse(),
+  }) {
+    if (dateOfBirth != null) {
+      return dateOfBirth(data);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(GetError value) getError,
+    required TResult Function(Success value) success,
+    required TResult Function(GetImage value) getImage,
+    required TResult Function(Profile value) userResponse,
+    required TResult Function(GetGender value) gender,
+    required TResult Function(GetDateOfBirth value) dateOfBirth,
+    required TResult Function(GetBytes value) bytes,
+    required TResult Function(SetTransactionDate value) setTransactionDate,
+  }) {
+    return dateOfBirth(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(GetError value)? getError,
+    TResult? Function(Success value)? success,
+    TResult? Function(GetImage value)? getImage,
+    TResult? Function(Profile value)? userResponse,
+    TResult? Function(GetGender value)? gender,
+    TResult? Function(GetDateOfBirth value)? dateOfBirth,
+    TResult? Function(GetBytes value)? bytes,
+    TResult? Function(SetTransactionDate value)? setTransactionDate,
+  }) {
+    return dateOfBirth?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(GetError value)? getError,
+    TResult Function(Success value)? success,
+    TResult Function(GetImage value)? getImage,
+    TResult Function(Profile value)? userResponse,
+    TResult Function(GetGender value)? gender,
+    TResult Function(GetDateOfBirth value)? dateOfBirth,
+    TResult Function(GetBytes value)? bytes,
+    TResult Function(SetTransactionDate value)? setTransactionDate,
+    required TResult orElse(),
+  }) {
+    if (dateOfBirth != null) {
+      return dateOfBirth(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetDateOfBirth implements ProfileState {
+  const factory GetDateOfBirth({final ProfileStateData? data}) =
+      _$GetDateOfBirthImpl;
+
+  @override
+  ProfileStateData? get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$GetDateOfBirthImplCopyWith<_$GetDateOfBirthImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GetBytesImplCopyWith<$Res>
+    implements $ProfileStateCopyWith<$Res> {
+  factory _$$GetBytesImplCopyWith(
+          _$GetBytesImpl value, $Res Function(_$GetBytesImpl) then) =
+      __$$GetBytesImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({ProfileStateData? data});
+
+  @override
+  $ProfileStateDataCopyWith<$Res>? get data;
+}
+
+/// @nodoc
+class __$$GetBytesImplCopyWithImpl<$Res>
+    extends _$ProfileStateCopyWithImpl<$Res, _$GetBytesImpl>
+    implements _$$GetBytesImplCopyWith<$Res> {
+  __$$GetBytesImplCopyWithImpl(
+      _$GetBytesImpl _value, $Res Function(_$GetBytesImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = freezed,
+  }) {
+    return _then(_$GetBytesImpl(
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as ProfileStateData?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GetBytesImpl with DiagnosticableTreeMixin implements GetBytes {
+  const _$GetBytesImpl({this.data});
+
+  @override
+  final ProfileStateData? data;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ProfileState.bytes(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ProfileState.bytes'))
+      ..add(DiagnosticsProperty('data', data));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetBytesImpl &&
+            (identical(other.data, data) || other.data == data));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, data);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetBytesImplCopyWith<_$GetBytesImpl> get copyWith =>
+      __$$GetBytesImplCopyWithImpl<_$GetBytesImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ProfileStateData? data) initial,
+    required TResult Function(ProfileStateData? data) getError,
+    required TResult Function(ProfileStateData? data) success,
+    required TResult Function(ProfileStateData? data) getImage,
+    required TResult Function(ProfileStateData? data) userResponse,
+    required TResult Function(ProfileStateData? data) gender,
+    required TResult Function(ProfileStateData? data) dateOfBirth,
+    required TResult Function(ProfileStateData? data) bytes,
+    required TResult Function(ProfileStateData? data) setTransactionDate,
+  }) {
+    return bytes(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ProfileStateData? data)? initial,
+    TResult? Function(ProfileStateData? data)? getError,
+    TResult? Function(ProfileStateData? data)? success,
+    TResult? Function(ProfileStateData? data)? getImage,
+    TResult? Function(ProfileStateData? data)? userResponse,
+    TResult? Function(ProfileStateData? data)? gender,
+    TResult? Function(ProfileStateData? data)? dateOfBirth,
+    TResult? Function(ProfileStateData? data)? bytes,
+    TResult? Function(ProfileStateData? data)? setTransactionDate,
+  }) {
+    return bytes?.call(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ProfileStateData? data)? initial,
+    TResult Function(ProfileStateData? data)? getError,
+    TResult Function(ProfileStateData? data)? success,
+    TResult Function(ProfileStateData? data)? getImage,
+    TResult Function(ProfileStateData? data)? userResponse,
+    TResult Function(ProfileStateData? data)? gender,
+    TResult Function(ProfileStateData? data)? dateOfBirth,
+    TResult Function(ProfileStateData? data)? bytes,
+    TResult Function(ProfileStateData? data)? setTransactionDate,
+    required TResult orElse(),
+  }) {
+    if (bytes != null) {
+      return bytes(data);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(GetError value) getError,
+    required TResult Function(Success value) success,
+    required TResult Function(GetImage value) getImage,
+    required TResult Function(Profile value) userResponse,
+    required TResult Function(GetGender value) gender,
+    required TResult Function(GetDateOfBirth value) dateOfBirth,
+    required TResult Function(GetBytes value) bytes,
+    required TResult Function(SetTransactionDate value) setTransactionDate,
+  }) {
+    return bytes(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(GetError value)? getError,
+    TResult? Function(Success value)? success,
+    TResult? Function(GetImage value)? getImage,
+    TResult? Function(Profile value)? userResponse,
+    TResult? Function(GetGender value)? gender,
+    TResult? Function(GetDateOfBirth value)? dateOfBirth,
+    TResult? Function(GetBytes value)? bytes,
+    TResult? Function(SetTransactionDate value)? setTransactionDate,
+  }) {
+    return bytes?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(GetError value)? getError,
+    TResult Function(Success value)? success,
+    TResult Function(GetImage value)? getImage,
+    TResult Function(Profile value)? userResponse,
+    TResult Function(GetGender value)? gender,
+    TResult Function(GetDateOfBirth value)? dateOfBirth,
+    TResult Function(GetBytes value)? bytes,
+    TResult Function(SetTransactionDate value)? setTransactionDate,
+    required TResult orElse(),
+  }) {
+    if (bytes != null) {
+      return bytes(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetBytes implements ProfileState {
+  const factory GetBytes({final ProfileStateData? data}) = _$GetBytesImpl;
+
+  @override
+  ProfileStateData? get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$GetBytesImplCopyWith<_$GetBytesImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SetTransactionDateImplCopyWith<$Res>
+    implements $ProfileStateCopyWith<$Res> {
+  factory _$$SetTransactionDateImplCopyWith(_$SetTransactionDateImpl value,
+          $Res Function(_$SetTransactionDateImpl) then) =
+      __$$SetTransactionDateImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({ProfileStateData? data});
+
+  @override
+  $ProfileStateDataCopyWith<$Res>? get data;
+}
+
+/// @nodoc
+class __$$SetTransactionDateImplCopyWithImpl<$Res>
+    extends _$ProfileStateCopyWithImpl<$Res, _$SetTransactionDateImpl>
+    implements _$$SetTransactionDateImplCopyWith<$Res> {
+  __$$SetTransactionDateImplCopyWithImpl(_$SetTransactionDateImpl _value,
+      $Res Function(_$SetTransactionDateImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = freezed,
+  }) {
+    return _then(_$SetTransactionDateImpl(
+      freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as ProfileStateData?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SetTransactionDateImpl
+    with DiagnosticableTreeMixin
+    implements SetTransactionDate {
+  const _$SetTransactionDateImpl(this.data);
+
+  @override
+  final ProfileStateData? data;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ProfileState.setTransactionDate(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ProfileState.setTransactionDate'))
+      ..add(DiagnosticsProperty('data', data));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SetTransactionDateImpl &&
+            (identical(other.data, data) || other.data == data));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, data);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SetTransactionDateImplCopyWith<_$SetTransactionDateImpl> get copyWith =>
+      __$$SetTransactionDateImplCopyWithImpl<_$SetTransactionDateImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ProfileStateData? data) initial,
+    required TResult Function(ProfileStateData? data) getError,
+    required TResult Function(ProfileStateData? data) success,
+    required TResult Function(ProfileStateData? data) getImage,
+    required TResult Function(ProfileStateData? data) userResponse,
+    required TResult Function(ProfileStateData? data) gender,
+    required TResult Function(ProfileStateData? data) dateOfBirth,
+    required TResult Function(ProfileStateData? data) bytes,
+    required TResult Function(ProfileStateData? data) setTransactionDate,
+  }) {
+    return setTransactionDate(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ProfileStateData? data)? initial,
+    TResult? Function(ProfileStateData? data)? getError,
+    TResult? Function(ProfileStateData? data)? success,
+    TResult? Function(ProfileStateData? data)? getImage,
+    TResult? Function(ProfileStateData? data)? userResponse,
+    TResult? Function(ProfileStateData? data)? gender,
+    TResult? Function(ProfileStateData? data)? dateOfBirth,
+    TResult? Function(ProfileStateData? data)? bytes,
+    TResult? Function(ProfileStateData? data)? setTransactionDate,
+  }) {
+    return setTransactionDate?.call(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ProfileStateData? data)? initial,
+    TResult Function(ProfileStateData? data)? getError,
+    TResult Function(ProfileStateData? data)? success,
+    TResult Function(ProfileStateData? data)? getImage,
+    TResult Function(ProfileStateData? data)? userResponse,
+    TResult Function(ProfileStateData? data)? gender,
+    TResult Function(ProfileStateData? data)? dateOfBirth,
+    TResult Function(ProfileStateData? data)? bytes,
+    TResult Function(ProfileStateData? data)? setTransactionDate,
+    required TResult orElse(),
+  }) {
+    if (setTransactionDate != null) {
+      return setTransactionDate(data);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(GetError value) getError,
+    required TResult Function(Success value) success,
+    required TResult Function(GetImage value) getImage,
+    required TResult Function(Profile value) userResponse,
+    required TResult Function(GetGender value) gender,
+    required TResult Function(GetDateOfBirth value) dateOfBirth,
+    required TResult Function(GetBytes value) bytes,
+    required TResult Function(SetTransactionDate value) setTransactionDate,
+  }) {
+    return setTransactionDate(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(GetError value)? getError,
+    TResult? Function(Success value)? success,
+    TResult? Function(GetImage value)? getImage,
+    TResult? Function(Profile value)? userResponse,
+    TResult? Function(GetGender value)? gender,
+    TResult? Function(GetDateOfBirth value)? dateOfBirth,
+    TResult? Function(GetBytes value)? bytes,
+    TResult? Function(SetTransactionDate value)? setTransactionDate,
+  }) {
+    return setTransactionDate?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(GetError value)? getError,
+    TResult Function(Success value)? success,
+    TResult Function(GetImage value)? getImage,
+    TResult Function(Profile value)? userResponse,
+    TResult Function(GetGender value)? gender,
+    TResult Function(GetDateOfBirth value)? dateOfBirth,
+    TResult Function(GetBytes value)? bytes,
+    TResult Function(SetTransactionDate value)? setTransactionDate,
+    required TResult orElse(),
+  }) {
+    if (setTransactionDate != null) {
+      return setTransactionDate(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SetTransactionDate implements ProfileState {
+  const factory SetTransactionDate(final ProfileStateData? data) =
+      _$SetTransactionDateImpl;
+
+  @override
+  ProfileStateData? get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$SetTransactionDateImplCopyWith<_$SetTransactionDateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
