@@ -7,6 +7,7 @@ class EditPostStateData with _$EditPostStateData {
     @Default(0) int success,
     @Default(StatusType.init) StatusType status,
     File? image,
+    AddPostResponse? data,
     @Default([]) List<TopicItem> listTopic,
   }) = _EditPostStateData;
 }
@@ -25,4 +26,6 @@ class EditPostState with _$EditPostState {
       GetImage;
   const factory EditPostState.getListTopic({required EditPostStateData data}) =
       GetListTopic;
+  const factory EditPostState.getTopicDetail(
+      {required EditPostStateData data}) = GetTopicDetail;
 }

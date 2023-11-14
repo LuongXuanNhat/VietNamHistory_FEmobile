@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:after_layout/after_layout.dart';
@@ -11,10 +10,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../common/global_colors.dart';
-import '../../common/ui_helpers.dart';
 import '../../models/post/response/add_post_response.dart';
-import '../../route_generator.dart';
-import '../../widgets/custom_textfield.dart';
 import 'cubit/create_post_cubit.dart';
 import 'wigets/topic_card.dart';
 

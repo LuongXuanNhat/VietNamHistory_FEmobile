@@ -45,6 +45,13 @@ dependencies:
   image_picker: ^1.0.4
 
 
+  firebase_crashlytics: ^3.4.4
+
+
+  #Web
+  url_strategy: ^0.2.0
+
+
 
   #Networks
   retrofit: ^4.0.1

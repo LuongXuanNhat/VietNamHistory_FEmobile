@@ -9,7 +9,6 @@ import 'package:intl/intl.dart';
 import '../../../common/global_colors.dart';
 import '../../../common/global_styles.dart';
 import '../../../models/user/response/user_response.dart';
-import '../cubit/profile_cubit.dart';
 import 'cubit/update_profile_cubit.dart';
 
 class UpdateProfileScreen extends StatefulWidget {

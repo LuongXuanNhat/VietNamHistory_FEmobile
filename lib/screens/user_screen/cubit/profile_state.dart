@@ -8,7 +8,7 @@ class ProfileStateData with _$ProfileStateData {
     @Default(0) int gender,
     DateTime? dateOfBirth,
     File? image,
-    Uint8List? bytes,
+    String? urlImage,
     UserResponse? userResponse,
     DateTime? transactionDate,
   }) = _ProfileStateData;
@@ -24,7 +24,7 @@ class ProfileState with _$ProfileState {
   const factory ProfileState.gender({ProfileStateData? data}) = GetGender;
   const factory ProfileState.dateOfBirth({ProfileStateData? data}) =
       GetDateOfBirth;
-  const factory ProfileState.bytes({ProfileStateData? data}) = GetBytes;
+  const factory ProfileState.urlImage({ProfileStateData? data}) = GetUrlImage;
   const factory ProfileState.setTransactionDate(ProfileStateData? data) =
       SetTransactionDate;
 }

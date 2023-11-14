@@ -10,7 +10,6 @@ import '../../../models/report/request/report_post_request.dart';
 import '../../../models/report/response/list_report_response.dart';
 import '../../../models/succes/response/success_response.dart';
 import '../../../repositories/data_repository.dart';
-import '../../../route_generator.dart';
 
 part 'report_post_state.dart';
 part 'report_post_cubit.freezed.dart';

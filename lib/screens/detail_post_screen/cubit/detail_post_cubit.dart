@@ -25,6 +25,8 @@ class DetailPostCubit extends Cubit<DetailPostState> {
             data: DetailPostStateData(detailPost: response)));
       }
     } catch (e) {
+      UIHelpers.showSnackBar(message: e.toString());
+    } finally {
       UIHelpers.dismissLoading();
     }
   }

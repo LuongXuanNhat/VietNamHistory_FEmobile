@@ -3,11 +3,9 @@ import '../../common/global_colors.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../route_generator.dart';
 import '../discover_sceen/discover_screen.dart';
 import '../home_screen/home_screen.dart';
 import '../user_screen/account_settings_screen.dart';
-import '../user_screen/sub/update_profile_screen.dart';
 
 class MainScreen extends StatefulWidget {
   final TextEditingController? txtSearch;

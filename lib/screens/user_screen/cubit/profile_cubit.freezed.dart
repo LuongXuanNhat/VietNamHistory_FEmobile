@@ -21,7 +21,7 @@ mixin _$ProfileStateData {
   int get gender => throw _privateConstructorUsedError;
   DateTime? get dateOfBirth => throw _privateConstructorUsedError;
   File? get image => throw _privateConstructorUsedError;
-  Uint8List? get bytes => throw _privateConstructorUsedError;
+  String? get urlImage => throw _privateConstructorUsedError;
   UserResponse? get userResponse => throw _privateConstructorUsedError;
   DateTime? get transactionDate => throw _privateConstructorUsedError;
 
@@ -42,7 +42,7 @@ abstract class $ProfileStateDataCopyWith<$Res> {
       int gender,
       DateTime? dateOfBirth,
       File? image,
-      Uint8List? bytes,
+      String? urlImage,
       UserResponse? userResponse,
       DateTime? transactionDate});
 }
@@ -65,7 +65,7 @@ class _$ProfileStateDataCopyWithImpl<$Res, $Val extends ProfileStateData>
     Object? gender = null,
     Object? dateOfBirth = freezed,
     Object? image = freezed,
-    Object? bytes = freezed,
+    Object? urlImage = freezed,
     Object? userResponse = freezed,
     Object? transactionDate = freezed,
   }) {
@@ -90,10 +90,10 @@ class _$ProfileStateDataCopyWithImpl<$Res, $Val extends ProfileStateData>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as File?,
-      bytes: freezed == bytes
-          ? _value.bytes
-          : bytes // ignore: cast_nullable_to_non_nullable
-              as Uint8List?,
+      urlImage: freezed == urlImage
+          ? _value.urlImage
+          : urlImage // ignore: cast_nullable_to_non_nullable
+              as String?,
       userResponse: freezed == userResponse
           ? _value.userResponse
           : userResponse // ignore: cast_nullable_to_non_nullable
@@ -120,7 +120,7 @@ abstract class _$$ProfileStateDataImplCopyWith<$Res>
       int gender,
       DateTime? dateOfBirth,
       File? image,
-      Uint8List? bytes,
+      String? urlImage,
       UserResponse? userResponse,
       DateTime? transactionDate});
 }
@@ -141,7 +141,7 @@ class __$$ProfileStateDataImplCopyWithImpl<$Res>
     Object? gender = null,
     Object? dateOfBirth = freezed,
     Object? image = freezed,
-    Object? bytes = freezed,
+    Object? urlImage = freezed,
     Object? userResponse = freezed,
     Object? transactionDate = freezed,
   }) {
@@ -166,10 +166,10 @@ class __$$ProfileStateDataImplCopyWithImpl<$Res>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as File?,
-      bytes: freezed == bytes
-          ? _value.bytes
-          : bytes // ignore: cast_nullable_to_non_nullable
-              as Uint8List?,
+      urlImage: freezed == urlImage
+          ? _value.urlImage
+          : urlImage // ignore: cast_nullable_to_non_nullable
+              as String?,
       userResponse: freezed == userResponse
           ? _value.userResponse
           : userResponse // ignore: cast_nullable_to_non_nullable
@@ -193,7 +193,7 @@ class _$ProfileStateDataImpl
       this.gender = 0,
       this.dateOfBirth,
       this.image,
-      this.bytes,
+      this.urlImage,
       this.userResponse,
       this.transactionDate});
 
@@ -210,7 +210,7 @@ class _$ProfileStateDataImpl
   @override
   final File? image;
   @override
-  final Uint8List? bytes;
+  final String? urlImage;
   @override
   final UserResponse? userResponse;
   @override
@@ -218,7 +218,7 @@ class _$ProfileStateDataImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ProfileStateData(error: $error, success: $success, gender: $gender, dateOfBirth: $dateOfBirth, image: $image, bytes: $bytes, userResponse: $userResponse, transactionDate: $transactionDate)';
+    return 'ProfileStateData(error: $error, success: $success, gender: $gender, dateOfBirth: $dateOfBirth, image: $image, urlImage: $urlImage, userResponse: $userResponse, transactionDate: $transactionDate)';
   }
 
   @override
@@ -231,7 +231,7 @@ class _$ProfileStateDataImpl
       ..add(DiagnosticsProperty('gender', gender))
       ..add(DiagnosticsProperty('dateOfBirth', dateOfBirth))
       ..add(DiagnosticsProperty('image', image))
-      ..add(DiagnosticsProperty('bytes', bytes))
+      ..add(DiagnosticsProperty('urlImage', urlImage))
       ..add(DiagnosticsProperty('userResponse', userResponse))
       ..add(DiagnosticsProperty('transactionDate', transactionDate));
   }
@@ -247,7 +247,8 @@ class _$ProfileStateDataImpl
             (identical(other.dateOfBirth, dateOfBirth) ||
                 other.dateOfBirth == dateOfBirth) &&
             (identical(other.image, image) || other.image == image) &&
-            const DeepCollectionEquality().equals(other.bytes, bytes) &&
+            (identical(other.urlImage, urlImage) ||
+                other.urlImage == urlImage) &&
             (identical(other.userResponse, userResponse) ||
                 other.userResponse == userResponse) &&
             (identical(other.transactionDate, transactionDate) ||
@@ -255,16 +256,8 @@ class _$ProfileStateDataImpl
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      error,
-      success,
-      gender,
-      dateOfBirth,
-      image,
-      const DeepCollectionEquality().hash(bytes),
-      userResponse,
-      transactionDate);
+  int get hashCode => Object.hash(runtimeType, error, success, gender,
+      dateOfBirth, image, urlImage, userResponse, transactionDate);
 
   @JsonKey(ignore: true)
   @override
@@ -281,7 +274,7 @@ abstract class _ProfileStateData implements ProfileStateData {
       final int gender,
       final DateTime? dateOfBirth,
       final File? image,
-      final Uint8List? bytes,
+      final String? urlImage,
       final UserResponse? userResponse,
       final DateTime? transactionDate}) = _$ProfileStateDataImpl;
 
@@ -296,7 +289,7 @@ abstract class _ProfileStateData implements ProfileStateData {
   @override
   File? get image;
   @override
-  Uint8List? get bytes;
+  String? get urlImage;
   @override
   UserResponse? get userResponse;
   @override
@@ -319,7 +312,7 @@ mixin _$ProfileState {
     required TResult Function(ProfileStateData? data) userResponse,
     required TResult Function(ProfileStateData? data) gender,
     required TResult Function(ProfileStateData? data) dateOfBirth,
-    required TResult Function(ProfileStateData? data) bytes,
+    required TResult Function(ProfileStateData? data) urlImage,
     required TResult Function(ProfileStateData? data) setTransactionDate,
   }) =>
       throw _privateConstructorUsedError;
@@ -332,7 +325,7 @@ mixin _$ProfileState {
     TResult? Function(ProfileStateData? data)? userResponse,
     TResult? Function(ProfileStateData? data)? gender,
     TResult? Function(ProfileStateData? data)? dateOfBirth,
-    TResult? Function(ProfileStateData? data)? bytes,
+    TResult? Function(ProfileStateData? data)? urlImage,
     TResult? Function(ProfileStateData? data)? setTransactionDate,
   }) =>
       throw _privateConstructorUsedError;
@@ -345,7 +338,7 @@ mixin _$ProfileState {
     TResult Function(ProfileStateData? data)? userResponse,
     TResult Function(ProfileStateData? data)? gender,
     TResult Function(ProfileStateData? data)? dateOfBirth,
-    TResult Function(ProfileStateData? data)? bytes,
+    TResult Function(ProfileStateData? data)? urlImage,
     TResult Function(ProfileStateData? data)? setTransactionDate,
     required TResult orElse(),
   }) =>
@@ -359,7 +352,7 @@ mixin _$ProfileState {
     required TResult Function(Profile value) userResponse,
     required TResult Function(GetGender value) gender,
     required TResult Function(GetDateOfBirth value) dateOfBirth,
-    required TResult Function(GetBytes value) bytes,
+    required TResult Function(GetUrlImage value) urlImage,
     required TResult Function(SetTransactionDate value) setTransactionDate,
   }) =>
       throw _privateConstructorUsedError;
@@ -372,7 +365,7 @@ mixin _$ProfileState {
     TResult? Function(Profile value)? userResponse,
     TResult? Function(GetGender value)? gender,
     TResult? Function(GetDateOfBirth value)? dateOfBirth,
-    TResult? Function(GetBytes value)? bytes,
+    TResult? Function(GetUrlImage value)? urlImage,
     TResult? Function(SetTransactionDate value)? setTransactionDate,
   }) =>
       throw _privateConstructorUsedError;
@@ -385,7 +378,7 @@ mixin _$ProfileState {
     TResult Function(Profile value)? userResponse,
     TResult Function(GetGender value)? gender,
     TResult Function(GetDateOfBirth value)? dateOfBirth,
-    TResult Function(GetBytes value)? bytes,
+    TResult Function(GetUrlImage value)? urlImage,
     TResult Function(SetTransactionDate value)? setTransactionDate,
     required TResult orElse(),
   }) =>
@@ -527,7 +520,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements Initial {
     required TResult Function(ProfileStateData? data) userResponse,
     required TResult Function(ProfileStateData? data) gender,
     required TResult Function(ProfileStateData? data) dateOfBirth,
-    required TResult Function(ProfileStateData? data) bytes,
+    required TResult Function(ProfileStateData? data) urlImage,
     required TResult Function(ProfileStateData? data) setTransactionDate,
   }) {
     return initial(data);
@@ -543,7 +536,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements Initial {
     TResult? Function(ProfileStateData? data)? userResponse,
     TResult? Function(ProfileStateData? data)? gender,
     TResult? Function(ProfileStateData? data)? dateOfBirth,
-    TResult? Function(ProfileStateData? data)? bytes,
+    TResult? Function(ProfileStateData? data)? urlImage,
     TResult? Function(ProfileStateData? data)? setTransactionDate,
   }) {
     return initial?.call(data);
@@ -559,7 +552,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements Initial {
     TResult Function(ProfileStateData? data)? userResponse,
     TResult Function(ProfileStateData? data)? gender,
     TResult Function(ProfileStateData? data)? dateOfBirth,
-    TResult Function(ProfileStateData? data)? bytes,
+    TResult Function(ProfileStateData? data)? urlImage,
     TResult Function(ProfileStateData? data)? setTransactionDate,
     required TResult orElse(),
   }) {
@@ -579,7 +572,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements Initial {
     required TResult Function(Profile value) userResponse,
     required TResult Function(GetGender value) gender,
     required TResult Function(GetDateOfBirth value) dateOfBirth,
-    required TResult Function(GetBytes value) bytes,
+    required TResult Function(GetUrlImage value) urlImage,
     required TResult Function(SetTransactionDate value) setTransactionDate,
   }) {
     return initial(this);
@@ -595,7 +588,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements Initial {
     TResult? Function(Profile value)? userResponse,
     TResult? Function(GetGender value)? gender,
     TResult? Function(GetDateOfBirth value)? dateOfBirth,
-    TResult? Function(GetBytes value)? bytes,
+    TResult? Function(GetUrlImage value)? urlImage,
     TResult? Function(SetTransactionDate value)? setTransactionDate,
   }) {
     return initial?.call(this);
@@ -611,7 +604,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements Initial {
     TResult Function(Profile value)? userResponse,
     TResult Function(GetGender value)? gender,
     TResult Function(GetDateOfBirth value)? dateOfBirth,
-    TResult Function(GetBytes value)? bytes,
+    TResult Function(GetUrlImage value)? urlImage,
     TResult Function(SetTransactionDate value)? setTransactionDate,
     required TResult orElse(),
   }) {
@@ -717,7 +710,7 @@ class _$GetErrorImpl with DiagnosticableTreeMixin implements GetError {
     required TResult Function(ProfileStateData? data) userResponse,
     required TResult Function(ProfileStateData? data) gender,
     required TResult Function(ProfileStateData? data) dateOfBirth,
-    required TResult Function(ProfileStateData? data) bytes,
+    required TResult Function(ProfileStateData? data) urlImage,
     required TResult Function(ProfileStateData? data) setTransactionDate,
   }) {
     return getError(data);
@@ -733,7 +726,7 @@ class _$GetErrorImpl with DiagnosticableTreeMixin implements GetError {
     TResult? Function(ProfileStateData? data)? userResponse,
     TResult? Function(ProfileStateData? data)? gender,
     TResult? Function(ProfileStateData? data)? dateOfBirth,
-    TResult? Function(ProfileStateData? data)? bytes,
+    TResult? Function(ProfileStateData? data)? urlImage,
     TResult? Function(ProfileStateData? data)? setTransactionDate,
   }) {
     return getError?.call(data);
@@ -749,7 +742,7 @@ class _$GetErrorImpl with DiagnosticableTreeMixin implements GetError {
     TResult Function(ProfileStateData? data)? userResponse,
     TResult Function(ProfileStateData? data)? gender,
     TResult Function(ProfileStateData? data)? dateOfBirth,
-    TResult Function(ProfileStateData? data)? bytes,
+    TResult Function(ProfileStateData? data)? urlImage,
     TResult Function(ProfileStateData? data)? setTransactionDate,
     required TResult orElse(),
   }) {
@@ -769,7 +762,7 @@ class _$GetErrorImpl with DiagnosticableTreeMixin implements GetError {
     required TResult Function(Profile value) userResponse,
     required TResult Function(GetGender value) gender,
     required TResult Function(GetDateOfBirth value) dateOfBirth,
-    required TResult Function(GetBytes value) bytes,
+    required TResult Function(GetUrlImage value) urlImage,
     required TResult Function(SetTransactionDate value) setTransactionDate,
   }) {
     return getError(this);
@@ -785,7 +778,7 @@ class _$GetErrorImpl with DiagnosticableTreeMixin implements GetError {
     TResult? Function(Profile value)? userResponse,
     TResult? Function(GetGender value)? gender,
     TResult? Function(GetDateOfBirth value)? dateOfBirth,
-    TResult? Function(GetBytes value)? bytes,
+    TResult? Function(GetUrlImage value)? urlImage,
     TResult? Function(SetTransactionDate value)? setTransactionDate,
   }) {
     return getError?.call(this);
@@ -801,7 +794,7 @@ class _$GetErrorImpl with DiagnosticableTreeMixin implements GetError {
     TResult Function(Profile value)? userResponse,
     TResult Function(GetGender value)? gender,
     TResult Function(GetDateOfBirth value)? dateOfBirth,
-    TResult Function(GetBytes value)? bytes,
+    TResult Function(GetUrlImage value)? urlImage,
     TResult Function(SetTransactionDate value)? setTransactionDate,
     required TResult orElse(),
   }) {
@@ -907,7 +900,7 @@ class _$SuccessImpl with DiagnosticableTreeMixin implements Success {
     required TResult Function(ProfileStateData? data) userResponse,
     required TResult Function(ProfileStateData? data) gender,
     required TResult Function(ProfileStateData? data) dateOfBirth,
-    required TResult Function(ProfileStateData? data) bytes,
+    required TResult Function(ProfileStateData? data) urlImage,
     required TResult Function(ProfileStateData? data) setTransactionDate,
   }) {
     return success(data);
@@ -923,7 +916,7 @@ class _$SuccessImpl with DiagnosticableTreeMixin implements Success {
     TResult? Function(ProfileStateData? data)? userResponse,
     TResult? Function(ProfileStateData? data)? gender,
     TResult? Function(ProfileStateData? data)? dateOfBirth,
-    TResult? Function(ProfileStateData? data)? bytes,
+    TResult? Function(ProfileStateData? data)? urlImage,
     TResult? Function(ProfileStateData? data)? setTransactionDate,
   }) {
     return success?.call(data);
@@ -939,7 +932,7 @@ class _$SuccessImpl with DiagnosticableTreeMixin implements Success {
     TResult Function(ProfileStateData? data)? userResponse,
     TResult Function(ProfileStateData? data)? gender,
     TResult Function(ProfileStateData? data)? dateOfBirth,
-    TResult Function(ProfileStateData? data)? bytes,
+    TResult Function(ProfileStateData? data)? urlImage,
     TResult Function(ProfileStateData? data)? setTransactionDate,
     required TResult orElse(),
   }) {
@@ -959,7 +952,7 @@ class _$SuccessImpl with DiagnosticableTreeMixin implements Success {
     required TResult Function(Profile value) userResponse,
     required TResult Function(GetGender value) gender,
     required TResult Function(GetDateOfBirth value) dateOfBirth,
-    required TResult Function(GetBytes value) bytes,
+    required TResult Function(GetUrlImage value) urlImage,
     required TResult Function(SetTransactionDate value) setTransactionDate,
   }) {
     return success(this);
@@ -975,7 +968,7 @@ class _$SuccessImpl with DiagnosticableTreeMixin implements Success {
     TResult? Function(Profile value)? userResponse,
     TResult? Function(GetGender value)? gender,
     TResult? Function(GetDateOfBirth value)? dateOfBirth,
-    TResult? Function(GetBytes value)? bytes,
+    TResult? Function(GetUrlImage value)? urlImage,
     TResult? Function(SetTransactionDate value)? setTransactionDate,
   }) {
     return success?.call(this);
@@ -991,7 +984,7 @@ class _$SuccessImpl with DiagnosticableTreeMixin implements Success {
     TResult Function(Profile value)? userResponse,
     TResult Function(GetGender value)? gender,
     TResult Function(GetDateOfBirth value)? dateOfBirth,
-    TResult Function(GetBytes value)? bytes,
+    TResult Function(GetUrlImage value)? urlImage,
     TResult Function(SetTransactionDate value)? setTransactionDate,
     required TResult orElse(),
   }) {
@@ -1097,7 +1090,7 @@ class _$GetImageImpl with DiagnosticableTreeMixin implements GetImage {
     required TResult Function(ProfileStateData? data) userResponse,
     required TResult Function(ProfileStateData? data) gender,
     required TResult Function(ProfileStateData? data) dateOfBirth,
-    required TResult Function(ProfileStateData? data) bytes,
+    required TResult Function(ProfileStateData? data) urlImage,
     required TResult Function(ProfileStateData? data) setTransactionDate,
   }) {
     return getImage(data);
@@ -1113,7 +1106,7 @@ class _$GetImageImpl with DiagnosticableTreeMixin implements GetImage {
     TResult? Function(ProfileStateData? data)? userResponse,
     TResult? Function(ProfileStateData? data)? gender,
     TResult? Function(ProfileStateData? data)? dateOfBirth,
-    TResult? Function(ProfileStateData? data)? bytes,
+    TResult? Function(ProfileStateData? data)? urlImage,
     TResult? Function(ProfileStateData? data)? setTransactionDate,
   }) {
     return getImage?.call(data);
@@ -1129,7 +1122,7 @@ class _$GetImageImpl with DiagnosticableTreeMixin implements GetImage {
     TResult Function(ProfileStateData? data)? userResponse,
     TResult Function(ProfileStateData? data)? gender,
     TResult Function(ProfileStateData? data)? dateOfBirth,
-    TResult Function(ProfileStateData? data)? bytes,
+    TResult Function(ProfileStateData? data)? urlImage,
     TResult Function(ProfileStateData? data)? setTransactionDate,
     required TResult orElse(),
   }) {
@@ -1149,7 +1142,7 @@ class _$GetImageImpl with DiagnosticableTreeMixin implements GetImage {
     required TResult Function(Profile value) userResponse,
     required TResult Function(GetGender value) gender,
     required TResult Function(GetDateOfBirth value) dateOfBirth,
-    required TResult Function(GetBytes value) bytes,
+    required TResult Function(GetUrlImage value) urlImage,
     required TResult Function(SetTransactionDate value) setTransactionDate,
   }) {
     return getImage(this);
@@ -1165,7 +1158,7 @@ class _$GetImageImpl with DiagnosticableTreeMixin implements GetImage {
     TResult? Function(Profile value)? userResponse,
     TResult? Function(GetGender value)? gender,
     TResult? Function(GetDateOfBirth value)? dateOfBirth,
-    TResult? Function(GetBytes value)? bytes,
+    TResult? Function(GetUrlImage value)? urlImage,
     TResult? Function(SetTransactionDate value)? setTransactionDate,
   }) {
     return getImage?.call(this);
@@ -1181,7 +1174,7 @@ class _$GetImageImpl with DiagnosticableTreeMixin implements GetImage {
     TResult Function(Profile value)? userResponse,
     TResult Function(GetGender value)? gender,
     TResult Function(GetDateOfBirth value)? dateOfBirth,
-    TResult Function(GetBytes value)? bytes,
+    TResult Function(GetUrlImage value)? urlImage,
     TResult Function(SetTransactionDate value)? setTransactionDate,
     required TResult orElse(),
   }) {
@@ -1287,7 +1280,7 @@ class _$ProfileImpl with DiagnosticableTreeMixin implements Profile {
     required TResult Function(ProfileStateData? data) userResponse,
     required TResult Function(ProfileStateData? data) gender,
     required TResult Function(ProfileStateData? data) dateOfBirth,
-    required TResult Function(ProfileStateData? data) bytes,
+    required TResult Function(ProfileStateData? data) urlImage,
     required TResult Function(ProfileStateData? data) setTransactionDate,
   }) {
     return userResponse(data);
@@ -1303,7 +1296,7 @@ class _$ProfileImpl with DiagnosticableTreeMixin implements Profile {
     TResult? Function(ProfileStateData? data)? userResponse,
     TResult? Function(ProfileStateData? data)? gender,
     TResult? Function(ProfileStateData? data)? dateOfBirth,
-    TResult? Function(ProfileStateData? data)? bytes,
+    TResult? Function(ProfileStateData? data)? urlImage,
     TResult? Function(ProfileStateData? data)? setTransactionDate,
   }) {
     return userResponse?.call(data);
@@ -1319,7 +1312,7 @@ class _$ProfileImpl with DiagnosticableTreeMixin implements Profile {
     TResult Function(ProfileStateData? data)? userResponse,
     TResult Function(ProfileStateData? data)? gender,
     TResult Function(ProfileStateData? data)? dateOfBirth,
-    TResult Function(ProfileStateData? data)? bytes,
+    TResult Function(ProfileStateData? data)? urlImage,
     TResult Function(ProfileStateData? data)? setTransactionDate,
     required TResult orElse(),
   }) {
@@ -1339,7 +1332,7 @@ class _$ProfileImpl with DiagnosticableTreeMixin implements Profile {
     required TResult Function(Profile value) userResponse,
     required TResult Function(GetGender value) gender,
     required TResult Function(GetDateOfBirth value) dateOfBirth,
-    required TResult Function(GetBytes value) bytes,
+    required TResult Function(GetUrlImage value) urlImage,
     required TResult Function(SetTransactionDate value) setTransactionDate,
   }) {
     return userResponse(this);
@@ -1355,7 +1348,7 @@ class _$ProfileImpl with DiagnosticableTreeMixin implements Profile {
     TResult? Function(Profile value)? userResponse,
     TResult? Function(GetGender value)? gender,
     TResult? Function(GetDateOfBirth value)? dateOfBirth,
-    TResult? Function(GetBytes value)? bytes,
+    TResult? Function(GetUrlImage value)? urlImage,
     TResult? Function(SetTransactionDate value)? setTransactionDate,
   }) {
     return userResponse?.call(this);
@@ -1371,7 +1364,7 @@ class _$ProfileImpl with DiagnosticableTreeMixin implements Profile {
     TResult Function(Profile value)? userResponse,
     TResult Function(GetGender value)? gender,
     TResult Function(GetDateOfBirth value)? dateOfBirth,
-    TResult Function(GetBytes value)? bytes,
+    TResult Function(GetUrlImage value)? urlImage,
     TResult Function(SetTransactionDate value)? setTransactionDate,
     required TResult orElse(),
   }) {
@@ -1477,7 +1470,7 @@ class _$GetGenderImpl with DiagnosticableTreeMixin implements GetGender {
     required TResult Function(ProfileStateData? data) userResponse,
     required TResult Function(ProfileStateData? data) gender,
     required TResult Function(ProfileStateData? data) dateOfBirth,
-    required TResult Function(ProfileStateData? data) bytes,
+    required TResult Function(ProfileStateData? data) urlImage,
     required TResult Function(ProfileStateData? data) setTransactionDate,
   }) {
     return gender(data);
@@ -1493,7 +1486,7 @@ class _$GetGenderImpl with DiagnosticableTreeMixin implements GetGender {
     TResult? Function(ProfileStateData? data)? userResponse,
     TResult? Function(ProfileStateData? data)? gender,
     TResult? Function(ProfileStateData? data)? dateOfBirth,
-    TResult? Function(ProfileStateData? data)? bytes,
+    TResult? Function(ProfileStateData? data)? urlImage,
     TResult? Function(ProfileStateData? data)? setTransactionDate,
   }) {
     return gender?.call(data);
@@ -1509,7 +1502,7 @@ class _$GetGenderImpl with DiagnosticableTreeMixin implements GetGender {
     TResult Function(ProfileStateData? data)? userResponse,
     TResult Function(ProfileStateData? data)? gender,
     TResult Function(ProfileStateData? data)? dateOfBirth,
-    TResult Function(ProfileStateData? data)? bytes,
+    TResult Function(ProfileStateData? data)? urlImage,
     TResult Function(ProfileStateData? data)? setTransactionDate,
     required TResult orElse(),
   }) {
@@ -1529,7 +1522,7 @@ class _$GetGenderImpl with DiagnosticableTreeMixin implements GetGender {
     required TResult Function(Profile value) userResponse,
     required TResult Function(GetGender value) gender,
     required TResult Function(GetDateOfBirth value) dateOfBirth,
-    required TResult Function(GetBytes value) bytes,
+    required TResult Function(GetUrlImage value) urlImage,
     required TResult Function(SetTransactionDate value) setTransactionDate,
   }) {
     return gender(this);
@@ -1545,7 +1538,7 @@ class _$GetGenderImpl with DiagnosticableTreeMixin implements GetGender {
     TResult? Function(Profile value)? userResponse,
     TResult? Function(GetGender value)? gender,
     TResult? Function(GetDateOfBirth value)? dateOfBirth,
-    TResult? Function(GetBytes value)? bytes,
+    TResult? Function(GetUrlImage value)? urlImage,
     TResult? Function(SetTransactionDate value)? setTransactionDate,
   }) {
     return gender?.call(this);
@@ -1561,7 +1554,7 @@ class _$GetGenderImpl with DiagnosticableTreeMixin implements GetGender {
     TResult Function(Profile value)? userResponse,
     TResult Function(GetGender value)? gender,
     TResult Function(GetDateOfBirth value)? dateOfBirth,
-    TResult Function(GetBytes value)? bytes,
+    TResult Function(GetUrlImage value)? urlImage,
     TResult Function(SetTransactionDate value)? setTransactionDate,
     required TResult orElse(),
   }) {
@@ -1670,7 +1663,7 @@ class _$GetDateOfBirthImpl
     required TResult Function(ProfileStateData? data) userResponse,
     required TResult Function(ProfileStateData? data) gender,
     required TResult Function(ProfileStateData? data) dateOfBirth,
-    required TResult Function(ProfileStateData? data) bytes,
+    required TResult Function(ProfileStateData? data) urlImage,
     required TResult Function(ProfileStateData? data) setTransactionDate,
   }) {
     return dateOfBirth(data);
@@ -1686,7 +1679,7 @@ class _$GetDateOfBirthImpl
     TResult? Function(ProfileStateData? data)? userResponse,
     TResult? Function(ProfileStateData? data)? gender,
     TResult? Function(ProfileStateData? data)? dateOfBirth,
-    TResult? Function(ProfileStateData? data)? bytes,
+    TResult? Function(ProfileStateData? data)? urlImage,
     TResult? Function(ProfileStateData? data)? setTransactionDate,
   }) {
     return dateOfBirth?.call(data);
@@ -1702,7 +1695,7 @@ class _$GetDateOfBirthImpl
     TResult Function(ProfileStateData? data)? userResponse,
     TResult Function(ProfileStateData? data)? gender,
     TResult Function(ProfileStateData? data)? dateOfBirth,
-    TResult Function(ProfileStateData? data)? bytes,
+    TResult Function(ProfileStateData? data)? urlImage,
     TResult Function(ProfileStateData? data)? setTransactionDate,
     required TResult orElse(),
   }) {
@@ -1722,7 +1715,7 @@ class _$GetDateOfBirthImpl
     required TResult Function(Profile value) userResponse,
     required TResult Function(GetGender value) gender,
     required TResult Function(GetDateOfBirth value) dateOfBirth,
-    required TResult Function(GetBytes value) bytes,
+    required TResult Function(GetUrlImage value) urlImage,
     required TResult Function(SetTransactionDate value) setTransactionDate,
   }) {
     return dateOfBirth(this);
@@ -1738,7 +1731,7 @@ class _$GetDateOfBirthImpl
     TResult? Function(Profile value)? userResponse,
     TResult? Function(GetGender value)? gender,
     TResult? Function(GetDateOfBirth value)? dateOfBirth,
-    TResult? Function(GetBytes value)? bytes,
+    TResult? Function(GetUrlImage value)? urlImage,
     TResult? Function(SetTransactionDate value)? setTransactionDate,
   }) {
     return dateOfBirth?.call(this);
@@ -1754,7 +1747,7 @@ class _$GetDateOfBirthImpl
     TResult Function(Profile value)? userResponse,
     TResult Function(GetGender value)? gender,
     TResult Function(GetDateOfBirth value)? dateOfBirth,
-    TResult Function(GetBytes value)? bytes,
+    TResult Function(GetUrlImage value)? urlImage,
     TResult Function(SetTransactionDate value)? setTransactionDate,
     required TResult orElse(),
   }) {
@@ -1778,11 +1771,11 @@ abstract class GetDateOfBirth implements ProfileState {
 }
 
 /// @nodoc
-abstract class _$$GetBytesImplCopyWith<$Res>
+abstract class _$$GetUrlImageImplCopyWith<$Res>
     implements $ProfileStateCopyWith<$Res> {
-  factory _$$GetBytesImplCopyWith(
-          _$GetBytesImpl value, $Res Function(_$GetBytesImpl) then) =
-      __$$GetBytesImplCopyWithImpl<$Res>;
+  factory _$$GetUrlImageImplCopyWith(
+          _$GetUrlImageImpl value, $Res Function(_$GetUrlImageImpl) then) =
+      __$$GetUrlImageImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({ProfileStateData? data});
@@ -1792,11 +1785,11 @@ abstract class _$$GetBytesImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$GetBytesImplCopyWithImpl<$Res>
-    extends _$ProfileStateCopyWithImpl<$Res, _$GetBytesImpl>
-    implements _$$GetBytesImplCopyWith<$Res> {
-  __$$GetBytesImplCopyWithImpl(
-      _$GetBytesImpl _value, $Res Function(_$GetBytesImpl) _then)
+class __$$GetUrlImageImplCopyWithImpl<$Res>
+    extends _$ProfileStateCopyWithImpl<$Res, _$GetUrlImageImpl>
+    implements _$$GetUrlImageImplCopyWith<$Res> {
+  __$$GetUrlImageImplCopyWithImpl(
+      _$GetUrlImageImpl _value, $Res Function(_$GetUrlImageImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1804,7 +1797,7 @@ class __$$GetBytesImplCopyWithImpl<$Res>
   $Res call({
     Object? data = freezed,
   }) {
-    return _then(_$GetBytesImpl(
+    return _then(_$GetUrlImageImpl(
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -1815,22 +1808,22 @@ class __$$GetBytesImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$GetBytesImpl with DiagnosticableTreeMixin implements GetBytes {
-  const _$GetBytesImpl({this.data});
+class _$GetUrlImageImpl with DiagnosticableTreeMixin implements GetUrlImage {
+  const _$GetUrlImageImpl({this.data});
 
   @override
   final ProfileStateData? data;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ProfileState.bytes(data: $data)';
+    return 'ProfileState.urlImage(data: $data)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'ProfileState.bytes'))
+      ..add(DiagnosticsProperty('type', 'ProfileState.urlImage'))
       ..add(DiagnosticsProperty('data', data));
   }
 
@@ -1838,7 +1831,7 @@ class _$GetBytesImpl with DiagnosticableTreeMixin implements GetBytes {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GetBytesImpl &&
+            other is _$GetUrlImageImpl &&
             (identical(other.data, data) || other.data == data));
   }
 
@@ -1848,8 +1841,8 @@ class _$GetBytesImpl with DiagnosticableTreeMixin implements GetBytes {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$GetBytesImplCopyWith<_$GetBytesImpl> get copyWith =>
-      __$$GetBytesImplCopyWithImpl<_$GetBytesImpl>(this, _$identity);
+  _$$GetUrlImageImplCopyWith<_$GetUrlImageImpl> get copyWith =>
+      __$$GetUrlImageImplCopyWithImpl<_$GetUrlImageImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1861,10 +1854,10 @@ class _$GetBytesImpl with DiagnosticableTreeMixin implements GetBytes {
     required TResult Function(ProfileStateData? data) userResponse,
     required TResult Function(ProfileStateData? data) gender,
     required TResult Function(ProfileStateData? data) dateOfBirth,
-    required TResult Function(ProfileStateData? data) bytes,
+    required TResult Function(ProfileStateData? data) urlImage,
     required TResult Function(ProfileStateData? data) setTransactionDate,
   }) {
-    return bytes(data);
+    return urlImage(data);
   }
 
   @override
@@ -1877,10 +1870,10 @@ class _$GetBytesImpl with DiagnosticableTreeMixin implements GetBytes {
     TResult? Function(ProfileStateData? data)? userResponse,
     TResult? Function(ProfileStateData? data)? gender,
     TResult? Function(ProfileStateData? data)? dateOfBirth,
-    TResult? Function(ProfileStateData? data)? bytes,
+    TResult? Function(ProfileStateData? data)? urlImage,
     TResult? Function(ProfileStateData? data)? setTransactionDate,
   }) {
-    return bytes?.call(data);
+    return urlImage?.call(data);
   }
 
   @override
@@ -1893,12 +1886,12 @@ class _$GetBytesImpl with DiagnosticableTreeMixin implements GetBytes {
     TResult Function(ProfileStateData? data)? userResponse,
     TResult Function(ProfileStateData? data)? gender,
     TResult Function(ProfileStateData? data)? dateOfBirth,
-    TResult Function(ProfileStateData? data)? bytes,
+    TResult Function(ProfileStateData? data)? urlImage,
     TResult Function(ProfileStateData? data)? setTransactionDate,
     required TResult orElse(),
   }) {
-    if (bytes != null) {
-      return bytes(data);
+    if (urlImage != null) {
+      return urlImage(data);
     }
     return orElse();
   }
@@ -1913,10 +1906,10 @@ class _$GetBytesImpl with DiagnosticableTreeMixin implements GetBytes {
     required TResult Function(Profile value) userResponse,
     required TResult Function(GetGender value) gender,
     required TResult Function(GetDateOfBirth value) dateOfBirth,
-    required TResult Function(GetBytes value) bytes,
+    required TResult Function(GetUrlImage value) urlImage,
     required TResult Function(SetTransactionDate value) setTransactionDate,
   }) {
-    return bytes(this);
+    return urlImage(this);
   }
 
   @override
@@ -1929,10 +1922,10 @@ class _$GetBytesImpl with DiagnosticableTreeMixin implements GetBytes {
     TResult? Function(Profile value)? userResponse,
     TResult? Function(GetGender value)? gender,
     TResult? Function(GetDateOfBirth value)? dateOfBirth,
-    TResult? Function(GetBytes value)? bytes,
+    TResult? Function(GetUrlImage value)? urlImage,
     TResult? Function(SetTransactionDate value)? setTransactionDate,
   }) {
-    return bytes?.call(this);
+    return urlImage?.call(this);
   }
 
   @override
@@ -1945,25 +1938,25 @@ class _$GetBytesImpl with DiagnosticableTreeMixin implements GetBytes {
     TResult Function(Profile value)? userResponse,
     TResult Function(GetGender value)? gender,
     TResult Function(GetDateOfBirth value)? dateOfBirth,
-    TResult Function(GetBytes value)? bytes,
+    TResult Function(GetUrlImage value)? urlImage,
     TResult Function(SetTransactionDate value)? setTransactionDate,
     required TResult orElse(),
   }) {
-    if (bytes != null) {
-      return bytes(this);
+    if (urlImage != null) {
+      return urlImage(this);
     }
     return orElse();
   }
 }
 
-abstract class GetBytes implements ProfileState {
-  const factory GetBytes({final ProfileStateData? data}) = _$GetBytesImpl;
+abstract class GetUrlImage implements ProfileState {
+  const factory GetUrlImage({final ProfileStateData? data}) = _$GetUrlImageImpl;
 
   @override
   ProfileStateData? get data;
   @override
   @JsonKey(ignore: true)
-  _$$GetBytesImplCopyWith<_$GetBytesImpl> get copyWith =>
+  _$$GetUrlImageImplCopyWith<_$GetUrlImageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2054,7 +2047,7 @@ class _$SetTransactionDateImpl
     required TResult Function(ProfileStateData? data) userResponse,
     required TResult Function(ProfileStateData? data) gender,
     required TResult Function(ProfileStateData? data) dateOfBirth,
-    required TResult Function(ProfileStateData? data) bytes,
+    required TResult Function(ProfileStateData? data) urlImage,
     required TResult Function(ProfileStateData? data) setTransactionDate,
   }) {
     return setTransactionDate(data);
@@ -2070,7 +2063,7 @@ class _$SetTransactionDateImpl
     TResult? Function(ProfileStateData? data)? userResponse,
     TResult? Function(ProfileStateData? data)? gender,
     TResult? Function(ProfileStateData? data)? dateOfBirth,
-    TResult? Function(ProfileStateData? data)? bytes,
+    TResult? Function(ProfileStateData? data)? urlImage,
     TResult? Function(ProfileStateData? data)? setTransactionDate,
   }) {
     return setTransactionDate?.call(data);
@@ -2086,7 +2079,7 @@ class _$SetTransactionDateImpl
     TResult Function(ProfileStateData? data)? userResponse,
     TResult Function(ProfileStateData? data)? gender,
     TResult Function(ProfileStateData? data)? dateOfBirth,
-    TResult Function(ProfileStateData? data)? bytes,
+    TResult Function(ProfileStateData? data)? urlImage,
     TResult Function(ProfileStateData? data)? setTransactionDate,
     required TResult orElse(),
   }) {
@@ -2106,7 +2099,7 @@ class _$SetTransactionDateImpl
     required TResult Function(Profile value) userResponse,
     required TResult Function(GetGender value) gender,
     required TResult Function(GetDateOfBirth value) dateOfBirth,
-    required TResult Function(GetBytes value) bytes,
+    required TResult Function(GetUrlImage value) urlImage,
     required TResult Function(SetTransactionDate value) setTransactionDate,
   }) {
     return setTransactionDate(this);
@@ -2122,7 +2115,7 @@ class _$SetTransactionDateImpl
     TResult? Function(Profile value)? userResponse,
     TResult? Function(GetGender value)? gender,
     TResult? Function(GetDateOfBirth value)? dateOfBirth,
-    TResult? Function(GetBytes value)? bytes,
+    TResult? Function(GetUrlImage value)? urlImage,
     TResult? Function(SetTransactionDate value)? setTransactionDate,
   }) {
     return setTransactionDate?.call(this);
@@ -2138,7 +2131,7 @@ class _$SetTransactionDateImpl
     TResult Function(Profile value)? userResponse,
     TResult Function(GetGender value)? gender,
     TResult Function(GetDateOfBirth value)? dateOfBirth,
-    TResult Function(GetBytes value)? bytes,
+    TResult Function(GetUrlImage value)? urlImage,
     TResult Function(SetTransactionDate value)? setTransactionDate,
     required TResult orElse(),
   }) {

@@ -1,7 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
@@ -251,8 +248,6 @@ class ContainerDiscover extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Uint8List bytes = base64Decode(image);
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
       child: Container(
@@ -268,8 +263,8 @@ class ContainerDiscover extends StatelessWidget {
               ClipRRect(
                 borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(4), topRight: Radius.circular(4)),
-                child: Image.memory(
-                  bytes,
+                child: Image.network(
+                  image,
                   fit: BoxFit.fill,
                   height: 200,
                   width: 350,

@@ -7,7 +7,6 @@ import 'package:image_picker/image_picker.dart';
 import '../../../common/ui_helpers.dart';
 import '../../../enums/status_type.dart';
 import '../../../get_it.dart';
-import '../../../models/post/response/add_post_response.dart';
 import '../../../models/topic/response/list_topic_response.dart';
 import '../../../repositories/data_repository.dart';
 import '../../../route_generator.dart';

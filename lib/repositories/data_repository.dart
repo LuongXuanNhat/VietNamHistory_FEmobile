@@ -1,10 +1,7 @@
-import 'dart:ffi';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/semantics.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../common/global_configs.dart';
 import '../common/storage/app_prefs.dart';
@@ -13,7 +10,6 @@ import '../models/base/response/error_response.dart';
 import '../models/post/discover/response/list_discover_response.dart';
 import '../models/post/response/add_post_response.dart';
 import '../models/report/request/report_post_request.dart';
-import '../models/report/response/list_report_response.dart';
 import '../models/report/response/list_report_response.dart';
 import '../models/succes/response/success_response.dart';
 import '../models/succes/response/success_response_bool.dart';
@@ -116,7 +112,7 @@ class DataRepository implements RestClient {
   }
 
   @override
-  Future<dynamic> getImage() {
+  Future<String> getImage() {
     return client!.getImage();
   }
 

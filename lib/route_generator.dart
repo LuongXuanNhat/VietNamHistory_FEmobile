@@ -112,6 +112,7 @@ class RouteGenerator {
       case editPostScreen:
         final args = settings.arguments as Map<String, dynamic>?;
         final data = args!['postId'] as String;
+
         return MaterialPageRoute(
           builder: (context) => EditPostScreen.provider(postId: data),
           settings: settings,

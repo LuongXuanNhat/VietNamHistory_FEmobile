@@ -5,14 +5,10 @@ import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 
 import '../../common/global_colors.dart';
 
-import '../../common/ui_helpers.dart';
 import '../../models/post/discover/response/list_discover_response.dart';
-import '../../route_generator.dart';
-import '../../widgets/custom_dropdown.dart';
 import 'cubit/report_post_cubit.dart';
 
 class ReportPortSCreen extends StatefulWidget {

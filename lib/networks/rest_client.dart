@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -58,7 +57,7 @@ abstract class RestClient {
   Future<ListTopicResponse> getListTopic();
 
   @GET('User/Image')
-  Future<dynamic> getImage();
+  Future<String> getImage();
 
   @MultiPart()
   @POST('Post')

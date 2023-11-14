@@ -20,6 +20,7 @@ mixin _$EditPostStateData {
   int get success => throw _privateConstructorUsedError;
   StatusType get status => throw _privateConstructorUsedError;
   File? get image => throw _privateConstructorUsedError;
+  AddPostResponse? get data => throw _privateConstructorUsedError;
   List<TopicItem> get listTopic => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -38,6 +39,7 @@ abstract class $EditPostStateDataCopyWith<$Res> {
       int success,
       StatusType status,
       File? image,
+      AddPostResponse? data,
       List<TopicItem> listTopic});
 }
 
@@ -56,8 +58,9 @@ class _$EditPostStateDataCopyWithImpl<$Res, $Val extends EditPostStateData>
   $Res call({
     Object? error = freezed,
     Object? success = null,
-    Object? status = freezed,
+    Object? status = null,
     Object? image = freezed,
+    Object? data = freezed,
     Object? listTopic = null,
   }) {
     return _then(_value.copyWith(
@@ -69,7 +72,7 @@ class _$EditPostStateDataCopyWithImpl<$Res, $Val extends EditPostStateData>
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
               as int,
-      status: freezed == status
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as StatusType,
@@ -77,6 +80,10 @@ class _$EditPostStateDataCopyWithImpl<$Res, $Val extends EditPostStateData>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as File?,
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as AddPostResponse?,
       listTopic: null == listTopic
           ? _value.listTopic
           : listTopic // ignore: cast_nullable_to_non_nullable
@@ -98,6 +105,7 @@ abstract class _$$EditPostStateDataImplCopyWith<$Res>
       int success,
       StatusType status,
       File? image,
+      AddPostResponse? data,
       List<TopicItem> listTopic});
 }
 
@@ -114,8 +122,9 @@ class __$$EditPostStateDataImplCopyWithImpl<$Res>
   $Res call({
     Object? error = freezed,
     Object? success = null,
-    Object? status = freezed,
+    Object? status = null,
     Object? image = freezed,
+    Object? data = freezed,
     Object? listTopic = null,
   }) {
     return _then(_$EditPostStateDataImpl(
@@ -127,7 +136,7 @@ class __$$EditPostStateDataImplCopyWithImpl<$Res>
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
               as int,
-      status: freezed == status
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as StatusType,
@@ -135,6 +144,10 @@ class __$$EditPostStateDataImplCopyWithImpl<$Res>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as File?,
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as AddPostResponse?,
       listTopic: null == listTopic
           ? _value._listTopic
           : listTopic // ignore: cast_nullable_to_non_nullable
@@ -151,6 +164,7 @@ class _$EditPostStateDataImpl implements _EditPostStateData {
       this.success = 0,
       this.status = StatusType.init,
       this.image,
+      this.data,
       final List<TopicItem> listTopic = const []})
       : _listTopic = listTopic;
 
@@ -164,6 +178,8 @@ class _$EditPostStateDataImpl implements _EditPostStateData {
   final StatusType status;
   @override
   final File? image;
+  @override
+  final AddPostResponse? data;
   final List<TopicItem> _listTopic;
   @override
   @JsonKey()
@@ -175,7 +191,7 @@ class _$EditPostStateDataImpl implements _EditPostStateData {
 
   @override
   String toString() {
-    return 'EditPostStateData(error: $error, success: $success, status: $status, image: $image, listTopic: $listTopic)';
+    return 'EditPostStateData(error: $error, success: $success, status: $status, image: $image, data: $data, listTopic: $listTopic)';
   }
 
   @override
@@ -185,8 +201,9 @@ class _$EditPostStateDataImpl implements _EditPostStateData {
             other is _$EditPostStateDataImpl &&
             (identical(other.error, error) || other.error == error) &&
             (identical(other.success, success) || other.success == success) &&
-            const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality().equals(other.image, image) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.image, image) || other.image == image) &&
+            const DeepCollectionEquality().equals(other.data, data) &&
             const DeepCollectionEquality()
                 .equals(other._listTopic, _listTopic));
   }
@@ -196,8 +213,9 @@ class _$EditPostStateDataImpl implements _EditPostStateData {
       runtimeType,
       error,
       success,
-      const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(image),
+      status,
+      image,
+      const DeepCollectionEquality().hash(data),
       const DeepCollectionEquality().hash(_listTopic));
 
   @JsonKey(ignore: true)
@@ -214,6 +232,7 @@ abstract class _EditPostStateData implements EditPostStateData {
       final int success,
       final StatusType status,
       final File? image,
+      final AddPostResponse? data,
       final List<TopicItem> listTopic}) = _$EditPostStateDataImpl;
 
   @override
@@ -224,6 +243,8 @@ abstract class _EditPostStateData implements EditPostStateData {
   StatusType get status;
   @override
   File? get image;
+  @override
+  AddPostResponse? get data;
   @override
   List<TopicItem> get listTopic;
   @override
@@ -243,6 +264,7 @@ mixin _$EditPostState {
     required TResult Function(EditPostStateData data) status,
     required TResult Function(EditPostStateData data) getImage,
     required TResult Function(EditPostStateData data) getListTopic,
+    required TResult Function(EditPostStateData data) getTopicDetail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -253,6 +275,7 @@ mixin _$EditPostState {
     TResult? Function(EditPostStateData data)? status,
     TResult? Function(EditPostStateData data)? getImage,
     TResult? Function(EditPostStateData data)? getListTopic,
+    TResult? Function(EditPostStateData data)? getTopicDetail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -263,6 +286,7 @@ mixin _$EditPostState {
     TResult Function(EditPostStateData data)? status,
     TResult Function(EditPostStateData data)? getImage,
     TResult Function(EditPostStateData data)? getListTopic,
+    TResult Function(EditPostStateData data)? getTopicDetail,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -274,6 +298,7 @@ mixin _$EditPostState {
     required TResult Function(Status value) status,
     required TResult Function(GetImage value) getImage,
     required TResult Function(GetListTopic value) getListTopic,
+    required TResult Function(GetTopicDetail value) getTopicDetail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -284,6 +309,7 @@ mixin _$EditPostState {
     TResult? Function(Status value)? status,
     TResult? Function(GetImage value)? getImage,
     TResult? Function(GetListTopic value)? getListTopic,
+    TResult? Function(GetTopicDetail value)? getTopicDetail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -294,6 +320,7 @@ mixin _$EditPostState {
     TResult Function(Status value)? status,
     TResult Function(GetImage value)? getImage,
     TResult Function(GetListTopic value)? getListTopic,
+    TResult Function(GetTopicDetail value)? getTopicDetail,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -421,6 +448,7 @@ class _$InitialImpl implements Initial {
     required TResult Function(EditPostStateData data) status,
     required TResult Function(EditPostStateData data) getImage,
     required TResult Function(EditPostStateData data) getListTopic,
+    required TResult Function(EditPostStateData data) getTopicDetail,
   }) {
     return initial(data);
   }
@@ -434,6 +462,7 @@ class _$InitialImpl implements Initial {
     TResult? Function(EditPostStateData data)? status,
     TResult? Function(EditPostStateData data)? getImage,
     TResult? Function(EditPostStateData data)? getListTopic,
+    TResult? Function(EditPostStateData data)? getTopicDetail,
   }) {
     return initial?.call(data);
   }
@@ -447,6 +476,7 @@ class _$InitialImpl implements Initial {
     TResult Function(EditPostStateData data)? status,
     TResult Function(EditPostStateData data)? getImage,
     TResult Function(EditPostStateData data)? getListTopic,
+    TResult Function(EditPostStateData data)? getTopicDetail,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -464,6 +494,7 @@ class _$InitialImpl implements Initial {
     required TResult Function(Status value) status,
     required TResult Function(GetImage value) getImage,
     required TResult Function(GetListTopic value) getListTopic,
+    required TResult Function(GetTopicDetail value) getTopicDetail,
   }) {
     return initial(this);
   }
@@ -477,6 +508,7 @@ class _$InitialImpl implements Initial {
     TResult? Function(Status value)? status,
     TResult? Function(GetImage value)? getImage,
     TResult? Function(GetListTopic value)? getListTopic,
+    TResult? Function(GetTopicDetail value)? getTopicDetail,
   }) {
     return initial?.call(this);
   }
@@ -490,6 +522,7 @@ class _$InitialImpl implements Initial {
     TResult Function(Status value)? status,
     TResult Function(GetImage value)? getImage,
     TResult Function(GetListTopic value)? getListTopic,
+    TResult Function(GetTopicDetail value)? getTopicDetail,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -586,6 +619,7 @@ class _$GetErrorImpl implements GetError {
     required TResult Function(EditPostStateData data) status,
     required TResult Function(EditPostStateData data) getImage,
     required TResult Function(EditPostStateData data) getListTopic,
+    required TResult Function(EditPostStateData data) getTopicDetail,
   }) {
     return getError(data);
   }
@@ -599,6 +633,7 @@ class _$GetErrorImpl implements GetError {
     TResult? Function(EditPostStateData data)? status,
     TResult? Function(EditPostStateData data)? getImage,
     TResult? Function(EditPostStateData data)? getListTopic,
+    TResult? Function(EditPostStateData data)? getTopicDetail,
   }) {
     return getError?.call(data);
   }
@@ -612,6 +647,7 @@ class _$GetErrorImpl implements GetError {
     TResult Function(EditPostStateData data)? status,
     TResult Function(EditPostStateData data)? getImage,
     TResult Function(EditPostStateData data)? getListTopic,
+    TResult Function(EditPostStateData data)? getTopicDetail,
     required TResult orElse(),
   }) {
     if (getError != null) {
@@ -629,6 +665,7 @@ class _$GetErrorImpl implements GetError {
     required TResult Function(Status value) status,
     required TResult Function(GetImage value) getImage,
     required TResult Function(GetListTopic value) getListTopic,
+    required TResult Function(GetTopicDetail value) getTopicDetail,
   }) {
     return getError(this);
   }
@@ -642,6 +679,7 @@ class _$GetErrorImpl implements GetError {
     TResult? Function(Status value)? status,
     TResult? Function(GetImage value)? getImage,
     TResult? Function(GetListTopic value)? getListTopic,
+    TResult? Function(GetTopicDetail value)? getTopicDetail,
   }) {
     return getError?.call(this);
   }
@@ -655,6 +693,7 @@ class _$GetErrorImpl implements GetError {
     TResult Function(Status value)? status,
     TResult Function(GetImage value)? getImage,
     TResult Function(GetListTopic value)? getListTopic,
+    TResult Function(GetTopicDetail value)? getTopicDetail,
     required TResult orElse(),
   }) {
     if (getError != null) {
@@ -751,6 +790,7 @@ class _$SuccessImpl implements Success {
     required TResult Function(EditPostStateData data) status,
     required TResult Function(EditPostStateData data) getImage,
     required TResult Function(EditPostStateData data) getListTopic,
+    required TResult Function(EditPostStateData data) getTopicDetail,
   }) {
     return success(data);
   }
@@ -764,6 +804,7 @@ class _$SuccessImpl implements Success {
     TResult? Function(EditPostStateData data)? status,
     TResult? Function(EditPostStateData data)? getImage,
     TResult? Function(EditPostStateData data)? getListTopic,
+    TResult? Function(EditPostStateData data)? getTopicDetail,
   }) {
     return success?.call(data);
   }
@@ -777,6 +818,7 @@ class _$SuccessImpl implements Success {
     TResult Function(EditPostStateData data)? status,
     TResult Function(EditPostStateData data)? getImage,
     TResult Function(EditPostStateData data)? getListTopic,
+    TResult Function(EditPostStateData data)? getTopicDetail,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -794,6 +836,7 @@ class _$SuccessImpl implements Success {
     required TResult Function(Status value) status,
     required TResult Function(GetImage value) getImage,
     required TResult Function(GetListTopic value) getListTopic,
+    required TResult Function(GetTopicDetail value) getTopicDetail,
   }) {
     return success(this);
   }
@@ -807,6 +850,7 @@ class _$SuccessImpl implements Success {
     TResult? Function(Status value)? status,
     TResult? Function(GetImage value)? getImage,
     TResult? Function(GetListTopic value)? getListTopic,
+    TResult? Function(GetTopicDetail value)? getTopicDetail,
   }) {
     return success?.call(this);
   }
@@ -820,6 +864,7 @@ class _$SuccessImpl implements Success {
     TResult Function(Status value)? status,
     TResult Function(GetImage value)? getImage,
     TResult Function(GetListTopic value)? getListTopic,
+    TResult Function(GetTopicDetail value)? getTopicDetail,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -916,6 +961,7 @@ class _$StatusImpl implements Status {
     required TResult Function(EditPostStateData data) status,
     required TResult Function(EditPostStateData data) getImage,
     required TResult Function(EditPostStateData data) getListTopic,
+    required TResult Function(EditPostStateData data) getTopicDetail,
   }) {
     return status(data);
   }
@@ -929,6 +975,7 @@ class _$StatusImpl implements Status {
     TResult? Function(EditPostStateData data)? status,
     TResult? Function(EditPostStateData data)? getImage,
     TResult? Function(EditPostStateData data)? getListTopic,
+    TResult? Function(EditPostStateData data)? getTopicDetail,
   }) {
     return status?.call(data);
   }
@@ -942,6 +989,7 @@ class _$StatusImpl implements Status {
     TResult Function(EditPostStateData data)? status,
     TResult Function(EditPostStateData data)? getImage,
     TResult Function(EditPostStateData data)? getListTopic,
+    TResult Function(EditPostStateData data)? getTopicDetail,
     required TResult orElse(),
   }) {
     if (status != null) {
@@ -959,6 +1007,7 @@ class _$StatusImpl implements Status {
     required TResult Function(Status value) status,
     required TResult Function(GetImage value) getImage,
     required TResult Function(GetListTopic value) getListTopic,
+    required TResult Function(GetTopicDetail value) getTopicDetail,
   }) {
     return status(this);
   }
@@ -972,6 +1021,7 @@ class _$StatusImpl implements Status {
     TResult? Function(Status value)? status,
     TResult? Function(GetImage value)? getImage,
     TResult? Function(GetListTopic value)? getListTopic,
+    TResult? Function(GetTopicDetail value)? getTopicDetail,
   }) {
     return status?.call(this);
   }
@@ -985,6 +1035,7 @@ class _$StatusImpl implements Status {
     TResult Function(Status value)? status,
     TResult Function(GetImage value)? getImage,
     TResult Function(GetListTopic value)? getListTopic,
+    TResult Function(GetTopicDetail value)? getTopicDetail,
     required TResult orElse(),
   }) {
     if (status != null) {
@@ -1080,6 +1131,7 @@ class _$GetImageImpl implements GetImage {
     required TResult Function(EditPostStateData data) status,
     required TResult Function(EditPostStateData data) getImage,
     required TResult Function(EditPostStateData data) getListTopic,
+    required TResult Function(EditPostStateData data) getTopicDetail,
   }) {
     return getImage(data);
   }
@@ -1093,6 +1145,7 @@ class _$GetImageImpl implements GetImage {
     TResult? Function(EditPostStateData data)? status,
     TResult? Function(EditPostStateData data)? getImage,
     TResult? Function(EditPostStateData data)? getListTopic,
+    TResult? Function(EditPostStateData data)? getTopicDetail,
   }) {
     return getImage?.call(data);
   }
@@ -1106,6 +1159,7 @@ class _$GetImageImpl implements GetImage {
     TResult Function(EditPostStateData data)? status,
     TResult Function(EditPostStateData data)? getImage,
     TResult Function(EditPostStateData data)? getListTopic,
+    TResult Function(EditPostStateData data)? getTopicDetail,
     required TResult orElse(),
   }) {
     if (getImage != null) {
@@ -1123,6 +1177,7 @@ class _$GetImageImpl implements GetImage {
     required TResult Function(Status value) status,
     required TResult Function(GetImage value) getImage,
     required TResult Function(GetListTopic value) getListTopic,
+    required TResult Function(GetTopicDetail value) getTopicDetail,
   }) {
     return getImage(this);
   }
@@ -1136,6 +1191,7 @@ class _$GetImageImpl implements GetImage {
     TResult? Function(Status value)? status,
     TResult? Function(GetImage value)? getImage,
     TResult? Function(GetListTopic value)? getListTopic,
+    TResult? Function(GetTopicDetail value)? getTopicDetail,
   }) {
     return getImage?.call(this);
   }
@@ -1149,6 +1205,7 @@ class _$GetImageImpl implements GetImage {
     TResult Function(Status value)? status,
     TResult Function(GetImage value)? getImage,
     TResult Function(GetListTopic value)? getListTopic,
+    TResult Function(GetTopicDetail value)? getTopicDetail,
     required TResult orElse(),
   }) {
     if (getImage != null) {
@@ -1245,6 +1302,7 @@ class _$GetListTopicImpl implements GetListTopic {
     required TResult Function(EditPostStateData data) status,
     required TResult Function(EditPostStateData data) getImage,
     required TResult Function(EditPostStateData data) getListTopic,
+    required TResult Function(EditPostStateData data) getTopicDetail,
   }) {
     return getListTopic(data);
   }
@@ -1258,6 +1316,7 @@ class _$GetListTopicImpl implements GetListTopic {
     TResult? Function(EditPostStateData data)? status,
     TResult? Function(EditPostStateData data)? getImage,
     TResult? Function(EditPostStateData data)? getListTopic,
+    TResult? Function(EditPostStateData data)? getTopicDetail,
   }) {
     return getListTopic?.call(data);
   }
@@ -1271,6 +1330,7 @@ class _$GetListTopicImpl implements GetListTopic {
     TResult Function(EditPostStateData data)? status,
     TResult Function(EditPostStateData data)? getImage,
     TResult Function(EditPostStateData data)? getListTopic,
+    TResult Function(EditPostStateData data)? getTopicDetail,
     required TResult orElse(),
   }) {
     if (getListTopic != null) {
@@ -1288,6 +1348,7 @@ class _$GetListTopicImpl implements GetListTopic {
     required TResult Function(Status value) status,
     required TResult Function(GetImage value) getImage,
     required TResult Function(GetListTopic value) getListTopic,
+    required TResult Function(GetTopicDetail value) getTopicDetail,
   }) {
     return getListTopic(this);
   }
@@ -1301,6 +1362,7 @@ class _$GetListTopicImpl implements GetListTopic {
     TResult? Function(Status value)? status,
     TResult? Function(GetImage value)? getImage,
     TResult? Function(GetListTopic value)? getListTopic,
+    TResult? Function(GetTopicDetail value)? getTopicDetail,
   }) {
     return getListTopic?.call(this);
   }
@@ -1314,6 +1376,7 @@ class _$GetListTopicImpl implements GetListTopic {
     TResult Function(Status value)? status,
     TResult Function(GetImage value)? getImage,
     TResult Function(GetListTopic value)? getListTopic,
+    TResult Function(GetTopicDetail value)? getTopicDetail,
     required TResult orElse(),
   }) {
     if (getListTopic != null) {
@@ -1332,5 +1395,177 @@ abstract class GetListTopic implements EditPostState {
   @override
   @JsonKey(ignore: true)
   _$$GetListTopicImplCopyWith<_$GetListTopicImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GetTopicDetailImplCopyWith<$Res>
+    implements $EditPostStateCopyWith<$Res> {
+  factory _$$GetTopicDetailImplCopyWith(_$GetTopicDetailImpl value,
+          $Res Function(_$GetTopicDetailImpl) then) =
+      __$$GetTopicDetailImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({EditPostStateData data});
+
+  @override
+  $EditPostStateDataCopyWith<$Res> get data;
+}
+
+/// @nodoc
+class __$$GetTopicDetailImplCopyWithImpl<$Res>
+    extends _$EditPostStateCopyWithImpl<$Res, _$GetTopicDetailImpl>
+    implements _$$GetTopicDetailImplCopyWith<$Res> {
+  __$$GetTopicDetailImplCopyWithImpl(
+      _$GetTopicDetailImpl _value, $Res Function(_$GetTopicDetailImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = null,
+  }) {
+    return _then(_$GetTopicDetailImpl(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as EditPostStateData,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GetTopicDetailImpl implements GetTopicDetail {
+  const _$GetTopicDetailImpl({required this.data});
+
+  @override
+  final EditPostStateData data;
+
+  @override
+  String toString() {
+    return 'EditPostState.getTopicDetail(data: $data)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetTopicDetailImpl &&
+            (identical(other.data, data) || other.data == data));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, data);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetTopicDetailImplCopyWith<_$GetTopicDetailImpl> get copyWith =>
+      __$$GetTopicDetailImplCopyWithImpl<_$GetTopicDetailImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(EditPostStateData data) initial,
+    required TResult Function(EditPostStateData data) getError,
+    required TResult Function(EditPostStateData data) success,
+    required TResult Function(EditPostStateData data) status,
+    required TResult Function(EditPostStateData data) getImage,
+    required TResult Function(EditPostStateData data) getListTopic,
+    required TResult Function(EditPostStateData data) getTopicDetail,
+  }) {
+    return getTopicDetail(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(EditPostStateData data)? initial,
+    TResult? Function(EditPostStateData data)? getError,
+    TResult? Function(EditPostStateData data)? success,
+    TResult? Function(EditPostStateData data)? status,
+    TResult? Function(EditPostStateData data)? getImage,
+    TResult? Function(EditPostStateData data)? getListTopic,
+    TResult? Function(EditPostStateData data)? getTopicDetail,
+  }) {
+    return getTopicDetail?.call(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(EditPostStateData data)? initial,
+    TResult Function(EditPostStateData data)? getError,
+    TResult Function(EditPostStateData data)? success,
+    TResult Function(EditPostStateData data)? status,
+    TResult Function(EditPostStateData data)? getImage,
+    TResult Function(EditPostStateData data)? getListTopic,
+    TResult Function(EditPostStateData data)? getTopicDetail,
+    required TResult orElse(),
+  }) {
+    if (getTopicDetail != null) {
+      return getTopicDetail(data);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(GetError value) getError,
+    required TResult Function(Success value) success,
+    required TResult Function(Status value) status,
+    required TResult Function(GetImage value) getImage,
+    required TResult Function(GetListTopic value) getListTopic,
+    required TResult Function(GetTopicDetail value) getTopicDetail,
+  }) {
+    return getTopicDetail(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(GetError value)? getError,
+    TResult? Function(Success value)? success,
+    TResult? Function(Status value)? status,
+    TResult? Function(GetImage value)? getImage,
+    TResult? Function(GetListTopic value)? getListTopic,
+    TResult? Function(GetTopicDetail value)? getTopicDetail,
+  }) {
+    return getTopicDetail?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(GetError value)? getError,
+    TResult Function(Success value)? success,
+    TResult Function(Status value)? status,
+    TResult Function(GetImage value)? getImage,
+    TResult Function(GetListTopic value)? getListTopic,
+    TResult Function(GetTopicDetail value)? getTopicDetail,
+    required TResult orElse(),
+  }) {
+    if (getTopicDetail != null) {
+      return getTopicDetail(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetTopicDetail implements EditPostState {
+  const factory GetTopicDetail({required final EditPostStateData data}) =
+      _$GetTopicDetailImpl;
+
+  @override
+  EditPostStateData get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$GetTopicDetailImplCopyWith<_$GetTopicDetailImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

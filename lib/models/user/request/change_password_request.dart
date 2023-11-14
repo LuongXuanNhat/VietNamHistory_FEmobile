@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-
 class ChangePasswordRequest {
   ChangePasswordRequest({this.email, this.currentPassword, this.newPassword});
   String? email;

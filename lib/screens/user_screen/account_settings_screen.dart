@@ -1,8 +1,6 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
-import 'dart:typed_data';
+
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,11 +10,12 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
+import 'package:cached_network_image/cached_network_image.dart ';
 
 import '../../common/global_colors.dart';
 import '../../enums/gender.dart';
 import '../../route_generator.dart';
+import '../../widgets/error_image_widget.dart';
 import 'cubit/profile_cubit.dart';
 
 class AccountSettingsScreen extends StatefulWidget {
@@ -66,6 +65,7 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen>
       body: BlocBuilder<ProfileCubit, ProfileState>(
         builder: (context, state) {
           int? genderValue = state.data!.userResponse?.data!.gender;
+          String url = state.data!.urlImage ?? '';
 
           Gender gender;
           if (genderValue == 0) {
@@ -115,8 +115,8 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen>
                           children: [
                             Stack(
                               children: [
-                                if (state.data!.image == null &&
-                                    state.data!.bytes == null)
+                                if (url.contains('""') &&
+                                    state.data!.image == null)
                                   SizedBox(
                                     height: 100,
                                     width: 100,
@@ -124,7 +124,7 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen>
                                       borderRadius: const BorderRadius.all(
                                           Radius.circular(45)),
                                       child: Image.asset(
-                                        'assets/images/avarta123.jpg',
+                                        "assets/images/avatar.png",
                                         height: 300,
                                         width:
                                             MediaQuery.of(context).size.width,
@@ -132,24 +132,19 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen>
                                       ),
                                     ),
                                   ),
-                                if (state.data!.image == null &&
-                                    state.data!.bytes != null)
-                                  SizedBox(
-                                    height: 100,
-                                    width: 100,
-                                    child: ClipRRect(
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(45)),
-                                      child: Image.memory(
-                                        state.data!.bytes!,
-                                        height: 300,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
+                                Positioned(
+                                  bottom: -5,
+                                  right: -10,
+                                  child: IconButton(
+                                    onPressed: () {
+                                      _showBottomSheet();
+                                    },
+                                    icon: Icon(Icons.add_a_photo_rounded,
+                                        color: GlobalColors.ButtonNavigation),
                                   ),
-                                if (state.data!.image != null)
+                                ),
+                                if (state.data!.image != null &&
+                                    state.data!.urlImage == null)
                                   SizedBox(
                                     height: 100,
                                     width: 100,
@@ -176,6 +171,24 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen>
                                         color: GlobalColors.ButtonNavigation),
                                   ),
                                 ),
+                                if (!url.contains('"') && !url.contains('"'))
+                                  SizedBox(
+                                    height: 100,
+                                    width: 100,
+                                    child: ClipRRect(
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(45)),
+                                      child: CachedNetworkImage(
+                                        imageUrl: url.replaceAll('"', ''),
+                                        errorWidget: (context, url, error) =>
+                                            const ErrorWidgetImage(),
+                                        height: 300,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
                               ],
                             ),
                             Padding(

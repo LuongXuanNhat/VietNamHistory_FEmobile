@@ -64,6 +64,7 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
       } else {
         emit(UpdateProfileState.getError(
             data: state.data!.copyWith(error: response.message!)));
+        navigator!.pop();
       }
     } catch (e) {
       debugPrint('Update Profile Error: $e');

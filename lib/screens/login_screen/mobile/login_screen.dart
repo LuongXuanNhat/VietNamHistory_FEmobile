@@ -137,12 +137,15 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 6.0,
                       ),
 
-                      Padding(
-                        padding: const EdgeInsets.only(left: 244),
-                        child: TextButton(
-                          onPressed: () {},
-                          child: const Text(
-                            "Quên mật khẩu",
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: FractionallySizedBox(
+                          widthFactor: 0.5,
+                          child: TextButton(
+                            onPressed: () {},
+                            child: const Text(
+                              "Quên mật khẩu",
+                            ),
                           ),
                         ),
                       ),
