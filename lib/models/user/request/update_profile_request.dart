@@ -1,38 +1,40 @@
 import 'dart:convert';
 
 class UpdateProfileRequest {
-  UpdateProfileRequest({
-    this.email,
-    this.fullname,
-    this.dateOfBirth,
-    this.gender,
-    this.phoneNumber,
-    this.image,
-  });
+  UpdateProfileRequest(
+      {this.email,
+      this.fullname,
+      this.dateOfBirth,
+      this.gender,
+      this.phoneNumber,
+      this.image,
+      this.introduction});
 
   String? email;
   String? fullname;
-  dynamic dateOfBirth;
+  String? dateOfBirth;
   dynamic gender;
   String? phoneNumber;
-  dynamic image;
+  String? image;
+  String? introduction;
 
   UpdateProfileRequest copyWith({
     String? email,
     String? fullname,
-    dynamic dateOfBirth,
+    String? dateOfBirth,
     dynamic gender,
     String? phoneNumber,
-    dynamic image,
+    String? introduction,
+    String? image,
   }) =>
       UpdateProfileRequest(
-        email: email ?? this.email,
-        fullname: fullname ?? this.fullname,
-        dateOfBirth: dateOfBirth ?? this.dateOfBirth,
-        gender: gender ?? this.gender,
-        phoneNumber: phoneNumber ?? this.phoneNumber,
-        image: image ?? this.image,
-      );
+          email: email ?? this.email,
+          fullname: fullname ?? this.fullname,
+          dateOfBirth: dateOfBirth ?? this.dateOfBirth,
+          gender: gender ?? this.gender,
+          phoneNumber: phoneNumber ?? this.phoneNumber,
+          image: image ?? this.image,
+          introduction: introduction ?? this.introduction);
 
   factory UpdateProfileRequest.fromRawJson(String str) =>
       UpdateProfileRequest.fromJson(json.decode(str));
@@ -45,6 +47,7 @@ class UpdateProfileRequest {
         dateOfBirth: json["DateOfBirth"],
         gender: json["Gender"],
         phoneNumber: json["PhoneNumber"],
+        introduction: json["Introduction"],
         image: json["Image"],
       );
 
@@ -55,5 +58,6 @@ class UpdateProfileRequest {
         "Gender": gender,
         "PhoneNumber": phoneNumber,
         "Image": image,
+        "Introduction": introduction
       };
 }

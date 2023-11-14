@@ -37,11 +37,19 @@ dependencies:
   animated_custom_dropdown: 1.5.0
   cached_network_image: ^3.3.0
   intl: ^0.17.0
+  path_provider: ^2.0.5
 
 
   #storage
   shared_preferences: ^2.2.1
   image_picker: ^1.0.4
+
+
+  firebase_crashlytics: ^3.4.4
+
+
+  #Web
+  url_strategy: ^0.2.0
 
 
 

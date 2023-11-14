@@ -24,7 +24,7 @@ class CustomTextField extends StatelessWidget {
   final String? errorText;
   final Widget? suffixIcon;
   final int? maxLength;
-  final Function(String)? onchanged;
+  final Function(String?)? onchanged;
 
   CustomTextField(
       {Key? key,
@@ -33,7 +33,7 @@ class CustomTextField extends StatelessWidget {
       this.isObscure = false,
       this.onPressedObscure,
       this.onTap,
-      this.isEnable = false,
+      this.isEnable = true,
       this.keyboardKey,
       this.validator,
       this.inputFormatter,
@@ -55,8 +55,8 @@ class CustomTextField extends StatelessWidget {
       data: ThemeData(primarySwatch: Colors.blue),
       child: TextFormField(
         key: key,
-        // scrollPadding:
-        //     EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        scrollPadding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
         focusNode: myFocusNode,
         validator: validator,
         controller: controller,
@@ -66,7 +66,12 @@ class CustomTextField extends StatelessWidget {
         textInputAction: textInputAction,
         readOnly: readOnly,
         maxLength: maxLength,
-        //    onChanged: (value) => onchanged!(value),
+        //   onChanged: (value) => onchanged!(value),
+        onChanged: (value) {
+          if (onchanged != null) {
+            onchanged!(value);
+          }
+        },
         style: const TextStyle(fontSize: Dimension.FONT_SIZE_DEFAULT),
         decoration: InputDecoration(
           border: OutlineInputBorder(
@@ -102,6 +107,7 @@ class CustomTextField extends StatelessWidget {
           errorText: errorText,
           prefixIcon: prefixIcon,
           suffixIcon: suffixIcon,
+          // isObscure: isObscure,
         ),
       ),
     );

@@ -3,10 +3,9 @@ import '../../common/global_colors.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../route_generator.dart';
+import '../discover_sceen/discover_screen.dart';
 import '../home_screen/home_screen.dart';
 import '../user_screen/account_settings_screen.dart';
-import '../user_screen/update_profile_screen.dart';
 
 class MainScreen extends StatefulWidget {
   final TextEditingController? txtSearch;
@@ -25,7 +24,7 @@ class _MainScreenState extends State<MainScreen> {
     const HomeScreen(),
     const Icon(Icons.home),
     const Icon(Icons.menu),
-    const Icon(Icons.person),
+    DiscoverScreen.provider(),
     AccountSettingsScreen.provider(),
   ];
   @override

@@ -109,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       ///Email
                       CustomTextField(
-                        hintLabel: 'Nhập email của bạn',
+                        hintLabel: 'Nhập email',
                         controller: _txtEmail,
                         prefixIcon: const Icon(Icons.email_outlined),
                         isEnable: true,
@@ -121,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       BlocBuilder<LoginCubitCubit, LoginCubitState>(
                         builder: (context, state) => CustomTextField(
-                          hintLabel: 'Nhập mật khẩu của bạn',
+                          hintLabel: 'Nhập mật khẩu',
                           controller: _txtPassword,
                           isShowPass: state.data!.showPass,
                           isObscure: true,
@@ -137,12 +137,15 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 6.0,
                       ),
 
-                      Padding(
-                        padding: const EdgeInsets.only(left: 244),
-                        child: TextButton(
-                          onPressed: () {},
-                          child: const Text(
-                            "Quên mật khẩu",
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: FractionallySizedBox(
+                          widthFactor: 0.5,
+                          child: TextButton(
+                            onPressed: () {},
+                            child: const Text(
+                              "Quên mật khẩu",
+                            ),
                           ),
                         ),
                       ),
@@ -176,7 +179,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: [
                           Container(
                             height: 1,
-                            width: 144,
+                            width: 120,
                             color: Colors.black54,
                           ),
                           const SizedBox(
@@ -188,7 +191,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           Container(
                             height: 1,
-                            width: 144,
+                            width: 120,
                             color: Colors.black54,
                           ),
                         ],

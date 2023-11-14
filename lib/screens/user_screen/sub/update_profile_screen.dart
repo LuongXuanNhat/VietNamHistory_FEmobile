@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:after_layout/after_layout.dart';
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
@@ -7,19 +6,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-import '../../common/global_colors.dart';
-import '../../common/global_styles.dart';
-import 'cubit/profile_cubit.dart';
+import '../../../common/global_colors.dart';
+import '../../../common/global_styles.dart';
+import '../../../models/user/response/user_response.dart';
+import 'cubit/update_profile_cubit.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
-  static BlocProvider<ProfileCubit> provider() {
+  final User? userDetail;
+  static BlocProvider<UpdateProfileCubit> provider({required User userDetail}) {
     return BlocProvider(
-      create: (context) => ProfileCubit(),
-      child: const UpdateProfileScreen(),
+      create: (context) => UpdateProfileCubit(),
+      child: UpdateProfileScreen(userDetail: userDetail),
     );
   }
 
-  const UpdateProfileScreen({super.key});
+  const UpdateProfileScreen({this.userDetail, super.key});
 
   @override
   State<UpdateProfileScreen> createState() => _UpdateProfileScreenState();
@@ -27,41 +28,30 @@ class UpdateProfileScreen extends StatefulWidget {
 
 class _UpdateProfileScreenState extends State<UpdateProfileScreen>
     with AfterLayoutMixin {
-  final GlobalKey<ScaffoldState> globalKey = GlobalKey();
+  // final GlobalKey<ScaffoldState> globalKey = GlobalKey();
+  final GlobalKey _globalKey = GlobalKey();
   final TextEditingController txtFullname = TextEditingController();
   final TextEditingController txtPhoneNumber = TextEditingController();
+  final TextEditingController txtIntroduction = TextEditingController();
+  final TextEditingController txtBirthDay = TextEditingController();
+
   final select = TextEditingController();
   final select1 = TextEditingController();
-  final introdution = TextEditingController();
+  String formattedDate = '';
 
   @override
   FutureOr<void> afterFirstLayout(BuildContext context) async {
-    context.read<ProfileCubit>().getProfile();
+    // context.read<ProfileCubit>().getProfile();
+    // context.read<ProfileCubit>().updateGender(widget.userDetail!.gender);
   }
 
   DateTime selectedDate = DateTime.now();
-
-  void _showDatePicker(BuildContext context) {
-    showDatePicker(
-            context: context,
-            initialDate: DateTime.now(),
-            firstDate: DateTime(1900),
-            lastDate: DateTime(2101))
-        .then((value) {
-      if (value != null && value != selectedDate) {
-        setState(() {
-          selectedDate = value;
-        });
-      }
-    });
-  }
+  DateTime date = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
-    String formattedDate = DateFormat('yyyy/MM/dd').format(selectedDate);
-
     return Scaffold(
-      key: globalKey,
+      key: _globalKey,
       backgroundColor: GlobalColors.colorDefault,
       appBar: AppBar(
         centerTitle: true,
@@ -86,24 +76,24 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
           ),
         ),
       ),
-      body: BlocBuilder<ProfileCubit, ProfileState>(
-        builder: (context, state) {
-          dynamic datetime = state.data!.userResponse?.data!.dateOfBirth;
-          String imagePath = state.data!.userResponse?.data!.image ?? '';
-          FileImage? image;
-          if (imagePath.isNotEmpty) {
-            image = FileImage(File(imagePath));
-          } else {
-            image = null;
-          }
-          //     FileImage? fileImage = FileImage(File(imagePath));
-          if (datetime != null) {
-            DateTime date = DateTime.parse(datetime);
+      body: SingleChildScrollView(
+        child: BlocBuilder<UpdateProfileCubit, UpdateProfileState>(
+          builder: (context, state) {
+            // txtBirthDay.addListener(() {
+            //   final date1 = DateTime.parse(txtBirthDay.text);
+            //   context.read<ProfileCubit>().updateDateOfBirth(date1);
+            //   txtBirthDay.text =
+            //       state.data!.userResponse?.data!.dateOfBirth ?? 'yyyy/MM/dd';
 
-            formattedDate = DateFormat('yyyy-MM-dd').format(date);
-          }
-          return SingleChildScrollView(
-            child: SafeArea(
+            //   if (txtBirthDay.text.isNotEmpty) {
+            //     date = DateTime.parse(txtBirthDay.text);
+            //   }
+            //   formattedDate = DateFormat('yyyy/MM/dd').format(date);
+            // });
+
+            txtIntroduction.text = widget.userDetail?.introduction ?? '';
+
+            return SafeArea(
               child: Form(
                 child: Padding(
                   padding:
@@ -136,8 +126,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
                             },
                             decoration: InputDecoration(
                                 hintText:
-                                    state.data!.userResponse?.data!.fullname ??
-                                        'fullname',
+                                    widget.userDetail?.fullname ?? 'fullname',
                                 hintStyle: const TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
@@ -168,8 +157,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
                             decoration: InputDecoration(
                                 enabled: false,
                                 hintText:
-                                    state.data!.userResponse?.data!.username ??
-                                        'username',
+                                    widget.userDetail?.username ?? 'username',
                                 hintStyle: const TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
@@ -205,8 +193,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
                               return null;
                             },
                             decoration: InputDecoration(
-                                hintText: state.data!.userResponse?.data!
-                                        .phoneNumber ??
+                                hintText: widget.userDetail?.phoneNumber ??
                                     '0xxxxxxxxx',
                                 hintStyle: const TextStyle(
                                     fontSize: 14,
@@ -241,7 +228,14 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
                                 fontWeight: FontWeight.w400,
                                 color: Colors.black,
                                 fontFamily: 'Inter'),
-                            items: const ['Nam', 'Nữ', 'Khác'],
+                            items: const ['Male', 'Female', 'Other'],
+                            // onChanged: (newGender) {
+                            //   setState(() {
+                            //     context
+                            //         .read<ProfileCubit>()
+                            //         .updateGender(newGender);
+                            //   });
+                            // },
                             controller: select),
                       ),
                       const SizedBox(
@@ -279,26 +273,65 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
                       const SizedBox(
                         height: 15,
                       ),
-                      Text(
-                        "Ngày sinh",
-                        style: GlobalStyles.titleFont(context),
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Container(
+                      SizedBox(
                         height: 36,
-                        decoration: BoxDecoration(
-                          color: GlobalColors.colorbackgroundTF,
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        child: MaterialButton(
-                          onPressed: () => _showDatePicker(context),
-                          child: Text(
-                            formattedDate,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: InkWell(
+                            onTap: () {
+                              showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime(2000),
+                                lastDate: DateTime(2025),
+                              ).then((value) => _globalKey.currentContext!
+                                  .read<UpdateProfileCubit>()
+                                  .setTransactionDate(value!));
+                            },
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  Icons.calendar_month_outlined,
+                                  color: Colors.blue,
+                                ),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                Text(
+                                  DateFormat('dd/MM/yyyy')
+                                      .format(state.data!.transactionDate!),
+                                  style: const TextStyle(color: Colors.blue),
+                                ),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                const Icon(Icons.arrow_drop_down,
+                                    color: Colors.blue)
+                              ],
+                            ),
                           ),
                         ),
                       ),
+                      // Text(
+                      //   "Ngày sinh",
+                      //   style: GlobalStyles.titleFont(context),
+                      // ),
+                      // const SizedBox(
+                      //   height: 5,
+                      // ),
+                      // Container(
+                      //   height: 36,
+                      //   decoration: BoxDecoration(
+                      //     color: GlobalColors.colorbackgroundTF,
+                      //     borderRadius: BorderRadius.circular(4),
+                      //   ),
+                      //   child: MaterialButton(
+                      //     onPressed: () => _showDatePicker(context),
+                      //     child: Text(
+                      //       txtBirthDay.text,
+                      //     ),
+                      //   ),
+                      // ),
                       const SizedBox(
                         height: 15,
                       ),
@@ -313,6 +346,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
                         minLines: 2,
                         maxLines: 5,
                         keyboardType: TextInputType.multiline,
+                        scrollPadding: const EdgeInsets.all(20),
                         decoration: InputDecoration(
                           hintText: 'Giới thiệu về bản thân',
                           hintStyle: const TextStyle(
@@ -327,7 +361,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
                             ),
                           ),
                         ),
-                        controller: introdution,
+                        controller: txtIntroduction,
                       ),
                       Center(
                         child: Padding(
@@ -336,21 +370,24 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
                             width: 335,
                             height: 44,
                             child: ElevatedButton(
-                              onPressed: () => globalKey.currentContext!
-                                  .read<ProfileCubit>()
-                                  .updateProfile(
-                                    email:
-                                        state.data!.userResponse?.data!.email,
-                                    fullname: txtFullname.text,
-                                    dateOfBirth: formattedDate,
-                                    gender: select.text == 'Nam'
-                                        ? '1'
-                                        : select.text == 'Nữ'
-                                            ? '2'
-                                            : '3',
-                                    phoneNumber: txtPhoneNumber.text,
-                                    image: image,
-                                  ),
+                              onPressed: () async {
+                                FocusManager.instance.primaryFocus?.unfocus();
+                                _globalKey.currentContext!
+                                    .read<UpdateProfileCubit>()
+                                    .updateProfile(
+                                        email: widget.userDetail?.email ?? '',
+                                        fullname: txtFullname.text,
+                                        dateOfBirth: DateFormat('yyyy-MM-dd')
+                                            .format(
+                                                state.data!.transactionDate!),
+                                        gender: select.text == 'Other'
+                                            ? 3
+                                            : select.text == 'Male'
+                                                ? 0
+                                                : 2,
+                                        phoneNumber: txtPhoneNumber.text,
+                                        introduction: txtIntroduction.text);
+                              },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: GlobalColors.ButtonNavigation,
                                 elevation: 0.0,
@@ -373,9 +410,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
                   ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
