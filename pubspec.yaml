@@ -57,10 +57,10 @@ dependencies:
   retrofit: ^4.0.1
   dio: ^5.3.3
   logger: ^2.0.2+1
+  number_pagination: ^0.0.3+2
 
 
-  flutter_html: ^2.2.1
-  http_parser: ^4.0.2
+
 
 dev_dependencies:
   flutter_test:
@@ -78,12 +78,9 @@ flutter:
 
 
   assets:
-    - assets/fonts/
-    - assets/icons/
     - assets/images/
     - assets/images/history/
     - assets/images/banner/
-    - assets/svg/
     - assets/
 
 

@@ -225,28 +225,29 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<String> getImage() async {
+  Future<SuccesResponse> getImage() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<String>(_setStreamType<String>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccesResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-        .compose(
-          _dio.options,
-          'User/Image',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        ))));
-    final value = _result.data!;
+            .compose(
+              _dio.options,
+              'User/Image',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = SuccesResponse.fromJson(_result.data!);
     return value;
   }
 
@@ -334,13 +335,13 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<SuccesResponseBool> deletePost({required String id}) async {
+  Future<SuccesResponse> deletePost({required String id}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'Id': id};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<SuccesResponseBool>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccesResponse>(Options(
       method: 'DELETE',
       headers: _headers,
       extra: _extra,
@@ -356,7 +357,7 @@ class _RestClient implements RestClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = SuccesResponseBool.fromJson(_result.data!);
+    final value = SuccesResponse.fromJson(_result.data!);
     return value;
   }
 
@@ -440,6 +441,211 @@ class _RestClient implements RestClient {
               baseUrl,
             ))));
     final value = ListReport.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<AddPostResponse> updatePost({
+    required String id,
+    required String title,
+    required String content,
+    File? image,
+    required String topicId,
+    required List<String> tag,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    _data.fields.add(MapEntry(
+      'Id',
+      id,
+    ));
+    _data.fields.add(MapEntry(
+      'Title',
+      title,
+    ));
+    _data.fields.add(MapEntry(
+      'Content',
+      content,
+    ));
+    if (image != null) {
+      _data.files.add(MapEntry(
+        'Image',
+        MultipartFile.fromFileSync(
+          image.path,
+          filename: image.path.split(Platform.pathSeparator).last,
+        ),
+      ));
+    }
+    _data.fields.add(MapEntry(
+      'TopicId',
+      topicId,
+    ));
+    tag.forEach((i) {
+      _data.fields.add(MapEntry('Tag', i));
+    });
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<AddPostResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'Post',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = AddPostResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<SuccesResponseBool> likePost({
+    required String postId,
+    required String userId,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    _data.fields.add(MapEntry(
+      'PostId',
+      postId,
+    ));
+    _data.fields.add(MapEntry(
+      'UserId',
+      userId,
+    ));
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccesResponseBool>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'Post/Like',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = SuccesResponseBool.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<SuccesResponseBool> checkLikePost({
+    required String postId,
+    required String userId,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'PostId': postId,
+      r'UserId': userId,
+    };
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccesResponseBool>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'Post/Like',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = SuccesResponseBool.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<SuccesResponseBool> savePost({
+    required String postId,
+    required String userId,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    _data.fields.add(MapEntry(
+      'PostId',
+      postId,
+    ));
+    _data.fields.add(MapEntry(
+      'UserId',
+      userId,
+    ));
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccesResponseBool>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'Post/Save',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = SuccesResponseBool.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<SuccesResponseBool> checkSavePost({
+    required String postId,
+    required String userId,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'PostId': postId,
+      r'UserId': userId,
+    };
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccesResponseBool>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'Post/Save',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = SuccesResponseBool.fromJson(_result.data!);
     return value;
   }
 

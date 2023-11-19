@@ -59,7 +59,11 @@ class _LoginScreenState extends State<LoginScreen> {
           } else {
             if (state.data!.error!.contains('Success')) {
               navigator!.pushNamedAndRemoveUntil(
-                  RouteGenerator.mainScreen, (route) => false);
+                  RouteGenerator.mainScreen,
+                  arguments: {
+                    'currentIndex': 0,
+                  },
+                  (route) => false);
               UIHelpers.showSnackBar(
                   message: 'Đăng nhập thành công!', type: SnackBarType.ERROR);
             } else {

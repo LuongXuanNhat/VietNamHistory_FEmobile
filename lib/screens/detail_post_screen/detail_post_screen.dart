@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:flutter_html/flutter_html.dart';
 
 import '../../common/global_colors.dart';
 import '../../models/post/discover/response/list_discover_response.dart';
@@ -34,6 +33,15 @@ class _DetailPostScreenState extends State<DetailPostScreen>
   @override
   FutureOr<void> afterFirstLayout(BuildContext context) async {
     // context.read<DetailPostCubit>().getDetailPost(id: widget.resultObj.id!);
+    context.read<DetailPostCubit>().isLike(
+        postId: widget.resultObj.subId.toString(),
+        userId: widget.resultObj.userShort!.id!);
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
   }
 
   @override
@@ -174,8 +182,15 @@ class _DetailPostScreenState extends State<DetailPostScreen>
                                                                 .editPostScreen,
                                                             arguments: {
                                                               'postId': widget
-                                                                  .resultObj.id
+                                                                  .resultObj
+                                                                  .subId
                                                                   .toString(),
+                                                              'topicName': widget
+                                                                  .resultObj
+                                                                  .topicName,
+                                                              'tags': widget
+                                                                  .resultObj
+                                                                  .tags,
                                                             });
                                                       },
                                                       child: const Row(
@@ -375,11 +390,6 @@ class _DetailPostScreenState extends State<DetailPostScreen>
                           color: Colors.black,
                           fontFamily: 'Inter'),
                     ),
-                    Wrap(children: [
-                      Html(
-                        data: widget.resultObj.content,
-                      ),
-                    ]),
                     const SizedBox(
                       height: 10,
                     ),
@@ -395,28 +405,94 @@ class _DetailPostScreenState extends State<DetailPostScreen>
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Icon(Icons.favorite_border,
-                            size: 20, color: GlobalColors.ButtonNavigation),
-                        Text(
-                          'Thích',
-                          style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: 'Inter',
-                              color: GlobalColors.ButtonNavigation),
+                        InkWell(
+                          onTap: () {
+                            _globalKey.currentContext!
+                                .read<DetailPostCubit>()
+                                .likePost(
+                                    postId: widget.resultObj.subId.toString(),
+                                    userId: widget.resultObj.userShort!.id!);
+
+                            _globalKey.currentContext!
+                                .read<DetailPostCubit>()
+                                .isLike(
+                                    postId: widget.resultObj.subId.toString(),
+                                    userId: widget.resultObj.userShort!.id!);
+                          },
+                          child: Row(
+                            children: [
+                              Icon(
+                                  state.data.isLike == true
+                                      ? Icons.favorite
+                                      : Icons.favorite_border,
+                                  size: 20,
+                                  color: GlobalColors.ButtonNavigation),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              state.data.isLike == true
+                                  ? Text(
+                                      'Bỏ yêu thích',
+                                      style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: 'Inter',
+                                          color: GlobalColors.ButtonNavigation),
+                                    )
+                                  : Text(
+                                      'Yêu Thích',
+                                      style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: 'Inter',
+                                          color: GlobalColors.ButtonNavigation),
+                                    ),
+                            ],
+                          ),
                         ),
                         const SizedBox(
                           width: 30,
                         ),
-                        const Icon(Icons.save_alt_rounded,
-                            size: 20, color: Colors.black54),
-                        const Text(
-                          'Lưu bài viết',
-                          style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: 'Inter',
-                              color: Colors.black54),
+                        InkWell(
+                          onTap: () {
+                            _globalKey.currentContext!
+                                .read<DetailPostCubit>()
+                                .savePost(
+                                    postId: widget.resultObj.subId.toString(),
+                                    userId: widget.resultObj.userShort!.id!);
+                            _globalKey.currentContext!
+                                .read<DetailPostCubit>()
+                                .isSave(
+                                    postId: widget.resultObj.subId.toString(),
+                                    userId: widget.resultObj.userShort!.id!);
+                          },
+                          child: Row(
+                            children: [
+                              state.data.isSave == true
+                                  ? const Icon(Icons.check,
+                                      size: 20, color: Colors.black54)
+                                  : const Icon(Icons.save_alt_rounded,
+                                      size: 20, color: Colors.black54),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              state.data.isSave == true
+                                  ? const Text('Đã lưu',
+                                      style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: 'Inter',
+                                          color: Colors.black54))
+                                  : const Text(
+                                      'Lưu bài viết',
+                                      style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: 'Inter',
+                                          color: Colors.black54),
+                                    ),
+                            ],
+                          ),
                         ),
                         const SizedBox(
                           width: 30,

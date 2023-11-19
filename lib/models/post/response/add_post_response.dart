@@ -45,6 +45,7 @@ class AddPostResponse {
 
 class ResultObj {
   String? id;
+  String? subId;
   String? title;
   String? content;
   String? image;
@@ -58,6 +59,7 @@ class ResultObj {
 
   ResultObj({
     this.id,
+    this.subId,
     this.title,
     this.content,
     this.image,
@@ -72,6 +74,7 @@ class ResultObj {
 
   ResultObj copyWith({
     String? id,
+    String? subId,
     String? title,
     String? content,
     String? image,
@@ -85,6 +88,7 @@ class ResultObj {
   }) =>
       ResultObj(
         id: id ?? this.id,
+        subId: subId ?? this.subId,
         title: title ?? this.title,
         content: content ?? this.content,
         image: image ?? this.image,
@@ -104,6 +108,7 @@ class ResultObj {
 
   factory ResultObj.fromJson(Map<String, dynamic> json) => ResultObj(
         id: json["id"],
+        subId: json["subId"],
         title: json["title"],
         content: json["content"],
         image: json["image"],
@@ -122,6 +127,7 @@ class ResultObj {
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "subId": subId,
         "title": title,
         "content": content,
         "image": image,

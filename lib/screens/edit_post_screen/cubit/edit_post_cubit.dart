@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../common/ui_helpers.dart';
 import '../../../enums/status_type.dart';
@@ -29,6 +30,44 @@ class EditPostCubit extends Cubit<EditPostState> {
       }
     } catch (e) {
       log(e.toString());
-    } finally {}
+    } finally {
+      UIHelpers.dismissLoading();
+    }
+  }
+
+  Future<void> updatePost(
+      {required String id,
+      required String title,
+      required String content,
+      required String topicId,
+      File? image,
+      required List<String> tags}) async {
+    try {
+      UIHelpers.showLoading();
+      final data = await _dataRepository.updatePost(
+          id: id,
+          title: title,
+          content: content,
+          topicId: topicId,
+          image: image,
+          tag: tags);
+      if (data.isSuccessed == true) {
+        emit(EditPostState.success(data: EditPostStateData(data: data)));
+      }
+    } catch (e) {
+      log(e.toString());
+    } finally {
+      UIHelpers.dismissLoading();
+    }
+  }
+
+  Future<void> selectImage(ImageSource? source) async {
+    final image = await ImagePicker().pickImage(source: source!);
+    if (image != null) {
+      emit(EditPostState.getImage(
+          data: state.data.copyWith(image: File(image.path))));
+    } else {
+      emit(EditPostState.getImage(data: state.data.copyWith(image: null)));
+    }
   }
 }

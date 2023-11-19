@@ -5,13 +5,15 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../discover_sceen/discover_screen.dart';
 import '../home_screen/home_screen.dart';
+import '../quiz_screen/quiz_screnn.dart';
 import '../user_screen/account_settings_screen.dart';
 
 class MainScreen extends StatefulWidget {
-  final TextEditingController? txtSearch;
-  const MainScreen({
+//  final TextEditingController? txtSearch;
+  int currentIndex = 0;
+  MainScreen({
     Key? key,
-    this.txtSearch,
+    required this.currentIndex,
   }) : super(key: key);
 
   @override
@@ -19,11 +21,10 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int currentIndex = 0;
   List<Widget> body = [
     const HomeScreen(),
     const Icon(Icons.home),
-    const Icon(Icons.menu),
+    const QuizScreen(),
     DiscoverScreen.provider(),
     AccountSettingsScreen.provider(),
   ];
@@ -32,13 +33,13 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       //bottomNavigationBar: const BottomNavigation(),
       body: Center(
-        child: body[currentIndex],
+        child: body[widget.currentIndex],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentIndex,
+        currentIndex: widget.currentIndex,
         onTap: (intdex) {
           setState(() {
-            currentIndex = intdex;
+            widget.currentIndex = intdex;
           });
         },
         items: [
@@ -46,7 +47,7 @@ class _MainScreenState extends State<MainScreen> {
             label: "Trang chủ",
             icon: FaIcon(
               FontAwesomeIcons.house,
-              color: currentIndex == 0
+              color: widget.currentIndex == 0
                   ? GlobalColors.ButtonNavigation
                   : Colors.black45,
             ),
@@ -55,7 +56,7 @@ class _MainScreenState extends State<MainScreen> {
             label: "Lớp học",
             icon: FaIcon(
               FontAwesomeIcons.users,
-              color: currentIndex == 1
+              color: widget.currentIndex == 1
                   ? GlobalColors.ButtonNavigation
                   : Colors.black45,
             ),
@@ -64,7 +65,7 @@ class _MainScreenState extends State<MainScreen> {
             label: "Khóa học",
             icon: FaIcon(
               FontAwesomeIcons.briefcase,
-              color: currentIndex == 2
+              color: widget.currentIndex == 2
                   ? GlobalColors.ButtonNavigation
                   : Colors.black45,
             ),
@@ -73,7 +74,7 @@ class _MainScreenState extends State<MainScreen> {
             label: "Diễn đàn",
             icon: FaIcon(
               FontAwesomeIcons.comments,
-              color: currentIndex == 3
+              color: widget.currentIndex == 3
                   ? GlobalColors.ButtonNavigation
                   : Colors.black45,
             ),
@@ -82,7 +83,7 @@ class _MainScreenState extends State<MainScreen> {
             label: "Cá nhân",
             icon: FaIcon(
               FontAwesomeIcons.user,
-              color: currentIndex == 4
+              color: widget.currentIndex == 4
                   ? GlobalColors.ButtonNavigation
                   : Colors.black45,
             ),

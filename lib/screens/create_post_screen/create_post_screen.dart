@@ -96,6 +96,7 @@ class _CreatePostScreenState extends State<CreatePostScreen>
             ],
           ),
         ),
+
         backgroundColor: Colors.white,
         elevation: 0.0,
         //   foregroundColor: Colors.white,

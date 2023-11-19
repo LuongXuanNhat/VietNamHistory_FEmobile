@@ -29,7 +29,11 @@ class _SplashScreenState extends State<SplashScreen> with AfterLayoutMixin {
       final hasToken = await appPrefs.getToken();
       if (hasToken != null) {
         navigator!.pushNamedAndRemoveUntil(
-            RouteGenerator.mainScreen, (route) => false);
+            RouteGenerator.mainScreen,
+            arguments: {
+              'currentIndex': 0,
+            },
+            (route) => false);
       } else {
         navigator!.pushNamedAndRemoveUntil(
             RouteGenerator.loginScreen, (route) => false);
