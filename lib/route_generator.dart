@@ -11,6 +11,7 @@ import 'screens/home_screen/home_screen.dart';
 import 'screens/login_screen/mobile/login_screen.dart';
 
 import 'screens/main_screen/main_screen.dart';
+import 'screens/quiz_screen/quiz_screnn.dart';
 import 'screens/register_screen/register_screen.dart';
 
 import 'screens/discover_sceen/discover_screen.dart';
@@ -35,6 +36,7 @@ class RouteGenerator {
   static const String detailPostScreen = '/detail_post_screen';
   static const String reportPostScreen = '/report_post_screen';
   static const String editPostScreen = '/edit_post_screen';
+  static const String quizScreen = '/quiz_screen';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -95,8 +97,13 @@ class RouteGenerator {
           settings: settings,
         );
       case mainScreen:
+        final args = settings.arguments as Map<String, dynamic>?;
+        final currentIndex = args!['currentIndex'] as int;
         return MaterialPageRoute(
-            builder: (context) => const MainScreen(), settings: settings);
+            builder: (context) => MainScreen(
+                  currentIndex: currentIndex,
+                ),
+            settings: settings);
       case discoverScreen:
         return MaterialPageRoute(
             builder: (context) => DiscoverScreen.provider(),
@@ -112,9 +119,17 @@ class RouteGenerator {
       case editPostScreen:
         final args = settings.arguments as Map<String, dynamic>?;
         final data = args!['postId'] as String;
+        final topicname = args['topicName'] as String;
+        final tags = args['tags'] as List<Tag>;
 
         return MaterialPageRoute(
-          builder: (context) => EditPostScreen.provider(postId: data),
+          builder: (context) => EditPostScreen.provider(
+              postId: data, topicname: topicname, tags: tags),
+          settings: settings,
+        );
+      case quizScreen:
+        return MaterialPageRoute(
+          builder: (context) => const QuizScreen(),
           settings: settings,
         );
       default:

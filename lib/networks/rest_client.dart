@@ -6,6 +6,7 @@ import 'package:retrofit/http.dart';
 
 import '../common/global_configs.dart';
 import '../models/post/discover/response/list_discover_response.dart';
+import '../models/post/request/udpate_post_request.dart';
 import '../models/post/response/add_post_response.dart';
 import '../models/report/request/report_post_request.dart';
 import '../models/report/response/list_report_response.dart';
@@ -57,7 +58,7 @@ abstract class RestClient {
   Future<ListTopicResponse> getListTopic();
 
   @GET('User/Image')
-  Future<String> getImage();
+  Future<SuccesResponse> getImage();
 
   @MultiPart()
   @POST('Post')
@@ -72,10 +73,10 @@ abstract class RestClient {
   @GET('Post/Discover')
   Future<ListDiscoverResponse> getListDiscover();
   @DELETE('Post')
-  Future<SuccesResponseBool> deletePost({@Query('Id') required String id});
+  Future<SuccesResponse> deletePost({@Query('Id') required String id});
 
-  @GET('Post/{Id}')
-  Future<AddPostResponse> getDetailPost({@Path('Id') required String id});
+  @GET('Post/{SubId}')
+  Future<AddPostResponse> getDetailPost({@Path('SubId') required String id});
 
   @POST('Post/Report')
   Future<SuccesResponse> reportPost({
@@ -84,4 +85,38 @@ abstract class RestClient {
 
   @GET('Report')
   Future<ListReport> listReport();
+
+  @PUT('Post')
+  Future<AddPostResponse> updatePost({
+    @Part(name: 'Id') required String id,
+    @Part(name: 'Title') required String title,
+    @Part(name: 'Content') required String content,
+    @Part(name: 'Image') File? image,
+    @Part(name: 'TopicId') required String topicId,
+    @Part(name: 'Tag') required List<String> tag,
+  });
+
+  @POST('Post/Like')
+  Future<SuccesResponseBool> likePost({
+    @Part(name: 'PostId') required String postId,
+    @Part(name: 'UserId') required String userId,
+  });
+  // https://vuanhpham25-001-site1.gtempurl.com/Post/Like?PostId=Nhan-Vat-Lich-SuLy-Nam-e-23:31:50.893-18-11-2023&UserId=57EAEF52-4106-4C36-89E7-337692E350A5
+
+  @GET('Post/Like')
+  Future<SuccesResponseBool> checkLikePost({
+    @Query('PostId') required String postId,
+    @Query('UserId') required String userId,
+  });
+
+  @POST('Post/Save')
+  Future<SuccesResponseBool> savePost({
+    @Part(name: 'PostId') required String postId,
+    @Part(name: 'UserId') required String userId,
+  });
+  @GET('Post/Save')
+  Future<SuccesResponseBool> checkSavePost({
+    @Query('PostId') required String postId,
+    @Query('UserId') required String userId,
+  });
 }

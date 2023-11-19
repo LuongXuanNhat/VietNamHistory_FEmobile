@@ -36,9 +36,9 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   Future<void> getImage() async {
     final response = await dataRepository.getImage();
-    if (response.isNotEmpty) {
+    if (response.isSuccessed == true) {
       emit(ProfileState.urlImage(
-          data: state.data!.copyWith(urlImage: response)));
+          data: state.data!.copyWith(urlImage: response.resultObj)));
     } else {
       emit(ProfileState.getError(
           data: state.data!

@@ -115,23 +115,22 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen>
                           children: [
                             Stack(
                               children: [
-                                if (url.contains('""') &&
-                                    state.data!.image == null)
-                                  SizedBox(
-                                    height: 100,
-                                    width: 100,
-                                    child: ClipRRect(
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(45)),
-                                      child: Image.asset(
-                                        "assets/images/avatar.png",
-                                        height: 300,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        fit: BoxFit.cover,
-                                      ),
+                                SizedBox(
+                                  height: 100,
+                                  width: 100,
+                                  child: ClipRRect(
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(45)),
+                                    child: CachedNetworkImage(
+                                      imageUrl: state.data!.urlImage ?? '',
+                                      errorWidget: (context, url, error) =>
+                                          const ErrorWidgetImage(),
+                                      height: 300,
+                                      width: MediaQuery.of(context).size.width,
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
+                                ),
                                 Positioned(
                                   bottom: -5,
                                   right: -10,
@@ -143,52 +142,6 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen>
                                         color: GlobalColors.ButtonNavigation),
                                   ),
                                 ),
-                                if (state.data!.image != null &&
-                                    state.data!.urlImage == null)
-                                  SizedBox(
-                                    height: 100,
-                                    width: 100,
-                                    child: ClipRRect(
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(45)),
-                                      child: Image.file(
-                                        state.data!.image ?? File(''),
-                                        height: 300,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                Positioned(
-                                  bottom: -5,
-                                  right: -10,
-                                  child: IconButton(
-                                    onPressed: () {
-                                      _showBottomSheet();
-                                    },
-                                    icon: Icon(Icons.add_a_photo_rounded,
-                                        color: GlobalColors.ButtonNavigation),
-                                  ),
-                                ),
-                                if (!url.contains('"') && !url.contains('"'))
-                                  SizedBox(
-                                    height: 100,
-                                    width: 100,
-                                    child: ClipRRect(
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(45)),
-                                      child: CachedNetworkImage(
-                                        imageUrl: url.replaceAll('"', ''),
-                                        errorWidget: (context, url, error) =>
-                                            const ErrorWidgetImage(),
-                                        height: 300,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
                               ],
                             ),
                             Padding(

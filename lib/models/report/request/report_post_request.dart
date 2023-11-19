@@ -2,6 +2,7 @@ import 'dart:convert';
 
 class ReportPostRequest {
   String? postId;
+
   String? userId;
   String? reportId;
   String? description;
@@ -41,6 +42,7 @@ class ReportPostRequest {
 
   ReportPostRequest.fromJson(Map<String, dynamic> json) {
     postId = json["postId"];
+
     userId = json["userId"];
     reportId = json["reportId"];
     description = json["description"];

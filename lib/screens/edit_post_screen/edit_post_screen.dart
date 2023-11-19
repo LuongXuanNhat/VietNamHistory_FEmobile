@@ -11,14 +11,20 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../common/global_colors.dart';
 
+import '../../models/post/discover/response/list_discover_response.dart';
 import '../create_post_screen/cubit/create_post_cubit.dart';
 import '../create_post_screen/wigets/topic_card.dart';
 import 'cubit/edit_post_cubit.dart';
 
 class EditPostScreen extends StatefulWidget {
   final String postId;
+  final String? topicname;
+  final List<Tag> tags;
 
-  static MultiBlocProvider provider({required String postId}) {
+  static MultiBlocProvider provider(
+      {required String postId,
+      required String topicname,
+      required List<Tag> tags}) {
     return MultiBlocProvider(
       providers: [
         BlocProvider<EditPostCubit>(
@@ -28,11 +34,14 @@ class EditPostScreen extends StatefulWidget {
       ],
       child: EditPostScreen(
         postId: postId,
+        topicname: topicname,
+        tags: tags,
       ),
     );
   }
 
-  const EditPostScreen({super.key, required this.postId});
+  const EditPostScreen(
+      {super.key, required this.postId, this.topicname, required this.tags});
 
   @override
   State<EditPostScreen> createState() => _EditPostScreenState();
@@ -45,18 +54,82 @@ class _EditPostScreenState extends State<EditPostScreen> with AfterLayoutMixin {
   final _hashtagtxt = TextEditingController();
   final _vars = <VariantionItem>[];
   final _hashtag = <String>[];
+  late File _imageFile;
+  String? topicID;
   bool shouldShowAlertDialog = true;
 
   @override
   FutureOr<void> afterFirstLayout(BuildContext context) async {
-    final data = context.read<CreatePostCubit>().getTopics();
     await context.read<EditPostCubit>().getTopicDetail(id: widget.postId);
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    VariantionItem variant = VariantionItem(
+      title: widget.topicname,
+    );
+    _vars.add(variant);
+
+    _hashtag.addAll(widget.tags.map((e) => e.name!));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        flexibleSpace: SafeArea(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Builder(
+                  builder: (context) => Container(
+                    decoration: BoxDecoration(
+                      color: GlobalColors.colorButton1,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: BlocBuilder<EditPostCubit, EditPostState>(
+                      builder: (context, state) {
+                        return TextButton(
+                          onPressed: () {
+                            List<String> tags = [];
+                            for (var i = 0; i < _hashtag.length; i++) {
+                              Tag tag = Tag(name: _hashtag[i]);
+                              tags.add(tag.name.toString());
+                            }
+                            context.read<EditPostCubit>().updatePost(
+                                id: widget.postId.toString(),
+                                title: _titletxt.text,
+                                content: _contenttxt.text,
+                                image: context
+                                    .read<EditPostCubit>()
+                                    .state
+                                    .data
+                                    .image,
+                                topicId: 'f689b70d-59f3-454b-8255-46cbcb8a5b07',
+                                tags: tags);
+                          },
+                          child: const Text(
+                            'Lưu',
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                fontFamily: 'Inter',
+                                color: Colors.white),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+
         backgroundColor: Colors.white,
         elevation: 0.0,
         //   foregroundColor: Colors.white,
@@ -208,7 +281,7 @@ class _EditPostScreenState extends State<EditPostScreen> with AfterLayoutMixin {
                   Wrap(
                     children: [
                       _buildCard(
-                        context.watch<CreatePostCubit>().state.data!.image,
+                        context.watch<EditPostCubit>().state.data.image,
                         detail!.resultObj!.image,
                       ),
                     ],
@@ -216,7 +289,6 @@ class _EditPostScreenState extends State<EditPostScreen> with AfterLayoutMixin {
                 const SizedBox(
                   height: 16,
                 ),
-
                 Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
@@ -228,11 +300,10 @@ class _EditPostScreenState extends State<EditPostScreen> with AfterLayoutMixin {
                       builder: (context, state) {
                         final data = state.data!.listTopic;
 
-                        if (detail?.resultObj?.topicName != null) {
-                          variant = VariantionItem(
-                            title: detail?.resultObj!.topicName,
-                          );
-                          _vars.add(variant);
+                        for (var element in data) {
+                          if (element.title == widget.topicname) {
+                            topicID = element.id;
+                          }
                         }
 
                         return GestureDetector(
@@ -309,16 +380,13 @@ class _EditPostScreenState extends State<EditPostScreen> with AfterLayoutMixin {
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 10),
-
                 Wrap(
                   spacing: 5,
                   runSpacing: 5,
                   children: List.generate(
                       _vars.length, (index) => _buildProduct(index)),
                 ),
-
                 const SizedBox(
                   height: 16,
                 ),
@@ -393,13 +461,13 @@ class _EditPostScreenState extends State<EditPostScreen> with AfterLayoutMixin {
                   ),
                 ),
                 const SizedBox(height: 10),
-                // Wrap(
-                //   direction: Axis.horizontal,
-                //   spacing: 5,
-                //   runSpacing: 5,
-                //   children: List.generate(
-                //       _hashtag.length, (index) => _buildHashtag(index)),
-                // ),
+                Wrap(
+                  direction: Axis.horizontal,
+                  spacing: 5,
+                  runSpacing: 5,
+                  children: List.generate(
+                      _hashtag.length, (index) => _buildHashtag(index)),
+                ),
                 const SizedBox(height: 10),
               ],
             ),
@@ -478,7 +546,7 @@ class _EditPostScreenState extends State<EditPostScreen> with AfterLayoutMixin {
                       fixedSize: Size(Get.width * .3, Get.height * .15)),
                   onPressed: () async {
                     await context
-                        .read<CreatePostCubit>()
+                        .read<EditPostCubit>()
                         .selectImage(ImageSource.gallery);
                   },
                   child: Image.asset('assets/images/add_image.png'),
@@ -490,7 +558,7 @@ class _EditPostScreenState extends State<EditPostScreen> with AfterLayoutMixin {
                       fixedSize: Size(Get.width * .3, Get.height * .15)),
                   onPressed: () async {
                     await context
-                        .read<CreatePostCubit>()
+                        .read<EditPostCubit>()
                         .selectImage(ImageSource.camera);
                   },
                   child: Image.asset('assets/images/camera.png'),
@@ -503,6 +571,35 @@ class _EditPostScreenState extends State<EditPostScreen> with AfterLayoutMixin {
           ],
         );
       },
+    );
+  }
+
+  Widget _buildHashtag(index) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(5),
+        border: Border.all(color: Colors.black45, width: 0.5),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+            child: Text(_hashtag[index]),
+          ),
+          InkWell(
+            onTap: () {
+              setState(() {
+                _hashtag.removeAt(index);
+              });
+            },
+            child: const Icon(
+              Icons.close_rounded,
+              size: 17,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -524,6 +621,38 @@ class _EditPostScreenState extends State<EditPostScreen> with AfterLayoutMixin {
                 onTap: () {
                   setState(() {
                     _vars.removeAt(index);
+                    shouldShowAlertDialog = true;
+                  });
+                },
+                child: const Icon(
+                  Icons.close_rounded,
+                  size: 17,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildProductString({required String title}) {
+    return Row(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            border: Border.all(color: Colors.black45, width: 0.5),
+          ),
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+                child: Text(title),
+              ),
+              InkWell(
+                onTap: () {
+                  setState(() {
                     shouldShowAlertDialog = true;
                   });
                 },

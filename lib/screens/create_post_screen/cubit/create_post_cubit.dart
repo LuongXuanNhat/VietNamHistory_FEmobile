@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -68,7 +69,15 @@ class CreatePostCubit extends Cubit<CreatePostState> {
           tag: tag);
       UIHelpers.showSnackBar(
           title: 'Thông báo', message: 'Tạo bài viết thành công');
-      navigator!.pushNamed(RouteGenerator.discoverScreen);
+      // navigator!.pushNamedAndRemoveUntil(RouteGenerator.discoverScreen);
+      navigator!.pushNamedAndRemoveUntil(
+        RouteGenerator.mainScreen,
+        arguments: {
+          'currentIndex': 3,
+        },
+        (route) => false,
+      );
+
       if (data.isSuccessed == true) {
         emit(CreatePostState.success(data: state.data!.copyWith(success: 1)));
       } else {

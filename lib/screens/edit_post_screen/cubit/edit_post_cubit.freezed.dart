@@ -203,20 +203,14 @@ class _$EditPostStateDataImpl implements _EditPostStateData {
             (identical(other.success, success) || other.success == success) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.image, image) || other.image == image) &&
-            const DeepCollectionEquality().equals(other.data, data) &&
+            (identical(other.data, data) || other.data == data) &&
             const DeepCollectionEquality()
                 .equals(other._listTopic, _listTopic));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      error,
-      success,
-      status,
-      image,
-      const DeepCollectionEquality().hash(data),
-      const DeepCollectionEquality().hash(_listTopic));
+  int get hashCode => Object.hash(runtimeType, error, success, status, image,
+      data, const DeepCollectionEquality().hash(_listTopic));
 
   @JsonKey(ignore: true)
   @override

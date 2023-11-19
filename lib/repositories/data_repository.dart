@@ -112,7 +112,7 @@ class DataRepository implements RestClient {
   }
 
   @override
-  Future<String> getImage() {
+  Future<SuccesResponse> getImage() {
     return client!.getImage();
   }
 
@@ -139,7 +139,7 @@ class DataRepository implements RestClient {
   }
 
   @override
-  Future<SuccesResponseBool> deletePost({required String id}) {
+  Future<SuccesResponse> deletePost({required String id}) {
     return client!.deletePost(id: id);
   }
 
@@ -158,5 +158,56 @@ class DataRepository implements RestClient {
   @override
   Future<ListReport> listReport() {
     return client!.listReport();
+  }
+
+  @override
+  Future<AddPostResponse> updatePost({
+    required String id,
+    required String title,
+    required String content,
+    required String topicId,
+    File? image,
+    required List<String> tag,
+  }) {
+    return client!.updatePost(
+      id: id,
+      title: title,
+      content: content,
+      topicId: topicId,
+      image: image,
+      tag: tag,
+    );
+  }
+
+  @override
+  Future<SuccesResponseBool> likePost({
+    required String postId,
+    required String userId,
+  }) {
+    return client!.likePost(postId: postId, userId: userId);
+  }
+
+  @override
+  Future<SuccesResponseBool> checkLikePost({
+    required String postId,
+    required String userId,
+  }) {
+    return client!.checkLikePost(postId: postId, userId: userId);
+  }
+
+  @override
+  Future<SuccesResponseBool> savePost({
+    required String postId,
+    required String userId,
+  }) {
+    return client!.savePost(postId: postId, userId: userId);
+  }
+
+  @override
+  Future<SuccesResponseBool> checkSavePost({
+    required String postId,
+    required String userId,
+  }) {
+    return client!.checkSavePost(postId: postId, userId: userId);
   }
 }

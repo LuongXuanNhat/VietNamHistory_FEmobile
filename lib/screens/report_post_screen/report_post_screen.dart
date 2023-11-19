@@ -132,7 +132,7 @@ class _ReportPortSCreenState extends State<ReportPortSCreen>
                   InkWell(
                     onTap: () {
                       context.read<ReportPostCubit>().reportPost(
-                          postId: widget.resultObj.id.toString(),
+                          postId: widget.resultObj.subId.toString(),
                           userId: widget.resultObj.userShort!.id.toString(),
                           reportId: state.data!.listReport!.resultObj!
                               .firstWhere(
