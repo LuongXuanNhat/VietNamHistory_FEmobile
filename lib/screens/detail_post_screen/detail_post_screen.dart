@@ -7,21 +7,34 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import '../../common/global_colors.dart';
-import '../../models/post/discover/response/list_discover_response.dart';
 import '../../route_generator.dart';
 import 'cubit/detail_post_cubit.dart';
+import 'submit/like/cubit/likepost_cubit.dart';
+import 'submit/save/cubit/savepost_cubit.dart';
 
 class DetailPostScreen extends StatefulWidget {
-  final ResultObj resultObj;
-  static MultiBlocProvider provider({required ResultObj resultObj}) {
+  final String? subId;
+  final String? userId;
+  static MultiBlocProvider provider(
+      {required String subId, required String userId}) {
     return MultiBlocProvider(providers: [
       BlocProvider<DetailPostCubit>(
         create: (BuildContext context) => DetailPostCubit(),
       ),
-    ], child: DetailPostScreen(resultObj: resultObj));
+      BlocProvider<LikepostCubit>(
+        create: (BuildContext context) => LikepostCubit(),
+      ),
+      BlocProvider<SavepostCubit>(
+        create: (BuildContext context) => SavepostCubit(),
+      ),
+    ], child: DetailPostScreen(subId: subId, userId: userId));
   }
 
-  const DetailPostScreen({super.key, required this.resultObj});
+  const DetailPostScreen({
+    Key? key,
+    this.subId,
+    this.userId,
+  }) : super(key: key);
 
   @override
   State<DetailPostScreen> createState() => _DetailPostScreenState();
@@ -30,12 +43,17 @@ class DetailPostScreen extends StatefulWidget {
 class _DetailPostScreenState extends State<DetailPostScreen>
     with AfterLayoutMixin {
   final GlobalKey _globalKey = GlobalKey();
+
+  TextEditingController commentController = TextEditingController();
   @override
   FutureOr<void> afterFirstLayout(BuildContext context) async {
-    // context.read<DetailPostCubit>().getDetailPost(id: widget.resultObj.id!);
-    context.read<DetailPostCubit>().isLike(
-        postId: widget.resultObj.subId.toString(),
-        userId: widget.resultObj.userShort!.id!);
+    context.read<DetailPostCubit>().getDetailPost(id: widget.subId!);
+    context
+        .read<LikepostCubit>()
+        .isLike(postId: widget.subId!, userId: widget.userId!);
+    context
+        .read<SavepostCubit>()
+        .isSave(postId: widget.subId!, userId: widget.userId!);
   }
 
   @override
@@ -47,10 +65,7 @@ class _DetailPostScreenState extends State<DetailPostScreen>
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    String? content = widget.resultObj.content;
-    if (containsHtml(content!)) {
-      content = content.replaceAll(RegExp(r'<[^>]*>'), '');
-    }
+
     return SafeArea(
       child: Scaffold(
         key: _globalKey,
@@ -71,6 +86,11 @@ class _DetailPostScreenState extends State<DetailPostScreen>
         ),
         body: BlocBuilder<DetailPostCubit, DetailPostState>(
           builder: (context, state) {
+            final detail = state.data.data;
+            String content = detail?.resultObj?.content ?? '';
+            if (containsHtml(content)) {
+              content = content.replaceAll(RegExp(r'<[^>]*>'), '');
+            }
             return SingleChildScrollView(
               child: Padding(
                 padding:
@@ -83,7 +103,7 @@ class _DetailPostScreenState extends State<DetailPostScreen>
                         ClipRRect(
                           borderRadius: BorderRadius.circular(50),
                           child: Image.network(
-                            widget.resultObj.userShort!.image ?? '',
+                            detail?.resultObj?.userShort?.image ?? '',
                             errorBuilder: (BuildContext context,
                                 Object exception, StackTrace? stackTrace) {
                               return const CircleAvatar(
@@ -104,7 +124,7 @@ class _DetailPostScreenState extends State<DetailPostScreen>
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              widget.resultObj.userShort!.fullName!,
+                              detail?.resultObj?.userShort?.fullName ?? '',
                               style: const TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w700,
@@ -132,7 +152,9 @@ class _DetailPostScreenState extends State<DetailPostScreen>
                                 Row(
                                   children: [
                                     Text(
-                                      widget.resultObj.viewNumber.toString(),
+                                      detail?.resultObj?.viewNumber
+                                              ?.toString() ??
+                                          '',
                                       style: const TextStyle(
                                           fontSize: 11,
                                           fontWeight: FontWeight.w400,
@@ -181,16 +203,8 @@ class _DetailPostScreenState extends State<DetailPostScreen>
                                                             RouteGenerator
                                                                 .editPostScreen,
                                                             arguments: {
-                                                              'postId': widget
-                                                                  .resultObj
-                                                                  .subId
-                                                                  .toString(),
-                                                              'topicName': widget
-                                                                  .resultObj
-                                                                  .topicName,
-                                                              'tags': widget
-                                                                  .resultObj
-                                                                  .tags,
+                                                              'Data': detail
+                                                                  ?.resultObj
                                                             });
                                                       },
                                                       child: const Row(
@@ -242,7 +256,7 @@ class _DetailPostScreenState extends State<DetailPostScreen>
                                                                           _globalKey
                                                                               .currentContext!
                                                                               .read<DetailPostCubit>()
-                                                                              .deletePost(id: widget.resultObj.id!);
+                                                                              .deletePost(id: detail?.resultObj?.id ?? '');
                                                                           Navigator.pop(
                                                                               context);
                                                                         },
@@ -280,9 +294,10 @@ class _DetailPostScreenState extends State<DetailPostScreen>
                                                             RouteGenerator
                                                                 .reportPostScreen,
                                                             arguments: {
-                                                              'PostDetail':
-                                                                  widget
-                                                                      .resultObj
+                                                              'PostDetail': state
+                                                                  .data
+                                                                  .data
+                                                                  ?.resultObj
                                                             });
                                                       },
                                                       child: const Row(
@@ -350,7 +365,7 @@ class _DetailPostScreenState extends State<DetailPostScreen>
                           child: Padding(
                             padding: const EdgeInsets.all(2.0),
                             child: Text(
-                              widget.resultObj.topicName ?? '',
+                              detail?.resultObj?.topicName ?? '',
                               style: const TextStyle(
                                   fontSize: 11,
                                   fontWeight: FontWeight.w400,
@@ -363,16 +378,18 @@ class _DetailPostScreenState extends State<DetailPostScreen>
                     const SizedBox(
                       height: 17,
                     ),
-                    ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: widget.resultObj.tags!.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return TextHashtag(
-                              text: widget.resultObj.tags![index].name ?? '');
-                        }),
+                    if (detail != null)
+                      ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: detail.resultObj?.tags!.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return TextHashtag(
+                                text:
+                                    detail.resultObj?.tags![index].name ?? '');
+                          }),
                     Text(
-                      widget.resultObj.title!.toUpperCase(),
+                      detail?.resultObj?.title!.toUpperCase() ?? '',
                       style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w700,
@@ -383,7 +400,7 @@ class _DetailPostScreenState extends State<DetailPostScreen>
                       height: 17,
                     ),
                     Text(
-                      content!,
+                      content,
                       style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
@@ -397,117 +414,169 @@ class _DetailPostScreenState extends State<DetailPostScreen>
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                       ),
-                      child: Image.network(widget.resultObj.image!),
+                      child: Image.network(
+                        detail?.resultObj?.image! ?? '',
+                        errorBuilder: (BuildContext context, Object exception,
+                            StackTrace? stackTrace) {
+                          return const CircleAvatar(
+                            radius: 25,
+                            backgroundImage:
+                                AssetImage('assets/images/album.png'),
+                          );
+                        },
+                      ),
                     ),
                     const SizedBox(
                       height: 20,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            _globalKey.currentContext!
-                                .read<DetailPostCubit>()
-                                .likePost(
-                                    postId: widget.resultObj.subId.toString(),
-                                    userId: widget.resultObj.userShort!.id!);
-
-                            _globalKey.currentContext!
-                                .read<DetailPostCubit>()
-                                .isLike(
-                                    postId: widget.resultObj.subId.toString(),
-                                    userId: widget.resultObj.userShort!.id!);
-                          },
-                          child: Row(
-                            children: [
-                              Icon(
+                    BlocBuilder<LikepostCubit, LikepostState>(
+                      builder: (context, state) {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                _globalKey.currentContext!
+                                    .read<LikepostCubit>()
+                                    .likePost(
+                                        postId: detail?.resultObj?.subId
+                                                .toString() ??
+                                            '',
+                                        userId:
+                                            detail?.resultObj?.userShort!.id! ??
+                                                '');
+                              },
+                              child: Row(
+                                children: [
+                                  Icon(
+                                      state.data.isLike
+                                          ? Icons.favorite
+                                          : Icons.favorite_border,
+                                      size: 20,
+                                      color: GlobalColors.ButtonNavigation),
+                                  const SizedBox(
+                                    width: 3,
+                                  ),
                                   state.data.isLike == true
-                                      ? Icons.favorite
-                                      : Icons.favorite_border,
-                                  size: 20,
-                                  color: GlobalColors.ButtonNavigation),
-                              const SizedBox(
-                                width: 10,
+                                      ? Text(
+                                          '${state.data.numberLike} Thích',
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w400,
+                                              fontFamily: 'Inter',
+                                              color: GlobalColors
+                                                  .ButtonNavigation),
+                                        )
+                                      : Text(
+                                          '${state.data.numberLike} Thích',
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w400,
+                                              fontFamily: 'Inter',
+                                              color: GlobalColors
+                                                  .ButtonNavigation),
+                                        ),
+                                ],
                               ),
-                              state.data.isLike == true
-                                  ? Text(
-                                      'Bỏ yêu thích',
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w400,
-                                          fontFamily: 'Inter',
-                                          color: GlobalColors.ButtonNavigation),
-                                    )
-                                  : Text(
-                                      'Yêu Thích',
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w400,
-                                          fontFamily: 'Inter',
-                                          color: GlobalColors.ButtonNavigation),
-                                    ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 30,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            _globalKey.currentContext!
-                                .read<DetailPostCubit>()
-                                .savePost(
-                                    postId: widget.resultObj.subId.toString(),
-                                    userId: widget.resultObj.userShort!.id!);
-                            _globalKey.currentContext!
-                                .read<DetailPostCubit>()
-                                .isSave(
-                                    postId: widget.resultObj.subId.toString(),
-                                    userId: widget.resultObj.userShort!.id!);
-                          },
-                          child: Row(
-                            children: [
-                              state.data.isSave == true
-                                  ? const Icon(Icons.check,
-                                      size: 20, color: Colors.black54)
-                                  : const Icon(Icons.save_alt_rounded,
+                            ),
+                            BlocBuilder<SavepostCubit, SavepostState>(
+                              builder: (context, state) {
+                                return InkWell(
+                                  onTap: () {
+                                    _globalKey.currentContext!
+                                        .read<SavepostCubit>()
+                                        .savePost(
+                                            postId: detail?.resultObj?.subId
+                                                    ?.toString() ??
+                                                '',
+                                            userId: detail?.resultObj
+                                                    ?.userShort!.id ??
+                                                '');
+                                    _globalKey.currentContext!
+                                        .read<SavepostCubit>()
+                                        .isSave(
+                                            postId: detail?.resultObj?.subId
+                                                    .toString() ??
+                                                '',
+                                            userId: detail?.resultObj
+                                                    ?.userShort!.id ??
+                                                '');
+                                  },
+                                  child: Row(
+                                    children: [
+                                      state.data.isSave == true
+                                          ? const Icon(Icons.check,
+                                              size: 20, color: Colors.black54)
+                                          : const Icon(Icons.save_alt_rounded,
+                                              size: 20, color: Colors.black54),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      state.data.isSave == true
+                                          ? const Text('Đã lưu',
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w400,
+                                                  fontFamily: 'Inter',
+                                                  color: Colors.black54))
+                                          : const Text(
+                                              'Lưu bài',
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w400,
+                                                  fontFamily: 'Inter',
+                                                  color: Colors.black54),
+                                            ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
+                            InkWell(
+                              onTap: () {
+                                navigator!.pushNamed(
+                                    RouteGenerator.commentScreen,
+                                    arguments: {
+                                      'PostId':
+                                          detail?.resultObj?.subId.toString() ??
+                                              '',
+                                    });
+                              },
+                              child: const Row(
+                                children: [
+                                  Icon(Icons.comment_outlined,
                                       size: 20, color: Colors.black54),
-                              const SizedBox(
-                                width: 5,
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    'Bình luận',
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: 'Inter',
+                                        color: Colors.black54),
+                                  ),
+                                ],
                               ),
-                              state.data.isSave == true
-                                  ? const Text('Đã lưu',
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w400,
-                                          fontFamily: 'Inter',
-                                          color: Colors.black54))
-                                  : const Text(
-                                      'Lưu bài viết',
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w400,
-                                          fontFamily: 'Inter',
-                                          color: Colors.black54),
-                                    ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 30,
-                        ),
-                        const Icon(Icons.share_outlined,
-                            size: 20, color: Colors.black54),
-                        const Text(
-                          'Chia sẻ',
-                          style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: 'Inter',
-                              color: Colors.black54),
-                        )
-                      ],
+                            ),
+                            const Row(
+                              children: [
+                                Icon(Icons.share_outlined,
+                                    size: 20, color: Colors.black54),
+                                Text(
+                                  'Chia sẻ',
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: 'Inter',
+                                      color: Colors.black54),
+                                )
+                              ],
+                            ),
+                          ],
+                        );
+                      },
                     ),
                   ],
                 ),

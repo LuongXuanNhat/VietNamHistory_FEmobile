@@ -6,10 +6,18 @@ import 'package:retrofit/http.dart';
 
 import '../common/global_configs.dart';
 import '../models/post/discover/response/list_discover_response.dart';
-import '../models/post/request/udpate_post_request.dart';
+import '../models/post/request/create_commnet_request.dart';
+import '../models/post/request/update_comment_request.dart';
 import '../models/post/response/add_post_response.dart';
+import '../models/post/response/comment_post_response.dart';
+import '../models/question/answer/request/answer_request.dart';
+import '../models/question/answer/response/listanswerresponse.dart';
+import '../models/question/response/listquestionresponse.dart';
+import '../models/question/response/questionresponse.dart';
+import '../models/question/sub_answer/request/sub_answer_request.dart';
 import '../models/report/request/report_post_request.dart';
 import '../models/report/response/list_report_response.dart';
+import '../models/succes/response/success_response_list.dart';
 import '../models/succes/response/success_response.dart';
 import '../models/succes/response/success_response_bool.dart';
 import '../models/topic/response/list_topic_response.dart';
@@ -70,7 +78,7 @@ abstract class RestClient {
     @Part(name: 'Tag') required List<String> tag,
   });
 
-  @GET('Post/Discover')
+  @GET('Post/DiscoverMobile')
   Future<ListDiscoverResponse> getListDiscover();
   @DELETE('Post')
   Future<SuccesResponse> deletePost({@Query('Id') required String id});
@@ -101,7 +109,6 @@ abstract class RestClient {
     @Part(name: 'PostId') required String postId,
     @Part(name: 'UserId') required String userId,
   });
-  // https://vuanhpham25-001-site1.gtempurl.com/Post/Like?PostId=Nhan-Vat-Lich-SuLy-Nam-e-23:31:50.893-18-11-2023&UserId=57EAEF52-4106-4C36-89E7-337692E350A5
 
   @GET('Post/Like')
   Future<SuccesResponseBool> checkLikePost({
@@ -118,5 +125,71 @@ abstract class RestClient {
   Future<SuccesResponseBool> checkSavePost({
     @Query('PostId') required String postId,
     @Query('UserId') required String userId,
+  });
+
+  @POST('Post/Chat')
+  Future<CommentResponse> createComment({
+    @Body() required CreateCommentRequest request,
+  });
+
+  @GET('Post/Chat')
+  Future<CommentResponse> getComment({
+    @Query('PostId') required String postId,
+  });
+
+  @PUT('Post/Chat')
+  Future<CommentResponse> updateComment({
+    @Body() required UpdateCommentRequest request,
+  });
+
+  @GET('HashTag')
+  Future<SuccesResponseList> getListTag();
+
+  @GET('Post/FindByTag')
+  Future<ListDiscoverResponse> getListPostByTag({
+    @Query('tag') required String tag,
+  });
+
+  @GET('Post/Search')
+  Future<ListDiscoverResponse> searchPost({
+    @Query('keyWord') required String keyword,
+  });
+
+  @POST('Question')
+  Future<QuestionResponse> createQuestion({
+    @Part(name: 'Title') required String title,
+    @Part(name: 'Content') required String content,
+    @Part(name: 'Tag') required List<String> tag,
+  });
+
+  @PUT('Question')
+  Future<QuestionResponse> updateQuestion({
+    @Part(name: 'Id') required String id,
+    @Part(name: 'Title') required String title,
+    @Part(name: 'Content') required String content,
+    @Part(name: 'Tag') required List<String> tag,
+  });
+
+  @GET('Question')
+  Future<ListQuestionResponse> getAllQuestion();
+
+  @GET('Question/Detail')
+  Future<QuestionResponse> getDetailPostBySubId({
+    @Query('subId') required String subId,
+  });
+
+  @POST('Answer')
+  Future<ListAnswerResponse> createAnswer({
+    @Body() required AnswerRequest request,
+  });
+
+  @GET('Answer')
+  Future<ListAnswerResponse> getAnswer({
+    @Query('questionId') required String questionId,
+  });
+
+  @POST('Answer/SubAnswer')
+  Future<SuccesResponse> createSubAnswer({
+    @Body() required SubAnswerRequest request,
   });
 }

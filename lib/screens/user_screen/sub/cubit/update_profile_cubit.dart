@@ -1,12 +1,16 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../common/storage/app_prefs.dart';
 import '../../../../common/ui_helpers.dart';
 import '../../../../get_it.dart';
 import '../../../../models/user/request/update_profile_request.dart';
+import '../../../../models/user/user_pres.dart';
 import '../../../../repositories/data_repository.dart';
 import '../../../../route_generator.dart';
 
@@ -60,10 +64,18 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
       if (response.success == true) {
         emit(UpdateProfileState.getError(
             data: state.data!.copyWith(error: response.message!, success: 1)));
+
+        if (fullname.isNotEmpty) {
+          final token = (await appPref.getToken())?.token ?? '';
+          await UserPreferences.saveUserFromToken(
+              token: token, username: fullname);
+        }
+
         navigator!.pushReplacementNamed(RouteGenerator.accounsettingsScreen);
       } else {
         emit(UpdateProfileState.getError(
             data: state.data!.copyWith(error: response.message!)));
+
         navigator!.pop();
       }
     } catch (e) {

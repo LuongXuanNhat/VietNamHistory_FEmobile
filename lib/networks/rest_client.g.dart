@@ -321,7 +321,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              'Post/Discover',
+              'Post/DiscoverMobile',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -646,6 +646,400 @@ class _RestClient implements RestClient {
               baseUrl,
             ))));
     final value = SuccesResponseBool.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CommentResponse> createComment(
+      {required CreateCommentRequest request}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CommentResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'Post/Chat',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = CommentResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CommentResponse> getComment({required String postId}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'PostId': postId};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CommentResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'Post/Chat',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = CommentResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CommentResponse> updateComment(
+      {required UpdateCommentRequest request}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CommentResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'Post/Chat',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = CommentResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<SuccesResponseList> getListTag() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccesResponseList>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'HashTag',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = SuccesResponseList.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ListDiscoverResponse> getListPostByTag({required String tag}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'tag': tag};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ListDiscoverResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'Post/FindByTag',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = ListDiscoverResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ListDiscoverResponse> searchPost({required String keyword}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'keyWord': keyword};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ListDiscoverResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'Post/Search',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = ListDiscoverResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<QuestionResponse> createQuestion({
+    required String title,
+    required String content,
+    required List<String> tag,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    _data.fields.add(MapEntry(
+      'Title',
+      title,
+    ));
+    _data.fields.add(MapEntry(
+      'Content',
+      content,
+    ));
+    tag.forEach((i) {
+      _data.fields.add(MapEntry('Tag', i));
+    });
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<QuestionResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'Question',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = QuestionResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<QuestionResponse> updateQuestion({
+    required String id,
+    required String title,
+    required String content,
+    required List<String> tag,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    _data.fields.add(MapEntry(
+      'Id',
+      id,
+    ));
+    _data.fields.add(MapEntry(
+      'Title',
+      title,
+    ));
+    _data.fields.add(MapEntry(
+      'Content',
+      content,
+    ));
+    tag.forEach((i) {
+      _data.fields.add(MapEntry('Tag', i));
+    });
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<QuestionResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'Question',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = QuestionResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ListQuestionResponse> getAllQuestion() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ListQuestionResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'Question',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = ListQuestionResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<QuestionResponse> getDetailPostBySubId({required String subId}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'subId': subId};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<QuestionResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'Question/Detail',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = QuestionResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ListAnswerResponse> createAnswer(
+      {required AnswerRequest request}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<ListAnswerResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'Answer',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = ListAnswerResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ListAnswerResponse> getAnswer({required String questionId}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'questionId': questionId};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<ListAnswerResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'Answer',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = ListAnswerResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<SuccesResponse> createSubAnswer(
+      {required SubAnswerRequest request}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccesResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'Answer/SubAnswer',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = SuccesResponse.fromJson(_result.data!);
     return value;
   }
 

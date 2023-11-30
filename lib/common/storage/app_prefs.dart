@@ -2,6 +2,7 @@ import '../../models/user/response/login_response.dart';
 
 import '../../models/user/response/user_response.dart';
 
+import '../../models/user/user_pres.dart';
 import 'base_prefs.dart';
 import 'global_constants.dart';
 
@@ -84,5 +85,7 @@ class AppPref extends BasePrefs {
   Future<void> logout() async {
     await remove(key: GlobalConstants.kToken);
     await remove(key: GlobalConstants.kUser);
+    Map<String, String> userData = await UserPreferences.getUser();
+    userData.clear();
   }
 }

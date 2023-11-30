@@ -8,9 +8,18 @@ import '../common/storage/app_prefs.dart';
 import '../get_it.dart';
 import '../models/base/response/error_response.dart';
 import '../models/post/discover/response/list_discover_response.dart';
+import '../models/post/request/create_commnet_request.dart';
+import '../models/post/request/update_comment_request.dart';
 import '../models/post/response/add_post_response.dart';
+import '../models/post/response/comment_post_response.dart';
+import '../models/question/answer/request/answer_request.dart';
+import '../models/question/answer/response/listanswerresponse.dart';
+import '../models/question/response/listquestionresponse.dart';
+import '../models/question/response/questionresponse.dart';
+import '../models/question/sub_answer/request/sub_answer_request.dart';
 import '../models/report/request/report_post_request.dart';
 import '../models/report/response/list_report_response.dart';
+import '../models/succes/response/success_response_list.dart';
 import '../models/succes/response/success_response.dart';
 import '../models/succes/response/success_response_bool.dart';
 import '../models/topic/response/list_topic_response.dart';
@@ -209,5 +218,111 @@ class DataRepository implements RestClient {
     required String userId,
   }) {
     return client!.checkSavePost(postId: postId, userId: userId);
+  }
+
+  //createcomment
+  @override
+  Future<CommentResponse> createComment({
+    required CreateCommentRequest request,
+  }) {
+    return client!.createComment(
+      request: request,
+    );
+  }
+
+  //getcomment
+  @override
+  Future<CommentResponse> getComment({
+    required String postId,
+  }) {
+    return client!.getComment(
+      postId: postId,
+    );
+  }
+
+  //updatecomment
+  @override
+  Future<CommentResponse> updateComment({
+    required UpdateCommentRequest request,
+  }) {
+    return client!.updateComment(
+      request: request,
+    );
+  }
+
+  @override
+  Future<SuccesResponseList> getListTag() {
+    return client!.getListTag();
+  }
+
+  @override
+  Future<ListDiscoverResponse> getListPostByTag({
+    required String tag,
+  }) {
+    return client!.getListPostByTag(tag: tag);
+  }
+
+  @override
+  Future<ListDiscoverResponse> searchPost({
+    required String keyword,
+  }) {
+    return client!.searchPost(keyword: keyword);
+  }
+
+  @override
+  Future<QuestionResponse> createQuestion({
+    required String title,
+    required String content,
+    required List<String> tag,
+  }) {
+    return client!.createQuestion(
+      title: title,
+      content: content,
+      tag: tag,
+    );
+  }
+
+  @override
+  Future<QuestionResponse> updateQuestion({
+    required String id,
+    required String title,
+    required String content,
+    required List<String> tag,
+  }) {
+    return client!.updateQuestion(
+      id: id,
+      title: title,
+      content: content,
+      tag: tag,
+    );
+  }
+
+  @override
+  Future<QuestionResponse> getDetailPostBySubId({required String subId}) {
+    return client!.getDetailPostBySubId(subId: subId);
+  }
+
+  @override
+  Future<ListQuestionResponse> getAllQuestion() {
+    return client!.getAllQuestion();
+  }
+
+  @override
+  Future<ListAnswerResponse> createAnswer({required AnswerRequest request}) {
+    return client!.createAnswer(
+      request: request,
+    );
+  }
+
+  @override
+  Future<ListAnswerResponse> getAnswer({required String questionId}) {
+    return client!.getAnswer(questionId: questionId);
+  }
+
+  @override
+  Future<SuccesResponse> createSubAnswer({required SubAnswerRequest request}) {
+    return client!.createSubAnswer(
+      request: request,
+    );
   }
 }

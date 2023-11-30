@@ -1,9 +1,9 @@
+import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
+
 import '../../common/global_colors.dart';
-
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import '../discover_sceen/discover_screen.dart';
+import '../forum_question_screen/question_screen.dart';
 import '../home_screen/home_screen.dart';
 import '../quiz_screen/quiz_screnn.dart';
 import '../user_screen/account_settings_screen.dart';
@@ -21,75 +21,40 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  List<Widget> body = [
+  List<dynamic> pages = [
     const HomeScreen(),
-    const Icon(Icons.home),
+    QuestionScreen.provider(),
     const QuizScreen(),
     DiscoverScreen.provider(),
     AccountSettingsScreen.provider(),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //bottomNavigationBar: const BottomNavigation(),
-      body: Center(
-        child: body[widget.currentIndex],
-      ),
+      body: pages[widget.currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: widget.currentIndex,
-        onTap: (intdex) {
-          setState(() {
-            widget.currentIndex = intdex;
-          });
-        },
-        items: [
-          BottomNavigationBarItem(
-            label: "Trang chủ",
-            icon: FaIcon(
-              FontAwesomeIcons.house,
-              color: widget.currentIndex == 0
-                  ? GlobalColors.ButtonNavigation
-                  : Colors.black45,
-            ),
-          ),
-          BottomNavigationBarItem(
-            label: "Lớp học",
-            icon: FaIcon(
-              FontAwesomeIcons.users,
-              color: widget.currentIndex == 1
-                  ? GlobalColors.ButtonNavigation
-                  : Colors.black45,
-            ),
-          ),
-          BottomNavigationBarItem(
-            label: "Khóa học",
-            icon: FaIcon(
-              FontAwesomeIcons.briefcase,
-              color: widget.currentIndex == 2
-                  ? GlobalColors.ButtonNavigation
-                  : Colors.black45,
-            ),
-          ),
-          BottomNavigationBarItem(
-            label: "Diễn đàn",
-            icon: FaIcon(
-              FontAwesomeIcons.comments,
-              color: widget.currentIndex == 3
-                  ? GlobalColors.ButtonNavigation
-                  : Colors.black45,
-            ),
-          ),
-          BottomNavigationBarItem(
-            label: "Cá nhân",
-            icon: FaIcon(
-              FontAwesomeIcons.user,
-              color: widget.currentIndex == 4
-                  ? GlobalColors.ButtonNavigation
-                  : Colors.black45,
-            ),
-          ),
-        ],
-      ),
+          unselectedItemColor: GlobalColors.ButtonDefault,
+          fixedColor: GlobalColors.ButtonNavigation,
+          currentIndex: widget.currentIndex,
+          onTap: (index) => changePage(index),
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Trang chủ'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.question_answer), label: 'Hỏi đáp'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.create), label: 'Luyện tập'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.public), label: 'Khám phá'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.person), label: 'Người dùng'),
+          ]),
     );
+  }
+
+  changePage(int index) {
+    setState(() {
+      widget.currentIndex = index;
+    });
   }
 }

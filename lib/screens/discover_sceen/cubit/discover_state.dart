@@ -6,7 +6,9 @@ class DiscoverStateData with _$DiscoverStateData {
     String? error,
     @Default(0) int success,
     @Default(StatusType.init) StatusType status,
+    @Default([]) List<String>? listTag,
     ListDiscoverResponse? listDiscover,
+    ListDiscoverResponse? listDiscoverOriginal,
   }) = _DiscoverStateData;
 }
 
@@ -17,4 +19,9 @@ class DiscoverState with _$DiscoverState {
   const factory DiscoverState.status({DiscoverStateData? data}) = Status;
   const factory DiscoverState.getListDiscover({DiscoverStateData? data}) =
       GetListDiscover;
+
+  const factory DiscoverState.getListTag({DiscoverStateData? data}) =
+      GetListTag;
+  const factory DiscoverState.searchPost({DiscoverStateData? data}) =
+      SearchPost;
 }

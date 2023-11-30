@@ -11,20 +11,17 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../common/global_colors.dart';
 
-import '../../models/post/discover/response/list_discover_response.dart';
+import '../../models/post/response/add_post_response.dart';
 import '../create_post_screen/cubit/create_post_cubit.dart';
 import '../create_post_screen/wigets/topic_card.dart';
 import 'cubit/edit_post_cubit.dart';
 
 class EditPostScreen extends StatefulWidget {
-  final String postId;
-  final String? topicname;
-  final List<Tag> tags;
+  final ResultObj? data;
 
-  static MultiBlocProvider provider(
-      {required String postId,
-      required String topicname,
-      required List<Tag> tags}) {
+  static MultiBlocProvider provider({
+    required ResultObj data,
+  }) {
     return MultiBlocProvider(
       providers: [
         BlocProvider<EditPostCubit>(
@@ -33,15 +30,12 @@ class EditPostScreen extends StatefulWidget {
         BlocProvider<CreatePostCubit>(create: (context) => CreatePostCubit())
       ],
       child: EditPostScreen(
-        postId: postId,
-        topicname: topicname,
-        tags: tags,
+        data: data,
       ),
     );
   }
 
-  const EditPostScreen(
-      {super.key, required this.postId, this.topicname, required this.tags});
+  const EditPostScreen({super.key, required this.data});
 
   @override
   State<EditPostScreen> createState() => _EditPostScreenState();
@@ -54,13 +48,14 @@ class _EditPostScreenState extends State<EditPostScreen> with AfterLayoutMixin {
   final _hashtagtxt = TextEditingController();
   final _vars = <VariantionItem>[];
   final _hashtag = <String>[];
-  late File _imageFile;
+  String? _image;
   String? topicID;
   bool shouldShowAlertDialog = true;
+  bool showTag = true;
 
   @override
   FutureOr<void> afterFirstLayout(BuildContext context) async {
-    await context.read<EditPostCubit>().getTopicDetail(id: widget.postId);
+    await context.read<CreatePostCubit>().getTopics();
   }
 
   @override
@@ -68,11 +63,19 @@ class _EditPostScreenState extends State<EditPostScreen> with AfterLayoutMixin {
     // TODO: implement initState
     super.initState();
     VariantionItem variant = VariantionItem(
-      title: widget.topicname,
+      title: widget.data!.topicName,
     );
     _vars.add(variant);
-
-    _hashtag.addAll(widget.tags.map((e) => e.name!));
+    if (_vars.isNotEmpty) {
+      shouldShowAlertDialog = false;
+    }
+    _titletxt.text = widget.data!.title!;
+    _contenttxt.text = widget.data!.content!;
+    _image = widget.data!.image!;
+    _hashtag.addAll(widget.data!.tags!.map((e) => e.name!));
+    if (_hashtag.isNotEmpty) {
+      showTag = false;
+    }
   }
 
   @override
@@ -100,8 +103,9 @@ class _EditPostScreenState extends State<EditPostScreen> with AfterLayoutMixin {
                               Tag tag = Tag(name: _hashtag[i]);
                               tags.add(tag.name.toString());
                             }
+
                             context.read<EditPostCubit>().updatePost(
-                                id: widget.postId.toString(),
+                                id: widget.data!.id!,
                                 title: _titletxt.text,
                                 content: _contenttxt.text,
                                 image: context
@@ -109,7 +113,7 @@ class _EditPostScreenState extends State<EditPostScreen> with AfterLayoutMixin {
                                     .state
                                     .data
                                     .image,
-                                topicId: 'f689b70d-59f3-454b-8255-46cbcb8a5b07',
+                                topicId: _vars[0].id!,
                                 tags: tags);
                           },
                           child: const Text(
@@ -146,10 +150,6 @@ class _EditPostScreenState extends State<EditPostScreen> with AfterLayoutMixin {
       ),
       body: BlocBuilder<EditPostCubit, EditPostState>(
         builder: (context, state) {
-          final detail = state.data.data;
-          _titletxt.text = detail?.resultObj?.title ?? '';
-          _contenttxt.text = detail?.resultObj?.content ?? '';
-
           return SingleChildScrollView(
               child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -277,15 +277,14 @@ class _EditPostScreenState extends State<EditPostScreen> with AfterLayoutMixin {
                     ),
                   ),
                 ),
-                if (detail?.resultObj?.image != null)
-                  Wrap(
-                    children: [
-                      _buildCard(
-                        context.watch<EditPostCubit>().state.data.image,
-                        detail!.resultObj!.image,
-                      ),
-                    ],
-                  ),
+                Wrap(
+                  children: [
+                    _buildCard(
+                      context.watch<EditPostCubit>().state.data.image,
+                      widget.data!.image,
+                    ),
+                  ],
+                ),
                 const SizedBox(
                   height: 16,
                 ),
@@ -299,13 +298,12 @@ class _EditPostScreenState extends State<EditPostScreen> with AfterLayoutMixin {
                     child: BlocBuilder<CreatePostCubit, CreatePostState>(
                       builder: (context, state) {
                         final data = state.data!.listTopic;
-
                         for (var element in data) {
-                          if (element.title == widget.topicname) {
+                          if (element.title == widget.data!.topicName) {
                             topicID = element.id;
+                            _vars[0].id = topicID;
                           }
                         }
-
                         return GestureDetector(
                           onTap: () async {
                             if (shouldShowAlertDialog) {
@@ -395,45 +393,48 @@ class _EditPostScreenState extends State<EditPostScreen> with AfterLayoutMixin {
                       borderRadius: BorderRadius.circular(5),
                       border: Border.all(color: Colors.black45, width: 0.5)),
                   child: GestureDetector(
-                    onTap: () {
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: const Text('Thêm Hastag cho bài viết'),
-                              content: TextField(
-                                controller: _hashtagtxt,
-                                decoration: InputDecoration(
-                                  border: const OutlineInputBorder(),
-                                  labelText: 'Hastag',
-                                  suffixIcon: IconButton(
-                                    onPressed: () {
-                                      _hashtagtxt.clear();
-                                    },
-                                    icon: const Icon(Icons.clear),
+                    onTap: () async {
+                      if (showTag) {
+                        await showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: const Text('Thêm Hastag cho bài viết'),
+                                content: TextField(
+                                  controller: _hashtagtxt,
+                                  decoration: InputDecoration(
+                                    border: const OutlineInputBorder(),
+                                    labelText: 'Hastag',
+                                    suffixIcon: IconButton(
+                                      onPressed: () {
+                                        _hashtagtxt.clear();
+                                      },
+                                      icon: const Icon(Icons.clear),
+                                    ),
                                   ),
                                 ),
-                              ),
-                              actions: [
-                                TextButton(
-                                  child: const Text('Đóng'),
-                                  onPressed: () {
-                                    navigator!.pop();
-                                  },
-                                ),
-                                TextButton(
-                                  child: const Text('Thêm'),
-                                  onPressed: () {
-                                    setState(() {
-                                      _hashtag.add(_hashtagtxt.text);
-                                      _hashtagtxt.clear();
+                                actions: [
+                                  TextButton(
+                                    child: const Text('Đóng'),
+                                    onPressed: () {
                                       navigator!.pop();
-                                    });
-                                  },
-                                ),
-                              ],
-                            );
-                          });
+                                    },
+                                  ),
+                                  TextButton(
+                                    child: const Text('Thêm'),
+                                    onPressed: () {
+                                      setState(() {
+                                        _hashtag.add(_hashtagtxt.text);
+                                        _hashtagtxt.clear();
+                                        navigator!.pop();
+                                        showTag = false;
+                                      });
+                                    },
+                                  ),
+                                ],
+                              );
+                            });
+                      }
                     },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
@@ -591,6 +592,8 @@ class _EditPostScreenState extends State<EditPostScreen> with AfterLayoutMixin {
             onTap: () {
               setState(() {
                 _hashtag.removeAt(index);
+
+                showTag = true;
               });
             },
             child: const Icon(

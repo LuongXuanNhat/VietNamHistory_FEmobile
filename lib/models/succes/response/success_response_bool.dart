@@ -1,7 +1,7 @@
 class SuccesResponseBool {
   bool? isSuccessed;
   String? message;
-  bool? resultObj;
+  ResultObj? resultObj;
 
   SuccesResponseBool({
     this.isSuccessed,
@@ -12,7 +12,7 @@ class SuccesResponseBool {
   SuccesResponseBool copyWith({
     bool? isSuccessed,
     String? message,
-    bool? resultObj,
+    ResultObj? resultObj,
   }) =>
       SuccesResponseBool(
         isSuccessed: isSuccessed ?? this.isSuccessed,
@@ -24,7 +24,9 @@ class SuccesResponseBool {
     return SuccesResponseBool(
       isSuccessed: json["isSuccessed"],
       message: json["message"],
-      resultObj: json["resultObj"],
+      resultObj: json["resultObj"] == null
+          ? null
+          : ResultObj.fromJson(json["resultObj"]),
     );
   }
 
@@ -35,4 +37,33 @@ class SuccesResponseBool {
       "resultObj": resultObj,
     };
   }
+}
+
+class ResultObj {
+  bool item1;
+  int item2;
+
+  ResultObj({
+    required this.item1,
+    required this.item2,
+  });
+
+  ResultObj copyWith({
+    bool? item1,
+    int? item2,
+  }) =>
+      ResultObj(
+        item1: item1 ?? this.item1,
+        item2: item2 ?? this.item2,
+      );
+
+  factory ResultObj.fromJson(Map<String, dynamic> json) => ResultObj(
+        item1: json["check"],
+        item2: json["quantity"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "check": item1,
+        "quantity": item2,
+      };
 }

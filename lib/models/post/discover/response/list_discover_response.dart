@@ -49,6 +49,7 @@ class ResultObj {
   String? content;
   String? image;
   dynamic topicName;
+  DateTime? createdAt;
   List<Tag>? tags;
   UserShort? userShort;
   int? viewNumber;
@@ -65,6 +66,7 @@ class ResultObj {
     this.topicName,
     this.tags,
     this.userShort,
+    this.createdAt,
     this.viewNumber,
     this.commentNumber,
     this.likeNumber,
@@ -78,6 +80,7 @@ class ResultObj {
     String? content,
     String? image,
     dynamic topicName,
+    DateTime? createdAt,
     List<Tag>? tags,
     UserShort? userShort,
     int? viewNumber,
@@ -91,6 +94,7 @@ class ResultObj {
         title: title ?? this.title,
         content: content ?? this.content,
         image: image ?? this.image,
+        createdAt: createdAt ?? this.createdAt,
         topicName: topicName ?? this.topicName,
         tags: tags ?? this.tags,
         userShort: userShort ?? this.userShort,
@@ -106,6 +110,7 @@ class ResultObj {
     title = json['title'];
     content = json['content'];
     image = json['image'];
+    createdAt = DateTime.parse(json['createdAt']);
     topicName = json['topicName'];
     if (json['tags'] != null) {
       tags = <Tag>[];
@@ -128,6 +133,7 @@ class ResultObj {
     data['title'] = title;
     data['content'] = content;
     data['image'] = image;
+    data['createdAt'] = createdAt!.toIso8601String();
     data['topicName'] = topicName;
     data['tags'] = tags!.map((v) => v.toJson()).toList();
     data['userShort'] = userShort!.toJson();

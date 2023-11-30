@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../common/ui_helpers.dart';
@@ -12,6 +13,7 @@ import '../../../get_it.dart';
 import '../../../models/post/response/add_post_response.dart';
 import '../../../models/topic/response/list_topic_response.dart';
 import '../../../repositories/data_repository.dart';
+import '../../../route_generator.dart';
 
 part 'edit_post_state.dart';
 part 'edit_post_cubit.freezed.dart';
@@ -53,6 +55,10 @@ class EditPostCubit extends Cubit<EditPostState> {
           tag: tags);
       if (data.isSuccessed == true) {
         emit(EditPostState.success(data: EditPostStateData(data: data)));
+        navigator?.pushNamedAndRemoveUntil(
+            RouteGenerator.mainScreen,
+            arguments: {'currentIndex': 3},
+            (route) => false);
       }
     } catch (e) {
       log(e.toString());

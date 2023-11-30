@@ -65,7 +65,6 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen>
       body: BlocBuilder<ProfileCubit, ProfileState>(
         builder: (context, state) {
           int? genderValue = state.data!.userResponse?.data!.gender;
-          String url = state.data!.urlImage ?? '';
 
           Gender gender;
           if (genderValue == 0) {

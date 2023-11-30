@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'models/post/response/add_post_response.dart';
 
-import 'models/post/discover/response/list_discover_response.dart';
 import 'models/user/response/user_response.dart';
 import 'screens/change_pass_screen/change_pass_screen.dart';
 import 'screens/create_post_screen/create_post_screen.dart';
 import 'screens/detail_post_screen/detail_post_screen.dart';
+import 'screens/detail_post_screen/submit/comment/comment_box.dart';
 import 'screens/edit_post_screen/edit_post_screen.dart';
 import 'screens/errors_screen/not_found_screen.dart';
+import 'screens/forum_question_screen/create_question/create_question_screen.dart';
+import 'screens/forum_question_screen/detail_question/detail_question.dart';
+import 'screens/forum_question_screen/question_screen.dart';
 import 'screens/home_screen/home_screen.dart';
 import 'screens/login_screen/mobile/login_screen.dart';
 
@@ -37,6 +41,10 @@ class RouteGenerator {
   static const String reportPostScreen = '/report_post_screen';
   static const String editPostScreen = '/edit_post_screen';
   static const String quizScreen = '/quiz_screen';
+  static const String commentScreen = '/comment_screen';
+  static const String questionScreen = '/question_screen ';
+  static const String createQuestionScreen = '/create_question_screen';
+  static const String detailQuestionScreen = '/detail_question_screen';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -89,11 +97,12 @@ class RouteGenerator {
         );
       case detailPostScreen:
         final args = settings.arguments as Map<String, dynamic>?;
-        final postDetail = args!['PostDetail'] as ResultObj;
+        final postId = args!['PostId'] as String;
+        final userId = args['UserId'] as String;
+
         return MaterialPageRoute(
-          builder: (context) => DetailPostScreen.provider(
-            resultObj: postDetail,
-          ),
+          builder: (context) =>
+              DetailPostScreen.provider(subId: postId, userId: userId),
           settings: settings,
         );
       case mainScreen:
@@ -118,13 +127,10 @@ class RouteGenerator {
             settings: settings);
       case editPostScreen:
         final args = settings.arguments as Map<String, dynamic>?;
-        final data = args!['postId'] as String;
-        final topicname = args['topicName'] as String;
-        final tags = args['tags'] as List<Tag>;
+        final data = args!['Data'] as ResultObj;
 
         return MaterialPageRoute(
-          builder: (context) => EditPostScreen.provider(
-              postId: data, topicname: topicname, tags: tags),
+          builder: (context) => EditPostScreen.provider(data: data),
           settings: settings,
         );
       case quizScreen:
@@ -132,6 +138,36 @@ class RouteGenerator {
           builder: (context) => const QuizScreen(),
           settings: settings,
         );
+      case commentScreen:
+        final args = settings.arguments as Map<String, dynamic>?;
+        final postId = args!['PostId'] as String;
+        return MaterialPageRoute(
+          builder: (context) => CommentScreen.provider(
+            postId: postId,
+          ),
+          settings: settings,
+        );
+      case questionScreen:
+        return MaterialPageRoute(
+          builder: (context) => QuestionScreen.provider(),
+          settings: settings,
+        );
+      case createQuestionScreen:
+        return MaterialPageRoute(
+          builder: (context) => CreateQuestionScreen.provider(),
+          settings: settings,
+        );
+
+      case detailQuestionScreen:
+        final args = settings.arguments as Map<String, dynamic>?;
+        final subId = args!['subId'] as String;
+        final id = args['id'] as String;
+        return MaterialPageRoute(
+          builder: (context) =>
+              DetailQuestionScreen.provider(subId: subId, id: id),
+          settings: settings,
+        );
+
       default:
         return MaterialPageRoute(
           builder: (context) => const NotFoundScreen(),
