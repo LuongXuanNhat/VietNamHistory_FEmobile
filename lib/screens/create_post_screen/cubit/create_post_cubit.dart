@@ -73,7 +73,7 @@ class CreatePostCubit extends Cubit<CreatePostState> {
       navigator!.pushNamedAndRemoveUntil(
         RouteGenerator.mainScreen,
         arguments: {
-          'currentIndex': 3,
+          'currentIndex': 0,
         },
         (route) => false,
       );

@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 
+import 'ui_parameters.dart';
+
+const Color kPrimayLightColorLT = Color.fromARGB(255, 175, 84, 255);
+const Color kPrimayColorLT = Color.fromARGB(255, 120, 30, 255);
+const Color kPrimayColorDT = Color.fromARGB(255, 70, 14, 160);
+const Color kPrimayLightColorDT = Color.fromARGB(255, 92, 15, 210);
+
 class GlobalColors {
   static const Color primaryColor = Color(0x00000000);
   static const Color boderColor = Color.fromARGB(55, 154, 230, 1);
@@ -27,3 +34,40 @@ class HexColor extends Color {
 
   HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 }
+
+const kOnSurfaceTextColor = Colors.white;
+const kCorrectAnswerColor = Color.fromARGB(255, 0, 188, 100);
+const kWrongAnswerColor = Color.fromARGB(255, 230, 24, 24);
+const kNotAnswerColor = Color.fromARGB(255, 120, 50, 80);
+
+const mainGradientLT = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      kPrimayLightColorLT,
+      kPrimayColorLT,
+    ]);
+
+// main gradient pattern for Dark theme
+const mainGradientDT = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      kPrimayLightColorDT,
+      kPrimayColorDT,
+    ]);
+LinearGradient mainGradient(BuildContext context) =>
+    UIParameters.isDarkMode(context) ? mainGradientDT : mainGradientLT;
+
+Color customScaffoldColor(BuildContext context) =>
+    UIParameters.isDarkMode(context)
+        ? const Color.fromARGB(255, 14, 20, 44)
+        : const Color.fromARGB(255, 240, 237, 255);
+
+Color answerBorderColor(BuildContext context) =>
+    UIParameters.isDarkMode(context)
+        ? const Color.fromARGB(255, 20, 46, 158)
+        : const Color.fromARGB(255, 221, 221, 221);
+
+Color answerSelectedColor(BuildContext context) =>
+    GlobalColors.ButtonNavigation;

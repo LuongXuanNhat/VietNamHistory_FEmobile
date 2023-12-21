@@ -52,17 +52,24 @@ class PostCard extends StatelessWidget {
                       )
                     ],
                   ),
-                  const Spacer(),
-                  Container(
-                    height: 25,
-                    alignment: Alignment.center,
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        color: Colors.grey.withOpacity(0.1)),
-                    child: Text(
-                      post.topicName.toString(),
-                      style: const TextStyle(fontSize: 14, color: Colors.blue),
+                  const Spacer(
+                    flex: 1,
+                  ),
+                  Expanded(
+                    child: Container(
+                      height: 25,
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          color: Colors.grey.withOpacity(0.1)),
+                      child: Text(
+                        post.topicName.toString(),
+                        style:
+                            const TextStyle(fontSize: 14, color: Colors.blue),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
                     ),
                   ),
                   const SizedBox(width: 5),

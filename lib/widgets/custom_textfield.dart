@@ -65,6 +65,7 @@ class CustomTextField extends StatelessWidget {
         inputFormatters: inputFormatter,
         textInputAction: textInputAction,
         readOnly: readOnly,
+
         maxLength: maxLength,
         //   onChanged: (value) => onchanged!(value),
         onChanged: (value) {
@@ -107,7 +108,6 @@ class CustomTextField extends StatelessWidget {
           errorText: errorText,
           prefixIcon: prefixIcon,
           suffixIcon: suffixIcon,
-          // isObscure: isObscure,
         ),
       ),
     );

@@ -39,6 +39,7 @@ class ResultObjs {
   final dynamic updatedAt;
   final bool confirm;
   final bool mostConfirm;
+  final dynamic voteNumber;
   final List<SubAnswer?>? subAnswer;
 
   ResultObjs({
@@ -52,32 +53,33 @@ class ResultObjs {
     required this.confirm,
     required this.mostConfirm,
     required this.subAnswer,
+    this.voteNumber,
   });
 
-  ResultObjs copyWith({
-    String? id,
-    String? authorId,
-    String? questionId,
-    UserShort? userShort,
-    String? content,
-    DateTime? createdAt,
-    dynamic updatedAt,
-    bool? confirm,
-    bool? mostConfirm,
-    List<SubAnswer?>? subAnswer,
-  }) =>
+  ResultObjs copyWith(
+          {String? id,
+          String? authorId,
+          String? questionId,
+          UserShort? userShort,
+          String? content,
+          DateTime? createdAt,
+          dynamic updatedAt,
+          bool? confirm,
+          bool? mostConfirm,
+          List<SubAnswer?>? subAnswer,
+          dynamic voteNumber}) =>
       ResultObjs(
-        id: id ?? this.id,
-        authorId: authorId ?? this.authorId,
-        questionId: questionId ?? this.questionId,
-        userShort: userShort ?? this.userShort,
-        content: content ?? this.content,
-        createdAt: createdAt ?? this.createdAt,
-        updatedAt: updatedAt ?? this.updatedAt,
-        confirm: confirm ?? this.confirm,
-        mostConfirm: mostConfirm ?? this.mostConfirm,
-        subAnswer: subAnswer ?? this.subAnswer,
-      );
+          id: id ?? this.id,
+          authorId: authorId ?? this.authorId,
+          questionId: questionId ?? this.questionId,
+          userShort: userShort ?? this.userShort,
+          content: content ?? this.content,
+          createdAt: createdAt ?? this.createdAt,
+          updatedAt: updatedAt ?? this.updatedAt,
+          confirm: confirm ?? this.confirm,
+          mostConfirm: mostConfirm ?? this.mostConfirm,
+          subAnswer: subAnswer ?? this.subAnswer,
+          voteNumber: voteNumber ?? this.voteNumber);
 
   factory ResultObjs.fromJson(Map<String, dynamic> json) => ResultObjs(
         id: json["id"],
@@ -89,6 +91,7 @@ class ResultObjs {
         updatedAt: json["updatedAt"],
         confirm: json["confirm"],
         mostConfirm: json["mostConfirm"],
+        voteNumber: json["voteNumber"],
         subAnswer: List<SubAnswer>.from(
             json["subAnswer"].map((x) => SubAnswer.fromJson(x))),
       );
@@ -101,6 +104,7 @@ class ResultObjs {
         "content": content,
         "createdAt": createdAt.toIso8601String(),
         "updatedAt": updatedAt,
+        "voteNumber": voteNumber,
         "confirm": confirm,
         "mostConfirm": mostConfirm,
         "subAnswer":
@@ -113,7 +117,7 @@ class SubAnswer {
   final String preAnswerId;
   final String authorId;
   final String content;
-  final dynamic pubDate;
+  final DateTime createdAt;
   final dynamic updateAt;
   final UserShort userShort;
 
@@ -122,7 +126,7 @@ class SubAnswer {
     required this.preAnswerId,
     required this.authorId,
     required this.content,
-    required this.pubDate,
+    required this.createdAt,
     required this.updateAt,
     required this.userShort,
   });
@@ -132,7 +136,7 @@ class SubAnswer {
     String? preAnswerId,
     String? authorId,
     String? content,
-    dynamic pubDate,
+    DateTime? createdAt,
     dynamic updateAt,
     UserShort? userShort,
   }) =>
@@ -141,7 +145,7 @@ class SubAnswer {
         preAnswerId: preAnswerId ?? this.preAnswerId,
         authorId: authorId ?? this.authorId,
         content: content ?? this.content,
-        pubDate: pubDate ?? this.pubDate,
+        createdAt: createdAt ?? this.createdAt,
         updateAt: updateAt ?? this.updateAt,
         userShort: userShort ?? this.userShort,
       );
@@ -151,8 +155,8 @@ class SubAnswer {
         preAnswerId: json["preAnswerId"],
         authorId: json["authorId"],
         content: json["content"],
-        pubDate: json["pubDate"],
-        updateAt: json["updateAt"],
+        createdAt: DateTime.parse(json["createdAt"]),
+        updateAt: json["updatedAt"],
         userShort: UserShort.fromJson(json["userShort"]),
       );
 
@@ -161,8 +165,8 @@ class SubAnswer {
         "preAnswerId": preAnswerId,
         "authorId": authorId,
         "content": content,
-        "pubDate": pubDate,
-        "updateAt": updateAt,
+        "createdAt": createdAt,
+        "updatedAt": updateAt,
         "userShort": userShort.toJson(),
       };
 }

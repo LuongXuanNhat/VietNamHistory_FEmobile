@@ -3,10 +3,14 @@ import 'dart:async';
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../common/global_colors.dart';
+
+import '../../models/user/user_pres.dart';
 import '../../route_generator.dart';
 import 'cubit/detail_post_cubit.dart';
 import 'submit/like/cubit/likepost_cubit.dart';
@@ -43,6 +47,7 @@ class DetailPostScreen extends StatefulWidget {
 class _DetailPostScreenState extends State<DetailPostScreen>
     with AfterLayoutMixin {
   final GlobalKey _globalKey = GlobalKey();
+  String meId = '';
 
   TextEditingController commentController = TextEditingController();
   @override
@@ -54,6 +59,8 @@ class _DetailPostScreenState extends State<DetailPostScreen>
     context
         .read<SavepostCubit>()
         .isSave(postId: widget.subId!, userId: widget.userId!);
+    Map<String, dynamic> userData = await UserPreferences.getUser();
+    meId = userData['id']!;
   }
 
   @override
@@ -87,10 +94,7 @@ class _DetailPostScreenState extends State<DetailPostScreen>
         body: BlocBuilder<DetailPostCubit, DetailPostState>(
           builder: (context, state) {
             final detail = state.data.data;
-            String content = detail?.resultObj?.content ?? '';
-            if (containsHtml(content)) {
-              content = content.replaceAll(RegExp(r'<[^>]*>'), '');
-            }
+
             return SingleChildScrollView(
               child: Padding(
                 padding:
@@ -172,7 +176,7 @@ class _DetailPostScreenState extends State<DetailPostScreen>
                                 SizedBox(
                                   width: size.width * 0.3,
                                 ),
-                                InkWell(
+                                GestureDetector(
                                   onTap: () {
                                     showDialog(
                                         context: context,
@@ -207,28 +211,42 @@ class _DetailPostScreenState extends State<DetailPostScreen>
                                                                   ?.resultObj
                                                             });
                                                       },
-                                                      child: const Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        children: [
-                                                          Icon(
-                                                            Icons.edit_outlined,
-                                                            size: 20,
-                                                          ),
-                                                          Text(
-                                                            'Sửa bài',
-                                                            style: TextStyle(
-                                                                fontFamily:
-                                                                    'Mulish',
-                                                                fontSize: 14,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400),
-                                                          ),
-                                                        ],
-                                                      ),
+                                                      child: meId ==
+                                                              detail
+                                                                  ?.resultObj
+                                                                  ?.userShort
+                                                                  ?.id
+                                                          ? const Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .min,
+                                                              children: [
+                                                                Icon(
+                                                                  Icons
+                                                                      .edit_outlined,
+                                                                  size: 20,
+                                                                ),
+                                                                Text(
+                                                                  'Sửa bài',
+                                                                  style: TextStyle(
+                                                                      fontFamily:
+                                                                          'Mulish',
+                                                                      fontSize:
+                                                                          14,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400),
+                                                                ),
+                                                              ],
+                                                            )
+                                                          : Container(),
                                                     ),
-                                                    const SizedBox(height: 10),
+                                                    meId ==
+                                                            detail?.resultObj
+                                                                ?.userShort?.id
+                                                        ? const SizedBox(
+                                                            height: 10)
+                                                        : Container(),
                                                     GestureDetector(
                                                       onTap: () {
                                                         showDialog(
@@ -265,29 +283,42 @@ class _DetailPostScreenState extends State<DetailPostScreen>
                                                                   ],
                                                                 ));
                                                       },
-                                                      child: const Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        children: [
-                                                          Icon(
-                                                            Icons
-                                                                .delete_outline,
-                                                            size: 20,
-                                                          ),
-                                                          Text(
-                                                            'Xóa bài',
-                                                            style: TextStyle(
-                                                                fontFamily:
-                                                                    'Mulish',
-                                                                fontSize: 14,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400),
-                                                          ),
-                                                        ],
-                                                      ),
+                                                      child: meId ==
+                                                              detail
+                                                                  ?.resultObj
+                                                                  ?.userShort
+                                                                  ?.id
+                                                          ? const Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .min,
+                                                              children: [
+                                                                Icon(
+                                                                  Icons
+                                                                      .delete_outline,
+                                                                  size: 20,
+                                                                ),
+                                                                Text(
+                                                                  'Xóa bài',
+                                                                  style: TextStyle(
+                                                                      fontFamily:
+                                                                          'Mulish',
+                                                                      fontSize:
+                                                                          14,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400),
+                                                                ),
+                                                              ],
+                                                            )
+                                                          : Container(),
                                                     ),
-                                                    const SizedBox(height: 10),
+                                                    meId ==
+                                                            detail?.resultObj
+                                                                ?.userShort?.id
+                                                        ? const SizedBox(
+                                                            height: 10)
+                                                        : Container(),
                                                     GestureDetector(
                                                       onTap: () {
                                                         navigator!.pushNamed(
@@ -331,7 +362,7 @@ class _DetailPostScreenState extends State<DetailPostScreen>
                                   },
                                   child: const FaIcon(
                                     FontAwesomeIcons.ellipsisVertical,
-                                    size: 13,
+                                    size: 20,
                                   ),
                                 ),
                               ],
@@ -399,14 +430,7 @@ class _DetailPostScreenState extends State<DetailPostScreen>
                     const SizedBox(
                       height: 17,
                     ),
-                    Text(
-                      content,
-                      style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black,
-                          fontFamily: 'Inter'),
-                    ),
+                    Html(data: detail?.resultObj?.content ?? ''),
                     const SizedBox(
                       height: 10,
                     ),
@@ -502,33 +526,41 @@ class _DetailPostScreenState extends State<DetailPostScreen>
                                                     ?.userShort!.id ??
                                                 '');
                                   },
-                                  child: Row(
-                                    children: [
-                                      state.data.isSave == true
-                                          ? const Icon(Icons.check,
-                                              size: 20, color: Colors.black54)
-                                          : const Icon(Icons.save_alt_rounded,
-                                              size: 20, color: Colors.black54),
-                                      const SizedBox(
-                                        width: 5,
-                                      ),
-                                      state.data.isSave == true
-                                          ? const Text('Đã lưu',
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w400,
-                                                  fontFamily: 'Inter',
-                                                  color: Colors.black54))
-                                          : const Text(
-                                              'Lưu bài',
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w400,
-                                                  fontFamily: 'Inter',
-                                                  color: Colors.black54),
+                                  child: meId !=
+                                          detail?.resultObj?.userShort?.id
+                                      ? Row(
+                                          children: [
+                                            state.data.isSave == true
+                                                ? const Icon(Icons.check,
+                                                    size: 20,
+                                                    color: Colors.black54)
+                                                : const Icon(
+                                                    Icons.save_alt_rounded,
+                                                    size: 20,
+                                                    color: Colors.black54),
+                                            const SizedBox(
+                                              width: 5,
                                             ),
-                                    ],
-                                  ),
+                                            state.data.isSave == true
+                                                ? const Text('Đã lưu',
+                                                    style: TextStyle(
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontFamily: 'Inter',
+                                                        color: Colors.black54))
+                                                : const Text(
+                                                    'Lưu bài',
+                                                    style: TextStyle(
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontFamily: 'Inter',
+                                                        color: Colors.black54),
+                                                  ),
+                                          ],
+                                        )
+                                      : Container(),
                                 );
                               },
                             ),
@@ -560,19 +592,25 @@ class _DetailPostScreenState extends State<DetailPostScreen>
                                 ],
                               ),
                             ),
-                            const Row(
-                              children: [
-                                Icon(Icons.share_outlined,
-                                    size: 20, color: Colors.black54),
-                                Text(
-                                  'Chia sẻ',
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w400,
-                                      fontFamily: 'Inter',
-                                      color: Colors.black54),
-                                )
-                              ],
+                            GestureDetector(
+                              onTap: () async {
+                                await Share.share('Share this text',
+                                    subject: 'hello nhat ');
+                              },
+                              child: const Row(
+                                children: [
+                                  Icon(Icons.share_outlined,
+                                      size: 20, color: Colors.black54),
+                                  Text(
+                                    'Chia sẻ',
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: 'Inter',
+                                        color: Colors.black54),
+                                  )
+                                ],
+                              ),
                             ),
                           ],
                         );

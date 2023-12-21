@@ -24,6 +24,13 @@ mixin _$ProfileStateData {
   String? get urlImage => throw _privateConstructorUsedError;
   UserResponse? get userResponse => throw _privateConstructorUsedError;
   DateTime? get transactionDate => throw _privateConstructorUsedError;
+  MyPostResponse? get myPost => throw _privateConstructorUsedError;
+  MyPostResponse? get myPostSave => throw _privateConstructorUsedError;
+  ListQuestionResponse? get myQuestion => throw _privateConstructorUsedError;
+  ListQuestionResponse? get myQuestionSave =>
+      throw _privateConstructorUsedError;
+  ListHistoryMyExam? get myExam => throw _privateConstructorUsedError;
+  bool get isShowDialog => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProfileStateDataCopyWith<ProfileStateData> get copyWith =>
@@ -44,7 +51,13 @@ abstract class $ProfileStateDataCopyWith<$Res> {
       File? image,
       String? urlImage,
       UserResponse? userResponse,
-      DateTime? transactionDate});
+      DateTime? transactionDate,
+      MyPostResponse? myPost,
+      MyPostResponse? myPostSave,
+      ListQuestionResponse? myQuestion,
+      ListQuestionResponse? myQuestionSave,
+      ListHistoryMyExam? myExam,
+      bool isShowDialog});
 }
 
 /// @nodoc
@@ -68,6 +81,12 @@ class _$ProfileStateDataCopyWithImpl<$Res, $Val extends ProfileStateData>
     Object? urlImage = freezed,
     Object? userResponse = freezed,
     Object? transactionDate = freezed,
+    Object? myPost = freezed,
+    Object? myPostSave = freezed,
+    Object? myQuestion = freezed,
+    Object? myQuestionSave = freezed,
+    Object? myExam = freezed,
+    Object? isShowDialog = null,
   }) {
     return _then(_value.copyWith(
       error: freezed == error
@@ -102,6 +121,30 @@ class _$ProfileStateDataCopyWithImpl<$Res, $Val extends ProfileStateData>
           ? _value.transactionDate
           : transactionDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      myPost: freezed == myPost
+          ? _value.myPost
+          : myPost // ignore: cast_nullable_to_non_nullable
+              as MyPostResponse?,
+      myPostSave: freezed == myPostSave
+          ? _value.myPostSave
+          : myPostSave // ignore: cast_nullable_to_non_nullable
+              as MyPostResponse?,
+      myQuestion: freezed == myQuestion
+          ? _value.myQuestion
+          : myQuestion // ignore: cast_nullable_to_non_nullable
+              as ListQuestionResponse?,
+      myQuestionSave: freezed == myQuestionSave
+          ? _value.myQuestionSave
+          : myQuestionSave // ignore: cast_nullable_to_non_nullable
+              as ListQuestionResponse?,
+      myExam: freezed == myExam
+          ? _value.myExam
+          : myExam // ignore: cast_nullable_to_non_nullable
+              as ListHistoryMyExam?,
+      isShowDialog: null == isShowDialog
+          ? _value.isShowDialog
+          : isShowDialog // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -122,7 +165,13 @@ abstract class _$$ProfileStateDataImplCopyWith<$Res>
       File? image,
       String? urlImage,
       UserResponse? userResponse,
-      DateTime? transactionDate});
+      DateTime? transactionDate,
+      MyPostResponse? myPost,
+      MyPostResponse? myPostSave,
+      ListQuestionResponse? myQuestion,
+      ListQuestionResponse? myQuestionSave,
+      ListHistoryMyExam? myExam,
+      bool isShowDialog});
 }
 
 /// @nodoc
@@ -144,6 +193,12 @@ class __$$ProfileStateDataImplCopyWithImpl<$Res>
     Object? urlImage = freezed,
     Object? userResponse = freezed,
     Object? transactionDate = freezed,
+    Object? myPost = freezed,
+    Object? myPostSave = freezed,
+    Object? myQuestion = freezed,
+    Object? myQuestionSave = freezed,
+    Object? myExam = freezed,
+    Object? isShowDialog = null,
   }) {
     return _then(_$ProfileStateDataImpl(
       error: freezed == error
@@ -178,6 +233,30 @@ class __$$ProfileStateDataImplCopyWithImpl<$Res>
           ? _value.transactionDate
           : transactionDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      myPost: freezed == myPost
+          ? _value.myPost
+          : myPost // ignore: cast_nullable_to_non_nullable
+              as MyPostResponse?,
+      myPostSave: freezed == myPostSave
+          ? _value.myPostSave
+          : myPostSave // ignore: cast_nullable_to_non_nullable
+              as MyPostResponse?,
+      myQuestion: freezed == myQuestion
+          ? _value.myQuestion
+          : myQuestion // ignore: cast_nullable_to_non_nullable
+              as ListQuestionResponse?,
+      myQuestionSave: freezed == myQuestionSave
+          ? _value.myQuestionSave
+          : myQuestionSave // ignore: cast_nullable_to_non_nullable
+              as ListQuestionResponse?,
+      myExam: freezed == myExam
+          ? _value.myExam
+          : myExam // ignore: cast_nullable_to_non_nullable
+              as ListHistoryMyExam?,
+      isShowDialog: null == isShowDialog
+          ? _value.isShowDialog
+          : isShowDialog // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -195,7 +274,13 @@ class _$ProfileStateDataImpl
       this.image,
       this.urlImage,
       this.userResponse,
-      this.transactionDate});
+      this.transactionDate,
+      this.myPost,
+      this.myPostSave,
+      this.myQuestion,
+      this.myQuestionSave,
+      this.myExam,
+      this.isShowDialog = false});
 
   @override
   final String? error;
@@ -215,10 +300,23 @@ class _$ProfileStateDataImpl
   final UserResponse? userResponse;
   @override
   final DateTime? transactionDate;
+  @override
+  final MyPostResponse? myPost;
+  @override
+  final MyPostResponse? myPostSave;
+  @override
+  final ListQuestionResponse? myQuestion;
+  @override
+  final ListQuestionResponse? myQuestionSave;
+  @override
+  final ListHistoryMyExam? myExam;
+  @override
+  @JsonKey()
+  final bool isShowDialog;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ProfileStateData(error: $error, success: $success, gender: $gender, dateOfBirth: $dateOfBirth, image: $image, urlImage: $urlImage, userResponse: $userResponse, transactionDate: $transactionDate)';
+    return 'ProfileStateData(error: $error, success: $success, gender: $gender, dateOfBirth: $dateOfBirth, image: $image, urlImage: $urlImage, userResponse: $userResponse, transactionDate: $transactionDate, myPost: $myPost, myPostSave: $myPostSave, myQuestion: $myQuestion, myQuestionSave: $myQuestionSave, myExam: $myExam, isShowDialog: $isShowDialog)';
   }
 
   @override
@@ -233,7 +331,13 @@ class _$ProfileStateDataImpl
       ..add(DiagnosticsProperty('image', image))
       ..add(DiagnosticsProperty('urlImage', urlImage))
       ..add(DiagnosticsProperty('userResponse', userResponse))
-      ..add(DiagnosticsProperty('transactionDate', transactionDate));
+      ..add(DiagnosticsProperty('transactionDate', transactionDate))
+      ..add(DiagnosticsProperty('myPost', myPost))
+      ..add(DiagnosticsProperty('myPostSave', myPostSave))
+      ..add(DiagnosticsProperty('myQuestion', myQuestion))
+      ..add(DiagnosticsProperty('myQuestionSave', myQuestionSave))
+      ..add(DiagnosticsProperty('myExam', myExam))
+      ..add(DiagnosticsProperty('isShowDialog', isShowDialog));
   }
 
   @override
@@ -252,12 +356,36 @@ class _$ProfileStateDataImpl
             (identical(other.userResponse, userResponse) ||
                 other.userResponse == userResponse) &&
             (identical(other.transactionDate, transactionDate) ||
-                other.transactionDate == transactionDate));
+                other.transactionDate == transactionDate) &&
+            (identical(other.myPost, myPost) || other.myPost == myPost) &&
+            (identical(other.myPostSave, myPostSave) ||
+                other.myPostSave == myPostSave) &&
+            (identical(other.myQuestion, myQuestion) ||
+                other.myQuestion == myQuestion) &&
+            (identical(other.myQuestionSave, myQuestionSave) ||
+                other.myQuestionSave == myQuestionSave) &&
+            (identical(other.myExam, myExam) || other.myExam == myExam) &&
+            (identical(other.isShowDialog, isShowDialog) ||
+                other.isShowDialog == isShowDialog));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, error, success, gender,
-      dateOfBirth, image, urlImage, userResponse, transactionDate);
+  int get hashCode => Object.hash(
+      runtimeType,
+      error,
+      success,
+      gender,
+      dateOfBirth,
+      image,
+      urlImage,
+      userResponse,
+      transactionDate,
+      myPost,
+      myPostSave,
+      myQuestion,
+      myQuestionSave,
+      myExam,
+      isShowDialog);
 
   @JsonKey(ignore: true)
   @override
@@ -276,7 +404,13 @@ abstract class _ProfileStateData implements ProfileStateData {
       final File? image,
       final String? urlImage,
       final UserResponse? userResponse,
-      final DateTime? transactionDate}) = _$ProfileStateDataImpl;
+      final DateTime? transactionDate,
+      final MyPostResponse? myPost,
+      final MyPostResponse? myPostSave,
+      final ListQuestionResponse? myQuestion,
+      final ListQuestionResponse? myQuestionSave,
+      final ListHistoryMyExam? myExam,
+      final bool isShowDialog}) = _$ProfileStateDataImpl;
 
   @override
   String? get error;
@@ -294,6 +428,18 @@ abstract class _ProfileStateData implements ProfileStateData {
   UserResponse? get userResponse;
   @override
   DateTime? get transactionDate;
+  @override
+  MyPostResponse? get myPost;
+  @override
+  MyPostResponse? get myPostSave;
+  @override
+  ListQuestionResponse? get myQuestion;
+  @override
+  ListQuestionResponse? get myQuestionSave;
+  @override
+  ListHistoryMyExam? get myExam;
+  @override
+  bool get isShowDialog;
   @override
   @JsonKey(ignore: true)
   _$$ProfileStateDataImplCopyWith<_$ProfileStateDataImpl> get copyWith =>
@@ -314,6 +460,12 @@ mixin _$ProfileState {
     required TResult Function(ProfileStateData? data) dateOfBirth,
     required TResult Function(ProfileStateData? data) urlImage,
     required TResult Function(ProfileStateData? data) setTransactionDate,
+    required TResult Function(ProfileStateData? data) myPost,
+    required TResult Function(ProfileStateData? data) myPostSave,
+    required TResult Function(ProfileStateData? data) showDialog,
+    required TResult Function(ProfileStateData? data) myQuestion,
+    required TResult Function(ProfileStateData? data) myQuestionSave,
+    required TResult Function(ProfileStateData? data) myExam,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -327,6 +479,12 @@ mixin _$ProfileState {
     TResult? Function(ProfileStateData? data)? dateOfBirth,
     TResult? Function(ProfileStateData? data)? urlImage,
     TResult? Function(ProfileStateData? data)? setTransactionDate,
+    TResult? Function(ProfileStateData? data)? myPost,
+    TResult? Function(ProfileStateData? data)? myPostSave,
+    TResult? Function(ProfileStateData? data)? showDialog,
+    TResult? Function(ProfileStateData? data)? myQuestion,
+    TResult? Function(ProfileStateData? data)? myQuestionSave,
+    TResult? Function(ProfileStateData? data)? myExam,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -340,6 +498,12 @@ mixin _$ProfileState {
     TResult Function(ProfileStateData? data)? dateOfBirth,
     TResult Function(ProfileStateData? data)? urlImage,
     TResult Function(ProfileStateData? data)? setTransactionDate,
+    TResult Function(ProfileStateData? data)? myPost,
+    TResult Function(ProfileStateData? data)? myPostSave,
+    TResult Function(ProfileStateData? data)? showDialog,
+    TResult Function(ProfileStateData? data)? myQuestion,
+    TResult Function(ProfileStateData? data)? myQuestionSave,
+    TResult Function(ProfileStateData? data)? myExam,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -354,6 +518,12 @@ mixin _$ProfileState {
     required TResult Function(GetDateOfBirth value) dateOfBirth,
     required TResult Function(GetUrlImage value) urlImage,
     required TResult Function(SetTransactionDate value) setTransactionDate,
+    required TResult Function(GetMyPost value) myPost,
+    required TResult Function(GetMyPostSave value) myPostSave,
+    required TResult Function(ShowDialog value) showDialog,
+    required TResult Function(GetMyQuestion value) myQuestion,
+    required TResult Function(GetMyQuestionSave value) myQuestionSave,
+    required TResult Function(GetMyExam value) myExam,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -367,6 +537,12 @@ mixin _$ProfileState {
     TResult? Function(GetDateOfBirth value)? dateOfBirth,
     TResult? Function(GetUrlImage value)? urlImage,
     TResult? Function(SetTransactionDate value)? setTransactionDate,
+    TResult? Function(GetMyPost value)? myPost,
+    TResult? Function(GetMyPostSave value)? myPostSave,
+    TResult? Function(ShowDialog value)? showDialog,
+    TResult? Function(GetMyQuestion value)? myQuestion,
+    TResult? Function(GetMyQuestionSave value)? myQuestionSave,
+    TResult? Function(GetMyExam value)? myExam,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -380,6 +556,12 @@ mixin _$ProfileState {
     TResult Function(GetDateOfBirth value)? dateOfBirth,
     TResult Function(GetUrlImage value)? urlImage,
     TResult Function(SetTransactionDate value)? setTransactionDate,
+    TResult Function(GetMyPost value)? myPost,
+    TResult Function(GetMyPostSave value)? myPostSave,
+    TResult Function(ShowDialog value)? showDialog,
+    TResult Function(GetMyQuestion value)? myQuestion,
+    TResult Function(GetMyQuestionSave value)? myQuestionSave,
+    TResult Function(GetMyExam value)? myExam,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -522,6 +704,12 @@ class _$InitialImpl with DiagnosticableTreeMixin implements Initial {
     required TResult Function(ProfileStateData? data) dateOfBirth,
     required TResult Function(ProfileStateData? data) urlImage,
     required TResult Function(ProfileStateData? data) setTransactionDate,
+    required TResult Function(ProfileStateData? data) myPost,
+    required TResult Function(ProfileStateData? data) myPostSave,
+    required TResult Function(ProfileStateData? data) showDialog,
+    required TResult Function(ProfileStateData? data) myQuestion,
+    required TResult Function(ProfileStateData? data) myQuestionSave,
+    required TResult Function(ProfileStateData? data) myExam,
   }) {
     return initial(data);
   }
@@ -538,6 +726,12 @@ class _$InitialImpl with DiagnosticableTreeMixin implements Initial {
     TResult? Function(ProfileStateData? data)? dateOfBirth,
     TResult? Function(ProfileStateData? data)? urlImage,
     TResult? Function(ProfileStateData? data)? setTransactionDate,
+    TResult? Function(ProfileStateData? data)? myPost,
+    TResult? Function(ProfileStateData? data)? myPostSave,
+    TResult? Function(ProfileStateData? data)? showDialog,
+    TResult? Function(ProfileStateData? data)? myQuestion,
+    TResult? Function(ProfileStateData? data)? myQuestionSave,
+    TResult? Function(ProfileStateData? data)? myExam,
   }) {
     return initial?.call(data);
   }
@@ -554,6 +748,12 @@ class _$InitialImpl with DiagnosticableTreeMixin implements Initial {
     TResult Function(ProfileStateData? data)? dateOfBirth,
     TResult Function(ProfileStateData? data)? urlImage,
     TResult Function(ProfileStateData? data)? setTransactionDate,
+    TResult Function(ProfileStateData? data)? myPost,
+    TResult Function(ProfileStateData? data)? myPostSave,
+    TResult Function(ProfileStateData? data)? showDialog,
+    TResult Function(ProfileStateData? data)? myQuestion,
+    TResult Function(ProfileStateData? data)? myQuestionSave,
+    TResult Function(ProfileStateData? data)? myExam,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -574,6 +774,12 @@ class _$InitialImpl with DiagnosticableTreeMixin implements Initial {
     required TResult Function(GetDateOfBirth value) dateOfBirth,
     required TResult Function(GetUrlImage value) urlImage,
     required TResult Function(SetTransactionDate value) setTransactionDate,
+    required TResult Function(GetMyPost value) myPost,
+    required TResult Function(GetMyPostSave value) myPostSave,
+    required TResult Function(ShowDialog value) showDialog,
+    required TResult Function(GetMyQuestion value) myQuestion,
+    required TResult Function(GetMyQuestionSave value) myQuestionSave,
+    required TResult Function(GetMyExam value) myExam,
   }) {
     return initial(this);
   }
@@ -590,6 +796,12 @@ class _$InitialImpl with DiagnosticableTreeMixin implements Initial {
     TResult? Function(GetDateOfBirth value)? dateOfBirth,
     TResult? Function(GetUrlImage value)? urlImage,
     TResult? Function(SetTransactionDate value)? setTransactionDate,
+    TResult? Function(GetMyPost value)? myPost,
+    TResult? Function(GetMyPostSave value)? myPostSave,
+    TResult? Function(ShowDialog value)? showDialog,
+    TResult? Function(GetMyQuestion value)? myQuestion,
+    TResult? Function(GetMyQuestionSave value)? myQuestionSave,
+    TResult? Function(GetMyExam value)? myExam,
   }) {
     return initial?.call(this);
   }
@@ -606,6 +818,12 @@ class _$InitialImpl with DiagnosticableTreeMixin implements Initial {
     TResult Function(GetDateOfBirth value)? dateOfBirth,
     TResult Function(GetUrlImage value)? urlImage,
     TResult Function(SetTransactionDate value)? setTransactionDate,
+    TResult Function(GetMyPost value)? myPost,
+    TResult Function(GetMyPostSave value)? myPostSave,
+    TResult Function(ShowDialog value)? showDialog,
+    TResult Function(GetMyQuestion value)? myQuestion,
+    TResult Function(GetMyQuestionSave value)? myQuestionSave,
+    TResult Function(GetMyExam value)? myExam,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -712,6 +930,12 @@ class _$GetErrorImpl with DiagnosticableTreeMixin implements GetError {
     required TResult Function(ProfileStateData? data) dateOfBirth,
     required TResult Function(ProfileStateData? data) urlImage,
     required TResult Function(ProfileStateData? data) setTransactionDate,
+    required TResult Function(ProfileStateData? data) myPost,
+    required TResult Function(ProfileStateData? data) myPostSave,
+    required TResult Function(ProfileStateData? data) showDialog,
+    required TResult Function(ProfileStateData? data) myQuestion,
+    required TResult Function(ProfileStateData? data) myQuestionSave,
+    required TResult Function(ProfileStateData? data) myExam,
   }) {
     return getError(data);
   }
@@ -728,6 +952,12 @@ class _$GetErrorImpl with DiagnosticableTreeMixin implements GetError {
     TResult? Function(ProfileStateData? data)? dateOfBirth,
     TResult? Function(ProfileStateData? data)? urlImage,
     TResult? Function(ProfileStateData? data)? setTransactionDate,
+    TResult? Function(ProfileStateData? data)? myPost,
+    TResult? Function(ProfileStateData? data)? myPostSave,
+    TResult? Function(ProfileStateData? data)? showDialog,
+    TResult? Function(ProfileStateData? data)? myQuestion,
+    TResult? Function(ProfileStateData? data)? myQuestionSave,
+    TResult? Function(ProfileStateData? data)? myExam,
   }) {
     return getError?.call(data);
   }
@@ -744,6 +974,12 @@ class _$GetErrorImpl with DiagnosticableTreeMixin implements GetError {
     TResult Function(ProfileStateData? data)? dateOfBirth,
     TResult Function(ProfileStateData? data)? urlImage,
     TResult Function(ProfileStateData? data)? setTransactionDate,
+    TResult Function(ProfileStateData? data)? myPost,
+    TResult Function(ProfileStateData? data)? myPostSave,
+    TResult Function(ProfileStateData? data)? showDialog,
+    TResult Function(ProfileStateData? data)? myQuestion,
+    TResult Function(ProfileStateData? data)? myQuestionSave,
+    TResult Function(ProfileStateData? data)? myExam,
     required TResult orElse(),
   }) {
     if (getError != null) {
@@ -764,6 +1000,12 @@ class _$GetErrorImpl with DiagnosticableTreeMixin implements GetError {
     required TResult Function(GetDateOfBirth value) dateOfBirth,
     required TResult Function(GetUrlImage value) urlImage,
     required TResult Function(SetTransactionDate value) setTransactionDate,
+    required TResult Function(GetMyPost value) myPost,
+    required TResult Function(GetMyPostSave value) myPostSave,
+    required TResult Function(ShowDialog value) showDialog,
+    required TResult Function(GetMyQuestion value) myQuestion,
+    required TResult Function(GetMyQuestionSave value) myQuestionSave,
+    required TResult Function(GetMyExam value) myExam,
   }) {
     return getError(this);
   }
@@ -780,6 +1022,12 @@ class _$GetErrorImpl with DiagnosticableTreeMixin implements GetError {
     TResult? Function(GetDateOfBirth value)? dateOfBirth,
     TResult? Function(GetUrlImage value)? urlImage,
     TResult? Function(SetTransactionDate value)? setTransactionDate,
+    TResult? Function(GetMyPost value)? myPost,
+    TResult? Function(GetMyPostSave value)? myPostSave,
+    TResult? Function(ShowDialog value)? showDialog,
+    TResult? Function(GetMyQuestion value)? myQuestion,
+    TResult? Function(GetMyQuestionSave value)? myQuestionSave,
+    TResult? Function(GetMyExam value)? myExam,
   }) {
     return getError?.call(this);
   }
@@ -796,6 +1044,12 @@ class _$GetErrorImpl with DiagnosticableTreeMixin implements GetError {
     TResult Function(GetDateOfBirth value)? dateOfBirth,
     TResult Function(GetUrlImage value)? urlImage,
     TResult Function(SetTransactionDate value)? setTransactionDate,
+    TResult Function(GetMyPost value)? myPost,
+    TResult Function(GetMyPostSave value)? myPostSave,
+    TResult Function(ShowDialog value)? showDialog,
+    TResult Function(GetMyQuestion value)? myQuestion,
+    TResult Function(GetMyQuestionSave value)? myQuestionSave,
+    TResult Function(GetMyExam value)? myExam,
     required TResult orElse(),
   }) {
     if (getError != null) {
@@ -902,6 +1156,12 @@ class _$SuccessImpl with DiagnosticableTreeMixin implements Success {
     required TResult Function(ProfileStateData? data) dateOfBirth,
     required TResult Function(ProfileStateData? data) urlImage,
     required TResult Function(ProfileStateData? data) setTransactionDate,
+    required TResult Function(ProfileStateData? data) myPost,
+    required TResult Function(ProfileStateData? data) myPostSave,
+    required TResult Function(ProfileStateData? data) showDialog,
+    required TResult Function(ProfileStateData? data) myQuestion,
+    required TResult Function(ProfileStateData? data) myQuestionSave,
+    required TResult Function(ProfileStateData? data) myExam,
   }) {
     return success(data);
   }
@@ -918,6 +1178,12 @@ class _$SuccessImpl with DiagnosticableTreeMixin implements Success {
     TResult? Function(ProfileStateData? data)? dateOfBirth,
     TResult? Function(ProfileStateData? data)? urlImage,
     TResult? Function(ProfileStateData? data)? setTransactionDate,
+    TResult? Function(ProfileStateData? data)? myPost,
+    TResult? Function(ProfileStateData? data)? myPostSave,
+    TResult? Function(ProfileStateData? data)? showDialog,
+    TResult? Function(ProfileStateData? data)? myQuestion,
+    TResult? Function(ProfileStateData? data)? myQuestionSave,
+    TResult? Function(ProfileStateData? data)? myExam,
   }) {
     return success?.call(data);
   }
@@ -934,6 +1200,12 @@ class _$SuccessImpl with DiagnosticableTreeMixin implements Success {
     TResult Function(ProfileStateData? data)? dateOfBirth,
     TResult Function(ProfileStateData? data)? urlImage,
     TResult Function(ProfileStateData? data)? setTransactionDate,
+    TResult Function(ProfileStateData? data)? myPost,
+    TResult Function(ProfileStateData? data)? myPostSave,
+    TResult Function(ProfileStateData? data)? showDialog,
+    TResult Function(ProfileStateData? data)? myQuestion,
+    TResult Function(ProfileStateData? data)? myQuestionSave,
+    TResult Function(ProfileStateData? data)? myExam,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -954,6 +1226,12 @@ class _$SuccessImpl with DiagnosticableTreeMixin implements Success {
     required TResult Function(GetDateOfBirth value) dateOfBirth,
     required TResult Function(GetUrlImage value) urlImage,
     required TResult Function(SetTransactionDate value) setTransactionDate,
+    required TResult Function(GetMyPost value) myPost,
+    required TResult Function(GetMyPostSave value) myPostSave,
+    required TResult Function(ShowDialog value) showDialog,
+    required TResult Function(GetMyQuestion value) myQuestion,
+    required TResult Function(GetMyQuestionSave value) myQuestionSave,
+    required TResult Function(GetMyExam value) myExam,
   }) {
     return success(this);
   }
@@ -970,6 +1248,12 @@ class _$SuccessImpl with DiagnosticableTreeMixin implements Success {
     TResult? Function(GetDateOfBirth value)? dateOfBirth,
     TResult? Function(GetUrlImage value)? urlImage,
     TResult? Function(SetTransactionDate value)? setTransactionDate,
+    TResult? Function(GetMyPost value)? myPost,
+    TResult? Function(GetMyPostSave value)? myPostSave,
+    TResult? Function(ShowDialog value)? showDialog,
+    TResult? Function(GetMyQuestion value)? myQuestion,
+    TResult? Function(GetMyQuestionSave value)? myQuestionSave,
+    TResult? Function(GetMyExam value)? myExam,
   }) {
     return success?.call(this);
   }
@@ -986,6 +1270,12 @@ class _$SuccessImpl with DiagnosticableTreeMixin implements Success {
     TResult Function(GetDateOfBirth value)? dateOfBirth,
     TResult Function(GetUrlImage value)? urlImage,
     TResult Function(SetTransactionDate value)? setTransactionDate,
+    TResult Function(GetMyPost value)? myPost,
+    TResult Function(GetMyPostSave value)? myPostSave,
+    TResult Function(ShowDialog value)? showDialog,
+    TResult Function(GetMyQuestion value)? myQuestion,
+    TResult Function(GetMyQuestionSave value)? myQuestionSave,
+    TResult Function(GetMyExam value)? myExam,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -1092,6 +1382,12 @@ class _$GetImageImpl with DiagnosticableTreeMixin implements GetImage {
     required TResult Function(ProfileStateData? data) dateOfBirth,
     required TResult Function(ProfileStateData? data) urlImage,
     required TResult Function(ProfileStateData? data) setTransactionDate,
+    required TResult Function(ProfileStateData? data) myPost,
+    required TResult Function(ProfileStateData? data) myPostSave,
+    required TResult Function(ProfileStateData? data) showDialog,
+    required TResult Function(ProfileStateData? data) myQuestion,
+    required TResult Function(ProfileStateData? data) myQuestionSave,
+    required TResult Function(ProfileStateData? data) myExam,
   }) {
     return getImage(data);
   }
@@ -1108,6 +1404,12 @@ class _$GetImageImpl with DiagnosticableTreeMixin implements GetImage {
     TResult? Function(ProfileStateData? data)? dateOfBirth,
     TResult? Function(ProfileStateData? data)? urlImage,
     TResult? Function(ProfileStateData? data)? setTransactionDate,
+    TResult? Function(ProfileStateData? data)? myPost,
+    TResult? Function(ProfileStateData? data)? myPostSave,
+    TResult? Function(ProfileStateData? data)? showDialog,
+    TResult? Function(ProfileStateData? data)? myQuestion,
+    TResult? Function(ProfileStateData? data)? myQuestionSave,
+    TResult? Function(ProfileStateData? data)? myExam,
   }) {
     return getImage?.call(data);
   }
@@ -1124,6 +1426,12 @@ class _$GetImageImpl with DiagnosticableTreeMixin implements GetImage {
     TResult Function(ProfileStateData? data)? dateOfBirth,
     TResult Function(ProfileStateData? data)? urlImage,
     TResult Function(ProfileStateData? data)? setTransactionDate,
+    TResult Function(ProfileStateData? data)? myPost,
+    TResult Function(ProfileStateData? data)? myPostSave,
+    TResult Function(ProfileStateData? data)? showDialog,
+    TResult Function(ProfileStateData? data)? myQuestion,
+    TResult Function(ProfileStateData? data)? myQuestionSave,
+    TResult Function(ProfileStateData? data)? myExam,
     required TResult orElse(),
   }) {
     if (getImage != null) {
@@ -1144,6 +1452,12 @@ class _$GetImageImpl with DiagnosticableTreeMixin implements GetImage {
     required TResult Function(GetDateOfBirth value) dateOfBirth,
     required TResult Function(GetUrlImage value) urlImage,
     required TResult Function(SetTransactionDate value) setTransactionDate,
+    required TResult Function(GetMyPost value) myPost,
+    required TResult Function(GetMyPostSave value) myPostSave,
+    required TResult Function(ShowDialog value) showDialog,
+    required TResult Function(GetMyQuestion value) myQuestion,
+    required TResult Function(GetMyQuestionSave value) myQuestionSave,
+    required TResult Function(GetMyExam value) myExam,
   }) {
     return getImage(this);
   }
@@ -1160,6 +1474,12 @@ class _$GetImageImpl with DiagnosticableTreeMixin implements GetImage {
     TResult? Function(GetDateOfBirth value)? dateOfBirth,
     TResult? Function(GetUrlImage value)? urlImage,
     TResult? Function(SetTransactionDate value)? setTransactionDate,
+    TResult? Function(GetMyPost value)? myPost,
+    TResult? Function(GetMyPostSave value)? myPostSave,
+    TResult? Function(ShowDialog value)? showDialog,
+    TResult? Function(GetMyQuestion value)? myQuestion,
+    TResult? Function(GetMyQuestionSave value)? myQuestionSave,
+    TResult? Function(GetMyExam value)? myExam,
   }) {
     return getImage?.call(this);
   }
@@ -1176,6 +1496,12 @@ class _$GetImageImpl with DiagnosticableTreeMixin implements GetImage {
     TResult Function(GetDateOfBirth value)? dateOfBirth,
     TResult Function(GetUrlImage value)? urlImage,
     TResult Function(SetTransactionDate value)? setTransactionDate,
+    TResult Function(GetMyPost value)? myPost,
+    TResult Function(GetMyPostSave value)? myPostSave,
+    TResult Function(ShowDialog value)? showDialog,
+    TResult Function(GetMyQuestion value)? myQuestion,
+    TResult Function(GetMyQuestionSave value)? myQuestionSave,
+    TResult Function(GetMyExam value)? myExam,
     required TResult orElse(),
   }) {
     if (getImage != null) {
@@ -1282,6 +1608,12 @@ class _$ProfileImpl with DiagnosticableTreeMixin implements Profile {
     required TResult Function(ProfileStateData? data) dateOfBirth,
     required TResult Function(ProfileStateData? data) urlImage,
     required TResult Function(ProfileStateData? data) setTransactionDate,
+    required TResult Function(ProfileStateData? data) myPost,
+    required TResult Function(ProfileStateData? data) myPostSave,
+    required TResult Function(ProfileStateData? data) showDialog,
+    required TResult Function(ProfileStateData? data) myQuestion,
+    required TResult Function(ProfileStateData? data) myQuestionSave,
+    required TResult Function(ProfileStateData? data) myExam,
   }) {
     return userResponse(data);
   }
@@ -1298,6 +1630,12 @@ class _$ProfileImpl with DiagnosticableTreeMixin implements Profile {
     TResult? Function(ProfileStateData? data)? dateOfBirth,
     TResult? Function(ProfileStateData? data)? urlImage,
     TResult? Function(ProfileStateData? data)? setTransactionDate,
+    TResult? Function(ProfileStateData? data)? myPost,
+    TResult? Function(ProfileStateData? data)? myPostSave,
+    TResult? Function(ProfileStateData? data)? showDialog,
+    TResult? Function(ProfileStateData? data)? myQuestion,
+    TResult? Function(ProfileStateData? data)? myQuestionSave,
+    TResult? Function(ProfileStateData? data)? myExam,
   }) {
     return userResponse?.call(data);
   }
@@ -1314,6 +1652,12 @@ class _$ProfileImpl with DiagnosticableTreeMixin implements Profile {
     TResult Function(ProfileStateData? data)? dateOfBirth,
     TResult Function(ProfileStateData? data)? urlImage,
     TResult Function(ProfileStateData? data)? setTransactionDate,
+    TResult Function(ProfileStateData? data)? myPost,
+    TResult Function(ProfileStateData? data)? myPostSave,
+    TResult Function(ProfileStateData? data)? showDialog,
+    TResult Function(ProfileStateData? data)? myQuestion,
+    TResult Function(ProfileStateData? data)? myQuestionSave,
+    TResult Function(ProfileStateData? data)? myExam,
     required TResult orElse(),
   }) {
     if (userResponse != null) {
@@ -1334,6 +1678,12 @@ class _$ProfileImpl with DiagnosticableTreeMixin implements Profile {
     required TResult Function(GetDateOfBirth value) dateOfBirth,
     required TResult Function(GetUrlImage value) urlImage,
     required TResult Function(SetTransactionDate value) setTransactionDate,
+    required TResult Function(GetMyPost value) myPost,
+    required TResult Function(GetMyPostSave value) myPostSave,
+    required TResult Function(ShowDialog value) showDialog,
+    required TResult Function(GetMyQuestion value) myQuestion,
+    required TResult Function(GetMyQuestionSave value) myQuestionSave,
+    required TResult Function(GetMyExam value) myExam,
   }) {
     return userResponse(this);
   }
@@ -1350,6 +1700,12 @@ class _$ProfileImpl with DiagnosticableTreeMixin implements Profile {
     TResult? Function(GetDateOfBirth value)? dateOfBirth,
     TResult? Function(GetUrlImage value)? urlImage,
     TResult? Function(SetTransactionDate value)? setTransactionDate,
+    TResult? Function(GetMyPost value)? myPost,
+    TResult? Function(GetMyPostSave value)? myPostSave,
+    TResult? Function(ShowDialog value)? showDialog,
+    TResult? Function(GetMyQuestion value)? myQuestion,
+    TResult? Function(GetMyQuestionSave value)? myQuestionSave,
+    TResult? Function(GetMyExam value)? myExam,
   }) {
     return userResponse?.call(this);
   }
@@ -1366,6 +1722,12 @@ class _$ProfileImpl with DiagnosticableTreeMixin implements Profile {
     TResult Function(GetDateOfBirth value)? dateOfBirth,
     TResult Function(GetUrlImage value)? urlImage,
     TResult Function(SetTransactionDate value)? setTransactionDate,
+    TResult Function(GetMyPost value)? myPost,
+    TResult Function(GetMyPostSave value)? myPostSave,
+    TResult Function(ShowDialog value)? showDialog,
+    TResult Function(GetMyQuestion value)? myQuestion,
+    TResult Function(GetMyQuestionSave value)? myQuestionSave,
+    TResult Function(GetMyExam value)? myExam,
     required TResult orElse(),
   }) {
     if (userResponse != null) {
@@ -1472,6 +1834,12 @@ class _$GetGenderImpl with DiagnosticableTreeMixin implements GetGender {
     required TResult Function(ProfileStateData? data) dateOfBirth,
     required TResult Function(ProfileStateData? data) urlImage,
     required TResult Function(ProfileStateData? data) setTransactionDate,
+    required TResult Function(ProfileStateData? data) myPost,
+    required TResult Function(ProfileStateData? data) myPostSave,
+    required TResult Function(ProfileStateData? data) showDialog,
+    required TResult Function(ProfileStateData? data) myQuestion,
+    required TResult Function(ProfileStateData? data) myQuestionSave,
+    required TResult Function(ProfileStateData? data) myExam,
   }) {
     return gender(data);
   }
@@ -1488,6 +1856,12 @@ class _$GetGenderImpl with DiagnosticableTreeMixin implements GetGender {
     TResult? Function(ProfileStateData? data)? dateOfBirth,
     TResult? Function(ProfileStateData? data)? urlImage,
     TResult? Function(ProfileStateData? data)? setTransactionDate,
+    TResult? Function(ProfileStateData? data)? myPost,
+    TResult? Function(ProfileStateData? data)? myPostSave,
+    TResult? Function(ProfileStateData? data)? showDialog,
+    TResult? Function(ProfileStateData? data)? myQuestion,
+    TResult? Function(ProfileStateData? data)? myQuestionSave,
+    TResult? Function(ProfileStateData? data)? myExam,
   }) {
     return gender?.call(data);
   }
@@ -1504,6 +1878,12 @@ class _$GetGenderImpl with DiagnosticableTreeMixin implements GetGender {
     TResult Function(ProfileStateData? data)? dateOfBirth,
     TResult Function(ProfileStateData? data)? urlImage,
     TResult Function(ProfileStateData? data)? setTransactionDate,
+    TResult Function(ProfileStateData? data)? myPost,
+    TResult Function(ProfileStateData? data)? myPostSave,
+    TResult Function(ProfileStateData? data)? showDialog,
+    TResult Function(ProfileStateData? data)? myQuestion,
+    TResult Function(ProfileStateData? data)? myQuestionSave,
+    TResult Function(ProfileStateData? data)? myExam,
     required TResult orElse(),
   }) {
     if (gender != null) {
@@ -1524,6 +1904,12 @@ class _$GetGenderImpl with DiagnosticableTreeMixin implements GetGender {
     required TResult Function(GetDateOfBirth value) dateOfBirth,
     required TResult Function(GetUrlImage value) urlImage,
     required TResult Function(SetTransactionDate value) setTransactionDate,
+    required TResult Function(GetMyPost value) myPost,
+    required TResult Function(GetMyPostSave value) myPostSave,
+    required TResult Function(ShowDialog value) showDialog,
+    required TResult Function(GetMyQuestion value) myQuestion,
+    required TResult Function(GetMyQuestionSave value) myQuestionSave,
+    required TResult Function(GetMyExam value) myExam,
   }) {
     return gender(this);
   }
@@ -1540,6 +1926,12 @@ class _$GetGenderImpl with DiagnosticableTreeMixin implements GetGender {
     TResult? Function(GetDateOfBirth value)? dateOfBirth,
     TResult? Function(GetUrlImage value)? urlImage,
     TResult? Function(SetTransactionDate value)? setTransactionDate,
+    TResult? Function(GetMyPost value)? myPost,
+    TResult? Function(GetMyPostSave value)? myPostSave,
+    TResult? Function(ShowDialog value)? showDialog,
+    TResult? Function(GetMyQuestion value)? myQuestion,
+    TResult? Function(GetMyQuestionSave value)? myQuestionSave,
+    TResult? Function(GetMyExam value)? myExam,
   }) {
     return gender?.call(this);
   }
@@ -1556,6 +1948,12 @@ class _$GetGenderImpl with DiagnosticableTreeMixin implements GetGender {
     TResult Function(GetDateOfBirth value)? dateOfBirth,
     TResult Function(GetUrlImage value)? urlImage,
     TResult Function(SetTransactionDate value)? setTransactionDate,
+    TResult Function(GetMyPost value)? myPost,
+    TResult Function(GetMyPostSave value)? myPostSave,
+    TResult Function(ShowDialog value)? showDialog,
+    TResult Function(GetMyQuestion value)? myQuestion,
+    TResult Function(GetMyQuestionSave value)? myQuestionSave,
+    TResult Function(GetMyExam value)? myExam,
     required TResult orElse(),
   }) {
     if (gender != null) {
@@ -1665,6 +2063,12 @@ class _$GetDateOfBirthImpl
     required TResult Function(ProfileStateData? data) dateOfBirth,
     required TResult Function(ProfileStateData? data) urlImage,
     required TResult Function(ProfileStateData? data) setTransactionDate,
+    required TResult Function(ProfileStateData? data) myPost,
+    required TResult Function(ProfileStateData? data) myPostSave,
+    required TResult Function(ProfileStateData? data) showDialog,
+    required TResult Function(ProfileStateData? data) myQuestion,
+    required TResult Function(ProfileStateData? data) myQuestionSave,
+    required TResult Function(ProfileStateData? data) myExam,
   }) {
     return dateOfBirth(data);
   }
@@ -1681,6 +2085,12 @@ class _$GetDateOfBirthImpl
     TResult? Function(ProfileStateData? data)? dateOfBirth,
     TResult? Function(ProfileStateData? data)? urlImage,
     TResult? Function(ProfileStateData? data)? setTransactionDate,
+    TResult? Function(ProfileStateData? data)? myPost,
+    TResult? Function(ProfileStateData? data)? myPostSave,
+    TResult? Function(ProfileStateData? data)? showDialog,
+    TResult? Function(ProfileStateData? data)? myQuestion,
+    TResult? Function(ProfileStateData? data)? myQuestionSave,
+    TResult? Function(ProfileStateData? data)? myExam,
   }) {
     return dateOfBirth?.call(data);
   }
@@ -1697,6 +2107,12 @@ class _$GetDateOfBirthImpl
     TResult Function(ProfileStateData? data)? dateOfBirth,
     TResult Function(ProfileStateData? data)? urlImage,
     TResult Function(ProfileStateData? data)? setTransactionDate,
+    TResult Function(ProfileStateData? data)? myPost,
+    TResult Function(ProfileStateData? data)? myPostSave,
+    TResult Function(ProfileStateData? data)? showDialog,
+    TResult Function(ProfileStateData? data)? myQuestion,
+    TResult Function(ProfileStateData? data)? myQuestionSave,
+    TResult Function(ProfileStateData? data)? myExam,
     required TResult orElse(),
   }) {
     if (dateOfBirth != null) {
@@ -1717,6 +2133,12 @@ class _$GetDateOfBirthImpl
     required TResult Function(GetDateOfBirth value) dateOfBirth,
     required TResult Function(GetUrlImage value) urlImage,
     required TResult Function(SetTransactionDate value) setTransactionDate,
+    required TResult Function(GetMyPost value) myPost,
+    required TResult Function(GetMyPostSave value) myPostSave,
+    required TResult Function(ShowDialog value) showDialog,
+    required TResult Function(GetMyQuestion value) myQuestion,
+    required TResult Function(GetMyQuestionSave value) myQuestionSave,
+    required TResult Function(GetMyExam value) myExam,
   }) {
     return dateOfBirth(this);
   }
@@ -1733,6 +2155,12 @@ class _$GetDateOfBirthImpl
     TResult? Function(GetDateOfBirth value)? dateOfBirth,
     TResult? Function(GetUrlImage value)? urlImage,
     TResult? Function(SetTransactionDate value)? setTransactionDate,
+    TResult? Function(GetMyPost value)? myPost,
+    TResult? Function(GetMyPostSave value)? myPostSave,
+    TResult? Function(ShowDialog value)? showDialog,
+    TResult? Function(GetMyQuestion value)? myQuestion,
+    TResult? Function(GetMyQuestionSave value)? myQuestionSave,
+    TResult? Function(GetMyExam value)? myExam,
   }) {
     return dateOfBirth?.call(this);
   }
@@ -1749,6 +2177,12 @@ class _$GetDateOfBirthImpl
     TResult Function(GetDateOfBirth value)? dateOfBirth,
     TResult Function(GetUrlImage value)? urlImage,
     TResult Function(SetTransactionDate value)? setTransactionDate,
+    TResult Function(GetMyPost value)? myPost,
+    TResult Function(GetMyPostSave value)? myPostSave,
+    TResult Function(ShowDialog value)? showDialog,
+    TResult Function(GetMyQuestion value)? myQuestion,
+    TResult Function(GetMyQuestionSave value)? myQuestionSave,
+    TResult Function(GetMyExam value)? myExam,
     required TResult orElse(),
   }) {
     if (dateOfBirth != null) {
@@ -1856,6 +2290,12 @@ class _$GetUrlImageImpl with DiagnosticableTreeMixin implements GetUrlImage {
     required TResult Function(ProfileStateData? data) dateOfBirth,
     required TResult Function(ProfileStateData? data) urlImage,
     required TResult Function(ProfileStateData? data) setTransactionDate,
+    required TResult Function(ProfileStateData? data) myPost,
+    required TResult Function(ProfileStateData? data) myPostSave,
+    required TResult Function(ProfileStateData? data) showDialog,
+    required TResult Function(ProfileStateData? data) myQuestion,
+    required TResult Function(ProfileStateData? data) myQuestionSave,
+    required TResult Function(ProfileStateData? data) myExam,
   }) {
     return urlImage(data);
   }
@@ -1872,6 +2312,12 @@ class _$GetUrlImageImpl with DiagnosticableTreeMixin implements GetUrlImage {
     TResult? Function(ProfileStateData? data)? dateOfBirth,
     TResult? Function(ProfileStateData? data)? urlImage,
     TResult? Function(ProfileStateData? data)? setTransactionDate,
+    TResult? Function(ProfileStateData? data)? myPost,
+    TResult? Function(ProfileStateData? data)? myPostSave,
+    TResult? Function(ProfileStateData? data)? showDialog,
+    TResult? Function(ProfileStateData? data)? myQuestion,
+    TResult? Function(ProfileStateData? data)? myQuestionSave,
+    TResult? Function(ProfileStateData? data)? myExam,
   }) {
     return urlImage?.call(data);
   }
@@ -1888,6 +2334,12 @@ class _$GetUrlImageImpl with DiagnosticableTreeMixin implements GetUrlImage {
     TResult Function(ProfileStateData? data)? dateOfBirth,
     TResult Function(ProfileStateData? data)? urlImage,
     TResult Function(ProfileStateData? data)? setTransactionDate,
+    TResult Function(ProfileStateData? data)? myPost,
+    TResult Function(ProfileStateData? data)? myPostSave,
+    TResult Function(ProfileStateData? data)? showDialog,
+    TResult Function(ProfileStateData? data)? myQuestion,
+    TResult Function(ProfileStateData? data)? myQuestionSave,
+    TResult Function(ProfileStateData? data)? myExam,
     required TResult orElse(),
   }) {
     if (urlImage != null) {
@@ -1908,6 +2360,12 @@ class _$GetUrlImageImpl with DiagnosticableTreeMixin implements GetUrlImage {
     required TResult Function(GetDateOfBirth value) dateOfBirth,
     required TResult Function(GetUrlImage value) urlImage,
     required TResult Function(SetTransactionDate value) setTransactionDate,
+    required TResult Function(GetMyPost value) myPost,
+    required TResult Function(GetMyPostSave value) myPostSave,
+    required TResult Function(ShowDialog value) showDialog,
+    required TResult Function(GetMyQuestion value) myQuestion,
+    required TResult Function(GetMyQuestionSave value) myQuestionSave,
+    required TResult Function(GetMyExam value) myExam,
   }) {
     return urlImage(this);
   }
@@ -1924,6 +2382,12 @@ class _$GetUrlImageImpl with DiagnosticableTreeMixin implements GetUrlImage {
     TResult? Function(GetDateOfBirth value)? dateOfBirth,
     TResult? Function(GetUrlImage value)? urlImage,
     TResult? Function(SetTransactionDate value)? setTransactionDate,
+    TResult? Function(GetMyPost value)? myPost,
+    TResult? Function(GetMyPostSave value)? myPostSave,
+    TResult? Function(ShowDialog value)? showDialog,
+    TResult? Function(GetMyQuestion value)? myQuestion,
+    TResult? Function(GetMyQuestionSave value)? myQuestionSave,
+    TResult? Function(GetMyExam value)? myExam,
   }) {
     return urlImage?.call(this);
   }
@@ -1940,6 +2404,12 @@ class _$GetUrlImageImpl with DiagnosticableTreeMixin implements GetUrlImage {
     TResult Function(GetDateOfBirth value)? dateOfBirth,
     TResult Function(GetUrlImage value)? urlImage,
     TResult Function(SetTransactionDate value)? setTransactionDate,
+    TResult Function(GetMyPost value)? myPost,
+    TResult Function(GetMyPostSave value)? myPostSave,
+    TResult Function(ShowDialog value)? showDialog,
+    TResult Function(GetMyQuestion value)? myQuestion,
+    TResult Function(GetMyQuestionSave value)? myQuestionSave,
+    TResult Function(GetMyExam value)? myExam,
     required TResult orElse(),
   }) {
     if (urlImage != null) {
@@ -2049,6 +2519,12 @@ class _$SetTransactionDateImpl
     required TResult Function(ProfileStateData? data) dateOfBirth,
     required TResult Function(ProfileStateData? data) urlImage,
     required TResult Function(ProfileStateData? data) setTransactionDate,
+    required TResult Function(ProfileStateData? data) myPost,
+    required TResult Function(ProfileStateData? data) myPostSave,
+    required TResult Function(ProfileStateData? data) showDialog,
+    required TResult Function(ProfileStateData? data) myQuestion,
+    required TResult Function(ProfileStateData? data) myQuestionSave,
+    required TResult Function(ProfileStateData? data) myExam,
   }) {
     return setTransactionDate(data);
   }
@@ -2065,6 +2541,12 @@ class _$SetTransactionDateImpl
     TResult? Function(ProfileStateData? data)? dateOfBirth,
     TResult? Function(ProfileStateData? data)? urlImage,
     TResult? Function(ProfileStateData? data)? setTransactionDate,
+    TResult? Function(ProfileStateData? data)? myPost,
+    TResult? Function(ProfileStateData? data)? myPostSave,
+    TResult? Function(ProfileStateData? data)? showDialog,
+    TResult? Function(ProfileStateData? data)? myQuestion,
+    TResult? Function(ProfileStateData? data)? myQuestionSave,
+    TResult? Function(ProfileStateData? data)? myExam,
   }) {
     return setTransactionDate?.call(data);
   }
@@ -2081,6 +2563,12 @@ class _$SetTransactionDateImpl
     TResult Function(ProfileStateData? data)? dateOfBirth,
     TResult Function(ProfileStateData? data)? urlImage,
     TResult Function(ProfileStateData? data)? setTransactionDate,
+    TResult Function(ProfileStateData? data)? myPost,
+    TResult Function(ProfileStateData? data)? myPostSave,
+    TResult Function(ProfileStateData? data)? showDialog,
+    TResult Function(ProfileStateData? data)? myQuestion,
+    TResult Function(ProfileStateData? data)? myQuestionSave,
+    TResult Function(ProfileStateData? data)? myExam,
     required TResult orElse(),
   }) {
     if (setTransactionDate != null) {
@@ -2101,6 +2589,12 @@ class _$SetTransactionDateImpl
     required TResult Function(GetDateOfBirth value) dateOfBirth,
     required TResult Function(GetUrlImage value) urlImage,
     required TResult Function(SetTransactionDate value) setTransactionDate,
+    required TResult Function(GetMyPost value) myPost,
+    required TResult Function(GetMyPostSave value) myPostSave,
+    required TResult Function(ShowDialog value) showDialog,
+    required TResult Function(GetMyQuestion value) myQuestion,
+    required TResult Function(GetMyQuestionSave value) myQuestionSave,
+    required TResult Function(GetMyExam value) myExam,
   }) {
     return setTransactionDate(this);
   }
@@ -2117,6 +2611,12 @@ class _$SetTransactionDateImpl
     TResult? Function(GetDateOfBirth value)? dateOfBirth,
     TResult? Function(GetUrlImage value)? urlImage,
     TResult? Function(SetTransactionDate value)? setTransactionDate,
+    TResult? Function(GetMyPost value)? myPost,
+    TResult? Function(GetMyPostSave value)? myPostSave,
+    TResult? Function(ShowDialog value)? showDialog,
+    TResult? Function(GetMyQuestion value)? myQuestion,
+    TResult? Function(GetMyQuestionSave value)? myQuestionSave,
+    TResult? Function(GetMyExam value)? myExam,
   }) {
     return setTransactionDate?.call(this);
   }
@@ -2133,6 +2633,12 @@ class _$SetTransactionDateImpl
     TResult Function(GetDateOfBirth value)? dateOfBirth,
     TResult Function(GetUrlImage value)? urlImage,
     TResult Function(SetTransactionDate value)? setTransactionDate,
+    TResult Function(GetMyPost value)? myPost,
+    TResult Function(GetMyPostSave value)? myPostSave,
+    TResult Function(ShowDialog value)? showDialog,
+    TResult Function(GetMyQuestion value)? myQuestion,
+    TResult Function(GetMyQuestionSave value)? myQuestionSave,
+    TResult Function(GetMyExam value)? myExam,
     required TResult orElse(),
   }) {
     if (setTransactionDate != null) {
@@ -2151,5 +2657,1371 @@ abstract class SetTransactionDate implements ProfileState {
   @override
   @JsonKey(ignore: true)
   _$$SetTransactionDateImplCopyWith<_$SetTransactionDateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GetMyPostImplCopyWith<$Res>
+    implements $ProfileStateCopyWith<$Res> {
+  factory _$$GetMyPostImplCopyWith(
+          _$GetMyPostImpl value, $Res Function(_$GetMyPostImpl) then) =
+      __$$GetMyPostImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({ProfileStateData? data});
+
+  @override
+  $ProfileStateDataCopyWith<$Res>? get data;
+}
+
+/// @nodoc
+class __$$GetMyPostImplCopyWithImpl<$Res>
+    extends _$ProfileStateCopyWithImpl<$Res, _$GetMyPostImpl>
+    implements _$$GetMyPostImplCopyWith<$Res> {
+  __$$GetMyPostImplCopyWithImpl(
+      _$GetMyPostImpl _value, $Res Function(_$GetMyPostImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = freezed,
+  }) {
+    return _then(_$GetMyPostImpl(
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as ProfileStateData?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GetMyPostImpl with DiagnosticableTreeMixin implements GetMyPost {
+  const _$GetMyPostImpl({this.data});
+
+  @override
+  final ProfileStateData? data;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ProfileState.myPost(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ProfileState.myPost'))
+      ..add(DiagnosticsProperty('data', data));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetMyPostImpl &&
+            (identical(other.data, data) || other.data == data));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, data);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetMyPostImplCopyWith<_$GetMyPostImpl> get copyWith =>
+      __$$GetMyPostImplCopyWithImpl<_$GetMyPostImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ProfileStateData? data) initial,
+    required TResult Function(ProfileStateData? data) getError,
+    required TResult Function(ProfileStateData? data) success,
+    required TResult Function(ProfileStateData? data) getImage,
+    required TResult Function(ProfileStateData? data) userResponse,
+    required TResult Function(ProfileStateData? data) gender,
+    required TResult Function(ProfileStateData? data) dateOfBirth,
+    required TResult Function(ProfileStateData? data) urlImage,
+    required TResult Function(ProfileStateData? data) setTransactionDate,
+    required TResult Function(ProfileStateData? data) myPost,
+    required TResult Function(ProfileStateData? data) myPostSave,
+    required TResult Function(ProfileStateData? data) showDialog,
+    required TResult Function(ProfileStateData? data) myQuestion,
+    required TResult Function(ProfileStateData? data) myQuestionSave,
+    required TResult Function(ProfileStateData? data) myExam,
+  }) {
+    return myPost(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ProfileStateData? data)? initial,
+    TResult? Function(ProfileStateData? data)? getError,
+    TResult? Function(ProfileStateData? data)? success,
+    TResult? Function(ProfileStateData? data)? getImage,
+    TResult? Function(ProfileStateData? data)? userResponse,
+    TResult? Function(ProfileStateData? data)? gender,
+    TResult? Function(ProfileStateData? data)? dateOfBirth,
+    TResult? Function(ProfileStateData? data)? urlImage,
+    TResult? Function(ProfileStateData? data)? setTransactionDate,
+    TResult? Function(ProfileStateData? data)? myPost,
+    TResult? Function(ProfileStateData? data)? myPostSave,
+    TResult? Function(ProfileStateData? data)? showDialog,
+    TResult? Function(ProfileStateData? data)? myQuestion,
+    TResult? Function(ProfileStateData? data)? myQuestionSave,
+    TResult? Function(ProfileStateData? data)? myExam,
+  }) {
+    return myPost?.call(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ProfileStateData? data)? initial,
+    TResult Function(ProfileStateData? data)? getError,
+    TResult Function(ProfileStateData? data)? success,
+    TResult Function(ProfileStateData? data)? getImage,
+    TResult Function(ProfileStateData? data)? userResponse,
+    TResult Function(ProfileStateData? data)? gender,
+    TResult Function(ProfileStateData? data)? dateOfBirth,
+    TResult Function(ProfileStateData? data)? urlImage,
+    TResult Function(ProfileStateData? data)? setTransactionDate,
+    TResult Function(ProfileStateData? data)? myPost,
+    TResult Function(ProfileStateData? data)? myPostSave,
+    TResult Function(ProfileStateData? data)? showDialog,
+    TResult Function(ProfileStateData? data)? myQuestion,
+    TResult Function(ProfileStateData? data)? myQuestionSave,
+    TResult Function(ProfileStateData? data)? myExam,
+    required TResult orElse(),
+  }) {
+    if (myPost != null) {
+      return myPost(data);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(GetError value) getError,
+    required TResult Function(Success value) success,
+    required TResult Function(GetImage value) getImage,
+    required TResult Function(Profile value) userResponse,
+    required TResult Function(GetGender value) gender,
+    required TResult Function(GetDateOfBirth value) dateOfBirth,
+    required TResult Function(GetUrlImage value) urlImage,
+    required TResult Function(SetTransactionDate value) setTransactionDate,
+    required TResult Function(GetMyPost value) myPost,
+    required TResult Function(GetMyPostSave value) myPostSave,
+    required TResult Function(ShowDialog value) showDialog,
+    required TResult Function(GetMyQuestion value) myQuestion,
+    required TResult Function(GetMyQuestionSave value) myQuestionSave,
+    required TResult Function(GetMyExam value) myExam,
+  }) {
+    return myPost(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(GetError value)? getError,
+    TResult? Function(Success value)? success,
+    TResult? Function(GetImage value)? getImage,
+    TResult? Function(Profile value)? userResponse,
+    TResult? Function(GetGender value)? gender,
+    TResult? Function(GetDateOfBirth value)? dateOfBirth,
+    TResult? Function(GetUrlImage value)? urlImage,
+    TResult? Function(SetTransactionDate value)? setTransactionDate,
+    TResult? Function(GetMyPost value)? myPost,
+    TResult? Function(GetMyPostSave value)? myPostSave,
+    TResult? Function(ShowDialog value)? showDialog,
+    TResult? Function(GetMyQuestion value)? myQuestion,
+    TResult? Function(GetMyQuestionSave value)? myQuestionSave,
+    TResult? Function(GetMyExam value)? myExam,
+  }) {
+    return myPost?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(GetError value)? getError,
+    TResult Function(Success value)? success,
+    TResult Function(GetImage value)? getImage,
+    TResult Function(Profile value)? userResponse,
+    TResult Function(GetGender value)? gender,
+    TResult Function(GetDateOfBirth value)? dateOfBirth,
+    TResult Function(GetUrlImage value)? urlImage,
+    TResult Function(SetTransactionDate value)? setTransactionDate,
+    TResult Function(GetMyPost value)? myPost,
+    TResult Function(GetMyPostSave value)? myPostSave,
+    TResult Function(ShowDialog value)? showDialog,
+    TResult Function(GetMyQuestion value)? myQuestion,
+    TResult Function(GetMyQuestionSave value)? myQuestionSave,
+    TResult Function(GetMyExam value)? myExam,
+    required TResult orElse(),
+  }) {
+    if (myPost != null) {
+      return myPost(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetMyPost implements ProfileState {
+  const factory GetMyPost({final ProfileStateData? data}) = _$GetMyPostImpl;
+
+  @override
+  ProfileStateData? get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$GetMyPostImplCopyWith<_$GetMyPostImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GetMyPostSaveImplCopyWith<$Res>
+    implements $ProfileStateCopyWith<$Res> {
+  factory _$$GetMyPostSaveImplCopyWith(
+          _$GetMyPostSaveImpl value, $Res Function(_$GetMyPostSaveImpl) then) =
+      __$$GetMyPostSaveImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({ProfileStateData? data});
+
+  @override
+  $ProfileStateDataCopyWith<$Res>? get data;
+}
+
+/// @nodoc
+class __$$GetMyPostSaveImplCopyWithImpl<$Res>
+    extends _$ProfileStateCopyWithImpl<$Res, _$GetMyPostSaveImpl>
+    implements _$$GetMyPostSaveImplCopyWith<$Res> {
+  __$$GetMyPostSaveImplCopyWithImpl(
+      _$GetMyPostSaveImpl _value, $Res Function(_$GetMyPostSaveImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = freezed,
+  }) {
+    return _then(_$GetMyPostSaveImpl(
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as ProfileStateData?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GetMyPostSaveImpl
+    with DiagnosticableTreeMixin
+    implements GetMyPostSave {
+  const _$GetMyPostSaveImpl({this.data});
+
+  @override
+  final ProfileStateData? data;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ProfileState.myPostSave(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ProfileState.myPostSave'))
+      ..add(DiagnosticsProperty('data', data));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetMyPostSaveImpl &&
+            (identical(other.data, data) || other.data == data));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, data);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetMyPostSaveImplCopyWith<_$GetMyPostSaveImpl> get copyWith =>
+      __$$GetMyPostSaveImplCopyWithImpl<_$GetMyPostSaveImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ProfileStateData? data) initial,
+    required TResult Function(ProfileStateData? data) getError,
+    required TResult Function(ProfileStateData? data) success,
+    required TResult Function(ProfileStateData? data) getImage,
+    required TResult Function(ProfileStateData? data) userResponse,
+    required TResult Function(ProfileStateData? data) gender,
+    required TResult Function(ProfileStateData? data) dateOfBirth,
+    required TResult Function(ProfileStateData? data) urlImage,
+    required TResult Function(ProfileStateData? data) setTransactionDate,
+    required TResult Function(ProfileStateData? data) myPost,
+    required TResult Function(ProfileStateData? data) myPostSave,
+    required TResult Function(ProfileStateData? data) showDialog,
+    required TResult Function(ProfileStateData? data) myQuestion,
+    required TResult Function(ProfileStateData? data) myQuestionSave,
+    required TResult Function(ProfileStateData? data) myExam,
+  }) {
+    return myPostSave(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ProfileStateData? data)? initial,
+    TResult? Function(ProfileStateData? data)? getError,
+    TResult? Function(ProfileStateData? data)? success,
+    TResult? Function(ProfileStateData? data)? getImage,
+    TResult? Function(ProfileStateData? data)? userResponse,
+    TResult? Function(ProfileStateData? data)? gender,
+    TResult? Function(ProfileStateData? data)? dateOfBirth,
+    TResult? Function(ProfileStateData? data)? urlImage,
+    TResult? Function(ProfileStateData? data)? setTransactionDate,
+    TResult? Function(ProfileStateData? data)? myPost,
+    TResult? Function(ProfileStateData? data)? myPostSave,
+    TResult? Function(ProfileStateData? data)? showDialog,
+    TResult? Function(ProfileStateData? data)? myQuestion,
+    TResult? Function(ProfileStateData? data)? myQuestionSave,
+    TResult? Function(ProfileStateData? data)? myExam,
+  }) {
+    return myPostSave?.call(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ProfileStateData? data)? initial,
+    TResult Function(ProfileStateData? data)? getError,
+    TResult Function(ProfileStateData? data)? success,
+    TResult Function(ProfileStateData? data)? getImage,
+    TResult Function(ProfileStateData? data)? userResponse,
+    TResult Function(ProfileStateData? data)? gender,
+    TResult Function(ProfileStateData? data)? dateOfBirth,
+    TResult Function(ProfileStateData? data)? urlImage,
+    TResult Function(ProfileStateData? data)? setTransactionDate,
+    TResult Function(ProfileStateData? data)? myPost,
+    TResult Function(ProfileStateData? data)? myPostSave,
+    TResult Function(ProfileStateData? data)? showDialog,
+    TResult Function(ProfileStateData? data)? myQuestion,
+    TResult Function(ProfileStateData? data)? myQuestionSave,
+    TResult Function(ProfileStateData? data)? myExam,
+    required TResult orElse(),
+  }) {
+    if (myPostSave != null) {
+      return myPostSave(data);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(GetError value) getError,
+    required TResult Function(Success value) success,
+    required TResult Function(GetImage value) getImage,
+    required TResult Function(Profile value) userResponse,
+    required TResult Function(GetGender value) gender,
+    required TResult Function(GetDateOfBirth value) dateOfBirth,
+    required TResult Function(GetUrlImage value) urlImage,
+    required TResult Function(SetTransactionDate value) setTransactionDate,
+    required TResult Function(GetMyPost value) myPost,
+    required TResult Function(GetMyPostSave value) myPostSave,
+    required TResult Function(ShowDialog value) showDialog,
+    required TResult Function(GetMyQuestion value) myQuestion,
+    required TResult Function(GetMyQuestionSave value) myQuestionSave,
+    required TResult Function(GetMyExam value) myExam,
+  }) {
+    return myPostSave(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(GetError value)? getError,
+    TResult? Function(Success value)? success,
+    TResult? Function(GetImage value)? getImage,
+    TResult? Function(Profile value)? userResponse,
+    TResult? Function(GetGender value)? gender,
+    TResult? Function(GetDateOfBirth value)? dateOfBirth,
+    TResult? Function(GetUrlImage value)? urlImage,
+    TResult? Function(SetTransactionDate value)? setTransactionDate,
+    TResult? Function(GetMyPost value)? myPost,
+    TResult? Function(GetMyPostSave value)? myPostSave,
+    TResult? Function(ShowDialog value)? showDialog,
+    TResult? Function(GetMyQuestion value)? myQuestion,
+    TResult? Function(GetMyQuestionSave value)? myQuestionSave,
+    TResult? Function(GetMyExam value)? myExam,
+  }) {
+    return myPostSave?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(GetError value)? getError,
+    TResult Function(Success value)? success,
+    TResult Function(GetImage value)? getImage,
+    TResult Function(Profile value)? userResponse,
+    TResult Function(GetGender value)? gender,
+    TResult Function(GetDateOfBirth value)? dateOfBirth,
+    TResult Function(GetUrlImage value)? urlImage,
+    TResult Function(SetTransactionDate value)? setTransactionDate,
+    TResult Function(GetMyPost value)? myPost,
+    TResult Function(GetMyPostSave value)? myPostSave,
+    TResult Function(ShowDialog value)? showDialog,
+    TResult Function(GetMyQuestion value)? myQuestion,
+    TResult Function(GetMyQuestionSave value)? myQuestionSave,
+    TResult Function(GetMyExam value)? myExam,
+    required TResult orElse(),
+  }) {
+    if (myPostSave != null) {
+      return myPostSave(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetMyPostSave implements ProfileState {
+  const factory GetMyPostSave({final ProfileStateData? data}) =
+      _$GetMyPostSaveImpl;
+
+  @override
+  ProfileStateData? get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$GetMyPostSaveImplCopyWith<_$GetMyPostSaveImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ShowDialogImplCopyWith<$Res>
+    implements $ProfileStateCopyWith<$Res> {
+  factory _$$ShowDialogImplCopyWith(
+          _$ShowDialogImpl value, $Res Function(_$ShowDialogImpl) then) =
+      __$$ShowDialogImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({ProfileStateData? data});
+
+  @override
+  $ProfileStateDataCopyWith<$Res>? get data;
+}
+
+/// @nodoc
+class __$$ShowDialogImplCopyWithImpl<$Res>
+    extends _$ProfileStateCopyWithImpl<$Res, _$ShowDialogImpl>
+    implements _$$ShowDialogImplCopyWith<$Res> {
+  __$$ShowDialogImplCopyWithImpl(
+      _$ShowDialogImpl _value, $Res Function(_$ShowDialogImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = freezed,
+  }) {
+    return _then(_$ShowDialogImpl(
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as ProfileStateData?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ShowDialogImpl with DiagnosticableTreeMixin implements ShowDialog {
+  const _$ShowDialogImpl({this.data});
+
+  @override
+  final ProfileStateData? data;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ProfileState.showDialog(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ProfileState.showDialog'))
+      ..add(DiagnosticsProperty('data', data));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ShowDialogImpl &&
+            (identical(other.data, data) || other.data == data));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, data);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ShowDialogImplCopyWith<_$ShowDialogImpl> get copyWith =>
+      __$$ShowDialogImplCopyWithImpl<_$ShowDialogImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ProfileStateData? data) initial,
+    required TResult Function(ProfileStateData? data) getError,
+    required TResult Function(ProfileStateData? data) success,
+    required TResult Function(ProfileStateData? data) getImage,
+    required TResult Function(ProfileStateData? data) userResponse,
+    required TResult Function(ProfileStateData? data) gender,
+    required TResult Function(ProfileStateData? data) dateOfBirth,
+    required TResult Function(ProfileStateData? data) urlImage,
+    required TResult Function(ProfileStateData? data) setTransactionDate,
+    required TResult Function(ProfileStateData? data) myPost,
+    required TResult Function(ProfileStateData? data) myPostSave,
+    required TResult Function(ProfileStateData? data) showDialog,
+    required TResult Function(ProfileStateData? data) myQuestion,
+    required TResult Function(ProfileStateData? data) myQuestionSave,
+    required TResult Function(ProfileStateData? data) myExam,
+  }) {
+    return showDialog(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ProfileStateData? data)? initial,
+    TResult? Function(ProfileStateData? data)? getError,
+    TResult? Function(ProfileStateData? data)? success,
+    TResult? Function(ProfileStateData? data)? getImage,
+    TResult? Function(ProfileStateData? data)? userResponse,
+    TResult? Function(ProfileStateData? data)? gender,
+    TResult? Function(ProfileStateData? data)? dateOfBirth,
+    TResult? Function(ProfileStateData? data)? urlImage,
+    TResult? Function(ProfileStateData? data)? setTransactionDate,
+    TResult? Function(ProfileStateData? data)? myPost,
+    TResult? Function(ProfileStateData? data)? myPostSave,
+    TResult? Function(ProfileStateData? data)? showDialog,
+    TResult? Function(ProfileStateData? data)? myQuestion,
+    TResult? Function(ProfileStateData? data)? myQuestionSave,
+    TResult? Function(ProfileStateData? data)? myExam,
+  }) {
+    return showDialog?.call(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ProfileStateData? data)? initial,
+    TResult Function(ProfileStateData? data)? getError,
+    TResult Function(ProfileStateData? data)? success,
+    TResult Function(ProfileStateData? data)? getImage,
+    TResult Function(ProfileStateData? data)? userResponse,
+    TResult Function(ProfileStateData? data)? gender,
+    TResult Function(ProfileStateData? data)? dateOfBirth,
+    TResult Function(ProfileStateData? data)? urlImage,
+    TResult Function(ProfileStateData? data)? setTransactionDate,
+    TResult Function(ProfileStateData? data)? myPost,
+    TResult Function(ProfileStateData? data)? myPostSave,
+    TResult Function(ProfileStateData? data)? showDialog,
+    TResult Function(ProfileStateData? data)? myQuestion,
+    TResult Function(ProfileStateData? data)? myQuestionSave,
+    TResult Function(ProfileStateData? data)? myExam,
+    required TResult orElse(),
+  }) {
+    if (showDialog != null) {
+      return showDialog(data);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(GetError value) getError,
+    required TResult Function(Success value) success,
+    required TResult Function(GetImage value) getImage,
+    required TResult Function(Profile value) userResponse,
+    required TResult Function(GetGender value) gender,
+    required TResult Function(GetDateOfBirth value) dateOfBirth,
+    required TResult Function(GetUrlImage value) urlImage,
+    required TResult Function(SetTransactionDate value) setTransactionDate,
+    required TResult Function(GetMyPost value) myPost,
+    required TResult Function(GetMyPostSave value) myPostSave,
+    required TResult Function(ShowDialog value) showDialog,
+    required TResult Function(GetMyQuestion value) myQuestion,
+    required TResult Function(GetMyQuestionSave value) myQuestionSave,
+    required TResult Function(GetMyExam value) myExam,
+  }) {
+    return showDialog(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(GetError value)? getError,
+    TResult? Function(Success value)? success,
+    TResult? Function(GetImage value)? getImage,
+    TResult? Function(Profile value)? userResponse,
+    TResult? Function(GetGender value)? gender,
+    TResult? Function(GetDateOfBirth value)? dateOfBirth,
+    TResult? Function(GetUrlImage value)? urlImage,
+    TResult? Function(SetTransactionDate value)? setTransactionDate,
+    TResult? Function(GetMyPost value)? myPost,
+    TResult? Function(GetMyPostSave value)? myPostSave,
+    TResult? Function(ShowDialog value)? showDialog,
+    TResult? Function(GetMyQuestion value)? myQuestion,
+    TResult? Function(GetMyQuestionSave value)? myQuestionSave,
+    TResult? Function(GetMyExam value)? myExam,
+  }) {
+    return showDialog?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(GetError value)? getError,
+    TResult Function(Success value)? success,
+    TResult Function(GetImage value)? getImage,
+    TResult Function(Profile value)? userResponse,
+    TResult Function(GetGender value)? gender,
+    TResult Function(GetDateOfBirth value)? dateOfBirth,
+    TResult Function(GetUrlImage value)? urlImage,
+    TResult Function(SetTransactionDate value)? setTransactionDate,
+    TResult Function(GetMyPost value)? myPost,
+    TResult Function(GetMyPostSave value)? myPostSave,
+    TResult Function(ShowDialog value)? showDialog,
+    TResult Function(GetMyQuestion value)? myQuestion,
+    TResult Function(GetMyQuestionSave value)? myQuestionSave,
+    TResult Function(GetMyExam value)? myExam,
+    required TResult orElse(),
+  }) {
+    if (showDialog != null) {
+      return showDialog(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ShowDialog implements ProfileState {
+  const factory ShowDialog({final ProfileStateData? data}) = _$ShowDialogImpl;
+
+  @override
+  ProfileStateData? get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$ShowDialogImplCopyWith<_$ShowDialogImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GetMyQuestionImplCopyWith<$Res>
+    implements $ProfileStateCopyWith<$Res> {
+  factory _$$GetMyQuestionImplCopyWith(
+          _$GetMyQuestionImpl value, $Res Function(_$GetMyQuestionImpl) then) =
+      __$$GetMyQuestionImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({ProfileStateData? data});
+
+  @override
+  $ProfileStateDataCopyWith<$Res>? get data;
+}
+
+/// @nodoc
+class __$$GetMyQuestionImplCopyWithImpl<$Res>
+    extends _$ProfileStateCopyWithImpl<$Res, _$GetMyQuestionImpl>
+    implements _$$GetMyQuestionImplCopyWith<$Res> {
+  __$$GetMyQuestionImplCopyWithImpl(
+      _$GetMyQuestionImpl _value, $Res Function(_$GetMyQuestionImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = freezed,
+  }) {
+    return _then(_$GetMyQuestionImpl(
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as ProfileStateData?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GetMyQuestionImpl
+    with DiagnosticableTreeMixin
+    implements GetMyQuestion {
+  const _$GetMyQuestionImpl({this.data});
+
+  @override
+  final ProfileStateData? data;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ProfileState.myQuestion(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ProfileState.myQuestion'))
+      ..add(DiagnosticsProperty('data', data));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetMyQuestionImpl &&
+            (identical(other.data, data) || other.data == data));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, data);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetMyQuestionImplCopyWith<_$GetMyQuestionImpl> get copyWith =>
+      __$$GetMyQuestionImplCopyWithImpl<_$GetMyQuestionImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ProfileStateData? data) initial,
+    required TResult Function(ProfileStateData? data) getError,
+    required TResult Function(ProfileStateData? data) success,
+    required TResult Function(ProfileStateData? data) getImage,
+    required TResult Function(ProfileStateData? data) userResponse,
+    required TResult Function(ProfileStateData? data) gender,
+    required TResult Function(ProfileStateData? data) dateOfBirth,
+    required TResult Function(ProfileStateData? data) urlImage,
+    required TResult Function(ProfileStateData? data) setTransactionDate,
+    required TResult Function(ProfileStateData? data) myPost,
+    required TResult Function(ProfileStateData? data) myPostSave,
+    required TResult Function(ProfileStateData? data) showDialog,
+    required TResult Function(ProfileStateData? data) myQuestion,
+    required TResult Function(ProfileStateData? data) myQuestionSave,
+    required TResult Function(ProfileStateData? data) myExam,
+  }) {
+    return myQuestion(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ProfileStateData? data)? initial,
+    TResult? Function(ProfileStateData? data)? getError,
+    TResult? Function(ProfileStateData? data)? success,
+    TResult? Function(ProfileStateData? data)? getImage,
+    TResult? Function(ProfileStateData? data)? userResponse,
+    TResult? Function(ProfileStateData? data)? gender,
+    TResult? Function(ProfileStateData? data)? dateOfBirth,
+    TResult? Function(ProfileStateData? data)? urlImage,
+    TResult? Function(ProfileStateData? data)? setTransactionDate,
+    TResult? Function(ProfileStateData? data)? myPost,
+    TResult? Function(ProfileStateData? data)? myPostSave,
+    TResult? Function(ProfileStateData? data)? showDialog,
+    TResult? Function(ProfileStateData? data)? myQuestion,
+    TResult? Function(ProfileStateData? data)? myQuestionSave,
+    TResult? Function(ProfileStateData? data)? myExam,
+  }) {
+    return myQuestion?.call(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ProfileStateData? data)? initial,
+    TResult Function(ProfileStateData? data)? getError,
+    TResult Function(ProfileStateData? data)? success,
+    TResult Function(ProfileStateData? data)? getImage,
+    TResult Function(ProfileStateData? data)? userResponse,
+    TResult Function(ProfileStateData? data)? gender,
+    TResult Function(ProfileStateData? data)? dateOfBirth,
+    TResult Function(ProfileStateData? data)? urlImage,
+    TResult Function(ProfileStateData? data)? setTransactionDate,
+    TResult Function(ProfileStateData? data)? myPost,
+    TResult Function(ProfileStateData? data)? myPostSave,
+    TResult Function(ProfileStateData? data)? showDialog,
+    TResult Function(ProfileStateData? data)? myQuestion,
+    TResult Function(ProfileStateData? data)? myQuestionSave,
+    TResult Function(ProfileStateData? data)? myExam,
+    required TResult orElse(),
+  }) {
+    if (myQuestion != null) {
+      return myQuestion(data);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(GetError value) getError,
+    required TResult Function(Success value) success,
+    required TResult Function(GetImage value) getImage,
+    required TResult Function(Profile value) userResponse,
+    required TResult Function(GetGender value) gender,
+    required TResult Function(GetDateOfBirth value) dateOfBirth,
+    required TResult Function(GetUrlImage value) urlImage,
+    required TResult Function(SetTransactionDate value) setTransactionDate,
+    required TResult Function(GetMyPost value) myPost,
+    required TResult Function(GetMyPostSave value) myPostSave,
+    required TResult Function(ShowDialog value) showDialog,
+    required TResult Function(GetMyQuestion value) myQuestion,
+    required TResult Function(GetMyQuestionSave value) myQuestionSave,
+    required TResult Function(GetMyExam value) myExam,
+  }) {
+    return myQuestion(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(GetError value)? getError,
+    TResult? Function(Success value)? success,
+    TResult? Function(GetImage value)? getImage,
+    TResult? Function(Profile value)? userResponse,
+    TResult? Function(GetGender value)? gender,
+    TResult? Function(GetDateOfBirth value)? dateOfBirth,
+    TResult? Function(GetUrlImage value)? urlImage,
+    TResult? Function(SetTransactionDate value)? setTransactionDate,
+    TResult? Function(GetMyPost value)? myPost,
+    TResult? Function(GetMyPostSave value)? myPostSave,
+    TResult? Function(ShowDialog value)? showDialog,
+    TResult? Function(GetMyQuestion value)? myQuestion,
+    TResult? Function(GetMyQuestionSave value)? myQuestionSave,
+    TResult? Function(GetMyExam value)? myExam,
+  }) {
+    return myQuestion?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(GetError value)? getError,
+    TResult Function(Success value)? success,
+    TResult Function(GetImage value)? getImage,
+    TResult Function(Profile value)? userResponse,
+    TResult Function(GetGender value)? gender,
+    TResult Function(GetDateOfBirth value)? dateOfBirth,
+    TResult Function(GetUrlImage value)? urlImage,
+    TResult Function(SetTransactionDate value)? setTransactionDate,
+    TResult Function(GetMyPost value)? myPost,
+    TResult Function(GetMyPostSave value)? myPostSave,
+    TResult Function(ShowDialog value)? showDialog,
+    TResult Function(GetMyQuestion value)? myQuestion,
+    TResult Function(GetMyQuestionSave value)? myQuestionSave,
+    TResult Function(GetMyExam value)? myExam,
+    required TResult orElse(),
+  }) {
+    if (myQuestion != null) {
+      return myQuestion(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetMyQuestion implements ProfileState {
+  const factory GetMyQuestion({final ProfileStateData? data}) =
+      _$GetMyQuestionImpl;
+
+  @override
+  ProfileStateData? get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$GetMyQuestionImplCopyWith<_$GetMyQuestionImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GetMyQuestionSaveImplCopyWith<$Res>
+    implements $ProfileStateCopyWith<$Res> {
+  factory _$$GetMyQuestionSaveImplCopyWith(_$GetMyQuestionSaveImpl value,
+          $Res Function(_$GetMyQuestionSaveImpl) then) =
+      __$$GetMyQuestionSaveImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({ProfileStateData? data});
+
+  @override
+  $ProfileStateDataCopyWith<$Res>? get data;
+}
+
+/// @nodoc
+class __$$GetMyQuestionSaveImplCopyWithImpl<$Res>
+    extends _$ProfileStateCopyWithImpl<$Res, _$GetMyQuestionSaveImpl>
+    implements _$$GetMyQuestionSaveImplCopyWith<$Res> {
+  __$$GetMyQuestionSaveImplCopyWithImpl(_$GetMyQuestionSaveImpl _value,
+      $Res Function(_$GetMyQuestionSaveImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = freezed,
+  }) {
+    return _then(_$GetMyQuestionSaveImpl(
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as ProfileStateData?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GetMyQuestionSaveImpl
+    with DiagnosticableTreeMixin
+    implements GetMyQuestionSave {
+  const _$GetMyQuestionSaveImpl({this.data});
+
+  @override
+  final ProfileStateData? data;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ProfileState.myQuestionSave(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ProfileState.myQuestionSave'))
+      ..add(DiagnosticsProperty('data', data));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetMyQuestionSaveImpl &&
+            (identical(other.data, data) || other.data == data));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, data);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetMyQuestionSaveImplCopyWith<_$GetMyQuestionSaveImpl> get copyWith =>
+      __$$GetMyQuestionSaveImplCopyWithImpl<_$GetMyQuestionSaveImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ProfileStateData? data) initial,
+    required TResult Function(ProfileStateData? data) getError,
+    required TResult Function(ProfileStateData? data) success,
+    required TResult Function(ProfileStateData? data) getImage,
+    required TResult Function(ProfileStateData? data) userResponse,
+    required TResult Function(ProfileStateData? data) gender,
+    required TResult Function(ProfileStateData? data) dateOfBirth,
+    required TResult Function(ProfileStateData? data) urlImage,
+    required TResult Function(ProfileStateData? data) setTransactionDate,
+    required TResult Function(ProfileStateData? data) myPost,
+    required TResult Function(ProfileStateData? data) myPostSave,
+    required TResult Function(ProfileStateData? data) showDialog,
+    required TResult Function(ProfileStateData? data) myQuestion,
+    required TResult Function(ProfileStateData? data) myQuestionSave,
+    required TResult Function(ProfileStateData? data) myExam,
+  }) {
+    return myQuestionSave(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ProfileStateData? data)? initial,
+    TResult? Function(ProfileStateData? data)? getError,
+    TResult? Function(ProfileStateData? data)? success,
+    TResult? Function(ProfileStateData? data)? getImage,
+    TResult? Function(ProfileStateData? data)? userResponse,
+    TResult? Function(ProfileStateData? data)? gender,
+    TResult? Function(ProfileStateData? data)? dateOfBirth,
+    TResult? Function(ProfileStateData? data)? urlImage,
+    TResult? Function(ProfileStateData? data)? setTransactionDate,
+    TResult? Function(ProfileStateData? data)? myPost,
+    TResult? Function(ProfileStateData? data)? myPostSave,
+    TResult? Function(ProfileStateData? data)? showDialog,
+    TResult? Function(ProfileStateData? data)? myQuestion,
+    TResult? Function(ProfileStateData? data)? myQuestionSave,
+    TResult? Function(ProfileStateData? data)? myExam,
+  }) {
+    return myQuestionSave?.call(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ProfileStateData? data)? initial,
+    TResult Function(ProfileStateData? data)? getError,
+    TResult Function(ProfileStateData? data)? success,
+    TResult Function(ProfileStateData? data)? getImage,
+    TResult Function(ProfileStateData? data)? userResponse,
+    TResult Function(ProfileStateData? data)? gender,
+    TResult Function(ProfileStateData? data)? dateOfBirth,
+    TResult Function(ProfileStateData? data)? urlImage,
+    TResult Function(ProfileStateData? data)? setTransactionDate,
+    TResult Function(ProfileStateData? data)? myPost,
+    TResult Function(ProfileStateData? data)? myPostSave,
+    TResult Function(ProfileStateData? data)? showDialog,
+    TResult Function(ProfileStateData? data)? myQuestion,
+    TResult Function(ProfileStateData? data)? myQuestionSave,
+    TResult Function(ProfileStateData? data)? myExam,
+    required TResult orElse(),
+  }) {
+    if (myQuestionSave != null) {
+      return myQuestionSave(data);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(GetError value) getError,
+    required TResult Function(Success value) success,
+    required TResult Function(GetImage value) getImage,
+    required TResult Function(Profile value) userResponse,
+    required TResult Function(GetGender value) gender,
+    required TResult Function(GetDateOfBirth value) dateOfBirth,
+    required TResult Function(GetUrlImage value) urlImage,
+    required TResult Function(SetTransactionDate value) setTransactionDate,
+    required TResult Function(GetMyPost value) myPost,
+    required TResult Function(GetMyPostSave value) myPostSave,
+    required TResult Function(ShowDialog value) showDialog,
+    required TResult Function(GetMyQuestion value) myQuestion,
+    required TResult Function(GetMyQuestionSave value) myQuestionSave,
+    required TResult Function(GetMyExam value) myExam,
+  }) {
+    return myQuestionSave(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(GetError value)? getError,
+    TResult? Function(Success value)? success,
+    TResult? Function(GetImage value)? getImage,
+    TResult? Function(Profile value)? userResponse,
+    TResult? Function(GetGender value)? gender,
+    TResult? Function(GetDateOfBirth value)? dateOfBirth,
+    TResult? Function(GetUrlImage value)? urlImage,
+    TResult? Function(SetTransactionDate value)? setTransactionDate,
+    TResult? Function(GetMyPost value)? myPost,
+    TResult? Function(GetMyPostSave value)? myPostSave,
+    TResult? Function(ShowDialog value)? showDialog,
+    TResult? Function(GetMyQuestion value)? myQuestion,
+    TResult? Function(GetMyQuestionSave value)? myQuestionSave,
+    TResult? Function(GetMyExam value)? myExam,
+  }) {
+    return myQuestionSave?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(GetError value)? getError,
+    TResult Function(Success value)? success,
+    TResult Function(GetImage value)? getImage,
+    TResult Function(Profile value)? userResponse,
+    TResult Function(GetGender value)? gender,
+    TResult Function(GetDateOfBirth value)? dateOfBirth,
+    TResult Function(GetUrlImage value)? urlImage,
+    TResult Function(SetTransactionDate value)? setTransactionDate,
+    TResult Function(GetMyPost value)? myPost,
+    TResult Function(GetMyPostSave value)? myPostSave,
+    TResult Function(ShowDialog value)? showDialog,
+    TResult Function(GetMyQuestion value)? myQuestion,
+    TResult Function(GetMyQuestionSave value)? myQuestionSave,
+    TResult Function(GetMyExam value)? myExam,
+    required TResult orElse(),
+  }) {
+    if (myQuestionSave != null) {
+      return myQuestionSave(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetMyQuestionSave implements ProfileState {
+  const factory GetMyQuestionSave({final ProfileStateData? data}) =
+      _$GetMyQuestionSaveImpl;
+
+  @override
+  ProfileStateData? get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$GetMyQuestionSaveImplCopyWith<_$GetMyQuestionSaveImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GetMyExamImplCopyWith<$Res>
+    implements $ProfileStateCopyWith<$Res> {
+  factory _$$GetMyExamImplCopyWith(
+          _$GetMyExamImpl value, $Res Function(_$GetMyExamImpl) then) =
+      __$$GetMyExamImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({ProfileStateData? data});
+
+  @override
+  $ProfileStateDataCopyWith<$Res>? get data;
+}
+
+/// @nodoc
+class __$$GetMyExamImplCopyWithImpl<$Res>
+    extends _$ProfileStateCopyWithImpl<$Res, _$GetMyExamImpl>
+    implements _$$GetMyExamImplCopyWith<$Res> {
+  __$$GetMyExamImplCopyWithImpl(
+      _$GetMyExamImpl _value, $Res Function(_$GetMyExamImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = freezed,
+  }) {
+    return _then(_$GetMyExamImpl(
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as ProfileStateData?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GetMyExamImpl with DiagnosticableTreeMixin implements GetMyExam {
+  const _$GetMyExamImpl({this.data});
+
+  @override
+  final ProfileStateData? data;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ProfileState.myExam(data: $data)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ProfileState.myExam'))
+      ..add(DiagnosticsProperty('data', data));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetMyExamImpl &&
+            (identical(other.data, data) || other.data == data));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, data);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetMyExamImplCopyWith<_$GetMyExamImpl> get copyWith =>
+      __$$GetMyExamImplCopyWithImpl<_$GetMyExamImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ProfileStateData? data) initial,
+    required TResult Function(ProfileStateData? data) getError,
+    required TResult Function(ProfileStateData? data) success,
+    required TResult Function(ProfileStateData? data) getImage,
+    required TResult Function(ProfileStateData? data) userResponse,
+    required TResult Function(ProfileStateData? data) gender,
+    required TResult Function(ProfileStateData? data) dateOfBirth,
+    required TResult Function(ProfileStateData? data) urlImage,
+    required TResult Function(ProfileStateData? data) setTransactionDate,
+    required TResult Function(ProfileStateData? data) myPost,
+    required TResult Function(ProfileStateData? data) myPostSave,
+    required TResult Function(ProfileStateData? data) showDialog,
+    required TResult Function(ProfileStateData? data) myQuestion,
+    required TResult Function(ProfileStateData? data) myQuestionSave,
+    required TResult Function(ProfileStateData? data) myExam,
+  }) {
+    return myExam(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ProfileStateData? data)? initial,
+    TResult? Function(ProfileStateData? data)? getError,
+    TResult? Function(ProfileStateData? data)? success,
+    TResult? Function(ProfileStateData? data)? getImage,
+    TResult? Function(ProfileStateData? data)? userResponse,
+    TResult? Function(ProfileStateData? data)? gender,
+    TResult? Function(ProfileStateData? data)? dateOfBirth,
+    TResult? Function(ProfileStateData? data)? urlImage,
+    TResult? Function(ProfileStateData? data)? setTransactionDate,
+    TResult? Function(ProfileStateData? data)? myPost,
+    TResult? Function(ProfileStateData? data)? myPostSave,
+    TResult? Function(ProfileStateData? data)? showDialog,
+    TResult? Function(ProfileStateData? data)? myQuestion,
+    TResult? Function(ProfileStateData? data)? myQuestionSave,
+    TResult? Function(ProfileStateData? data)? myExam,
+  }) {
+    return myExam?.call(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ProfileStateData? data)? initial,
+    TResult Function(ProfileStateData? data)? getError,
+    TResult Function(ProfileStateData? data)? success,
+    TResult Function(ProfileStateData? data)? getImage,
+    TResult Function(ProfileStateData? data)? userResponse,
+    TResult Function(ProfileStateData? data)? gender,
+    TResult Function(ProfileStateData? data)? dateOfBirth,
+    TResult Function(ProfileStateData? data)? urlImage,
+    TResult Function(ProfileStateData? data)? setTransactionDate,
+    TResult Function(ProfileStateData? data)? myPost,
+    TResult Function(ProfileStateData? data)? myPostSave,
+    TResult Function(ProfileStateData? data)? showDialog,
+    TResult Function(ProfileStateData? data)? myQuestion,
+    TResult Function(ProfileStateData? data)? myQuestionSave,
+    TResult Function(ProfileStateData? data)? myExam,
+    required TResult orElse(),
+  }) {
+    if (myExam != null) {
+      return myExam(data);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(GetError value) getError,
+    required TResult Function(Success value) success,
+    required TResult Function(GetImage value) getImage,
+    required TResult Function(Profile value) userResponse,
+    required TResult Function(GetGender value) gender,
+    required TResult Function(GetDateOfBirth value) dateOfBirth,
+    required TResult Function(GetUrlImage value) urlImage,
+    required TResult Function(SetTransactionDate value) setTransactionDate,
+    required TResult Function(GetMyPost value) myPost,
+    required TResult Function(GetMyPostSave value) myPostSave,
+    required TResult Function(ShowDialog value) showDialog,
+    required TResult Function(GetMyQuestion value) myQuestion,
+    required TResult Function(GetMyQuestionSave value) myQuestionSave,
+    required TResult Function(GetMyExam value) myExam,
+  }) {
+    return myExam(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(GetError value)? getError,
+    TResult? Function(Success value)? success,
+    TResult? Function(GetImage value)? getImage,
+    TResult? Function(Profile value)? userResponse,
+    TResult? Function(GetGender value)? gender,
+    TResult? Function(GetDateOfBirth value)? dateOfBirth,
+    TResult? Function(GetUrlImage value)? urlImage,
+    TResult? Function(SetTransactionDate value)? setTransactionDate,
+    TResult? Function(GetMyPost value)? myPost,
+    TResult? Function(GetMyPostSave value)? myPostSave,
+    TResult? Function(ShowDialog value)? showDialog,
+    TResult? Function(GetMyQuestion value)? myQuestion,
+    TResult? Function(GetMyQuestionSave value)? myQuestionSave,
+    TResult? Function(GetMyExam value)? myExam,
+  }) {
+    return myExam?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(GetError value)? getError,
+    TResult Function(Success value)? success,
+    TResult Function(GetImage value)? getImage,
+    TResult Function(Profile value)? userResponse,
+    TResult Function(GetGender value)? gender,
+    TResult Function(GetDateOfBirth value)? dateOfBirth,
+    TResult Function(GetUrlImage value)? urlImage,
+    TResult Function(SetTransactionDate value)? setTransactionDate,
+    TResult Function(GetMyPost value)? myPost,
+    TResult Function(GetMyPostSave value)? myPostSave,
+    TResult Function(ShowDialog value)? showDialog,
+    TResult Function(GetMyQuestion value)? myQuestion,
+    TResult Function(GetMyQuestionSave value)? myQuestionSave,
+    TResult Function(GetMyExam value)? myExam,
+    required TResult orElse(),
+  }) {
+    if (myExam != null) {
+      return myExam(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetMyExam implements ProfileState {
+  const factory GetMyExam({final ProfileStateData? data}) = _$GetMyExamImpl;
+
+  @override
+  ProfileStateData? get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$GetMyExamImplCopyWith<_$GetMyExamImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

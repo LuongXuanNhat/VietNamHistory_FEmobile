@@ -38,7 +38,11 @@ class LikepostCubit extends Cubit<LikepostState> {
             ),
           ));
         } else {
-          emit(LikepostState.isLike(data: state.data.copyWith(isLike: false)));
+          emit(LikepostState.isLike(
+              data: state.data.copyWith(
+            isLike: false,
+            numberLike: response.resultObj!.item2,
+          )));
         }
       }
     } catch (e) {
@@ -63,7 +67,11 @@ class LikepostCubit extends Cubit<LikepostState> {
           ),
         ));
       } else {
-        emit(LikepostState.isLike(data: state.data.copyWith(isLike: false)));
+        emit(LikepostState.isLike(
+            data: state.data.copyWith(
+          isLike: false,
+          numberLike: response.resultObj!.item2,
+        )));
       }
     } catch (e) {
       log(e.toString());

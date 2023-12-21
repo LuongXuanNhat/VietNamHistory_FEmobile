@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:after_layout/after_layout.dart';
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:intl/intl.dart';
 
 import '../../../common/global_colors.dart';
@@ -40,13 +42,19 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
   String formattedDate = '';
 
   @override
-  FutureOr<void> afterFirstLayout(BuildContext context) async {
-    // context.read<ProfileCubit>().getProfile();
-    // context.read<ProfileCubit>().updateGender(widget.userDetail!.gender);
-  }
+  FutureOr<void> afterFirstLayout(BuildContext context) async {}
 
-  DateTime selectedDate = DateTime.now();
-  DateTime date = DateTime.now();
+  DateTime datetime = DateTime(2050, 2, 1, 10, 20);
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    txtFullname.text = widget.userDetail?.fullname ?? '';
+    txtPhoneNumber.text = widget.userDetail?.phoneNumber ?? '';
+    txtIntroduction.text = widget.userDetail?.introduction ?? '';
+    datetime = widget.userDetail?.dateOfBirth ?? DateTime(2050, 2, 1, 10, 20);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,20 +87,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
       body: SingleChildScrollView(
         child: BlocBuilder<UpdateProfileCubit, UpdateProfileState>(
           builder: (context, state) {
-            // txtBirthDay.addListener(() {
-            //   final date1 = DateTime.parse(txtBirthDay.text);
-            //   context.read<ProfileCubit>().updateDateOfBirth(date1);
-            //   txtBirthDay.text =
-            //       state.data!.userResponse?.data!.dateOfBirth ?? 'yyyy/MM/dd';
-
-            //   if (txtBirthDay.text.isNotEmpty) {
-            //     date = DateTime.parse(txtBirthDay.text);
-            //   }
-            //   formattedDate = DateFormat('yyyy/MM/dd').format(date);
-            // });
-
-            txtIntroduction.text = widget.userDetail?.introduction ?? '';
-
             return SafeArea(
               child: Form(
                 child: Padding(
@@ -229,109 +223,93 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
                                 color: Colors.black,
                                 fontFamily: 'Inter'),
                             items: const ['Male', 'Female', 'Other'],
-                            // onChanged: (newGender) {
-                            //   setState(() {
-                            //     context
-                            //         .read<ProfileCubit>()
-                            //         .updateGender(newGender);
-                            //   });
-                            // },
                             controller: select),
                       ),
                       const SizedBox(
                         height: 15,
                       ),
-                      Text(
-                        "Học sinh trường",
-                        style: GlobalStyles.titleFont(context),
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      SizedBox(
-                        height: 36,
-                        child: CustomDropdown(
-                            borderRadius: BorderRadius.circular(4),
-                            fillColor: GlobalColors.colorbackgroundTF,
-                            hintText: '-- Chọn trường --',
-                            hintStyle: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                fontFamily: 'Inter'),
-                            selectedStyle: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black,
-                                fontFamily: 'Inter'),
-                            items: const [
-                              'Cao Ba Quat',
-                              'Nguyen Hue',
-                              'Nguyen Trai'
-                            ],
-                            controller: select1),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      SizedBox(
-                        height: 36,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8),
-                          child: InkWell(
-                            onTap: () {
-                              showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime(2000),
-                                lastDate: DateTime(2025),
-                              ).then((value) => _globalKey.currentContext!
-                                  .read<UpdateProfileCubit>()
-                                  .setTransactionDate(value!));
-                            },
-                            child: Row(
-                              children: [
-                                const Icon(
-                                  Icons.calendar_month_outlined,
-                                  color: Colors.blue,
-                                ),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                Text(
-                                  DateFormat('dd/MM/yyyy')
-                                      .format(state.data!.transactionDate!),
-                                  style: const TextStyle(color: Colors.blue),
-                                ),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                const Icon(Icons.arrow_drop_down,
-                                    color: Colors.blue)
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      // Text(
-                      //   "Ngày sinh",
-                      //   style: GlobalStyles.titleFont(context),
-                      // ),
-                      // const SizedBox(
-                      //   height: 5,
-                      // ),
-                      // Container(
+
+                      // SizedBox(
                       //   height: 36,
-                      //   decoration: BoxDecoration(
-                      //     color: GlobalColors.colorbackgroundTF,
-                      //     borderRadius: BorderRadius.circular(4),
-                      //   ),
-                      //   child: MaterialButton(
-                      //     onPressed: () => _showDatePicker(context),
-                      //     child: Text(
-                      //       txtBirthDay.text,
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.all(8),
+                      //     child: InkWell(
+                      //       onTap: () {
+                      //         showDatePicker(
+                      //           context: context,
+                      //           initialDate: DateTime.now(),
+                      //           firstDate: DateTime(2000),
+                      //           lastDate: DateTime(2025),
+                      //         ).then((value) => _globalKey.currentContext!
+                      //             .read<UpdateProfileCubit>()
+                      //             .setTransactionDate(value!));
+                      //       },
+                      //       child: Row(
+                      //         children: [
+                      //           const Icon(
+                      //             Icons.calendar_month_outlined,
+                      //             color: Colors.blue,
+                      //           ),
+                      //           const SizedBox(
+                      //             width: 8,
+                      //           ),
+                      //           Text(
+                      //             DateFormat('dd/MM/yyyy')
+                      //                 .format(state.data!.transactionDate!),
+                      //             style: const TextStyle(color: Colors.blue),
+                      //           ),
+                      //           const SizedBox(
+                      //             width: 8,
+                      //           ),
+                      //           const Icon(Icons.arrow_drop_down,
+                      //               color: Colors.blue)
+                      //         ],
+                      //       ),
                       //     ),
                       //   ),
                       // ),
+                      Text(
+                        "Ngày sinh",
+                        style: GlobalStyles.titleFont(context),
+                      ),
+                      CupertinoButton(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: GlobalColors.colorbackgroundTF,
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Text(
+                                  "${datetime.day}/${datetime.month}/${datetime.year}",
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Inter',
+                                  )),
+                            ),
+                          ),
+                          onPressed: () {
+                            showCupertinoModalPopup(
+                              context: context,
+                              builder: (BuildContext context) => SizedBox(
+                                height: 250,
+                                child: CupertinoDatePicker(
+                                  backgroundColor: Colors.white,
+                                  initialDateTime: datetime,
+                                  onDateTimeChanged: (DateTime newTime) {
+                                    setState(
+                                      () {
+                                        datetime = newTime;
+                                      },
+                                    );
+                                  },
+                                  mode: CupertinoDatePickerMode.date,
+                                ),
+                              ),
+                            );
+                          }),
                       const SizedBox(
                         height: 15,
                       ),
@@ -377,9 +355,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
                                     .updateProfile(
                                         email: widget.userDetail?.email ?? '',
                                         fullname: txtFullname.text,
-                                        dateOfBirth: DateFormat('yyyy-MM-dd')
-                                            .format(
-                                                state.data!.transactionDate!),
+                                        dateOfBirth: datetime.toIso8601String(),
                                         gender: select.text == 'Other'
                                             ? 3
                                             : select.text == 'Male'

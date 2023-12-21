@@ -66,12 +66,18 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
             data: state.data!.copyWith(error: response.message!, success: 1)));
 
         if (fullname.isNotEmpty) {
-          final token = (await appPref.getToken())?.token ?? '';
+          final token = (await appPref.getToken())?.resultObj ?? '';
           await UserPreferences.saveUserFromToken(
               token: token, username: fullname);
         }
 
-        navigator!.pushReplacementNamed(RouteGenerator.accounsettingsScreen);
+        navigator!.pushNamedAndRemoveUntil(
+          RouteGenerator.mainScreen,
+          arguments: {
+            'currentIndex': 4,
+          },
+          (route) => false,
+        );
       } else {
         emit(UpdateProfileState.getError(
             data: state.data!.copyWith(error: response.message!)));

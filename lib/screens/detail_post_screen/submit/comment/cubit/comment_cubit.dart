@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import '../../../../../common/ui_helpers.dart';
 import '../../../../../models/post/response/comment_post_response.dart';
 import '../../../../../models/post/model/comment.dart';
@@ -35,10 +36,10 @@ class CommentCubit extends Cubit<CommentState> {
       UIHelpers.showLoading();
       Map<String, String> userData = await UserPreferences.getUser();
       final request = CreateCommentRequest(
-        postId: postId,
-        userId: userData['id'],
-        content: content,
-      );
+          postId: postId,
+          userId: userData['id'],
+          content: content,
+          createdAt: DateTime.now());
       final response = await _dataRepository.createComment(request: request);
 
       if (response.isSuccessed == true) {
@@ -53,22 +54,44 @@ class CommentCubit extends Cubit<CommentState> {
     try {
       final response = await _dataRepository.getComment(postId: postId);
       if (response.isSuccessed == true) {
+        List<ResultObj> sortedList = List.from(response.resultObj)
+          ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
         emit(CommentState.listComment(
             data: state.data.copyWith(
-                comments: response.resultObj
-                    .map((e) => Comment(
-                        id: e.id,
-                        userId: e.userId,
-                        postId: e.postId,
-                        userShort: UserShortt(
-                            id: e.userShort.id,
-                            fullName: e.userShort.fullName,
-                            image: e.userShort.image),
-                        content: e.content,
-                        createdAt: e.createdAt,
-                        updatedAt: e.updatedAt,
-                        subComment: e.subComment))
-                    .toList())));
+          dataLoad: response,
+          resultObjs: sortedList,
+        )));
+      }
+    } catch (e) {
+      log(e.toString());
+    } finally {
+      UIHelpers.dismissLoading();
+    }
+  }
+
+  void loadCommentHubConnection({required CommentResponse data}) async {
+    try {
+      List<ResultObj> sortedList = List.from(data.resultObj)
+        ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
+      emit(CommentState.listComment(
+          data: state.data.copyWith(
+        dataLoad: data,
+        resultObjs: sortedList,
+      )));
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  Future<void> deleteComment({required String id}) async {
+    try {
+      UIHelpers.showLoading();
+      final response = await _dataRepository.deleteComment(idComment: id);
+      if (response.isSuccessed == true) {
+        loadCommentHubConnection(data: response);
+        UIHelpers.showSnackBar(message: 'Xóa bình luận thành công');
+      } else {
+        UIHelpers.showSnackBar(message: 'Xóa bình luận thất bại');
       }
     } catch (e) {
       log(e.toString());

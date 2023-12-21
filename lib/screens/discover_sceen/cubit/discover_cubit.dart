@@ -88,4 +88,20 @@ class DiscoverCubit extends Cubit<DiscoverState> {
               listDiscover: ListDiscoverResponse(resultObj: result))));
     }
   }
+
+  Future<void> getMyPost() async {
+    final response = await _dataRepository.getMyPost1();
+    if (response.isSuccessed == true) {
+      emit(DiscoverState.getListDiscover(
+          data: state.data!.copyWith(listDiscover: response)));
+    }
+  }
+
+  Future<void> getMyPostSave() async {
+    final response = await _dataRepository.getMyPostSave1();
+    if (response.isSuccessed == true) {
+      emit(DiscoverState.getListDiscover(
+          data: state.data!.copyWith(listDiscover: response)));
+    }
+  }
 }

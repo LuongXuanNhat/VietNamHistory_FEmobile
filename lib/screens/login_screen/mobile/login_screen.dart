@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:after_layout/after_layout.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,7 +29,7 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
   final TextEditingController _txtEmail = TextEditingController();
   final TextEditingController _txtPassword = TextEditingController();
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey();
@@ -37,6 +38,11 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isFormLogin = true;
   int current = 0;
   final CarouselController controller = CarouselController();
+
+  @override
+  FutureOr<void> afterFirstLayout(BuildContext context) {
+    getLoginInput();
+  }
 
   @override
   void dispose() {
@@ -48,7 +54,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     DateTime? currentBackPressTime;
-    // var size = MediaQuery.of(context).size;
     return BlocListener<LoginCubitCubit, LoginCubitState>(
       listener: (context, state) {
         if (state.data!.error != '') {
@@ -65,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                   (route) => false);
               UIHelpers.showSnackBar(
-                  message: 'Đăng nhập thành công!', type: SnackBarType.ERROR);
+                  message: 'Đăng nhập thành công!', type: SnackBarType.SUCCESS);
             } else {
               UIHelpers.showSnackBar(
                   message: state.data!.error!, type: SnackBarType.ERROR);
@@ -103,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const SizedBox(
-                        height: 130,
+                        height: 50,
                       ),
                       Text("Đăng nhập",
                           style: GlobalStyles.primaryFont(context)),
@@ -133,7 +138,11 @@ class _LoginScreenState extends State<LoginScreen> {
                               .read<LoginCubitCubit>()
                               .showPass(!state.data!.showPass),
                           prefixIcon: const Icon(Icons.lock_outline),
-                          suffixIcon: const Icon(Icons.remove_red_eye_outlined),
+                          suffixIcon: GestureDetector(
+                              onTap: () => _globalKey.currentContext!
+                                  .read<LoginCubitCubit>()
+                                  .showPass(!state.data!.showPass),
+                              child: const Icon(Icons.remove_red_eye_outlined)),
                           isEnable: true,
                         ),
                       ),
@@ -141,12 +150,18 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 6.0,
                       ),
 
+                      const SizedBox(
+                        height: 6.0,
+                      ),
                       Align(
                         alignment: Alignment.centerRight,
                         child: FractionallySizedBox(
                           widthFactor: 0.5,
                           child: TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              navigator!
+                                  .pushNamed(RouteGenerator.forgotPassScreen);
+                            },
                             child: const Text(
                               "Quên mật khẩu",
                             ),
@@ -250,7 +265,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           TextButton(
                               onPressed: () => navigator!
-                                  .pushNamed(RouteGenerator.registerScreen),
+                                  .pushNamed(RouteGenerator.signupScreen),
                               child: const Text(
                                 'Đăng ký',
                                 style: TextStyle(
@@ -269,5 +284,10 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  void getLoginInput() async {
+    _txtEmail.text = await getIt<AppPref>().getUsernameInput();
+    _txtPassword.text = await getIt<AppPref>().getPasswordInput();
   }
 }

@@ -21,6 +21,8 @@ mixin _$CommentStateData {
   Comment? get postComment => throw _privateConstructorUsedError;
   String get imageUser => throw _privateConstructorUsedError;
   CommentResponse? get data => throw _privateConstructorUsedError;
+  CommentResponse? get dataLoad => throw _privateConstructorUsedError;
+  List<ResultObj>? get resultObjs => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CommentStateDataCopyWith<CommentStateData> get copyWith =>
@@ -38,7 +40,9 @@ abstract class $CommentStateDataCopyWith<$Res> {
       List<Comment> comments,
       Comment? postComment,
       String imageUser,
-      CommentResponse? data});
+      CommentResponse? data,
+      CommentResponse? dataLoad,
+      List<ResultObj>? resultObjs});
 }
 
 /// @nodoc
@@ -59,6 +63,8 @@ class _$CommentStateDataCopyWithImpl<$Res, $Val extends CommentStateData>
     Object? postComment = freezed,
     Object? imageUser = null,
     Object? data = freezed,
+    Object? dataLoad = freezed,
+    Object? resultObjs = freezed,
   }) {
     return _then(_value.copyWith(
       error: null == error
@@ -81,6 +87,14 @@ class _$CommentStateDataCopyWithImpl<$Res, $Val extends CommentStateData>
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
               as CommentResponse?,
+      dataLoad: freezed == dataLoad
+          ? _value.dataLoad
+          : dataLoad // ignore: cast_nullable_to_non_nullable
+              as CommentResponse?,
+      resultObjs: freezed == resultObjs
+          ? _value.resultObjs
+          : resultObjs // ignore: cast_nullable_to_non_nullable
+              as List<ResultObj>?,
     ) as $Val);
   }
 }
@@ -98,7 +112,9 @@ abstract class _$$CommentStateDataImplCopyWith<$Res>
       List<Comment> comments,
       Comment? postComment,
       String imageUser,
-      CommentResponse? data});
+      CommentResponse? data,
+      CommentResponse? dataLoad,
+      List<ResultObj>? resultObjs});
 }
 
 /// @nodoc
@@ -117,6 +133,8 @@ class __$$CommentStateDataImplCopyWithImpl<$Res>
     Object? postComment = freezed,
     Object? imageUser = null,
     Object? data = freezed,
+    Object? dataLoad = freezed,
+    Object? resultObjs = freezed,
   }) {
     return _then(_$CommentStateDataImpl(
       error: null == error
@@ -139,6 +157,14 @@ class __$$CommentStateDataImplCopyWithImpl<$Res>
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
               as CommentResponse?,
+      dataLoad: freezed == dataLoad
+          ? _value.dataLoad
+          : dataLoad // ignore: cast_nullable_to_non_nullable
+              as CommentResponse?,
+      resultObjs: freezed == resultObjs
+          ? _value._resultObjs
+          : resultObjs // ignore: cast_nullable_to_non_nullable
+              as List<ResultObj>?,
     ));
   }
 }
@@ -151,8 +177,11 @@ class _$CommentStateDataImpl implements _CommentStateData {
       final List<Comment> comments = const [],
       this.postComment,
       this.imageUser = '',
-      this.data})
-      : _comments = comments;
+      this.data,
+      this.dataLoad,
+      final List<ResultObj>? resultObjs})
+      : _comments = comments,
+        _resultObjs = resultObjs;
 
   @override
   @JsonKey()
@@ -173,10 +202,21 @@ class _$CommentStateDataImpl implements _CommentStateData {
   final String imageUser;
   @override
   final CommentResponse? data;
+  @override
+  final CommentResponse? dataLoad;
+  final List<ResultObj>? _resultObjs;
+  @override
+  List<ResultObj>? get resultObjs {
+    final value = _resultObjs;
+    if (value == null) return null;
+    if (_resultObjs is EqualUnmodifiableListView) return _resultObjs;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'CommentStateData(error: $error, comments: $comments, postComment: $postComment, imageUser: $imageUser, data: $data)';
+    return 'CommentStateData(error: $error, comments: $comments, postComment: $postComment, imageUser: $imageUser, data: $data, dataLoad: $dataLoad, resultObjs: $resultObjs)';
   }
 
   @override
@@ -190,7 +230,11 @@ class _$CommentStateDataImpl implements _CommentStateData {
                 other.postComment == postComment) &&
             (identical(other.imageUser, imageUser) ||
                 other.imageUser == imageUser) &&
-            (identical(other.data, data) || other.data == data));
+            (identical(other.data, data) || other.data == data) &&
+            (identical(other.dataLoad, dataLoad) ||
+                other.dataLoad == dataLoad) &&
+            const DeepCollectionEquality()
+                .equals(other._resultObjs, _resultObjs));
   }
 
   @override
@@ -200,7 +244,9 @@ class _$CommentStateDataImpl implements _CommentStateData {
       const DeepCollectionEquality().hash(_comments),
       postComment,
       imageUser,
-      data);
+      data,
+      dataLoad,
+      const DeepCollectionEquality().hash(_resultObjs));
 
   @JsonKey(ignore: true)
   @override
@@ -216,7 +262,9 @@ abstract class _CommentStateData implements CommentStateData {
       final List<Comment> comments,
       final Comment? postComment,
       final String imageUser,
-      final CommentResponse? data}) = _$CommentStateDataImpl;
+      final CommentResponse? data,
+      final CommentResponse? dataLoad,
+      final List<ResultObj>? resultObjs}) = _$CommentStateDataImpl;
 
   @override
   String get error;
@@ -228,6 +276,10 @@ abstract class _CommentStateData implements CommentStateData {
   String get imageUser;
   @override
   CommentResponse? get data;
+  @override
+  CommentResponse? get dataLoad;
+  @override
+  List<ResultObj>? get resultObjs;
   @override
   @JsonKey(ignore: true)
   _$$CommentStateDataImplCopyWith<_$CommentStateDataImpl> get copyWith =>
@@ -245,6 +297,8 @@ mixin _$CommentState {
     required TResult Function(CommentStateData data) postComment,
     required TResult Function(CommentStateData data) listComment,
     required TResult Function(CommentStateData data) loadImageUser,
+    required TResult Function(CommentStateData data) loadCommentHubConnection,
+    required TResult Function(CommentStateData data) loadComment,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -255,6 +309,8 @@ mixin _$CommentState {
     TResult? Function(CommentStateData data)? postComment,
     TResult? Function(CommentStateData data)? listComment,
     TResult? Function(CommentStateData data)? loadImageUser,
+    TResult? Function(CommentStateData data)? loadCommentHubConnection,
+    TResult? Function(CommentStateData data)? loadComment,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -265,6 +321,8 @@ mixin _$CommentState {
     TResult Function(CommentStateData data)? postComment,
     TResult Function(CommentStateData data)? listComment,
     TResult Function(CommentStateData data)? loadImageUser,
+    TResult Function(CommentStateData data)? loadCommentHubConnection,
+    TResult Function(CommentStateData data)? loadComment,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -276,6 +334,9 @@ mixin _$CommentState {
     required TResult Function(PostComment value) postComment,
     required TResult Function(ListComment value) listComment,
     required TResult Function(LoadImageUser value) loadImageUser,
+    required TResult Function(LoadCommentHubConnection value)
+        loadCommentHubConnection,
+    required TResult Function(LoadComment value) loadComment,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -286,6 +347,8 @@ mixin _$CommentState {
     TResult? Function(PostComment value)? postComment,
     TResult? Function(ListComment value)? listComment,
     TResult? Function(LoadImageUser value)? loadImageUser,
+    TResult? Function(LoadCommentHubConnection value)? loadCommentHubConnection,
+    TResult? Function(LoadComment value)? loadComment,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -296,6 +359,8 @@ mixin _$CommentState {
     TResult Function(PostComment value)? postComment,
     TResult Function(ListComment value)? listComment,
     TResult Function(LoadImageUser value)? loadImageUser,
+    TResult Function(LoadCommentHubConnection value)? loadCommentHubConnection,
+    TResult Function(LoadComment value)? loadComment,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -423,6 +488,8 @@ class _$InitialImpl implements Initial {
     required TResult Function(CommentStateData data) postComment,
     required TResult Function(CommentStateData data) listComment,
     required TResult Function(CommentStateData data) loadImageUser,
+    required TResult Function(CommentStateData data) loadCommentHubConnection,
+    required TResult Function(CommentStateData data) loadComment,
   }) {
     return initial(data);
   }
@@ -436,6 +503,8 @@ class _$InitialImpl implements Initial {
     TResult? Function(CommentStateData data)? postComment,
     TResult? Function(CommentStateData data)? listComment,
     TResult? Function(CommentStateData data)? loadImageUser,
+    TResult? Function(CommentStateData data)? loadCommentHubConnection,
+    TResult? Function(CommentStateData data)? loadComment,
   }) {
     return initial?.call(data);
   }
@@ -449,6 +518,8 @@ class _$InitialImpl implements Initial {
     TResult Function(CommentStateData data)? postComment,
     TResult Function(CommentStateData data)? listComment,
     TResult Function(CommentStateData data)? loadImageUser,
+    TResult Function(CommentStateData data)? loadCommentHubConnection,
+    TResult Function(CommentStateData data)? loadComment,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -466,6 +537,9 @@ class _$InitialImpl implements Initial {
     required TResult Function(PostComment value) postComment,
     required TResult Function(ListComment value) listComment,
     required TResult Function(LoadImageUser value) loadImageUser,
+    required TResult Function(LoadCommentHubConnection value)
+        loadCommentHubConnection,
+    required TResult Function(LoadComment value) loadComment,
   }) {
     return initial(this);
   }
@@ -479,6 +553,8 @@ class _$InitialImpl implements Initial {
     TResult? Function(PostComment value)? postComment,
     TResult? Function(ListComment value)? listComment,
     TResult? Function(LoadImageUser value)? loadImageUser,
+    TResult? Function(LoadCommentHubConnection value)? loadCommentHubConnection,
+    TResult? Function(LoadComment value)? loadComment,
   }) {
     return initial?.call(this);
   }
@@ -492,6 +568,8 @@ class _$InitialImpl implements Initial {
     TResult Function(PostComment value)? postComment,
     TResult Function(ListComment value)? listComment,
     TResult Function(LoadImageUser value)? loadImageUser,
+    TResult Function(LoadCommentHubConnection value)? loadCommentHubConnection,
+    TResult Function(LoadComment value)? loadComment,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -587,6 +665,8 @@ class _$GetErrorImpl implements GetError {
     required TResult Function(CommentStateData data) postComment,
     required TResult Function(CommentStateData data) listComment,
     required TResult Function(CommentStateData data) loadImageUser,
+    required TResult Function(CommentStateData data) loadCommentHubConnection,
+    required TResult Function(CommentStateData data) loadComment,
   }) {
     return getError(data);
   }
@@ -600,6 +680,8 @@ class _$GetErrorImpl implements GetError {
     TResult? Function(CommentStateData data)? postComment,
     TResult? Function(CommentStateData data)? listComment,
     TResult? Function(CommentStateData data)? loadImageUser,
+    TResult? Function(CommentStateData data)? loadCommentHubConnection,
+    TResult? Function(CommentStateData data)? loadComment,
   }) {
     return getError?.call(data);
   }
@@ -613,6 +695,8 @@ class _$GetErrorImpl implements GetError {
     TResult Function(CommentStateData data)? postComment,
     TResult Function(CommentStateData data)? listComment,
     TResult Function(CommentStateData data)? loadImageUser,
+    TResult Function(CommentStateData data)? loadCommentHubConnection,
+    TResult Function(CommentStateData data)? loadComment,
     required TResult orElse(),
   }) {
     if (getError != null) {
@@ -630,6 +714,9 @@ class _$GetErrorImpl implements GetError {
     required TResult Function(PostComment value) postComment,
     required TResult Function(ListComment value) listComment,
     required TResult Function(LoadImageUser value) loadImageUser,
+    required TResult Function(LoadCommentHubConnection value)
+        loadCommentHubConnection,
+    required TResult Function(LoadComment value) loadComment,
   }) {
     return getError(this);
   }
@@ -643,6 +730,8 @@ class _$GetErrorImpl implements GetError {
     TResult? Function(PostComment value)? postComment,
     TResult? Function(ListComment value)? listComment,
     TResult? Function(LoadImageUser value)? loadImageUser,
+    TResult? Function(LoadCommentHubConnection value)? loadCommentHubConnection,
+    TResult? Function(LoadComment value)? loadComment,
   }) {
     return getError?.call(this);
   }
@@ -656,6 +745,8 @@ class _$GetErrorImpl implements GetError {
     TResult Function(PostComment value)? postComment,
     TResult Function(ListComment value)? listComment,
     TResult Function(LoadImageUser value)? loadImageUser,
+    TResult Function(LoadCommentHubConnection value)? loadCommentHubConnection,
+    TResult Function(LoadComment value)? loadComment,
     required TResult orElse(),
   }) {
     if (getError != null) {
@@ -752,6 +843,8 @@ class _$SuccessImpl implements Success {
     required TResult Function(CommentStateData data) postComment,
     required TResult Function(CommentStateData data) listComment,
     required TResult Function(CommentStateData data) loadImageUser,
+    required TResult Function(CommentStateData data) loadCommentHubConnection,
+    required TResult Function(CommentStateData data) loadComment,
   }) {
     return success(data);
   }
@@ -765,6 +858,8 @@ class _$SuccessImpl implements Success {
     TResult? Function(CommentStateData data)? postComment,
     TResult? Function(CommentStateData data)? listComment,
     TResult? Function(CommentStateData data)? loadImageUser,
+    TResult? Function(CommentStateData data)? loadCommentHubConnection,
+    TResult? Function(CommentStateData data)? loadComment,
   }) {
     return success?.call(data);
   }
@@ -778,6 +873,8 @@ class _$SuccessImpl implements Success {
     TResult Function(CommentStateData data)? postComment,
     TResult Function(CommentStateData data)? listComment,
     TResult Function(CommentStateData data)? loadImageUser,
+    TResult Function(CommentStateData data)? loadCommentHubConnection,
+    TResult Function(CommentStateData data)? loadComment,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -795,6 +892,9 @@ class _$SuccessImpl implements Success {
     required TResult Function(PostComment value) postComment,
     required TResult Function(ListComment value) listComment,
     required TResult Function(LoadImageUser value) loadImageUser,
+    required TResult Function(LoadCommentHubConnection value)
+        loadCommentHubConnection,
+    required TResult Function(LoadComment value) loadComment,
   }) {
     return success(this);
   }
@@ -808,6 +908,8 @@ class _$SuccessImpl implements Success {
     TResult? Function(PostComment value)? postComment,
     TResult? Function(ListComment value)? listComment,
     TResult? Function(LoadImageUser value)? loadImageUser,
+    TResult? Function(LoadCommentHubConnection value)? loadCommentHubConnection,
+    TResult? Function(LoadComment value)? loadComment,
   }) {
     return success?.call(this);
   }
@@ -821,6 +923,8 @@ class _$SuccessImpl implements Success {
     TResult Function(PostComment value)? postComment,
     TResult Function(ListComment value)? listComment,
     TResult Function(LoadImageUser value)? loadImageUser,
+    TResult Function(LoadCommentHubConnection value)? loadCommentHubConnection,
+    TResult Function(LoadComment value)? loadComment,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -916,6 +1020,8 @@ class _$PostCommentImpl implements PostComment {
     required TResult Function(CommentStateData data) postComment,
     required TResult Function(CommentStateData data) listComment,
     required TResult Function(CommentStateData data) loadImageUser,
+    required TResult Function(CommentStateData data) loadCommentHubConnection,
+    required TResult Function(CommentStateData data) loadComment,
   }) {
     return postComment(data);
   }
@@ -929,6 +1035,8 @@ class _$PostCommentImpl implements PostComment {
     TResult? Function(CommentStateData data)? postComment,
     TResult? Function(CommentStateData data)? listComment,
     TResult? Function(CommentStateData data)? loadImageUser,
+    TResult? Function(CommentStateData data)? loadCommentHubConnection,
+    TResult? Function(CommentStateData data)? loadComment,
   }) {
     return postComment?.call(data);
   }
@@ -942,6 +1050,8 @@ class _$PostCommentImpl implements PostComment {
     TResult Function(CommentStateData data)? postComment,
     TResult Function(CommentStateData data)? listComment,
     TResult Function(CommentStateData data)? loadImageUser,
+    TResult Function(CommentStateData data)? loadCommentHubConnection,
+    TResult Function(CommentStateData data)? loadComment,
     required TResult orElse(),
   }) {
     if (postComment != null) {
@@ -959,6 +1069,9 @@ class _$PostCommentImpl implements PostComment {
     required TResult Function(PostComment value) postComment,
     required TResult Function(ListComment value) listComment,
     required TResult Function(LoadImageUser value) loadImageUser,
+    required TResult Function(LoadCommentHubConnection value)
+        loadCommentHubConnection,
+    required TResult Function(LoadComment value) loadComment,
   }) {
     return postComment(this);
   }
@@ -972,6 +1085,8 @@ class _$PostCommentImpl implements PostComment {
     TResult? Function(PostComment value)? postComment,
     TResult? Function(ListComment value)? listComment,
     TResult? Function(LoadImageUser value)? loadImageUser,
+    TResult? Function(LoadCommentHubConnection value)? loadCommentHubConnection,
+    TResult? Function(LoadComment value)? loadComment,
   }) {
     return postComment?.call(this);
   }
@@ -985,6 +1100,8 @@ class _$PostCommentImpl implements PostComment {
     TResult Function(PostComment value)? postComment,
     TResult Function(ListComment value)? listComment,
     TResult Function(LoadImageUser value)? loadImageUser,
+    TResult Function(LoadCommentHubConnection value)? loadCommentHubConnection,
+    TResult Function(LoadComment value)? loadComment,
     required TResult orElse(),
   }) {
     if (postComment != null) {
@@ -1081,6 +1198,8 @@ class _$ListCommentImpl implements ListComment {
     required TResult Function(CommentStateData data) postComment,
     required TResult Function(CommentStateData data) listComment,
     required TResult Function(CommentStateData data) loadImageUser,
+    required TResult Function(CommentStateData data) loadCommentHubConnection,
+    required TResult Function(CommentStateData data) loadComment,
   }) {
     return listComment(data);
   }
@@ -1094,6 +1213,8 @@ class _$ListCommentImpl implements ListComment {
     TResult? Function(CommentStateData data)? postComment,
     TResult? Function(CommentStateData data)? listComment,
     TResult? Function(CommentStateData data)? loadImageUser,
+    TResult? Function(CommentStateData data)? loadCommentHubConnection,
+    TResult? Function(CommentStateData data)? loadComment,
   }) {
     return listComment?.call(data);
   }
@@ -1107,6 +1228,8 @@ class _$ListCommentImpl implements ListComment {
     TResult Function(CommentStateData data)? postComment,
     TResult Function(CommentStateData data)? listComment,
     TResult Function(CommentStateData data)? loadImageUser,
+    TResult Function(CommentStateData data)? loadCommentHubConnection,
+    TResult Function(CommentStateData data)? loadComment,
     required TResult orElse(),
   }) {
     if (listComment != null) {
@@ -1124,6 +1247,9 @@ class _$ListCommentImpl implements ListComment {
     required TResult Function(PostComment value) postComment,
     required TResult Function(ListComment value) listComment,
     required TResult Function(LoadImageUser value) loadImageUser,
+    required TResult Function(LoadCommentHubConnection value)
+        loadCommentHubConnection,
+    required TResult Function(LoadComment value) loadComment,
   }) {
     return listComment(this);
   }
@@ -1137,6 +1263,8 @@ class _$ListCommentImpl implements ListComment {
     TResult? Function(PostComment value)? postComment,
     TResult? Function(ListComment value)? listComment,
     TResult? Function(LoadImageUser value)? loadImageUser,
+    TResult? Function(LoadCommentHubConnection value)? loadCommentHubConnection,
+    TResult? Function(LoadComment value)? loadComment,
   }) {
     return listComment?.call(this);
   }
@@ -1150,6 +1278,8 @@ class _$ListCommentImpl implements ListComment {
     TResult Function(PostComment value)? postComment,
     TResult Function(ListComment value)? listComment,
     TResult Function(LoadImageUser value)? loadImageUser,
+    TResult Function(LoadCommentHubConnection value)? loadCommentHubConnection,
+    TResult Function(LoadComment value)? loadComment,
     required TResult orElse(),
   }) {
     if (listComment != null) {
@@ -1246,6 +1376,8 @@ class _$LoadImageUserImpl implements LoadImageUser {
     required TResult Function(CommentStateData data) postComment,
     required TResult Function(CommentStateData data) listComment,
     required TResult Function(CommentStateData data) loadImageUser,
+    required TResult Function(CommentStateData data) loadCommentHubConnection,
+    required TResult Function(CommentStateData data) loadComment,
   }) {
     return loadImageUser(data);
   }
@@ -1259,6 +1391,8 @@ class _$LoadImageUserImpl implements LoadImageUser {
     TResult? Function(CommentStateData data)? postComment,
     TResult? Function(CommentStateData data)? listComment,
     TResult? Function(CommentStateData data)? loadImageUser,
+    TResult? Function(CommentStateData data)? loadCommentHubConnection,
+    TResult? Function(CommentStateData data)? loadComment,
   }) {
     return loadImageUser?.call(data);
   }
@@ -1272,6 +1406,8 @@ class _$LoadImageUserImpl implements LoadImageUser {
     TResult Function(CommentStateData data)? postComment,
     TResult Function(CommentStateData data)? listComment,
     TResult Function(CommentStateData data)? loadImageUser,
+    TResult Function(CommentStateData data)? loadCommentHubConnection,
+    TResult Function(CommentStateData data)? loadComment,
     required TResult orElse(),
   }) {
     if (loadImageUser != null) {
@@ -1289,6 +1425,9 @@ class _$LoadImageUserImpl implements LoadImageUser {
     required TResult Function(PostComment value) postComment,
     required TResult Function(ListComment value) listComment,
     required TResult Function(LoadImageUser value) loadImageUser,
+    required TResult Function(LoadCommentHubConnection value)
+        loadCommentHubConnection,
+    required TResult Function(LoadComment value) loadComment,
   }) {
     return loadImageUser(this);
   }
@@ -1302,6 +1441,8 @@ class _$LoadImageUserImpl implements LoadImageUser {
     TResult? Function(PostComment value)? postComment,
     TResult? Function(ListComment value)? listComment,
     TResult? Function(LoadImageUser value)? loadImageUser,
+    TResult? Function(LoadCommentHubConnection value)? loadCommentHubConnection,
+    TResult? Function(LoadComment value)? loadComment,
   }) {
     return loadImageUser?.call(this);
   }
@@ -1315,6 +1456,8 @@ class _$LoadImageUserImpl implements LoadImageUser {
     TResult Function(PostComment value)? postComment,
     TResult Function(ListComment value)? listComment,
     TResult Function(LoadImageUser value)? loadImageUser,
+    TResult Function(LoadCommentHubConnection value)? loadCommentHubConnection,
+    TResult Function(LoadComment value)? loadComment,
     required TResult orElse(),
   }) {
     if (loadImageUser != null) {
@@ -1333,5 +1476,364 @@ abstract class LoadImageUser implements CommentState {
   @override
   @JsonKey(ignore: true)
   _$$LoadImageUserImplCopyWith<_$LoadImageUserImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LoadCommentHubConnectionImplCopyWith<$Res>
+    implements $CommentStateCopyWith<$Res> {
+  factory _$$LoadCommentHubConnectionImplCopyWith(
+          _$LoadCommentHubConnectionImpl value,
+          $Res Function(_$LoadCommentHubConnectionImpl) then) =
+      __$$LoadCommentHubConnectionImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({CommentStateData data});
+
+  @override
+  $CommentStateDataCopyWith<$Res> get data;
+}
+
+/// @nodoc
+class __$$LoadCommentHubConnectionImplCopyWithImpl<$Res>
+    extends _$CommentStateCopyWithImpl<$Res, _$LoadCommentHubConnectionImpl>
+    implements _$$LoadCommentHubConnectionImplCopyWith<$Res> {
+  __$$LoadCommentHubConnectionImplCopyWithImpl(
+      _$LoadCommentHubConnectionImpl _value,
+      $Res Function(_$LoadCommentHubConnectionImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = null,
+  }) {
+    return _then(_$LoadCommentHubConnectionImpl(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as CommentStateData,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$LoadCommentHubConnectionImpl implements LoadCommentHubConnection {
+  const _$LoadCommentHubConnectionImpl({required this.data});
+
+  @override
+  final CommentStateData data;
+
+  @override
+  String toString() {
+    return 'CommentState.loadCommentHubConnection(data: $data)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoadCommentHubConnectionImpl &&
+            (identical(other.data, data) || other.data == data));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, data);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoadCommentHubConnectionImplCopyWith<_$LoadCommentHubConnectionImpl>
+      get copyWith => __$$LoadCommentHubConnectionImplCopyWithImpl<
+          _$LoadCommentHubConnectionImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(CommentStateData data) initial,
+    required TResult Function(CommentStateData data) getError,
+    required TResult Function(CommentStateData data) success,
+    required TResult Function(CommentStateData data) postComment,
+    required TResult Function(CommentStateData data) listComment,
+    required TResult Function(CommentStateData data) loadImageUser,
+    required TResult Function(CommentStateData data) loadCommentHubConnection,
+    required TResult Function(CommentStateData data) loadComment,
+  }) {
+    return loadCommentHubConnection(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(CommentStateData data)? initial,
+    TResult? Function(CommentStateData data)? getError,
+    TResult? Function(CommentStateData data)? success,
+    TResult? Function(CommentStateData data)? postComment,
+    TResult? Function(CommentStateData data)? listComment,
+    TResult? Function(CommentStateData data)? loadImageUser,
+    TResult? Function(CommentStateData data)? loadCommentHubConnection,
+    TResult? Function(CommentStateData data)? loadComment,
+  }) {
+    return loadCommentHubConnection?.call(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(CommentStateData data)? initial,
+    TResult Function(CommentStateData data)? getError,
+    TResult Function(CommentStateData data)? success,
+    TResult Function(CommentStateData data)? postComment,
+    TResult Function(CommentStateData data)? listComment,
+    TResult Function(CommentStateData data)? loadImageUser,
+    TResult Function(CommentStateData data)? loadCommentHubConnection,
+    TResult Function(CommentStateData data)? loadComment,
+    required TResult orElse(),
+  }) {
+    if (loadCommentHubConnection != null) {
+      return loadCommentHubConnection(data);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(GetError value) getError,
+    required TResult Function(Success value) success,
+    required TResult Function(PostComment value) postComment,
+    required TResult Function(ListComment value) listComment,
+    required TResult Function(LoadImageUser value) loadImageUser,
+    required TResult Function(LoadCommentHubConnection value)
+        loadCommentHubConnection,
+    required TResult Function(LoadComment value) loadComment,
+  }) {
+    return loadCommentHubConnection(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(GetError value)? getError,
+    TResult? Function(Success value)? success,
+    TResult? Function(PostComment value)? postComment,
+    TResult? Function(ListComment value)? listComment,
+    TResult? Function(LoadImageUser value)? loadImageUser,
+    TResult? Function(LoadCommentHubConnection value)? loadCommentHubConnection,
+    TResult? Function(LoadComment value)? loadComment,
+  }) {
+    return loadCommentHubConnection?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(GetError value)? getError,
+    TResult Function(Success value)? success,
+    TResult Function(PostComment value)? postComment,
+    TResult Function(ListComment value)? listComment,
+    TResult Function(LoadImageUser value)? loadImageUser,
+    TResult Function(LoadCommentHubConnection value)? loadCommentHubConnection,
+    TResult Function(LoadComment value)? loadComment,
+    required TResult orElse(),
+  }) {
+    if (loadCommentHubConnection != null) {
+      return loadCommentHubConnection(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LoadCommentHubConnection implements CommentState {
+  const factory LoadCommentHubConnection(
+      {required final CommentStateData data}) = _$LoadCommentHubConnectionImpl;
+
+  @override
+  CommentStateData get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$LoadCommentHubConnectionImplCopyWith<_$LoadCommentHubConnectionImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LoadCommentImplCopyWith<$Res>
+    implements $CommentStateCopyWith<$Res> {
+  factory _$$LoadCommentImplCopyWith(
+          _$LoadCommentImpl value, $Res Function(_$LoadCommentImpl) then) =
+      __$$LoadCommentImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({CommentStateData data});
+
+  @override
+  $CommentStateDataCopyWith<$Res> get data;
+}
+
+/// @nodoc
+class __$$LoadCommentImplCopyWithImpl<$Res>
+    extends _$CommentStateCopyWithImpl<$Res, _$LoadCommentImpl>
+    implements _$$LoadCommentImplCopyWith<$Res> {
+  __$$LoadCommentImplCopyWithImpl(
+      _$LoadCommentImpl _value, $Res Function(_$LoadCommentImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = null,
+  }) {
+    return _then(_$LoadCommentImpl(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as CommentStateData,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$LoadCommentImpl implements LoadComment {
+  const _$LoadCommentImpl({required this.data});
+
+  @override
+  final CommentStateData data;
+
+  @override
+  String toString() {
+    return 'CommentState.loadComment(data: $data)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoadCommentImpl &&
+            (identical(other.data, data) || other.data == data));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, data);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoadCommentImplCopyWith<_$LoadCommentImpl> get copyWith =>
+      __$$LoadCommentImplCopyWithImpl<_$LoadCommentImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(CommentStateData data) initial,
+    required TResult Function(CommentStateData data) getError,
+    required TResult Function(CommentStateData data) success,
+    required TResult Function(CommentStateData data) postComment,
+    required TResult Function(CommentStateData data) listComment,
+    required TResult Function(CommentStateData data) loadImageUser,
+    required TResult Function(CommentStateData data) loadCommentHubConnection,
+    required TResult Function(CommentStateData data) loadComment,
+  }) {
+    return loadComment(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(CommentStateData data)? initial,
+    TResult? Function(CommentStateData data)? getError,
+    TResult? Function(CommentStateData data)? success,
+    TResult? Function(CommentStateData data)? postComment,
+    TResult? Function(CommentStateData data)? listComment,
+    TResult? Function(CommentStateData data)? loadImageUser,
+    TResult? Function(CommentStateData data)? loadCommentHubConnection,
+    TResult? Function(CommentStateData data)? loadComment,
+  }) {
+    return loadComment?.call(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(CommentStateData data)? initial,
+    TResult Function(CommentStateData data)? getError,
+    TResult Function(CommentStateData data)? success,
+    TResult Function(CommentStateData data)? postComment,
+    TResult Function(CommentStateData data)? listComment,
+    TResult Function(CommentStateData data)? loadImageUser,
+    TResult Function(CommentStateData data)? loadCommentHubConnection,
+    TResult Function(CommentStateData data)? loadComment,
+    required TResult orElse(),
+  }) {
+    if (loadComment != null) {
+      return loadComment(data);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(GetError value) getError,
+    required TResult Function(Success value) success,
+    required TResult Function(PostComment value) postComment,
+    required TResult Function(ListComment value) listComment,
+    required TResult Function(LoadImageUser value) loadImageUser,
+    required TResult Function(LoadCommentHubConnection value)
+        loadCommentHubConnection,
+    required TResult Function(LoadComment value) loadComment,
+  }) {
+    return loadComment(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(GetError value)? getError,
+    TResult? Function(Success value)? success,
+    TResult? Function(PostComment value)? postComment,
+    TResult? Function(ListComment value)? listComment,
+    TResult? Function(LoadImageUser value)? loadImageUser,
+    TResult? Function(LoadCommentHubConnection value)? loadCommentHubConnection,
+    TResult? Function(LoadComment value)? loadComment,
+  }) {
+    return loadComment?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(GetError value)? getError,
+    TResult Function(Success value)? success,
+    TResult Function(PostComment value)? postComment,
+    TResult Function(ListComment value)? listComment,
+    TResult Function(LoadImageUser value)? loadImageUser,
+    TResult Function(LoadCommentHubConnection value)? loadCommentHubConnection,
+    TResult Function(LoadComment value)? loadComment,
+    required TResult orElse(),
+  }) {
+    if (loadComment != null) {
+      return loadComment(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LoadComment implements CommentState {
+  const factory LoadComment({required final CommentStateData data}) =
+      _$LoadCommentImpl;
+
+  @override
+  CommentStateData get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$LoadCommentImplCopyWith<_$LoadCommentImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

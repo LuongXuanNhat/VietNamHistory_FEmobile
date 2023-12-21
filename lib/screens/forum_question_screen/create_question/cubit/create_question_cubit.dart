@@ -38,7 +38,7 @@ class CreateQuestionCubit extends Cubit<CreateQuestionState> {
         navigator!.pushNamedAndRemoveUntil(
           RouteGenerator.mainScreen,
           arguments: {
-            'currentIndex': 1,
+            'currentIndex': 3,
           },
           (route) => false,
         );

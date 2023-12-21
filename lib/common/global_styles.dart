@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'global_colors.dart';
+
 class GlobalStyles {
   static const TextStyle boldStyle = TextStyle(fontWeight: FontWeight.bold);
   static const TextStyle normalStyle = TextStyle(fontWeight: FontWeight.normal);
@@ -27,3 +29,6 @@ class GlobalStyles {
         fontWeight: FontWeight.w700,
       );
 }
+
+const kQuizeNumberCardTs = TextStyle(
+    fontSize: 16, fontWeight: FontWeight.w500, color: kOnSurfaceTextColor);

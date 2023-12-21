@@ -1,17 +1,21 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:signalr_netcore/signalr_client.dart';
 
 import '../../../models/question/answer/response/listanswerresponse.dart';
 
 import '../../../common/global_colors.dart';
+import '../../../models/user/user_pres.dart';
+import '../../../route_generator.dart';
 import '../../../widgets/button_fliter.dart';
+import '../cubit/question_cubit.dart';
 import 'cubit/detail_question_cubit.dart';
 import 'widget/commentItem.dart';
 
@@ -45,6 +49,7 @@ class _DetailQuestionScreenState extends State<DetailQuestionScreen>
   final FocusNode writingTextFocus = FocusNode();
   String signalRStatus = "disconnected";
   ListAnswerResponse? listAnswerResponse;
+  String? idUser;
   final hubConnection = HubConnectionBuilder()
       .withUrl("https://vuanhpham25-001-site1.gtempurl.com/commentHub")
       .build();
@@ -54,6 +59,8 @@ class _DetailQuestionScreenState extends State<DetailQuestionScreen>
   FutureOr<void> afterFirstLayout(BuildContext context) async {
     context.read<DetailQuestionCubit>().getDetailQuestion(subId: widget.subId!);
     context.read<DetailQuestionCubit>().getListAnswer(subId: widget.id!);
+    Map<dynamic, String> userData = await UserPreferences.getUser();
+    idUser = userData['id'];
     await hubConnection.start();
     log("Connection state: ${hubConnection.state}, connection id: ${hubConnection.connectionId}");
 
@@ -73,6 +80,14 @@ class _DetailQuestionScreenState extends State<DetailQuestionScreen>
                 .updateWithDataFromHub(data: listAnswerResponse);
           }
         }
+      } catch (e) {
+        log(e.toString());
+      }
+    });
+    hubConnection.on('ReceiveSubAnswer', (message) {
+      log("ReceiveSubAnswer: $message");
+      try {
+        context.read<DetailQuestionCubit>().getListAnswer(subId: widget.id!);
       } catch (e) {
         log(e.toString());
       }
@@ -97,7 +112,6 @@ class _DetailQuestionScreenState extends State<DetailQuestionScreen>
   }
 
   bool isOpenSubAnswer = false;
-  final TextEditingController _txtSubAnswer = TextEditingController();
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -121,8 +135,13 @@ class _DetailQuestionScreenState extends State<DetailQuestionScreen>
         body: BlocBuilder<DetailQuestionCubit, DetailQuestionState>(
           builder: (context, state) {
             final detail = state.data.questionResponse;
+            String content = '';
             if (state.data.resultObjs != null) {
               _answers = state.data.resultObjs!;
+              content = detail?.resultObj.content ?? '';
+              if (containsHtml(content)) {
+                content = content.replaceAll(RegExp(r'<[^>]*>'), '');
+              }
             }
             return SingleChildScrollView(
               child: Padding(
@@ -167,9 +186,7 @@ class _DetailQuestionScreenState extends State<DetailQuestionScreen>
                               Row(
                                 children: [
                                   Text(
-                                    state.data.questionResponse!.resultObj
-                                        .createAt
-                                        .toIso8601String(),
+                                    '${state.data.questionResponse!.resultObj.createAt.day}/${state.data.questionResponse!.resultObj.createAt.month}/${state.data.questionResponse!.resultObj.createAt.year} ${state.data.questionResponse!.resultObj.createAt.hour}:${state.data.questionResponse!.resultObj.createAt.minute}',
                                     style: const TextStyle(
                                         fontSize: 11,
                                         fontWeight: FontWeight.w400,
@@ -186,153 +203,192 @@ class _DetailQuestionScreenState extends State<DetailQuestionScreen>
                                     width: 5,
                                   ),
                                   SizedBox(
-                                    width: size.width * 0.3,
+                                    width: size.width * 0.4,
                                   ),
-                                  InkWell(
-                                    onTap: () {
-                                      showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return AlertDialog(
-                                              alignment: Alignment.topRight,
-                                              elevation: 0.0,
-                                              backgroundColor:
-                                                  Colors.transparent,
-                                              content: IntrinsicWidth(
-                                                child: Container(
-                                                  padding:
-                                                      const EdgeInsets.all(10),
-                                                  decoration:
-                                                      const BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius
-                                                                      .circular(
-                                                                          10)),
-                                                          color: Colors.white),
-                                                  child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      GestureDetector(
-                                                        onTap: () {},
-                                                        child: const Row(
+                                  idUser ==
+                                          state.data.questionResponse!.resultObj
+                                              .userShort.id
+                                      ? InkWell(
+                                          onTap: () {
+                                            showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return AlertDialog(
+                                                    alignment:
+                                                        Alignment.topRight,
+                                                    elevation: 0.0,
+                                                    backgroundColor:
+                                                        Colors.transparent,
+                                                    content: IntrinsicWidth(
+                                                      child: Container(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10),
+                                                        decoration: const BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10)),
+                                                            color:
+                                                                Colors.white),
+                                                        child: Column(
                                                           mainAxisSize:
                                                               MainAxisSize.min,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
                                                           children: [
-                                                            Icon(
-                                                              Icons
-                                                                  .edit_outlined,
-                                                              size: 20,
+                                                            idUser ==
+                                                                    state
+                                                                        .data
+                                                                        .questionResponse!
+                                                                        .resultObj
+                                                                        .userShort
+                                                                        .id
+                                                                ? GestureDetector(
+                                                                    onTap: () {
+                                                                      navigator!.pushNamed(
+                                                                          RouteGenerator
+                                                                              .updateQuestionScreen,
+                                                                          arguments: {
+                                                                            'data':
+                                                                                state.data.questionResponse
+                                                                          });
+                                                                    },
+                                                                    child:
+                                                                        const Row(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .min,
+                                                                      children: [
+                                                                        Icon(
+                                                                          Icons
+                                                                              .edit_outlined,
+                                                                          size:
+                                                                              20,
+                                                                        ),
+                                                                        Text(
+                                                                          'Sửa câu hỏi',
+                                                                          style: TextStyle(
+                                                                              fontFamily: 'Mulish',
+                                                                              fontSize: 14,
+                                                                              fontWeight: FontWeight.w400),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  )
+                                                                : Container(),
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                      top: 10),
+                                                              child:
+                                                                  GestureDetector(
+                                                                onTap: () {
+                                                                  showDialog(
+                                                                      context:
+                                                                          context,
+                                                                      builder: (BuildContext
+                                                                              context) =>
+                                                                          AlertDialog(
+                                                                            title:
+                                                                                const Text('Xác nhận xóa câu hỏi'),
+                                                                            content:
+                                                                                const Text('Bạn có chắc chắn muốn xóa câu hỏi này?'),
+                                                                            actions: [
+                                                                              TextButton(
+                                                                                  onPressed: () {
+                                                                                    Navigator.pop(context);
+                                                                                  },
+                                                                                  child: const Text('Hủy')),
+                                                                              TextButton(
+                                                                                  onPressed: () {
+                                                                                    _globalKey.currentContext!.read<DetailQuestionCubit>().deleteQuestion(id: widget.id!);
+
+                                                                                    Navigator.pop(context);
+                                                                                  },
+                                                                                  child: const Text('Xóa')),
+                                                                            ],
+                                                                          ));
+                                                                },
+                                                                child: idUser ==
+                                                                        state
+                                                                            .data
+                                                                            .questionResponse!
+                                                                            .resultObj
+                                                                            .userShort
+                                                                            .id
+                                                                    ? const Row(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.min,
+                                                                        children: [
+                                                                          Icon(
+                                                                            Icons.delete_outline,
+                                                                            size:
+                                                                                20,
+                                                                          ),
+                                                                          Text(
+                                                                            'Xóa câu hỏi',
+                                                                            style: TextStyle(
+                                                                                fontFamily: 'Mulish',
+                                                                                fontSize: 14,
+                                                                                fontWeight: FontWeight.w400),
+                                                                          ),
+                                                                        ],
+                                                                      )
+                                                                    : Container(),
+                                                              ),
                                                             ),
-                                                            Text(
-                                                              'Sửa câu hỏi',
-                                                              style: TextStyle(
-                                                                  fontFamily:
-                                                                      'Mulish',
-                                                                  fontSize: 14,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400),
-                                                            ),
+                                                            idUser ==
+                                                                    state
+                                                                        .data
+                                                                        .questionResponse!
+                                                                        .resultObj
+                                                                        .userShort
+                                                                        .id
+                                                                ? const SizedBox(
+                                                                    height: 10)
+                                                                : Container(),
+                                                            // GestureDetector(
+                                                            //   onTap: () {},
+                                                            //   child: const Row(
+                                                            //     mainAxisSize:
+                                                            //         MainAxisSize.min,
+                                                            //     children: [
+                                                            //       Icon(
+                                                            //         Icons
+                                                            //             .report_outlined,
+                                                            //         size: 20,
+                                                            //       ),
+                                                            //       Text(
+                                                            //         'Báo cáo bài viết',
+                                                            //         style: TextStyle(
+                                                            //             fontFamily:
+                                                            //                 'Mulish',
+                                                            //             fontSize: 14,
+                                                            //             fontWeight:
+                                                            //                 FontWeight
+                                                            //                     .w400),
+                                                            //       ),
+                                                            //     ],
+                                                            //   ),
+                                                            // ),
                                                           ],
                                                         ),
                                                       ),
-                                                      const SizedBox(
-                                                          height: 10),
-                                                      GestureDetector(
-                                                        onTap: () {
-                                                          showDialog(
-                                                              context: context,
-                                                              builder: (BuildContext
-                                                                      context) =>
-                                                                  AlertDialog(
-                                                                    title: const Text(
-                                                                        'Xác nhận xóa câu hỏi'),
-                                                                    content:
-                                                                        const Text(
-                                                                            'Bạn có chắc chắn muốn xóa câu hỏi này?'),
-                                                                    actions: [
-                                                                      TextButton(
-                                                                          onPressed:
-                                                                              () {
-                                                                            Navigator.pop(context);
-                                                                          },
-                                                                          child:
-                                                                              const Text('Hủy')),
-                                                                      TextButton(
-                                                                          onPressed:
-                                                                              () {
-                                                                            Navigator.pop(context);
-                                                                          },
-                                                                          child:
-                                                                              const Text('Xóa')),
-                                                                    ],
-                                                                  ));
-                                                        },
-                                                        child: const Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.min,
-                                                          children: [
-                                                            Icon(
-                                                              Icons
-                                                                  .delete_outline,
-                                                              size: 20,
-                                                            ),
-                                                            Text(
-                                                              'Xóa câu hỏi',
-                                                              style: TextStyle(
-                                                                  fontFamily:
-                                                                      'Mulish',
-                                                                  fontSize: 14,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      const SizedBox(
-                                                          height: 10),
-                                                      GestureDetector(
-                                                        onTap: () {},
-                                                        child: const Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.min,
-                                                          children: [
-                                                            Icon(
-                                                              Icons
-                                                                  .report_outlined,
-                                                              size: 20,
-                                                            ),
-                                                            Text(
-                                                              'Báo cáo bài viết',
-                                                              style: TextStyle(
-                                                                  fontFamily:
-                                                                      'Mulish',
-                                                                  fontSize: 14,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                          });
-                                    },
-                                    child: const FaIcon(
-                                      FontAwesomeIcons.ellipsisVertical,
-                                      size: 13,
-                                    ),
-                                  ),
+                                                    ),
+                                                  );
+                                                });
+                                          },
+                                          child: const FaIcon(
+                                            FontAwesomeIcons.ellipsisVertical,
+                                            size: 20,
+                                          ),
+                                        )
+                                      : Container(),
                                 ],
                               )
                             ],
@@ -387,13 +443,10 @@ class _DetailQuestionScreenState extends State<DetailQuestionScreen>
                       height: 10,
                     ),
                     if (detail != null)
-                      Text(
-                        detail.resultObj.content,
-                        style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                            fontFamily: 'Inter'),
+                      Html(
+                        data: state.data.questionResponse!.resultObj.content,
                       ),
+
                     const SizedBox(
                       height: 10,
                     ),
@@ -424,19 +477,13 @@ class _DetailQuestionScreenState extends State<DetailQuestionScreen>
                     _buildTextComposer(),
                     if (state.data.resultObjs != null)
                       for (var i = 0; i < state.data.resultObjs!.length; i++)
-                        CommentItem(
-                            subAnswer: state.data.resultObjs![i].subAnswer,
-                            size, (value) {
-                          _replyComment(value);
-                        },
-                            contentSubAnswer: _txtSubAnswer.text,
-                            answerId: state.data.resultObjs![i].id,
-                            image: state.data.resultObjs![i].userShort.image,
-                            userName:
-                                state.data.resultObjs![i].userShort.fullName,
-                            content: state.data.resultObjs![i].content,
-                            userId: state.data.resultObjs![i].authorId,
-                            time: state.data.resultObjs![i].createdAt),
+                        if (state.data.resultObjs![i].subAnswer != null)
+                          CommentItem(
+                            subId: widget.id!,
+                            item: state.data.resultObjs![i],
+                            size,
+                            userCurrent: idUser!,
+                          ),
                   ],
                 ),
               ),
@@ -483,10 +530,18 @@ class _DetailQuestionScreenState extends State<DetailQuestionScreen>
     );
   }
 
+  bool containsHtml(String input) {
+    final RegExp htmlRegex = RegExp(r'<[^>]*>');
+
+    return htmlRegex.hasMatch(input);
+  }
+
   Future<void> _handleSubmitted(String text) async {
     try {
       await context.read<DetailQuestionCubit>().createAnser(
-          questionId: widget.id!, content: _msgTextController.text);
+          questionId: widget.id!,
+          content: _msgTextController.text,
+          subId: widget.subId!);
 
       FocusScope.of(context).requestFocus(FocusNode());
 

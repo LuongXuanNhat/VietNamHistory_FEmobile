@@ -1,12 +1,12 @@
 class ListQuestionResponse {
-  final bool isSuccessed;
-  final String message;
-  final List<ResultObj> resultObj;
+  bool? isSuccessed;
+  String? message;
+  List<ResultObj>? resultObj;
 
   ListQuestionResponse({
-    required this.isSuccessed,
-    required this.message,
-    required this.resultObj,
+    this.isSuccessed,
+    this.message,
+    this.resultObj,
   });
 
   ListQuestionResponse copyWith({
@@ -31,7 +31,8 @@ class ListQuestionResponse {
   Map<String, dynamic> toJson() => {
         "isSuccessed": isSuccessed,
         "message": message,
-        "resultObj": List<dynamic>.from(resultObj.map((x) => x.toJson())),
+        if (resultObj != null)
+          "resultObj": List<dynamic>.from(resultObj!.map((x) => x.toJson())),
       };
 }
 

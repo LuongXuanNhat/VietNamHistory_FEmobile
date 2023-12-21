@@ -10,6 +10,8 @@ class MakeFeed extends StatefulWidget {
   final String content;
   final int numberView;
   final int numberComment;
+  final String questionId;
+  final int numberSave;
   final String image;
   final VoidCallback onTap;
   const MakeFeed(
@@ -20,7 +22,9 @@ class MakeFeed extends StatefulWidget {
       required this.image,
       required this.numberView,
       required this.numberComment,
-      required this.onTap});
+      required this.onTap,
+      required this.numberSave,
+      required this.questionId});
 
   @override
   State<MakeFeed> createState() => _MakeFeedState();
@@ -78,14 +82,6 @@ class _MakeFeedState extends State<MakeFeed> {
                     )
                   ],
                 ),
-                IconButton(
-                  icon: Icon(
-                    Icons.more_horiz,
-                    size: 30,
-                    color: Colors.grey[600],
-                  ),
-                  onPressed: () {},
-                )
               ],
             ),
             const SizedBox(
@@ -132,7 +128,10 @@ class _MakeFeedState extends State<MakeFeed> {
                 MakeCommentButton(
                   numberComment: widget.numberComment,
                 ),
-                const MakeSaveQuestion(),
+                MakeSaveQuestion(
+                  numberSave: widget.numberSave,
+                  questionId: widget.questionId,
+                ),
               ],
             ),
             Divider(

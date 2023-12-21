@@ -44,7 +44,7 @@ class DetailPostCubit extends Cubit<DetailPostState> {
         UIHelpers.showSnackBar(message: 'Xóa bài viết thành công');
         navigator!.pushNamedAndRemoveUntil(
             RouteGenerator.mainScreen,
-            arguments: {'currentIndex': 3},
+            arguments: {'currentIndex': 0},
             (context) => false);
       }
     } catch (e) {

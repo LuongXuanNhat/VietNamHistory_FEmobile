@@ -11,6 +11,9 @@ class DetailQuestionStateData with _$DetailQuestionStateData {
     @Default("disconnected") String signalRStatus,
     @Default(false) bool isOpenSubAnswer,
     @Default(1) int countAnswer,
+    VoteAnswerResponse? voteAnswerResponse,
+    VoteAnswerResponse? getMyVote,
+    @Default([]) List<VoteAnswerResponse> listVoteAnswerResponse,
   }) = _DetailQuestionStateData;
 }
 
@@ -43,4 +46,16 @@ class DetailQuestionState with _$DetailQuestionState {
   const factory DetailQuestionState.subanswers({
     required DetailQuestionStateData data,
   }) = SubAnswers;
+
+  const factory DetailQuestionState.voteAnswer({
+    required DetailQuestionStateData data,
+  }) = VoteAnswer;
+
+  const factory DetailQuestionState.getMyVote({
+    required DetailQuestionStateData data,
+  }) = GetMyVote;
+
+  const factory DetailQuestionState.listVoteAnswer({
+    required DetailQuestionStateData data,
+  }) = ListVoteAnswer;
 }

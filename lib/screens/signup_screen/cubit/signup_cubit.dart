@@ -8,6 +8,7 @@ import '../../../common/ui_helpers.dart';
 import '../../../get_it.dart';
 import '../../../models/user/request/login_request.dart';
 import '../../../models/user/request/register_request.dart';
+import '../../../models/user/user_pres.dart';
 import '../../../repositories/data_repository.dart';
 import '../../../route_generator.dart';
 
@@ -34,10 +35,18 @@ class SignupCubit extends Cubit<SignupState> {
       } else if (password.isEmpty) {
         emit(SignupState.getError(
             data: state.data!.copyWith(error: 'Mật khẩu không được để trống')));
-      } else if (password.length < 4) {
+      } else if (password.length < 6) {
         emit(SignupState.getError(
             data:
-                state.data!.copyWith(error: 'Mật khẩu phải lớn hơn 4 kí tự')));
+                state.data!.copyWith(error: 'Mật khẩu phải lớn hơn 6 kí tự')));
+      } else if (!containsUppercase(password) ||
+          !containsLowercase(password) ||
+          !hasDigit(password) ||
+          !hasSpecialChar(password)) {
+        emit(SignupState.getError(
+            data: state.data!.copyWith(
+                error:
+                    'Mật khẩu phải chứa ít nhất một ký tự hoa, một ký tự thường, một chữ số và một ký tự đặc biệt')));
       } else if (confirmPassword.isEmpty) {
         emit(SignupState.getError(
             data: state.data!
@@ -53,12 +62,12 @@ class SignupCubit extends Cubit<SignupState> {
           final requestLogin = LoginRequest(email: email, password: password);
           final responseLogin =
               await dataRepository.login(request: requestLogin);
-          if (responseLogin.isSuccess == true) {
+          if (responseLogin.isSuccessed == true) {
             emit(SignupState.getError(
                 data: state.data!.copyWith(error: 'Success')));
             await appPref.saveToken(tokenJson: responseLogin.toRawJson());
-            navigator!.pushNamedAndRemoveUntil(
-                RouteGenerator.mainScreen, (route) => false);
+            await UserPreferences.saveUserFromToken(
+                token: responseLogin.resultObj);
           } else {
             emit(SignupState.getError(
                 data:
@@ -68,8 +77,34 @@ class SignupCubit extends Cubit<SignupState> {
       }
     } catch (error) {
       debugPrint('Register Error: $error');
+      UIHelpers.showSnackBar(message: error.toString());
     } finally {
       UIHelpers.dismissLoading();
     }
+  }
+
+  void showPass(bool value) {
+    emit(SignupState.showPass(data: state.data!.copyWith(isShowPass: value)));
+  }
+
+  void showConfirmPass(bool value) {
+    emit(SignupState.showConfirmPass(
+        data: state.data!.copyWith(showConfirmPass: value)));
+  }
+
+  bool containsUppercase(String text) {
+    return text.contains(RegExp(r'[A-Z]'));
+  }
+
+  bool containsLowercase(String text) {
+    return text.contains(RegExp(r'[a-z]'));
+  }
+
+  bool hasDigit(String text) {
+    return text.contains(RegExp(r'[0-9]'));
+  }
+
+  bool hasSpecialChar(String text) {
+    return text.contains(RegExp(r'[!@#\$%^&*(),.?":{}|<>]'));
   }
 }

@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
 import '../../../common/storage/app_prefs.dart';
 import '../../../common/ui_helpers.dart';
 import '../../../get_it.dart';
@@ -35,28 +34,14 @@ class LoginCubitCubit extends Cubit<LoginCubitState> {
       } else {
         final request = LoginRequest(email: email, password: password);
         final response = await dataRepository.login(request: request);
-        if (response.isSuccess == true) {
+        log(response.toString());
+        if (response.isSuccessed == true) {
           emit(LoginCubitState.getError(
               data: state.data!.copyWith(error: 'Success')));
           await appPrefs.saveToken(tokenJson: response.toRawJson());
-          await UserPreferences.saveUserFromToken(token: response.token);
-          Map<String, dynamic> decodedToken =
-              JwtDecoder.decode(response.token!);
-          String email = decodedToken[
-              'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'];
-          String role = decodedToken[
-              'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
-          String name = decodedToken[
-              'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
-          String id = decodedToken[
-              'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
-
-          // Now you can use the extracted values as needed
-          log('Email: $email');
-          log('Role: $role');
-          log('Name: $name');
-          log('ID: $id');
+          await UserPreferences.saveUserFromToken(token: response.resultObj);
         } else {
+          UIHelpers.showSnackBar(message: response.message);
           emit(LoginCubitState.getError(
               data: state.data!.copyWith(error: response.message)));
         }

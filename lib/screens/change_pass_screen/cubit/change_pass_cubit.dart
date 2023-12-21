@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../common/ui_helpers.dart';
 import '../../../get_it.dart';
-import '../../../models/user/request/change_password_request.dart';
+import '../../../models/user/request/change_password_response.dart';
 import '../../../repositories/data_repository.dart';
 
 part 'change_pass_state.dart';

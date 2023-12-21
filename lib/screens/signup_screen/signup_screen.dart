@@ -51,7 +51,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       listener: (context, state) {
         if (state.data!.error != '') {
           if (state.data!.error.contains('Email') ||
-              state.data!.error.contains('Password')) {
+              state.data!.error.contains('Mật khẩu')) {
             UIHelpers.showSnackBar(
                 message: state.data!.error, type: SnackBarType.ERROR);
           } else {
@@ -59,25 +59,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
               _txtEmail.text = '';
               _txtPassword.text = '';
               _txtConfirmPassword.text = '';
+
+              navigator!.pushNamedAndRemoveUntil(
+                  RouteGenerator.mainScreen,
+                  arguments: {
+                    'currentIndex': 0,
+                  },
+                  (route) => false);
+              UIHelpers.showSnackBar(
+                  message: 'Đăng nhập thành công!', type: SnackBarType.ERROR);
             }
           }
         }
       },
       child: Scaffold(
         key: _globalKey,
-        appBar: AppBar(
-          leading: IconButton(
-            icon: const FaIcon(
-              FontAwesomeIcons.arrowLeft,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-          backgroundColor: Colors.white,
-          elevation: 0.0,
-        ),
         body: SingleChildScrollView(
           child: Center(
             child: Form(
@@ -90,7 +86,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const SizedBox(
-                      height: 130,
+                      height: 50,
                     ),
                     Text("Đăng ký tài khoản",
                         style: GlobalStyles.primaryFont(context)),
@@ -110,28 +106,49 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     const SizedBox(
                       height: 24.0,
                     ),
-                    CustomTextField(
-                      hintLabel: 'Nhập mật khẩu của bạn',
-                      controller: _txtPassword,
-                      isShowPass: false,
-                      isObscure: true,
-                      onPressedObscure: () {},
-                      prefixIcon: const Icon(Icons.lock_outline),
-                      suffixIcon: const Icon(Icons.remove_red_eye_outlined),
-                      isEnable: true,
+                    BlocBuilder<SignupCubit, SignupState>(
+                      builder: (context, state) {
+                        return CustomTextField(
+                          hintLabel: 'Nhập mật khẩu',
+                          controller: _txtPassword,
+                          isShowPass: state.data!.isShowPass,
+                          isObscure: true,
+                          onPressedObscure: () => _globalKey.currentContext!
+                              .read<SignupCubit>()
+                              .showPass(!state.data!.isShowPass),
+                          prefixIcon: const Icon(Icons.lock_outline),
+                          suffixIcon: GestureDetector(
+                              onTap: () => _globalKey.currentContext!
+                                  .read<SignupCubit>()
+                                  .showPass(!state.data!.isShowPass),
+                              child: const Icon(Icons.remove_red_eye_outlined)),
+                          isEnable: true,
+                        );
+                      },
                     ),
                     const SizedBox(
                       height: 24.0,
                     ),
-                    CustomTextField(
-                      hintLabel: 'Nhập lại mật khẩu của bạn',
-                      controller: _txtConfirmPassword,
-                      isShowPass: false,
-                      isObscure: true,
-                      onPressedObscure: () {},
-                      prefixIcon: const Icon(Icons.lock_outline),
-                      suffixIcon: const Icon(Icons.remove_red_eye_outlined),
-                      isEnable: true,
+                    BlocBuilder<SignupCubit, SignupState>(
+                      builder: (context, state) {
+                        return CustomTextField(
+                          hintLabel: 'Nhập lại mật khẩu',
+                          controller: _txtConfirmPassword,
+                          isShowPass: state.data!.showConfirmPass,
+                          isObscure: true,
+                          onPressedObscure: () => _globalKey.currentContext!
+                              .read<SignupCubit>()
+                              .showConfirmPass(!state.data!.showConfirmPass),
+                          prefixIcon: const Icon(Icons.lock_outline),
+                          suffixIcon: GestureDetector(
+                              onTap: () => _globalKey.currentContext!
+                                  .read<SignupCubit>()
+                                  .showConfirmPass(
+                                      !state.data!.showConfirmPass),
+                              child: const Icon(Icons.remove_red_eye_outlined)),
+                          isEnable: true,
+                        );
+                      },
                     ),
 
                     const SizedBox(
@@ -162,6 +179,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                           ),
                           onPressed: () {
+                            FocusManager.instance.primaryFocus?.unfocus();
                             final email = _txtEmail.text.trim();
                             final password = _txtPassword.text.trim();
                             final confirmPass = _txtConfirmPassword.text.trim();
@@ -184,7 +202,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       children: [
                         Container(
                           height: 1,
-                          width: 144,
+                          width: 100,
                           color: Colors.black54,
                         ),
                         const SizedBox(
@@ -196,7 +214,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         Container(
                           height: 1,
-                          width: 144,
+                          width: 100,
                           color: Colors.black54,
                         ),
                       ],
@@ -251,7 +269,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         TextButton(
                             onPressed: () => navigator!
-                                .pushNamed(RouteGenerator.registerScreen),
+                                .pushNamed(RouteGenerator.loginScreen),
                             child: const Text(
                               'Đăng nhập',
                               style: TextStyle(

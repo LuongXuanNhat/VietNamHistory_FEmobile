@@ -25,6 +25,11 @@ mixin _$DetailQuestionStateData {
   String get signalRStatus => throw _privateConstructorUsedError;
   bool get isOpenSubAnswer => throw _privateConstructorUsedError;
   int get countAnswer => throw _privateConstructorUsedError;
+  VoteAnswerResponse? get voteAnswerResponse =>
+      throw _privateConstructorUsedError;
+  VoteAnswerResponse? get getMyVote => throw _privateConstructorUsedError;
+  List<VoteAnswerResponse> get listVoteAnswerResponse =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DetailQuestionStateDataCopyWith<DetailQuestionStateData> get copyWith =>
@@ -45,7 +50,10 @@ abstract class $DetailQuestionStateDataCopyWith<$Res> {
       List<SubAnswer>? sub_answers,
       String signalRStatus,
       bool isOpenSubAnswer,
-      int countAnswer});
+      int countAnswer,
+      VoteAnswerResponse? voteAnswerResponse,
+      VoteAnswerResponse? getMyVote,
+      List<VoteAnswerResponse> listVoteAnswerResponse});
 }
 
 /// @nodoc
@@ -70,6 +78,9 @@ class _$DetailQuestionStateDataCopyWithImpl<$Res,
     Object? signalRStatus = null,
     Object? isOpenSubAnswer = null,
     Object? countAnswer = null,
+    Object? voteAnswerResponse = freezed,
+    Object? getMyVote = freezed,
+    Object? listVoteAnswerResponse = null,
   }) {
     return _then(_value.copyWith(
       error: null == error
@@ -104,6 +115,18 @@ class _$DetailQuestionStateDataCopyWithImpl<$Res,
           ? _value.countAnswer
           : countAnswer // ignore: cast_nullable_to_non_nullable
               as int,
+      voteAnswerResponse: freezed == voteAnswerResponse
+          ? _value.voteAnswerResponse
+          : voteAnswerResponse // ignore: cast_nullable_to_non_nullable
+              as VoteAnswerResponse?,
+      getMyVote: freezed == getMyVote
+          ? _value.getMyVote
+          : getMyVote // ignore: cast_nullable_to_non_nullable
+              as VoteAnswerResponse?,
+      listVoteAnswerResponse: null == listVoteAnswerResponse
+          ? _value.listVoteAnswerResponse
+          : listVoteAnswerResponse // ignore: cast_nullable_to_non_nullable
+              as List<VoteAnswerResponse>,
     ) as $Val);
   }
 }
@@ -125,7 +148,10 @@ abstract class _$$DetailQuestionStateDataImplCopyWith<$Res>
       List<SubAnswer>? sub_answers,
       String signalRStatus,
       bool isOpenSubAnswer,
-      int countAnswer});
+      int countAnswer,
+      VoteAnswerResponse? voteAnswerResponse,
+      VoteAnswerResponse? getMyVote,
+      List<VoteAnswerResponse> listVoteAnswerResponse});
 }
 
 /// @nodoc
@@ -149,6 +175,9 @@ class __$$DetailQuestionStateDataImplCopyWithImpl<$Res>
     Object? signalRStatus = null,
     Object? isOpenSubAnswer = null,
     Object? countAnswer = null,
+    Object? voteAnswerResponse = freezed,
+    Object? getMyVote = freezed,
+    Object? listVoteAnswerResponse = null,
   }) {
     return _then(_$DetailQuestionStateDataImpl(
       error: null == error
@@ -183,6 +212,18 @@ class __$$DetailQuestionStateDataImplCopyWithImpl<$Res>
           ? _value.countAnswer
           : countAnswer // ignore: cast_nullable_to_non_nullable
               as int,
+      voteAnswerResponse: freezed == voteAnswerResponse
+          ? _value.voteAnswerResponse
+          : voteAnswerResponse // ignore: cast_nullable_to_non_nullable
+              as VoteAnswerResponse?,
+      getMyVote: freezed == getMyVote
+          ? _value.getMyVote
+          : getMyVote // ignore: cast_nullable_to_non_nullable
+              as VoteAnswerResponse?,
+      listVoteAnswerResponse: null == listVoteAnswerResponse
+          ? _value._listVoteAnswerResponse
+          : listVoteAnswerResponse // ignore: cast_nullable_to_non_nullable
+              as List<VoteAnswerResponse>,
     ));
   }
 }
@@ -198,9 +239,13 @@ class _$DetailQuestionStateDataImpl implements _DetailQuestionStateData {
       final List<SubAnswer>? sub_answers,
       this.signalRStatus = "disconnected",
       this.isOpenSubAnswer = false,
-      this.countAnswer = 1})
+      this.countAnswer = 1,
+      this.voteAnswerResponse,
+      this.getMyVote,
+      final List<VoteAnswerResponse> listVoteAnswerResponse = const []})
       : _resultObjs = resultObjs,
-        _sub_answers = sub_answers;
+        _sub_answers = sub_answers,
+        _listVoteAnswerResponse = listVoteAnswerResponse;
 
   @override
   @JsonKey()
@@ -238,10 +283,23 @@ class _$DetailQuestionStateDataImpl implements _DetailQuestionStateData {
   @override
   @JsonKey()
   final int countAnswer;
+  @override
+  final VoteAnswerResponse? voteAnswerResponse;
+  @override
+  final VoteAnswerResponse? getMyVote;
+  final List<VoteAnswerResponse> _listVoteAnswerResponse;
+  @override
+  @JsonKey()
+  List<VoteAnswerResponse> get listVoteAnswerResponse {
+    if (_listVoteAnswerResponse is EqualUnmodifiableListView)
+      return _listVoteAnswerResponse;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_listVoteAnswerResponse);
+  }
 
   @override
   String toString() {
-    return 'DetailQuestionStateData(error: $error, questionResponse: $questionResponse, listAnswerResponse: $listAnswerResponse, resultObjs: $resultObjs, sub_answers: $sub_answers, signalRStatus: $signalRStatus, isOpenSubAnswer: $isOpenSubAnswer, countAnswer: $countAnswer)';
+    return 'DetailQuestionStateData(error: $error, questionResponse: $questionResponse, listAnswerResponse: $listAnswerResponse, resultObjs: $resultObjs, sub_answers: $sub_answers, signalRStatus: $signalRStatus, isOpenSubAnswer: $isOpenSubAnswer, countAnswer: $countAnswer, voteAnswerResponse: $voteAnswerResponse, getMyVote: $getMyVote, listVoteAnswerResponse: $listVoteAnswerResponse)';
   }
 
   @override
@@ -263,7 +321,13 @@ class _$DetailQuestionStateDataImpl implements _DetailQuestionStateData {
             (identical(other.isOpenSubAnswer, isOpenSubAnswer) ||
                 other.isOpenSubAnswer == isOpenSubAnswer) &&
             (identical(other.countAnswer, countAnswer) ||
-                other.countAnswer == countAnswer));
+                other.countAnswer == countAnswer) &&
+            (identical(other.voteAnswerResponse, voteAnswerResponse) ||
+                other.voteAnswerResponse == voteAnswerResponse) &&
+            (identical(other.getMyVote, getMyVote) ||
+                other.getMyVote == getMyVote) &&
+            const DeepCollectionEquality().equals(
+                other._listVoteAnswerResponse, _listVoteAnswerResponse));
   }
 
   @override
@@ -276,7 +340,10 @@ class _$DetailQuestionStateDataImpl implements _DetailQuestionStateData {
       const DeepCollectionEquality().hash(_sub_answers),
       signalRStatus,
       isOpenSubAnswer,
-      countAnswer);
+      countAnswer,
+      voteAnswerResponse,
+      getMyVote,
+      const DeepCollectionEquality().hash(_listVoteAnswerResponse));
 
   @JsonKey(ignore: true)
   @override
@@ -288,14 +355,18 @@ class _$DetailQuestionStateDataImpl implements _DetailQuestionStateData {
 
 abstract class _DetailQuestionStateData implements DetailQuestionStateData {
   const factory _DetailQuestionStateData(
-      {final String error,
-      final QuestionResponse? questionResponse,
-      final ListAnswerResponse? listAnswerResponse,
-      final List<ResultObjs>? resultObjs,
-      final List<SubAnswer>? sub_answers,
-      final String signalRStatus,
-      final bool isOpenSubAnswer,
-      final int countAnswer}) = _$DetailQuestionStateDataImpl;
+          {final String error,
+          final QuestionResponse? questionResponse,
+          final ListAnswerResponse? listAnswerResponse,
+          final List<ResultObjs>? resultObjs,
+          final List<SubAnswer>? sub_answers,
+          final String signalRStatus,
+          final bool isOpenSubAnswer,
+          final int countAnswer,
+          final VoteAnswerResponse? voteAnswerResponse,
+          final VoteAnswerResponse? getMyVote,
+          final List<VoteAnswerResponse> listVoteAnswerResponse}) =
+      _$DetailQuestionStateDataImpl;
 
   @override
   String get error;
@@ -313,6 +384,12 @@ abstract class _DetailQuestionStateData implements DetailQuestionStateData {
   bool get isOpenSubAnswer;
   @override
   int get countAnswer;
+  @override
+  VoteAnswerResponse? get voteAnswerResponse;
+  @override
+  VoteAnswerResponse? get getMyVote;
+  @override
+  List<VoteAnswerResponse> get listVoteAnswerResponse;
   @override
   @JsonKey(ignore: true)
   _$$DetailQuestionStateDataImplCopyWith<_$DetailQuestionStateDataImpl>
@@ -334,6 +411,9 @@ mixin _$DetailQuestionState {
     required TResult Function(DetailQuestionStateData data) signalRStatus,
     required TResult Function(DetailQuestionStateData data) openSubAnswer,
     required TResult Function(DetailQuestionStateData data) subanswers,
+    required TResult Function(DetailQuestionStateData data) voteAnswer,
+    required TResult Function(DetailQuestionStateData data) getMyVote,
+    required TResult Function(DetailQuestionStateData data) listVoteAnswer,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -348,6 +428,9 @@ mixin _$DetailQuestionState {
     TResult? Function(DetailQuestionStateData data)? signalRStatus,
     TResult? Function(DetailQuestionStateData data)? openSubAnswer,
     TResult? Function(DetailQuestionStateData data)? subanswers,
+    TResult? Function(DetailQuestionStateData data)? voteAnswer,
+    TResult? Function(DetailQuestionStateData data)? getMyVote,
+    TResult? Function(DetailQuestionStateData data)? listVoteAnswer,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -362,6 +445,9 @@ mixin _$DetailQuestionState {
     TResult Function(DetailQuestionStateData data)? signalRStatus,
     TResult Function(DetailQuestionStateData data)? openSubAnswer,
     TResult Function(DetailQuestionStateData data)? subanswers,
+    TResult Function(DetailQuestionStateData data)? voteAnswer,
+    TResult Function(DetailQuestionStateData data)? getMyVote,
+    TResult Function(DetailQuestionStateData data)? listVoteAnswer,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -377,6 +463,9 @@ mixin _$DetailQuestionState {
     required TResult Function(SignalRStatus value) signalRStatus,
     required TResult Function(OpenSubAnswer value) openSubAnswer,
     required TResult Function(SubAnswers value) subanswers,
+    required TResult Function(VoteAnswer value) voteAnswer,
+    required TResult Function(GetMyVote value) getMyVote,
+    required TResult Function(ListVoteAnswer value) listVoteAnswer,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -391,6 +480,9 @@ mixin _$DetailQuestionState {
     TResult? Function(SignalRStatus value)? signalRStatus,
     TResult? Function(OpenSubAnswer value)? openSubAnswer,
     TResult? Function(SubAnswers value)? subanswers,
+    TResult? Function(VoteAnswer value)? voteAnswer,
+    TResult? Function(GetMyVote value)? getMyVote,
+    TResult? Function(ListVoteAnswer value)? listVoteAnswer,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -405,6 +497,9 @@ mixin _$DetailQuestionState {
     TResult Function(SignalRStatus value)? signalRStatus,
     TResult Function(OpenSubAnswer value)? openSubAnswer,
     TResult Function(SubAnswers value)? subanswers,
+    TResult Function(VoteAnswer value)? voteAnswer,
+    TResult Function(GetMyVote value)? getMyVote,
+    TResult Function(ListVoteAnswer value)? listVoteAnswer,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -536,6 +631,9 @@ class _$InitialImpl implements Initial {
     required TResult Function(DetailQuestionStateData data) signalRStatus,
     required TResult Function(DetailQuestionStateData data) openSubAnswer,
     required TResult Function(DetailQuestionStateData data) subanswers,
+    required TResult Function(DetailQuestionStateData data) voteAnswer,
+    required TResult Function(DetailQuestionStateData data) getMyVote,
+    required TResult Function(DetailQuestionStateData data) listVoteAnswer,
   }) {
     return initial(data);
   }
@@ -553,6 +651,9 @@ class _$InitialImpl implements Initial {
     TResult? Function(DetailQuestionStateData data)? signalRStatus,
     TResult? Function(DetailQuestionStateData data)? openSubAnswer,
     TResult? Function(DetailQuestionStateData data)? subanswers,
+    TResult? Function(DetailQuestionStateData data)? voteAnswer,
+    TResult? Function(DetailQuestionStateData data)? getMyVote,
+    TResult? Function(DetailQuestionStateData data)? listVoteAnswer,
   }) {
     return initial?.call(data);
   }
@@ -570,6 +671,9 @@ class _$InitialImpl implements Initial {
     TResult Function(DetailQuestionStateData data)? signalRStatus,
     TResult Function(DetailQuestionStateData data)? openSubAnswer,
     TResult Function(DetailQuestionStateData data)? subanswers,
+    TResult Function(DetailQuestionStateData data)? voteAnswer,
+    TResult Function(DetailQuestionStateData data)? getMyVote,
+    TResult Function(DetailQuestionStateData data)? listVoteAnswer,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -591,6 +695,9 @@ class _$InitialImpl implements Initial {
     required TResult Function(SignalRStatus value) signalRStatus,
     required TResult Function(OpenSubAnswer value) openSubAnswer,
     required TResult Function(SubAnswers value) subanswers,
+    required TResult Function(VoteAnswer value) voteAnswer,
+    required TResult Function(GetMyVote value) getMyVote,
+    required TResult Function(ListVoteAnswer value) listVoteAnswer,
   }) {
     return initial(this);
   }
@@ -608,6 +715,9 @@ class _$InitialImpl implements Initial {
     TResult? Function(SignalRStatus value)? signalRStatus,
     TResult? Function(OpenSubAnswer value)? openSubAnswer,
     TResult? Function(SubAnswers value)? subanswers,
+    TResult? Function(VoteAnswer value)? voteAnswer,
+    TResult? Function(GetMyVote value)? getMyVote,
+    TResult? Function(ListVoteAnswer value)? listVoteAnswer,
   }) {
     return initial?.call(this);
   }
@@ -625,6 +735,9 @@ class _$InitialImpl implements Initial {
     TResult Function(SignalRStatus value)? signalRStatus,
     TResult Function(OpenSubAnswer value)? openSubAnswer,
     TResult Function(SubAnswers value)? subanswers,
+    TResult Function(VoteAnswer value)? voteAnswer,
+    TResult Function(GetMyVote value)? getMyVote,
+    TResult Function(ListVoteAnswer value)? listVoteAnswer,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -725,6 +838,9 @@ class _$LoadingImpl implements Loading {
     required TResult Function(DetailQuestionStateData data) signalRStatus,
     required TResult Function(DetailQuestionStateData data) openSubAnswer,
     required TResult Function(DetailQuestionStateData data) subanswers,
+    required TResult Function(DetailQuestionStateData data) voteAnswer,
+    required TResult Function(DetailQuestionStateData data) getMyVote,
+    required TResult Function(DetailQuestionStateData data) listVoteAnswer,
   }) {
     return loading(data);
   }
@@ -742,6 +858,9 @@ class _$LoadingImpl implements Loading {
     TResult? Function(DetailQuestionStateData data)? signalRStatus,
     TResult? Function(DetailQuestionStateData data)? openSubAnswer,
     TResult? Function(DetailQuestionStateData data)? subanswers,
+    TResult? Function(DetailQuestionStateData data)? voteAnswer,
+    TResult? Function(DetailQuestionStateData data)? getMyVote,
+    TResult? Function(DetailQuestionStateData data)? listVoteAnswer,
   }) {
     return loading?.call(data);
   }
@@ -759,6 +878,9 @@ class _$LoadingImpl implements Loading {
     TResult Function(DetailQuestionStateData data)? signalRStatus,
     TResult Function(DetailQuestionStateData data)? openSubAnswer,
     TResult Function(DetailQuestionStateData data)? subanswers,
+    TResult Function(DetailQuestionStateData data)? voteAnswer,
+    TResult Function(DetailQuestionStateData data)? getMyVote,
+    TResult Function(DetailQuestionStateData data)? listVoteAnswer,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -780,6 +902,9 @@ class _$LoadingImpl implements Loading {
     required TResult Function(SignalRStatus value) signalRStatus,
     required TResult Function(OpenSubAnswer value) openSubAnswer,
     required TResult Function(SubAnswers value) subanswers,
+    required TResult Function(VoteAnswer value) voteAnswer,
+    required TResult Function(GetMyVote value) getMyVote,
+    required TResult Function(ListVoteAnswer value) listVoteAnswer,
   }) {
     return loading(this);
   }
@@ -797,6 +922,9 @@ class _$LoadingImpl implements Loading {
     TResult? Function(SignalRStatus value)? signalRStatus,
     TResult? Function(OpenSubAnswer value)? openSubAnswer,
     TResult? Function(SubAnswers value)? subanswers,
+    TResult? Function(VoteAnswer value)? voteAnswer,
+    TResult? Function(GetMyVote value)? getMyVote,
+    TResult? Function(ListVoteAnswer value)? listVoteAnswer,
   }) {
     return loading?.call(this);
   }
@@ -814,6 +942,9 @@ class _$LoadingImpl implements Loading {
     TResult Function(SignalRStatus value)? signalRStatus,
     TResult Function(OpenSubAnswer value)? openSubAnswer,
     TResult Function(SubAnswers value)? subanswers,
+    TResult Function(VoteAnswer value)? voteAnswer,
+    TResult Function(GetMyVote value)? getMyVote,
+    TResult Function(ListVoteAnswer value)? listVoteAnswer,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -914,6 +1045,9 @@ class _$LoadedImpl implements Loaded {
     required TResult Function(DetailQuestionStateData data) signalRStatus,
     required TResult Function(DetailQuestionStateData data) openSubAnswer,
     required TResult Function(DetailQuestionStateData data) subanswers,
+    required TResult Function(DetailQuestionStateData data) voteAnswer,
+    required TResult Function(DetailQuestionStateData data) getMyVote,
+    required TResult Function(DetailQuestionStateData data) listVoteAnswer,
   }) {
     return loaded(data);
   }
@@ -931,6 +1065,9 @@ class _$LoadedImpl implements Loaded {
     TResult? Function(DetailQuestionStateData data)? signalRStatus,
     TResult? Function(DetailQuestionStateData data)? openSubAnswer,
     TResult? Function(DetailQuestionStateData data)? subanswers,
+    TResult? Function(DetailQuestionStateData data)? voteAnswer,
+    TResult? Function(DetailQuestionStateData data)? getMyVote,
+    TResult? Function(DetailQuestionStateData data)? listVoteAnswer,
   }) {
     return loaded?.call(data);
   }
@@ -948,6 +1085,9 @@ class _$LoadedImpl implements Loaded {
     TResult Function(DetailQuestionStateData data)? signalRStatus,
     TResult Function(DetailQuestionStateData data)? openSubAnswer,
     TResult Function(DetailQuestionStateData data)? subanswers,
+    TResult Function(DetailQuestionStateData data)? voteAnswer,
+    TResult Function(DetailQuestionStateData data)? getMyVote,
+    TResult Function(DetailQuestionStateData data)? listVoteAnswer,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -969,6 +1109,9 @@ class _$LoadedImpl implements Loaded {
     required TResult Function(SignalRStatus value) signalRStatus,
     required TResult Function(OpenSubAnswer value) openSubAnswer,
     required TResult Function(SubAnswers value) subanswers,
+    required TResult Function(VoteAnswer value) voteAnswer,
+    required TResult Function(GetMyVote value) getMyVote,
+    required TResult Function(ListVoteAnswer value) listVoteAnswer,
   }) {
     return loaded(this);
   }
@@ -986,6 +1129,9 @@ class _$LoadedImpl implements Loaded {
     TResult? Function(SignalRStatus value)? signalRStatus,
     TResult? Function(OpenSubAnswer value)? openSubAnswer,
     TResult? Function(SubAnswers value)? subanswers,
+    TResult? Function(VoteAnswer value)? voteAnswer,
+    TResult? Function(GetMyVote value)? getMyVote,
+    TResult? Function(ListVoteAnswer value)? listVoteAnswer,
   }) {
     return loaded?.call(this);
   }
@@ -1003,6 +1149,9 @@ class _$LoadedImpl implements Loaded {
     TResult Function(SignalRStatus value)? signalRStatus,
     TResult Function(OpenSubAnswer value)? openSubAnswer,
     TResult Function(SubAnswers value)? subanswers,
+    TResult Function(VoteAnswer value)? voteAnswer,
+    TResult Function(GetMyVote value)? getMyVote,
+    TResult Function(ListVoteAnswer value)? listVoteAnswer,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -1103,6 +1252,9 @@ class _$ErrorImpl implements Error {
     required TResult Function(DetailQuestionStateData data) signalRStatus,
     required TResult Function(DetailQuestionStateData data) openSubAnswer,
     required TResult Function(DetailQuestionStateData data) subanswers,
+    required TResult Function(DetailQuestionStateData data) voteAnswer,
+    required TResult Function(DetailQuestionStateData data) getMyVote,
+    required TResult Function(DetailQuestionStateData data) listVoteAnswer,
   }) {
     return error(data);
   }
@@ -1120,6 +1272,9 @@ class _$ErrorImpl implements Error {
     TResult? Function(DetailQuestionStateData data)? signalRStatus,
     TResult? Function(DetailQuestionStateData data)? openSubAnswer,
     TResult? Function(DetailQuestionStateData data)? subanswers,
+    TResult? Function(DetailQuestionStateData data)? voteAnswer,
+    TResult? Function(DetailQuestionStateData data)? getMyVote,
+    TResult? Function(DetailQuestionStateData data)? listVoteAnswer,
   }) {
     return error?.call(data);
   }
@@ -1137,6 +1292,9 @@ class _$ErrorImpl implements Error {
     TResult Function(DetailQuestionStateData data)? signalRStatus,
     TResult Function(DetailQuestionStateData data)? openSubAnswer,
     TResult Function(DetailQuestionStateData data)? subanswers,
+    TResult Function(DetailQuestionStateData data)? voteAnswer,
+    TResult Function(DetailQuestionStateData data)? getMyVote,
+    TResult Function(DetailQuestionStateData data)? listVoteAnswer,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -1158,6 +1316,9 @@ class _$ErrorImpl implements Error {
     required TResult Function(SignalRStatus value) signalRStatus,
     required TResult Function(OpenSubAnswer value) openSubAnswer,
     required TResult Function(SubAnswers value) subanswers,
+    required TResult Function(VoteAnswer value) voteAnswer,
+    required TResult Function(GetMyVote value) getMyVote,
+    required TResult Function(ListVoteAnswer value) listVoteAnswer,
   }) {
     return error(this);
   }
@@ -1175,6 +1336,9 @@ class _$ErrorImpl implements Error {
     TResult? Function(SignalRStatus value)? signalRStatus,
     TResult? Function(OpenSubAnswer value)? openSubAnswer,
     TResult? Function(SubAnswers value)? subanswers,
+    TResult? Function(VoteAnswer value)? voteAnswer,
+    TResult? Function(GetMyVote value)? getMyVote,
+    TResult? Function(ListVoteAnswer value)? listVoteAnswer,
   }) {
     return error?.call(this);
   }
@@ -1192,6 +1356,9 @@ class _$ErrorImpl implements Error {
     TResult Function(SignalRStatus value)? signalRStatus,
     TResult Function(OpenSubAnswer value)? openSubAnswer,
     TResult Function(SubAnswers value)? subanswers,
+    TResult Function(VoteAnswer value)? voteAnswer,
+    TResult Function(GetMyVote value)? getMyVote,
+    TResult Function(ListVoteAnswer value)? listVoteAnswer,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -1292,6 +1459,9 @@ class _$AnswerImpl implements Answer {
     required TResult Function(DetailQuestionStateData data) signalRStatus,
     required TResult Function(DetailQuestionStateData data) openSubAnswer,
     required TResult Function(DetailQuestionStateData data) subanswers,
+    required TResult Function(DetailQuestionStateData data) voteAnswer,
+    required TResult Function(DetailQuestionStateData data) getMyVote,
+    required TResult Function(DetailQuestionStateData data) listVoteAnswer,
   }) {
     return answer(data);
   }
@@ -1309,6 +1479,9 @@ class _$AnswerImpl implements Answer {
     TResult? Function(DetailQuestionStateData data)? signalRStatus,
     TResult? Function(DetailQuestionStateData data)? openSubAnswer,
     TResult? Function(DetailQuestionStateData data)? subanswers,
+    TResult? Function(DetailQuestionStateData data)? voteAnswer,
+    TResult? Function(DetailQuestionStateData data)? getMyVote,
+    TResult? Function(DetailQuestionStateData data)? listVoteAnswer,
   }) {
     return answer?.call(data);
   }
@@ -1326,6 +1499,9 @@ class _$AnswerImpl implements Answer {
     TResult Function(DetailQuestionStateData data)? signalRStatus,
     TResult Function(DetailQuestionStateData data)? openSubAnswer,
     TResult Function(DetailQuestionStateData data)? subanswers,
+    TResult Function(DetailQuestionStateData data)? voteAnswer,
+    TResult Function(DetailQuestionStateData data)? getMyVote,
+    TResult Function(DetailQuestionStateData data)? listVoteAnswer,
     required TResult orElse(),
   }) {
     if (answer != null) {
@@ -1347,6 +1523,9 @@ class _$AnswerImpl implements Answer {
     required TResult Function(SignalRStatus value) signalRStatus,
     required TResult Function(OpenSubAnswer value) openSubAnswer,
     required TResult Function(SubAnswers value) subanswers,
+    required TResult Function(VoteAnswer value) voteAnswer,
+    required TResult Function(GetMyVote value) getMyVote,
+    required TResult Function(ListVoteAnswer value) listVoteAnswer,
   }) {
     return answer(this);
   }
@@ -1364,6 +1543,9 @@ class _$AnswerImpl implements Answer {
     TResult? Function(SignalRStatus value)? signalRStatus,
     TResult? Function(OpenSubAnswer value)? openSubAnswer,
     TResult? Function(SubAnswers value)? subanswers,
+    TResult? Function(VoteAnswer value)? voteAnswer,
+    TResult? Function(GetMyVote value)? getMyVote,
+    TResult? Function(ListVoteAnswer value)? listVoteAnswer,
   }) {
     return answer?.call(this);
   }
@@ -1381,6 +1563,9 @@ class _$AnswerImpl implements Answer {
     TResult Function(SignalRStatus value)? signalRStatus,
     TResult Function(OpenSubAnswer value)? openSubAnswer,
     TResult Function(SubAnswers value)? subanswers,
+    TResult Function(VoteAnswer value)? voteAnswer,
+    TResult Function(GetMyVote value)? getMyVote,
+    TResult Function(ListVoteAnswer value)? listVoteAnswer,
     required TResult orElse(),
   }) {
     if (answer != null) {
@@ -1481,6 +1666,9 @@ class _$AnsweredImpl implements Answered {
     required TResult Function(DetailQuestionStateData data) signalRStatus,
     required TResult Function(DetailQuestionStateData data) openSubAnswer,
     required TResult Function(DetailQuestionStateData data) subanswers,
+    required TResult Function(DetailQuestionStateData data) voteAnswer,
+    required TResult Function(DetailQuestionStateData data) getMyVote,
+    required TResult Function(DetailQuestionStateData data) listVoteAnswer,
   }) {
     return answered(data);
   }
@@ -1498,6 +1686,9 @@ class _$AnsweredImpl implements Answered {
     TResult? Function(DetailQuestionStateData data)? signalRStatus,
     TResult? Function(DetailQuestionStateData data)? openSubAnswer,
     TResult? Function(DetailQuestionStateData data)? subanswers,
+    TResult? Function(DetailQuestionStateData data)? voteAnswer,
+    TResult? Function(DetailQuestionStateData data)? getMyVote,
+    TResult? Function(DetailQuestionStateData data)? listVoteAnswer,
   }) {
     return answered?.call(data);
   }
@@ -1515,6 +1706,9 @@ class _$AnsweredImpl implements Answered {
     TResult Function(DetailQuestionStateData data)? signalRStatus,
     TResult Function(DetailQuestionStateData data)? openSubAnswer,
     TResult Function(DetailQuestionStateData data)? subanswers,
+    TResult Function(DetailQuestionStateData data)? voteAnswer,
+    TResult Function(DetailQuestionStateData data)? getMyVote,
+    TResult Function(DetailQuestionStateData data)? listVoteAnswer,
     required TResult orElse(),
   }) {
     if (answered != null) {
@@ -1536,6 +1730,9 @@ class _$AnsweredImpl implements Answered {
     required TResult Function(SignalRStatus value) signalRStatus,
     required TResult Function(OpenSubAnswer value) openSubAnswer,
     required TResult Function(SubAnswers value) subanswers,
+    required TResult Function(VoteAnswer value) voteAnswer,
+    required TResult Function(GetMyVote value) getMyVote,
+    required TResult Function(ListVoteAnswer value) listVoteAnswer,
   }) {
     return answered(this);
   }
@@ -1553,6 +1750,9 @@ class _$AnsweredImpl implements Answered {
     TResult? Function(SignalRStatus value)? signalRStatus,
     TResult? Function(OpenSubAnswer value)? openSubAnswer,
     TResult? Function(SubAnswers value)? subanswers,
+    TResult? Function(VoteAnswer value)? voteAnswer,
+    TResult? Function(GetMyVote value)? getMyVote,
+    TResult? Function(ListVoteAnswer value)? listVoteAnswer,
   }) {
     return answered?.call(this);
   }
@@ -1570,6 +1770,9 @@ class _$AnsweredImpl implements Answered {
     TResult Function(SignalRStatus value)? signalRStatus,
     TResult Function(OpenSubAnswer value)? openSubAnswer,
     TResult Function(SubAnswers value)? subanswers,
+    TResult Function(VoteAnswer value)? voteAnswer,
+    TResult Function(GetMyVote value)? getMyVote,
+    TResult Function(ListVoteAnswer value)? listVoteAnswer,
     required TResult orElse(),
   }) {
     if (answered != null) {
@@ -1670,6 +1873,9 @@ class _$CountAnswerImpl implements CountAnswer {
     required TResult Function(DetailQuestionStateData data) signalRStatus,
     required TResult Function(DetailQuestionStateData data) openSubAnswer,
     required TResult Function(DetailQuestionStateData data) subanswers,
+    required TResult Function(DetailQuestionStateData data) voteAnswer,
+    required TResult Function(DetailQuestionStateData data) getMyVote,
+    required TResult Function(DetailQuestionStateData data) listVoteAnswer,
   }) {
     return countAnswer(data);
   }
@@ -1687,6 +1893,9 @@ class _$CountAnswerImpl implements CountAnswer {
     TResult? Function(DetailQuestionStateData data)? signalRStatus,
     TResult? Function(DetailQuestionStateData data)? openSubAnswer,
     TResult? Function(DetailQuestionStateData data)? subanswers,
+    TResult? Function(DetailQuestionStateData data)? voteAnswer,
+    TResult? Function(DetailQuestionStateData data)? getMyVote,
+    TResult? Function(DetailQuestionStateData data)? listVoteAnswer,
   }) {
     return countAnswer?.call(data);
   }
@@ -1704,6 +1913,9 @@ class _$CountAnswerImpl implements CountAnswer {
     TResult Function(DetailQuestionStateData data)? signalRStatus,
     TResult Function(DetailQuestionStateData data)? openSubAnswer,
     TResult Function(DetailQuestionStateData data)? subanswers,
+    TResult Function(DetailQuestionStateData data)? voteAnswer,
+    TResult Function(DetailQuestionStateData data)? getMyVote,
+    TResult Function(DetailQuestionStateData data)? listVoteAnswer,
     required TResult orElse(),
   }) {
     if (countAnswer != null) {
@@ -1725,6 +1937,9 @@ class _$CountAnswerImpl implements CountAnswer {
     required TResult Function(SignalRStatus value) signalRStatus,
     required TResult Function(OpenSubAnswer value) openSubAnswer,
     required TResult Function(SubAnswers value) subanswers,
+    required TResult Function(VoteAnswer value) voteAnswer,
+    required TResult Function(GetMyVote value) getMyVote,
+    required TResult Function(ListVoteAnswer value) listVoteAnswer,
   }) {
     return countAnswer(this);
   }
@@ -1742,6 +1957,9 @@ class _$CountAnswerImpl implements CountAnswer {
     TResult? Function(SignalRStatus value)? signalRStatus,
     TResult? Function(OpenSubAnswer value)? openSubAnswer,
     TResult? Function(SubAnswers value)? subanswers,
+    TResult? Function(VoteAnswer value)? voteAnswer,
+    TResult? Function(GetMyVote value)? getMyVote,
+    TResult? Function(ListVoteAnswer value)? listVoteAnswer,
   }) {
     return countAnswer?.call(this);
   }
@@ -1759,6 +1977,9 @@ class _$CountAnswerImpl implements CountAnswer {
     TResult Function(SignalRStatus value)? signalRStatus,
     TResult Function(OpenSubAnswer value)? openSubAnswer,
     TResult Function(SubAnswers value)? subanswers,
+    TResult Function(VoteAnswer value)? voteAnswer,
+    TResult Function(GetMyVote value)? getMyVote,
+    TResult Function(ListVoteAnswer value)? listVoteAnswer,
     required TResult orElse(),
   }) {
     if (countAnswer != null) {
@@ -1859,6 +2080,9 @@ class _$SignalRStatusImpl implements SignalRStatus {
     required TResult Function(DetailQuestionStateData data) signalRStatus,
     required TResult Function(DetailQuestionStateData data) openSubAnswer,
     required TResult Function(DetailQuestionStateData data) subanswers,
+    required TResult Function(DetailQuestionStateData data) voteAnswer,
+    required TResult Function(DetailQuestionStateData data) getMyVote,
+    required TResult Function(DetailQuestionStateData data) listVoteAnswer,
   }) {
     return signalRStatus(data);
   }
@@ -1876,6 +2100,9 @@ class _$SignalRStatusImpl implements SignalRStatus {
     TResult? Function(DetailQuestionStateData data)? signalRStatus,
     TResult? Function(DetailQuestionStateData data)? openSubAnswer,
     TResult? Function(DetailQuestionStateData data)? subanswers,
+    TResult? Function(DetailQuestionStateData data)? voteAnswer,
+    TResult? Function(DetailQuestionStateData data)? getMyVote,
+    TResult? Function(DetailQuestionStateData data)? listVoteAnswer,
   }) {
     return signalRStatus?.call(data);
   }
@@ -1893,6 +2120,9 @@ class _$SignalRStatusImpl implements SignalRStatus {
     TResult Function(DetailQuestionStateData data)? signalRStatus,
     TResult Function(DetailQuestionStateData data)? openSubAnswer,
     TResult Function(DetailQuestionStateData data)? subanswers,
+    TResult Function(DetailQuestionStateData data)? voteAnswer,
+    TResult Function(DetailQuestionStateData data)? getMyVote,
+    TResult Function(DetailQuestionStateData data)? listVoteAnswer,
     required TResult orElse(),
   }) {
     if (signalRStatus != null) {
@@ -1914,6 +2144,9 @@ class _$SignalRStatusImpl implements SignalRStatus {
     required TResult Function(SignalRStatus value) signalRStatus,
     required TResult Function(OpenSubAnswer value) openSubAnswer,
     required TResult Function(SubAnswers value) subanswers,
+    required TResult Function(VoteAnswer value) voteAnswer,
+    required TResult Function(GetMyVote value) getMyVote,
+    required TResult Function(ListVoteAnswer value) listVoteAnswer,
   }) {
     return signalRStatus(this);
   }
@@ -1931,6 +2164,9 @@ class _$SignalRStatusImpl implements SignalRStatus {
     TResult? Function(SignalRStatus value)? signalRStatus,
     TResult? Function(OpenSubAnswer value)? openSubAnswer,
     TResult? Function(SubAnswers value)? subanswers,
+    TResult? Function(VoteAnswer value)? voteAnswer,
+    TResult? Function(GetMyVote value)? getMyVote,
+    TResult? Function(ListVoteAnswer value)? listVoteAnswer,
   }) {
     return signalRStatus?.call(this);
   }
@@ -1948,6 +2184,9 @@ class _$SignalRStatusImpl implements SignalRStatus {
     TResult Function(SignalRStatus value)? signalRStatus,
     TResult Function(OpenSubAnswer value)? openSubAnswer,
     TResult Function(SubAnswers value)? subanswers,
+    TResult Function(VoteAnswer value)? voteAnswer,
+    TResult Function(GetMyVote value)? getMyVote,
+    TResult Function(ListVoteAnswer value)? listVoteAnswer,
     required TResult orElse(),
   }) {
     if (signalRStatus != null) {
@@ -2048,6 +2287,9 @@ class _$OpenSubAnswerImpl implements OpenSubAnswer {
     required TResult Function(DetailQuestionStateData data) signalRStatus,
     required TResult Function(DetailQuestionStateData data) openSubAnswer,
     required TResult Function(DetailQuestionStateData data) subanswers,
+    required TResult Function(DetailQuestionStateData data) voteAnswer,
+    required TResult Function(DetailQuestionStateData data) getMyVote,
+    required TResult Function(DetailQuestionStateData data) listVoteAnswer,
   }) {
     return openSubAnswer(data);
   }
@@ -2065,6 +2307,9 @@ class _$OpenSubAnswerImpl implements OpenSubAnswer {
     TResult? Function(DetailQuestionStateData data)? signalRStatus,
     TResult? Function(DetailQuestionStateData data)? openSubAnswer,
     TResult? Function(DetailQuestionStateData data)? subanswers,
+    TResult? Function(DetailQuestionStateData data)? voteAnswer,
+    TResult? Function(DetailQuestionStateData data)? getMyVote,
+    TResult? Function(DetailQuestionStateData data)? listVoteAnswer,
   }) {
     return openSubAnswer?.call(data);
   }
@@ -2082,6 +2327,9 @@ class _$OpenSubAnswerImpl implements OpenSubAnswer {
     TResult Function(DetailQuestionStateData data)? signalRStatus,
     TResult Function(DetailQuestionStateData data)? openSubAnswer,
     TResult Function(DetailQuestionStateData data)? subanswers,
+    TResult Function(DetailQuestionStateData data)? voteAnswer,
+    TResult Function(DetailQuestionStateData data)? getMyVote,
+    TResult Function(DetailQuestionStateData data)? listVoteAnswer,
     required TResult orElse(),
   }) {
     if (openSubAnswer != null) {
@@ -2103,6 +2351,9 @@ class _$OpenSubAnswerImpl implements OpenSubAnswer {
     required TResult Function(SignalRStatus value) signalRStatus,
     required TResult Function(OpenSubAnswer value) openSubAnswer,
     required TResult Function(SubAnswers value) subanswers,
+    required TResult Function(VoteAnswer value) voteAnswer,
+    required TResult Function(GetMyVote value) getMyVote,
+    required TResult Function(ListVoteAnswer value) listVoteAnswer,
   }) {
     return openSubAnswer(this);
   }
@@ -2120,6 +2371,9 @@ class _$OpenSubAnswerImpl implements OpenSubAnswer {
     TResult? Function(SignalRStatus value)? signalRStatus,
     TResult? Function(OpenSubAnswer value)? openSubAnswer,
     TResult? Function(SubAnswers value)? subanswers,
+    TResult? Function(VoteAnswer value)? voteAnswer,
+    TResult? Function(GetMyVote value)? getMyVote,
+    TResult? Function(ListVoteAnswer value)? listVoteAnswer,
   }) {
     return openSubAnswer?.call(this);
   }
@@ -2137,6 +2391,9 @@ class _$OpenSubAnswerImpl implements OpenSubAnswer {
     TResult Function(SignalRStatus value)? signalRStatus,
     TResult Function(OpenSubAnswer value)? openSubAnswer,
     TResult Function(SubAnswers value)? subanswers,
+    TResult Function(VoteAnswer value)? voteAnswer,
+    TResult Function(GetMyVote value)? getMyVote,
+    TResult Function(ListVoteAnswer value)? listVoteAnswer,
     required TResult orElse(),
   }) {
     if (openSubAnswer != null) {
@@ -2237,6 +2494,9 @@ class _$SubAnswersImpl implements SubAnswers {
     required TResult Function(DetailQuestionStateData data) signalRStatus,
     required TResult Function(DetailQuestionStateData data) openSubAnswer,
     required TResult Function(DetailQuestionStateData data) subanswers,
+    required TResult Function(DetailQuestionStateData data) voteAnswer,
+    required TResult Function(DetailQuestionStateData data) getMyVote,
+    required TResult Function(DetailQuestionStateData data) listVoteAnswer,
   }) {
     return subanswers(data);
   }
@@ -2254,6 +2514,9 @@ class _$SubAnswersImpl implements SubAnswers {
     TResult? Function(DetailQuestionStateData data)? signalRStatus,
     TResult? Function(DetailQuestionStateData data)? openSubAnswer,
     TResult? Function(DetailQuestionStateData data)? subanswers,
+    TResult? Function(DetailQuestionStateData data)? voteAnswer,
+    TResult? Function(DetailQuestionStateData data)? getMyVote,
+    TResult? Function(DetailQuestionStateData data)? listVoteAnswer,
   }) {
     return subanswers?.call(data);
   }
@@ -2271,6 +2534,9 @@ class _$SubAnswersImpl implements SubAnswers {
     TResult Function(DetailQuestionStateData data)? signalRStatus,
     TResult Function(DetailQuestionStateData data)? openSubAnswer,
     TResult Function(DetailQuestionStateData data)? subanswers,
+    TResult Function(DetailQuestionStateData data)? voteAnswer,
+    TResult Function(DetailQuestionStateData data)? getMyVote,
+    TResult Function(DetailQuestionStateData data)? listVoteAnswer,
     required TResult orElse(),
   }) {
     if (subanswers != null) {
@@ -2292,6 +2558,9 @@ class _$SubAnswersImpl implements SubAnswers {
     required TResult Function(SignalRStatus value) signalRStatus,
     required TResult Function(OpenSubAnswer value) openSubAnswer,
     required TResult Function(SubAnswers value) subanswers,
+    required TResult Function(VoteAnswer value) voteAnswer,
+    required TResult Function(GetMyVote value) getMyVote,
+    required TResult Function(ListVoteAnswer value) listVoteAnswer,
   }) {
     return subanswers(this);
   }
@@ -2309,6 +2578,9 @@ class _$SubAnswersImpl implements SubAnswers {
     TResult? Function(SignalRStatus value)? signalRStatus,
     TResult? Function(OpenSubAnswer value)? openSubAnswer,
     TResult? Function(SubAnswers value)? subanswers,
+    TResult? Function(VoteAnswer value)? voteAnswer,
+    TResult? Function(GetMyVote value)? getMyVote,
+    TResult? Function(ListVoteAnswer value)? listVoteAnswer,
   }) {
     return subanswers?.call(this);
   }
@@ -2326,6 +2598,9 @@ class _$SubAnswersImpl implements SubAnswers {
     TResult Function(SignalRStatus value)? signalRStatus,
     TResult Function(OpenSubAnswer value)? openSubAnswer,
     TResult Function(SubAnswers value)? subanswers,
+    TResult Function(VoteAnswer value)? voteAnswer,
+    TResult Function(GetMyVote value)? getMyVote,
+    TResult Function(ListVoteAnswer value)? listVoteAnswer,
     required TResult orElse(),
   }) {
     if (subanswers != null) {
@@ -2344,5 +2619,627 @@ abstract class SubAnswers implements DetailQuestionState {
   @override
   @JsonKey(ignore: true)
   _$$SubAnswersImplCopyWith<_$SubAnswersImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$VoteAnswerImplCopyWith<$Res>
+    implements $DetailQuestionStateCopyWith<$Res> {
+  factory _$$VoteAnswerImplCopyWith(
+          _$VoteAnswerImpl value, $Res Function(_$VoteAnswerImpl) then) =
+      __$$VoteAnswerImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({DetailQuestionStateData data});
+
+  @override
+  $DetailQuestionStateDataCopyWith<$Res> get data;
+}
+
+/// @nodoc
+class __$$VoteAnswerImplCopyWithImpl<$Res>
+    extends _$DetailQuestionStateCopyWithImpl<$Res, _$VoteAnswerImpl>
+    implements _$$VoteAnswerImplCopyWith<$Res> {
+  __$$VoteAnswerImplCopyWithImpl(
+      _$VoteAnswerImpl _value, $Res Function(_$VoteAnswerImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = null,
+  }) {
+    return _then(_$VoteAnswerImpl(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as DetailQuestionStateData,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$VoteAnswerImpl implements VoteAnswer {
+  const _$VoteAnswerImpl({required this.data});
+
+  @override
+  final DetailQuestionStateData data;
+
+  @override
+  String toString() {
+    return 'DetailQuestionState.voteAnswer(data: $data)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$VoteAnswerImpl &&
+            (identical(other.data, data) || other.data == data));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, data);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$VoteAnswerImplCopyWith<_$VoteAnswerImpl> get copyWith =>
+      __$$VoteAnswerImplCopyWithImpl<_$VoteAnswerImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(DetailQuestionStateData data) initial,
+    required TResult Function(DetailQuestionStateData data) loading,
+    required TResult Function(DetailQuestionStateData data) loaded,
+    required TResult Function(DetailQuestionStateData data) error,
+    required TResult Function(DetailQuestionStateData data) answer,
+    required TResult Function(DetailQuestionStateData data) answered,
+    required TResult Function(DetailQuestionStateData data) countAnswer,
+    required TResult Function(DetailQuestionStateData data) signalRStatus,
+    required TResult Function(DetailQuestionStateData data) openSubAnswer,
+    required TResult Function(DetailQuestionStateData data) subanswers,
+    required TResult Function(DetailQuestionStateData data) voteAnswer,
+    required TResult Function(DetailQuestionStateData data) getMyVote,
+    required TResult Function(DetailQuestionStateData data) listVoteAnswer,
+  }) {
+    return voteAnswer(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(DetailQuestionStateData data)? initial,
+    TResult? Function(DetailQuestionStateData data)? loading,
+    TResult? Function(DetailQuestionStateData data)? loaded,
+    TResult? Function(DetailQuestionStateData data)? error,
+    TResult? Function(DetailQuestionStateData data)? answer,
+    TResult? Function(DetailQuestionStateData data)? answered,
+    TResult? Function(DetailQuestionStateData data)? countAnswer,
+    TResult? Function(DetailQuestionStateData data)? signalRStatus,
+    TResult? Function(DetailQuestionStateData data)? openSubAnswer,
+    TResult? Function(DetailQuestionStateData data)? subanswers,
+    TResult? Function(DetailQuestionStateData data)? voteAnswer,
+    TResult? Function(DetailQuestionStateData data)? getMyVote,
+    TResult? Function(DetailQuestionStateData data)? listVoteAnswer,
+  }) {
+    return voteAnswer?.call(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(DetailQuestionStateData data)? initial,
+    TResult Function(DetailQuestionStateData data)? loading,
+    TResult Function(DetailQuestionStateData data)? loaded,
+    TResult Function(DetailQuestionStateData data)? error,
+    TResult Function(DetailQuestionStateData data)? answer,
+    TResult Function(DetailQuestionStateData data)? answered,
+    TResult Function(DetailQuestionStateData data)? countAnswer,
+    TResult Function(DetailQuestionStateData data)? signalRStatus,
+    TResult Function(DetailQuestionStateData data)? openSubAnswer,
+    TResult Function(DetailQuestionStateData data)? subanswers,
+    TResult Function(DetailQuestionStateData data)? voteAnswer,
+    TResult Function(DetailQuestionStateData data)? getMyVote,
+    TResult Function(DetailQuestionStateData data)? listVoteAnswer,
+    required TResult orElse(),
+  }) {
+    if (voteAnswer != null) {
+      return voteAnswer(data);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Loaded value) loaded,
+    required TResult Function(Error value) error,
+    required TResult Function(Answer value) answer,
+    required TResult Function(Answered value) answered,
+    required TResult Function(CountAnswer value) countAnswer,
+    required TResult Function(SignalRStatus value) signalRStatus,
+    required TResult Function(OpenSubAnswer value) openSubAnswer,
+    required TResult Function(SubAnswers value) subanswers,
+    required TResult Function(VoteAnswer value) voteAnswer,
+    required TResult Function(GetMyVote value) getMyVote,
+    required TResult Function(ListVoteAnswer value) listVoteAnswer,
+  }) {
+    return voteAnswer(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
+    TResult? Function(Error value)? error,
+    TResult? Function(Answer value)? answer,
+    TResult? Function(Answered value)? answered,
+    TResult? Function(CountAnswer value)? countAnswer,
+    TResult? Function(SignalRStatus value)? signalRStatus,
+    TResult? Function(OpenSubAnswer value)? openSubAnswer,
+    TResult? Function(SubAnswers value)? subanswers,
+    TResult? Function(VoteAnswer value)? voteAnswer,
+    TResult? Function(GetMyVote value)? getMyVote,
+    TResult? Function(ListVoteAnswer value)? listVoteAnswer,
+  }) {
+    return voteAnswer?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
+    TResult Function(Error value)? error,
+    TResult Function(Answer value)? answer,
+    TResult Function(Answered value)? answered,
+    TResult Function(CountAnswer value)? countAnswer,
+    TResult Function(SignalRStatus value)? signalRStatus,
+    TResult Function(OpenSubAnswer value)? openSubAnswer,
+    TResult Function(SubAnswers value)? subanswers,
+    TResult Function(VoteAnswer value)? voteAnswer,
+    TResult Function(GetMyVote value)? getMyVote,
+    TResult Function(ListVoteAnswer value)? listVoteAnswer,
+    required TResult orElse(),
+  }) {
+    if (voteAnswer != null) {
+      return voteAnswer(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class VoteAnswer implements DetailQuestionState {
+  const factory VoteAnswer({required final DetailQuestionStateData data}) =
+      _$VoteAnswerImpl;
+
+  @override
+  DetailQuestionStateData get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$VoteAnswerImplCopyWith<_$VoteAnswerImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GetMyVoteImplCopyWith<$Res>
+    implements $DetailQuestionStateCopyWith<$Res> {
+  factory _$$GetMyVoteImplCopyWith(
+          _$GetMyVoteImpl value, $Res Function(_$GetMyVoteImpl) then) =
+      __$$GetMyVoteImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({DetailQuestionStateData data});
+
+  @override
+  $DetailQuestionStateDataCopyWith<$Res> get data;
+}
+
+/// @nodoc
+class __$$GetMyVoteImplCopyWithImpl<$Res>
+    extends _$DetailQuestionStateCopyWithImpl<$Res, _$GetMyVoteImpl>
+    implements _$$GetMyVoteImplCopyWith<$Res> {
+  __$$GetMyVoteImplCopyWithImpl(
+      _$GetMyVoteImpl _value, $Res Function(_$GetMyVoteImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = null,
+  }) {
+    return _then(_$GetMyVoteImpl(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as DetailQuestionStateData,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GetMyVoteImpl implements GetMyVote {
+  const _$GetMyVoteImpl({required this.data});
+
+  @override
+  final DetailQuestionStateData data;
+
+  @override
+  String toString() {
+    return 'DetailQuestionState.getMyVote(data: $data)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetMyVoteImpl &&
+            (identical(other.data, data) || other.data == data));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, data);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetMyVoteImplCopyWith<_$GetMyVoteImpl> get copyWith =>
+      __$$GetMyVoteImplCopyWithImpl<_$GetMyVoteImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(DetailQuestionStateData data) initial,
+    required TResult Function(DetailQuestionStateData data) loading,
+    required TResult Function(DetailQuestionStateData data) loaded,
+    required TResult Function(DetailQuestionStateData data) error,
+    required TResult Function(DetailQuestionStateData data) answer,
+    required TResult Function(DetailQuestionStateData data) answered,
+    required TResult Function(DetailQuestionStateData data) countAnswer,
+    required TResult Function(DetailQuestionStateData data) signalRStatus,
+    required TResult Function(DetailQuestionStateData data) openSubAnswer,
+    required TResult Function(DetailQuestionStateData data) subanswers,
+    required TResult Function(DetailQuestionStateData data) voteAnswer,
+    required TResult Function(DetailQuestionStateData data) getMyVote,
+    required TResult Function(DetailQuestionStateData data) listVoteAnswer,
+  }) {
+    return getMyVote(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(DetailQuestionStateData data)? initial,
+    TResult? Function(DetailQuestionStateData data)? loading,
+    TResult? Function(DetailQuestionStateData data)? loaded,
+    TResult? Function(DetailQuestionStateData data)? error,
+    TResult? Function(DetailQuestionStateData data)? answer,
+    TResult? Function(DetailQuestionStateData data)? answered,
+    TResult? Function(DetailQuestionStateData data)? countAnswer,
+    TResult? Function(DetailQuestionStateData data)? signalRStatus,
+    TResult? Function(DetailQuestionStateData data)? openSubAnswer,
+    TResult? Function(DetailQuestionStateData data)? subanswers,
+    TResult? Function(DetailQuestionStateData data)? voteAnswer,
+    TResult? Function(DetailQuestionStateData data)? getMyVote,
+    TResult? Function(DetailQuestionStateData data)? listVoteAnswer,
+  }) {
+    return getMyVote?.call(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(DetailQuestionStateData data)? initial,
+    TResult Function(DetailQuestionStateData data)? loading,
+    TResult Function(DetailQuestionStateData data)? loaded,
+    TResult Function(DetailQuestionStateData data)? error,
+    TResult Function(DetailQuestionStateData data)? answer,
+    TResult Function(DetailQuestionStateData data)? answered,
+    TResult Function(DetailQuestionStateData data)? countAnswer,
+    TResult Function(DetailQuestionStateData data)? signalRStatus,
+    TResult Function(DetailQuestionStateData data)? openSubAnswer,
+    TResult Function(DetailQuestionStateData data)? subanswers,
+    TResult Function(DetailQuestionStateData data)? voteAnswer,
+    TResult Function(DetailQuestionStateData data)? getMyVote,
+    TResult Function(DetailQuestionStateData data)? listVoteAnswer,
+    required TResult orElse(),
+  }) {
+    if (getMyVote != null) {
+      return getMyVote(data);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Loaded value) loaded,
+    required TResult Function(Error value) error,
+    required TResult Function(Answer value) answer,
+    required TResult Function(Answered value) answered,
+    required TResult Function(CountAnswer value) countAnswer,
+    required TResult Function(SignalRStatus value) signalRStatus,
+    required TResult Function(OpenSubAnswer value) openSubAnswer,
+    required TResult Function(SubAnswers value) subanswers,
+    required TResult Function(VoteAnswer value) voteAnswer,
+    required TResult Function(GetMyVote value) getMyVote,
+    required TResult Function(ListVoteAnswer value) listVoteAnswer,
+  }) {
+    return getMyVote(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
+    TResult? Function(Error value)? error,
+    TResult? Function(Answer value)? answer,
+    TResult? Function(Answered value)? answered,
+    TResult? Function(CountAnswer value)? countAnswer,
+    TResult? Function(SignalRStatus value)? signalRStatus,
+    TResult? Function(OpenSubAnswer value)? openSubAnswer,
+    TResult? Function(SubAnswers value)? subanswers,
+    TResult? Function(VoteAnswer value)? voteAnswer,
+    TResult? Function(GetMyVote value)? getMyVote,
+    TResult? Function(ListVoteAnswer value)? listVoteAnswer,
+  }) {
+    return getMyVote?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
+    TResult Function(Error value)? error,
+    TResult Function(Answer value)? answer,
+    TResult Function(Answered value)? answered,
+    TResult Function(CountAnswer value)? countAnswer,
+    TResult Function(SignalRStatus value)? signalRStatus,
+    TResult Function(OpenSubAnswer value)? openSubAnswer,
+    TResult Function(SubAnswers value)? subanswers,
+    TResult Function(VoteAnswer value)? voteAnswer,
+    TResult Function(GetMyVote value)? getMyVote,
+    TResult Function(ListVoteAnswer value)? listVoteAnswer,
+    required TResult orElse(),
+  }) {
+    if (getMyVote != null) {
+      return getMyVote(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetMyVote implements DetailQuestionState {
+  const factory GetMyVote({required final DetailQuestionStateData data}) =
+      _$GetMyVoteImpl;
+
+  @override
+  DetailQuestionStateData get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$GetMyVoteImplCopyWith<_$GetMyVoteImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ListVoteAnswerImplCopyWith<$Res>
+    implements $DetailQuestionStateCopyWith<$Res> {
+  factory _$$ListVoteAnswerImplCopyWith(_$ListVoteAnswerImpl value,
+          $Res Function(_$ListVoteAnswerImpl) then) =
+      __$$ListVoteAnswerImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({DetailQuestionStateData data});
+
+  @override
+  $DetailQuestionStateDataCopyWith<$Res> get data;
+}
+
+/// @nodoc
+class __$$ListVoteAnswerImplCopyWithImpl<$Res>
+    extends _$DetailQuestionStateCopyWithImpl<$Res, _$ListVoteAnswerImpl>
+    implements _$$ListVoteAnswerImplCopyWith<$Res> {
+  __$$ListVoteAnswerImplCopyWithImpl(
+      _$ListVoteAnswerImpl _value, $Res Function(_$ListVoteAnswerImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = null,
+  }) {
+    return _then(_$ListVoteAnswerImpl(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as DetailQuestionStateData,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ListVoteAnswerImpl implements ListVoteAnswer {
+  const _$ListVoteAnswerImpl({required this.data});
+
+  @override
+  final DetailQuestionStateData data;
+
+  @override
+  String toString() {
+    return 'DetailQuestionState.listVoteAnswer(data: $data)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ListVoteAnswerImpl &&
+            (identical(other.data, data) || other.data == data));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, data);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ListVoteAnswerImplCopyWith<_$ListVoteAnswerImpl> get copyWith =>
+      __$$ListVoteAnswerImplCopyWithImpl<_$ListVoteAnswerImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(DetailQuestionStateData data) initial,
+    required TResult Function(DetailQuestionStateData data) loading,
+    required TResult Function(DetailQuestionStateData data) loaded,
+    required TResult Function(DetailQuestionStateData data) error,
+    required TResult Function(DetailQuestionStateData data) answer,
+    required TResult Function(DetailQuestionStateData data) answered,
+    required TResult Function(DetailQuestionStateData data) countAnswer,
+    required TResult Function(DetailQuestionStateData data) signalRStatus,
+    required TResult Function(DetailQuestionStateData data) openSubAnswer,
+    required TResult Function(DetailQuestionStateData data) subanswers,
+    required TResult Function(DetailQuestionStateData data) voteAnswer,
+    required TResult Function(DetailQuestionStateData data) getMyVote,
+    required TResult Function(DetailQuestionStateData data) listVoteAnswer,
+  }) {
+    return listVoteAnswer(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(DetailQuestionStateData data)? initial,
+    TResult? Function(DetailQuestionStateData data)? loading,
+    TResult? Function(DetailQuestionStateData data)? loaded,
+    TResult? Function(DetailQuestionStateData data)? error,
+    TResult? Function(DetailQuestionStateData data)? answer,
+    TResult? Function(DetailQuestionStateData data)? answered,
+    TResult? Function(DetailQuestionStateData data)? countAnswer,
+    TResult? Function(DetailQuestionStateData data)? signalRStatus,
+    TResult? Function(DetailQuestionStateData data)? openSubAnswer,
+    TResult? Function(DetailQuestionStateData data)? subanswers,
+    TResult? Function(DetailQuestionStateData data)? voteAnswer,
+    TResult? Function(DetailQuestionStateData data)? getMyVote,
+    TResult? Function(DetailQuestionStateData data)? listVoteAnswer,
+  }) {
+    return listVoteAnswer?.call(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(DetailQuestionStateData data)? initial,
+    TResult Function(DetailQuestionStateData data)? loading,
+    TResult Function(DetailQuestionStateData data)? loaded,
+    TResult Function(DetailQuestionStateData data)? error,
+    TResult Function(DetailQuestionStateData data)? answer,
+    TResult Function(DetailQuestionStateData data)? answered,
+    TResult Function(DetailQuestionStateData data)? countAnswer,
+    TResult Function(DetailQuestionStateData data)? signalRStatus,
+    TResult Function(DetailQuestionStateData data)? openSubAnswer,
+    TResult Function(DetailQuestionStateData data)? subanswers,
+    TResult Function(DetailQuestionStateData data)? voteAnswer,
+    TResult Function(DetailQuestionStateData data)? getMyVote,
+    TResult Function(DetailQuestionStateData data)? listVoteAnswer,
+    required TResult orElse(),
+  }) {
+    if (listVoteAnswer != null) {
+      return listVoteAnswer(data);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Loaded value) loaded,
+    required TResult Function(Error value) error,
+    required TResult Function(Answer value) answer,
+    required TResult Function(Answered value) answered,
+    required TResult Function(CountAnswer value) countAnswer,
+    required TResult Function(SignalRStatus value) signalRStatus,
+    required TResult Function(OpenSubAnswer value) openSubAnswer,
+    required TResult Function(SubAnswers value) subanswers,
+    required TResult Function(VoteAnswer value) voteAnswer,
+    required TResult Function(GetMyVote value) getMyVote,
+    required TResult Function(ListVoteAnswer value) listVoteAnswer,
+  }) {
+    return listVoteAnswer(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
+    TResult? Function(Error value)? error,
+    TResult? Function(Answer value)? answer,
+    TResult? Function(Answered value)? answered,
+    TResult? Function(CountAnswer value)? countAnswer,
+    TResult? Function(SignalRStatus value)? signalRStatus,
+    TResult? Function(OpenSubAnswer value)? openSubAnswer,
+    TResult? Function(SubAnswers value)? subanswers,
+    TResult? Function(VoteAnswer value)? voteAnswer,
+    TResult? Function(GetMyVote value)? getMyVote,
+    TResult? Function(ListVoteAnswer value)? listVoteAnswer,
+  }) {
+    return listVoteAnswer?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
+    TResult Function(Error value)? error,
+    TResult Function(Answer value)? answer,
+    TResult Function(Answered value)? answered,
+    TResult Function(CountAnswer value)? countAnswer,
+    TResult Function(SignalRStatus value)? signalRStatus,
+    TResult Function(OpenSubAnswer value)? openSubAnswer,
+    TResult Function(SubAnswers value)? subanswers,
+    TResult Function(VoteAnswer value)? voteAnswer,
+    TResult Function(GetMyVote value)? getMyVote,
+    TResult Function(ListVoteAnswer value)? listVoteAnswer,
+    required TResult orElse(),
+  }) {
+    if (listVoteAnswer != null) {
+      return listVoteAnswer(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ListVoteAnswer implements DetailQuestionState {
+  const factory ListVoteAnswer({required final DetailQuestionStateData data}) =
+      _$ListVoteAnswerImpl;
+
+  @override
+  DetailQuestionStateData get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$ListVoteAnswerImplCopyWith<_$ListVoteAnswerImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -15,14 +15,17 @@ import 'cubit/discover_cubit.dart';
 import 'widget/postcard.dart';
 
 class DiscoverScreen extends StatefulWidget {
-  static BlocProvider<DiscoverCubit> provider() {
+  final String? mySave;
+  static BlocProvider<DiscoverCubit> provider({String? mySave}) {
     return BlocProvider(
       create: (context) => DiscoverCubit(),
-      child: const DiscoverScreen(),
+      child: DiscoverScreen(
+        mySave: mySave,
+      ),
     );
   }
 
-  const DiscoverScreen({super.key});
+  const DiscoverScreen({super.key, this.mySave});
 
   @override
   State<DiscoverScreen> createState() => _DiscoverScreenState();
@@ -31,7 +34,13 @@ class DiscoverScreen extends StatefulWidget {
 class _DiscoverScreenState extends State<DiscoverScreen> with AfterLayoutMixin {
   List<String> tags = [];
   bool isShowFilter = true;
+  bool isShowFilter1 = false;
+  bool isShowFilter2 = false;
+
   bool isSelected = true;
+  bool isSelected1 = true;
+  String? title;
+
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey();
 
   String? selectTags;
@@ -86,7 +95,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> with AfterLayoutMixin {
                         child: SearchWidget(
                           controller: _txtSearchController,
                           hintText: 'Tìm bất cứ điều gì',
-                          isShowFilter: true,
+                          isShowFilter: false,
                           prefixIcon: const Icon(
                             Icons.search,
                             color: Colors.black87,
@@ -116,20 +125,40 @@ class _DiscoverScreenState extends State<DiscoverScreen> with AfterLayoutMixin {
                                     const SizedBox(
                                       width: 7,
                                     ),
-                                    const ButtonFilter(
-                                      title: 'Tất cả',
+                                    ButtonFilter(
+                                      isSelected: isShowFilter1,
+                                      title: 'Bài viết đã tạo',
+                                      onToggle: () {
+                                        context
+                                            .read<DiscoverCubit>()
+                                            .getMyPost();
+                                        setState(() {
+                                          title = 'Bài viết đã tạo';
+                                          isShowFilter1 = !isShowFilter1;
+                                          isShowFilter = false;
+                                          isShowFilter2 = false;
+                                          selectTags = null;
+                                        });
+                                      },
                                     ),
                                     const SizedBox(
                                       width: 7,
                                     ),
-                                    const ButtonFilter(
-                                      title: 'Bài viết thịnh hành',
-                                    ),
-                                    const SizedBox(
-                                      width: 7,
-                                    ),
-                                    const ButtonFilter(
-                                      title: 'Bài viết xem nhiều nhất',
+                                    ButtonFilter(
+                                      isSelected: isShowFilter2,
+                                      title: 'Bài viết đã lưu',
+                                      onToggle: () {
+                                        context
+                                            .read<DiscoverCubit>()
+                                            .getMyPostSave();
+                                        setState(() {
+                                          title = 'Bài viết đã lưu';
+                                          isShowFilter1 = false;
+                                          isShowFilter2 = !isShowFilter2;
+                                          isShowFilter = false;
+                                          selectTags = null;
+                                        });
+                                      },
                                     ),
                                   ],
                                 );
@@ -178,8 +207,10 @@ class _DiscoverScreenState extends State<DiscoverScreen> with AfterLayoutMixin {
                                             .read<DiscoverCubit>()
                                             .getDiscover();
                                         setState(() {
+                                          title = 'Bài viết mới nhất';
                                           isShowFilter = !isShowFilter;
                                           selectTags = null;
+                                          isShowFilter1 = false;
                                         });
                                       },
                                     ),
@@ -194,8 +225,10 @@ class _DiscoverScreenState extends State<DiscoverScreen> with AfterLayoutMixin {
                                                 .read<DiscoverCubit>()
                                                 .getDiscoverByTag(tag: item);
                                             setState(() {
+                                              title = 'Bài viết theo Hashtag';
                                               selectTags = item;
                                               isShowFilter = false;
+                                              isShowFilter1 = false;
                                             });
                                           },
                                         ),
@@ -215,17 +248,17 @@ class _DiscoverScreenState extends State<DiscoverScreen> with AfterLayoutMixin {
                       const SizedBox(
                         height: 20,
                       ),
-                      const Center(
+                      Center(
                         child: Text(
-                          'Những tài liệu phổ biến',
-                          style: TextStyle(
-                              fontSize: 16,
+                          title ?? 'Bài viết mới nhất',
+                          style: const TextStyle(
+                              fontSize: 20,
                               fontWeight: FontWeight.w600,
                               fontFamily: 'Epilogue'),
                         ),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 17,
                       ),
                       if (state.data!.listDiscover?.resultObj != null)
                         ListView.builder(

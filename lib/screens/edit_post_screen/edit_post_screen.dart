@@ -48,10 +48,9 @@ class _EditPostScreenState extends State<EditPostScreen> with AfterLayoutMixin {
   final _hashtagtxt = TextEditingController();
   final _vars = <VariantionItem>[];
   final _hashtag = <String>[];
-  String? _image;
+  String? image;
   String? topicID;
   bool shouldShowAlertDialog = true;
-  bool showTag = true;
 
   @override
   FutureOr<void> afterFirstLayout(BuildContext context) async {
@@ -71,11 +70,8 @@ class _EditPostScreenState extends State<EditPostScreen> with AfterLayoutMixin {
     }
     _titletxt.text = widget.data!.title!;
     _contenttxt.text = widget.data!.content!;
-    _image = widget.data!.image!;
+    image = widget.data!.image!;
     _hashtag.addAll(widget.data!.tags!.map((e) => e.name!));
-    if (_hashtag.isNotEmpty) {
-      showTag = false;
-    }
   }
 
   @override
@@ -113,7 +109,7 @@ class _EditPostScreenState extends State<EditPostScreen> with AfterLayoutMixin {
                                     .state
                                     .data
                                     .image,
-                                topicId: _vars[0].id!,
+                                topicName: _vars[0].title!,
                                 tags: tags);
                           },
                           child: const Text(
@@ -298,12 +294,7 @@ class _EditPostScreenState extends State<EditPostScreen> with AfterLayoutMixin {
                     child: BlocBuilder<CreatePostCubit, CreatePostState>(
                       builder: (context, state) {
                         final data = state.data!.listTopic;
-                        for (var element in data) {
-                          if (element.title == widget.data!.topicName) {
-                            topicID = element.id;
-                            _vars[0].id = topicID;
-                          }
-                        }
+
                         return GestureDetector(
                           onTap: () async {
                             if (shouldShowAlertDialog) {
@@ -394,47 +385,44 @@ class _EditPostScreenState extends State<EditPostScreen> with AfterLayoutMixin {
                       border: Border.all(color: Colors.black45, width: 0.5)),
                   child: GestureDetector(
                     onTap: () async {
-                      if (showTag) {
-                        await showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: const Text('Thêm Hastag cho bài viết'),
-                                content: TextField(
-                                  controller: _hashtagtxt,
-                                  decoration: InputDecoration(
-                                    border: const OutlineInputBorder(),
-                                    labelText: 'Hastag',
-                                    suffixIcon: IconButton(
-                                      onPressed: () {
-                                        _hashtagtxt.clear();
-                                      },
-                                      icon: const Icon(Icons.clear),
-                                    ),
+                      await showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text('Thêm Hastag cho bài viết'),
+                              content: TextField(
+                                controller: _hashtagtxt,
+                                decoration: InputDecoration(
+                                  border: const OutlineInputBorder(),
+                                  labelText: 'Hastag',
+                                  suffixIcon: IconButton(
+                                    onPressed: () {
+                                      _hashtagtxt.clear();
+                                    },
+                                    icon: const Icon(Icons.clear),
                                   ),
                                 ),
-                                actions: [
-                                  TextButton(
-                                    child: const Text('Đóng'),
-                                    onPressed: () {
+                              ),
+                              actions: [
+                                TextButton(
+                                  child: const Text('Đóng'),
+                                  onPressed: () {
+                                    navigator!.pop();
+                                  },
+                                ),
+                                TextButton(
+                                  child: const Text('Thêm'),
+                                  onPressed: () {
+                                    setState(() {
+                                      _hashtag.add(_hashtagtxt.text);
+                                      _hashtagtxt.clear();
                                       navigator!.pop();
-                                    },
-                                  ),
-                                  TextButton(
-                                    child: const Text('Thêm'),
-                                    onPressed: () {
-                                      setState(() {
-                                        _hashtag.add(_hashtagtxt.text);
-                                        _hashtagtxt.clear();
-                                        navigator!.pop();
-                                        showTag = false;
-                                      });
-                                    },
-                                  ),
-                                ],
-                              );
-                            });
-                      }
+                                    });
+                                  },
+                                ),
+                              ],
+                            );
+                          });
                     },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
@@ -592,8 +580,6 @@ class _EditPostScreenState extends State<EditPostScreen> with AfterLayoutMixin {
             onTap: () {
               setState(() {
                 _hashtag.removeAt(index);
-
-                showTag = true;
               });
             },
             child: const Icon(

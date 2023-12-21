@@ -8,6 +8,8 @@ class CommentStateData with _$CommentStateData {
     Comment? postComment,
     @Default('') String imageUser,
     CommentResponse? data,
+    CommentResponse? dataLoad,
+    List<ResultObj>? resultObjs,
   }) = _CommentStateData;
 }
 
@@ -28,4 +30,10 @@ class CommentState with _$CommentState {
 
   const factory CommentState.loadImageUser({required CommentStateData data}) =
       LoadImageUser;
+
+  const factory CommentState.loadCommentHubConnection(
+      {required CommentStateData data}) = LoadCommentHubConnection;
+
+  const factory CommentState.loadComment({required CommentStateData data}) =
+      LoadComment;
 }

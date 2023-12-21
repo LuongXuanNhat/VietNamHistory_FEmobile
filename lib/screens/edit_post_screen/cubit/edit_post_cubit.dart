@@ -41,11 +41,22 @@ class EditPostCubit extends Cubit<EditPostState> {
       {required String id,
       required String title,
       required String content,
-      required String topicId,
+      required String topicName,
       File? image,
       required List<String> tags}) async {
     try {
       UIHelpers.showLoading();
+      String topicId = '';
+      final findtopicid = await _dataRepository.getListTopic();
+
+      if (findtopicid.isSuccessed == true) {
+        final listTopic = findtopicid.resultObj!;
+        for (int i = 0; i < listTopic.length; i++) {
+          if (listTopic[i].title == topicName) {
+            topicId = listTopic[i].id!;
+          }
+        }
+      }
       final data = await _dataRepository.updatePost(
           id: id,
           title: title,
@@ -57,7 +68,7 @@ class EditPostCubit extends Cubit<EditPostState> {
         emit(EditPostState.success(data: EditPostStateData(data: data)));
         navigator?.pushNamedAndRemoveUntil(
             RouteGenerator.mainScreen,
-            arguments: {'currentIndex': 3},
+            arguments: {'currentIndex': 0},
             (route) => false);
       }
     } catch (e) {

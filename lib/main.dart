@@ -1,12 +1,17 @@
 import 'package:bmprogresshud/bmprogresshud.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:url_strategy/url_strategy.dart';
+
 import 'get_it.dart';
 import 'route_generator.dart';
 import 'package:get/get.dart';
 
+import 'screens/quiz_screen/start_quiz/quiz_controller.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   // GetIt
   await configureDependencies();
 
@@ -28,9 +33,19 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
+    Get.put(QuizController());
     return ProgressHud(
       isGlobalHud: true,
       child: GetMaterialApp(
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale('en', ''), // English
+          Locale('vi', ''), // Vietnamese
+        ],
         builder: (BuildContext context, Widget? child) {
           return MediaQuery(
               data: MediaQuery.of(context)

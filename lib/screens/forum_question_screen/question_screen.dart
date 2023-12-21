@@ -14,7 +14,7 @@ import 'widget/makeFeed.dart';
 
 class QuestionScreen extends StatefulWidget {
   static BlocProvider<QuestionCubit> provider() {
-    return BlocProvider<QuestionCubit>(
+    return BlocProvider(
       create: (context) => QuestionCubit(),
       child: const QuestionScreen(),
     );
@@ -27,13 +27,26 @@ class QuestionScreen extends StatefulWidget {
 }
 
 class _QuestionScreenState extends State<QuestionScreen> with AfterLayoutMixin {
+  List<String> tags = [];
   final TextEditingController _txtQuestion = TextEditingController();
+  final TextEditingController _txtSearchController = TextEditingController();
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey();
+  String? selectTags;
+  bool isShowFilter = true;
+  bool isShowFilter1 = false;
+  bool isShowFilter2 = false;
 
   @override
   FutureOr afterFirstLayout(BuildContext context) async {
     context.read<QuestionCubit>().getAllQuestion();
     context.read<QuestionCubit>().loadUser();
+    context.read<QuestionCubit>().getAllTag();
+
+    _txtSearchController.addListener(() {
+      context
+          .read<QuestionCubit>()
+          .searchQuestion(searchText: _txtSearchController.text);
+    });
   }
 
   @override
@@ -57,17 +70,20 @@ class _QuestionScreenState extends State<QuestionScreen> with AfterLayoutMixin {
       key: _globalKey,
       body: BlocBuilder<QuestionCubit, QuestionState>(
         builder: (context, state) {
+          tags.addAll(state.data.listTag);
           return SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Column(
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 10),
                     child: SearchWidget(
                       hintText: 'Tìm câu hỏi bạn muốn tìm',
                       isShowFilter: false,
-                      prefixIcon: Icon(
+                      controller: _txtSearchController,
+                      prefixIcon: const Icon(
                         Icons.search,
                         color: Colors.black87,
                         size: 30,
@@ -136,34 +152,61 @@ class _QuestionScreenState extends State<QuestionScreen> with AfterLayoutMixin {
                     height: 10,
                   ),
                   Padding(
+                    padding: EdgeInsets.only(
+                        left: 5,
+                        right: MediaQuery.of(context).size.width * 0.74),
+                    child: const Text(
+                      'Danh mục',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: 'Epilogue'),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Padding(
                     padding: const EdgeInsets.only(left: 5),
                     child: SizedBox(
                       height: 28,
                       child: ListView.separated(
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (BuildContext context, int index) {
-                            return const Row(
+                            return Row(
                               children: [
                                 ButtonFilter(
-                                  title: "Tạo bài viết",
+                                  isSelected: isShowFilter1,
+                                  title: 'Câu hỏi đã tạo',
+                                  onToggle: () {
+                                    setState(() {
+                                      context
+                                          .read<QuestionCubit>()
+                                          .getMyQuestion();
+                                      isShowFilter1 = !isShowFilter1;
+                                      isShowFilter = false;
+                                      isShowFilter2 = false;
+                                      selectTags = null;
+                                    });
+                                  },
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 7,
                                 ),
                                 ButtonFilter(
-                                  title: 'Tất cả',
-                                ),
-                                SizedBox(
-                                  width: 7,
-                                ),
-                                ButtonFilter(
-                                  title: 'Bài viết thịnh hành',
-                                ),
-                                SizedBox(
-                                  width: 7,
-                                ),
-                                ButtonFilter(
-                                  title: 'Bài viết xem nhiều nhất',
+                                  isSelected: isShowFilter2,
+                                  title: 'Câu hỏi đã lưu',
+                                  onToggle: () {
+                                    setState(() {
+                                      context
+                                          .read<QuestionCubit>()
+                                          .getMyQuestionSave();
+                                      isShowFilter1 = false;
+                                      isShowFilter2 = !isShowFilter2;
+                                      isShowFilter = false;
+                                      selectTags = null;
+                                    });
+                                  },
                                 ),
                               ],
                             );
@@ -176,6 +219,82 @@ class _QuestionScreenState extends State<QuestionScreen> with AfterLayoutMixin {
                           itemCount: 1),
                     ),
                   ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: 5,
+                        right: MediaQuery.of(context).size.width * 0.44),
+                    child: const Text(
+                      'Tìm bài viết theo Hashtag',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: 'Epilogue'),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  state.data.listTag.isEmpty
+                      ? const SizedBox()
+                      : Padding(
+                          padding: const EdgeInsets.only(left: 5),
+                          child: SizedBox(
+                            height: 28,
+                            child: ListView.separated(
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Row(
+                                    children: [
+                                      ButtonFilter(
+                                        isSelected: isShowFilter,
+                                        title: 'Tất cả',
+                                        onToggle: () {
+                                          context
+                                              .read<QuestionCubit>()
+                                              .getAllQuestion();
+                                          setState(() {
+                                            isShowFilter = !isShowFilter;
+                                            isShowFilter1 = false;
+                                            isShowFilter2 = false;
+                                            selectTags = null;
+                                          });
+                                        },
+                                      ),
+                                      for (var item in tags)
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              right: 5, left: 5),
+                                          child: ButtonFilter(
+                                            title: item,
+                                            isSelected: selectTags == item,
+                                            onToggle: () {
+                                              context
+                                                  .read<QuestionCubit>()
+                                                  .getQuestionByTag(tag: item);
+                                              setState(() {
+                                                selectTags = item;
+                                                isShowFilter = false;
+                                                isShowFilter1 = false;
+                                                isShowFilter2 = false;
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                    ],
+                                  );
+                                },
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
+                                  return const SizedBox(
+                                    width: 7,
+                                  );
+                                },
+                                itemCount: state.data.listTag.length),
+                          ),
+                        ),
                   const SizedBox(
                     height: 10,
                   ),
@@ -198,23 +317,27 @@ class _QuestionScreenState extends State<QuestionScreen> with AfterLayoutMixin {
                                 RouteGenerator.detailQuestionScreen,
                                 arguments: {
                                   'subId': state.data.listQuestionResponse!
-                                      .resultObj[index].subId,
+                                      .resultObj![index].subId,
                                   'id': state.data.listQuestionResponse!
-                                      .resultObj[index].id
+                                      .resultObj![index].id
                                 });
                           },
+                          questionId: state
+                              .data.listQuestionResponse!.resultObj![index].id,
+                          numberSave: state.data.listQuestionResponse!
+                              .resultObj![index].saveNumber,
                           numberView: state.data.listQuestionResponse!
-                              .resultObj[index].viewNumber,
+                              .resultObj![index].viewNumber,
                           numberComment: state.data.listQuestionResponse!
-                              .resultObj[index].commentNumber,
+                              .resultObj![index].commentNumber,
                           userName: state.data.listQuestionResponse!
-                              .resultObj[index].userShort.fullName,
+                              .resultObj![index].userShort.fullName,
                           time: state.data.listQuestionResponse!
-                              .resultObj[index].createAt,
+                              .resultObj![index].createAt,
                           content: state.data.listQuestionResponse!
-                              .resultObj[index].title,
+                              .resultObj![index].title,
                           image: state.data.listQuestionResponse!
-                              .resultObj[index].userShort.image,
+                              .resultObj![index].userShort.image,
                         );
                       },
                       separatorBuilder: (context, index) {
@@ -223,7 +346,7 @@ class _QuestionScreenState extends State<QuestionScreen> with AfterLayoutMixin {
                         );
                       },
                       itemCount:
-                          state.data.listQuestionResponse!.resultObj.length,
+                          state.data.listQuestionResponse!.resultObj!.length,
                     ),
                 ],
               ),
@@ -235,27 +358,27 @@ class _QuestionScreenState extends State<QuestionScreen> with AfterLayoutMixin {
   }
 }
 
-Widget makeShareButton() {
-  return Container(
-    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-    decoration: BoxDecoration(
-      border: Border.all(color: Colors.grey),
-      borderRadius: BorderRadius.circular(50),
-    ),
-    child: const Center(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Icon(Icons.share, color: Colors.grey, size: 18),
-          SizedBox(
-            width: 5,
-          ),
-          Text(
-            "Chia sẻ",
-            style: TextStyle(color: Colors.grey),
-          )
-        ],
-      ),
-    ),
-  );
-}
+// Widget makeShareButton() {
+//   return Container(
+//     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+//     decoration: BoxDecoration(
+//       border: Border.all(color: Colors.grey),
+//       borderRadius: BorderRadius.circular(50),
+//     ),
+//     child: const Center(
+//       child: Row(
+//         mainAxisAlignment: MainAxisAlignment.center,
+//         children: <Widget>[
+//           Icon(Icons.share, color: Colors.grey, size: 18),
+//           SizedBox(
+//             width: 5,
+//           ),
+//           Text(
+//             "Chia sẻ",
+//             style: TextStyle(color: Colors.grey),
+//           )
+//         ],
+//       ),
+//     ),
+//   );
+// }

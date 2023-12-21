@@ -44,7 +44,7 @@ class User {
   String? introduction;
   String? email;
   String? phoneNumber;
-  dynamic dateOfBirth;
+  DateTime? dateOfBirth;
   dynamic gender;
   dynamic image;
 
@@ -54,7 +54,7 @@ class User {
     String? email,
     String? introduction,
     String? phoneNumber,
-    dynamic dateOfBirth,
+    DateTime? dateOfBirth,
     dynamic gender,
     dynamic image,
   }) =>
@@ -78,7 +78,7 @@ class User {
       email: json["email"],
       introduction: json["introduction"],
       phoneNumber: json["phoneNumber"],
-      dateOfBirth: json["dateOfBirth"],
+      dateOfBirth: DateTime.parse(json["dateOfBirth"]),
       gender: json["gender"],
       image: json["image"]);
 
@@ -88,7 +88,7 @@ class User {
         'email': email,
         'introduction': introduction,
         'phoneNumber': phoneNumber,
-        'dateOfBirth': dateOfBirth,
+        'dateOfBirth': dateOfBirth!.toIso8601String(),
         'gender': gender,
         'image': image
       };

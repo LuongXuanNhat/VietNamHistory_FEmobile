@@ -112,12 +112,12 @@ class ResultObj {
 }
 
 class Tag {
-  final String id;
-  final String name;
+  String? id;
+  String? name;
 
   Tag({
-    required this.id,
-    required this.name,
+    this.id,
+    this.name,
   });
 
   Tag copyWith({

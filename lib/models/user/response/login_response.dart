@@ -1,17 +1,26 @@
 import 'dart:convert';
 
 class LoginResponse {
-  LoginResponse({this.isSuccess, this.message, this.token});
+  bool isSuccessed;
+  String message;
+  dynamic resultObj;
 
-  bool? isSuccess;
-  String? message;
-  String? token;
+  LoginResponse({
+    required this.isSuccessed,
+    required this.message,
+    required this.resultObj,
+  });
 
-  LoginResponse coppyWith({bool? isSuccess, String? message, String? token}) =>
+  LoginResponse copyWith({
+    bool? isSuccessed,
+    String? message,
+    dynamic resultObj,
+  }) =>
       LoginResponse(
-          isSuccess: isSuccess ?? this.isSuccess,
-          message: message ?? this.message,
-          token: token ?? this.token);
+        isSuccessed: isSuccessed ?? this.isSuccessed,
+        message: message ?? this.message,
+        resultObj: resultObj ?? this.resultObj,
+      );
 
   factory LoginResponse.fromRawJson(String str) =>
       LoginResponse.fromJson(json.decode(str));
@@ -19,10 +28,14 @@ class LoginResponse {
   String toRawJson() => json.encode(toJson());
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
-      isSuccess: json["isSuccessed"],
-      message: json["message"],
-      token: json["resultObj"]);
+        isSuccessed: json["isSuccessed"],
+        message: json["message"],
+        resultObj: json["resultObj"],
+      );
 
-  Map<String, dynamic> toJson() =>
-      {"isSuccessed": isSuccess, "message": message, "resultObj": token};
+  Map<String, dynamic> toJson() => {
+        "isSuccessed": isSuccessed,
+        "message": message,
+        "resultObj": resultObj,
+      };
 }

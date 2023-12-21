@@ -27,7 +27,7 @@ class UIHelpers {
     ScaffoldMessenger.of(Get.context!).hideCurrentSnackBar();
     Color? bgColor;
     if (type == SnackBarType.SUCCESS) {
-      bgColor = Colors.black;
+      bgColor = Colors.transparent;
     } else if (type == SnackBarType.ERROR) {
       bgColor == Colors.red;
     } else if (type == SnackBarType.WARNING) {
