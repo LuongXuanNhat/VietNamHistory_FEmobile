@@ -3,12 +3,15 @@ import 'dart:async';
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
 
 import '../../common/global_colors.dart';
 import '../../route_generator.dart';
+import '../../widgets/my_drawer.dart';
 import '../../widgets/search_widget.dart';
 import 'cubit/quiz_cubit.dart';
+import 'widget/quiz_page_card.dart';
 
 class QuizScreen extends StatefulWidget {
   static BlocProvider<QuizCubit> provider() {
@@ -39,6 +42,7 @@ class _QuizScreenState extends State<QuizScreen> with AfterLayoutMixin {
         elevation: 0.0,
         //   foregroundColor: Colors.white,
         centerTitle: true,
+        actions: const <Widget>[],
         title: const Text(
           "Luyện tập",
           style: TextStyle(
@@ -47,6 +51,7 @@ class _QuizScreenState extends State<QuizScreen> with AfterLayoutMixin {
               color: Colors.black,
               fontWeight: FontWeight.w600),
         ),
+
         iconTheme: IconThemeData(color: GlobalColors.colorBack),
       ),
       body: SafeArea(
@@ -79,50 +84,37 @@ class _QuizScreenState extends State<QuizScreen> with AfterLayoutMixin {
                               itemBuilder: (BuildContext context, int index) {
                                 return Padding(
                                   padding: const EdgeInsets.only(top: 10),
-                                  child: GestureDetector(
-                                      onTap: () {
-                                        navigator!.pushNamed(
-                                            RouteGenerator.quizDetailScreen,
-                                            arguments: {
-                                              "id": state
-                                                  .data
-                                                  .multipleChoiceResponse!
-                                                  .resultObj[index]
-                                                  .id
-                                            });
-                                      },
-                                      child: state.data.multipleChoiceResponse!
-                                                  .resultObj[index] !=
-                                              null
-                                          ? ContainerQuiz(
-                                              title: state
-                                                  .data
-                                                  .multipleChoiceResponse!
-                                                  .resultObj[index]
-                                                  .title,
-                                              numberQuestion: state
-                                                  .data
-                                                  .multipleChoiceResponse!
-                                                  .resultObj[index]
-                                                  .numberQuiz,
-                                              time: state
-                                                  .data
-                                                  .multipleChoiceResponse!
-                                                  .resultObj[index]
-                                                  .workTime,
-                                              date: state
-                                                  .data
-                                                  .multipleChoiceResponse!
-                                                  .resultObj[index]
-                                                  .createdAt,
-                                              name: state
-                                                  .data
-                                                  .multipleChoiceResponse!
-                                                  .resultObj[index]
-                                                  .userShort
-                                                  .fullName,
-                                            )
-                                          : Container()),
+                                  child: state.data.multipleChoiceResponse!
+                                              .resultObj[index] !=
+                                          null
+                                      ? QuizPageCard(
+                                          onTap: () {
+                                            navigator!.pushNamed(
+                                                RouteGenerator.quizDetailScreen,
+                                                arguments: {
+                                                  "id": state
+                                                      .data
+                                                      .multipleChoiceResponse!
+                                                      .resultObj[index]
+                                                      .id
+                                                });
+                                          },
+                                          title: state
+                                              .data
+                                              .multipleChoiceResponse!
+                                              .resultObj[index]
+                                              .title,
+                                          numberQuestion: state
+                                              .data
+                                              .multipleChoiceResponse!
+                                              .resultObj[index]
+                                              .numberQuiz,
+                                          time: state
+                                              .data
+                                              .multipleChoiceResponse!
+                                              .resultObj[index]
+                                              .workTime)
+                                      : Container(),
                                 );
                               },
                               itemCount: state.data.multipleChoiceResponse!
@@ -189,7 +181,7 @@ class _ContainerQuizState extends State<ContainerQuiz> {
                         fontSize: 16,
                         fontWeight: FontWeight.w700,
                         fontFamily: 'Epilogue'),
-                    maxLines: 1,
+                    maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(

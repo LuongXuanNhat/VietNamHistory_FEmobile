@@ -27,6 +27,7 @@ dependencies:
   injectable: ^2.3.0
 
   #Support UI
+  flutter_zoom_drawer: ^3.1.1
   share_plus: ^7.2.1
   curved_navigation_bar: ^1.0.3
   easy_separator: ^1.0.1

@@ -6,7 +6,6 @@ import 'package:url_strategy/url_strategy.dart';
 import 'get_it.dart';
 import 'route_generator.dart';
 import 'package:get/get.dart';
-
 import 'screens/quiz_screen/start_quiz/quiz_controller.dart';
 
 void main() async {

@@ -76,6 +76,8 @@ class RouteGenerator {
   static const String quizOverView = '/quiz_overview_screen';
   static const String resultQuizScreen = '/result_screen';
   static const String answerCheckScreen = '/answer_check_screen';
+  static const String deepLinkPrefix = "yourapp://";
+  static const String detailPostDeepLink = '${deepLinkPrefix}detail_post';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
