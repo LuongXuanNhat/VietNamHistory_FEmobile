@@ -1,0 +1,1 @@
+enum UniLinksType { string, uri }
