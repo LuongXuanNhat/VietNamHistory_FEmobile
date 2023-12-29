@@ -2,9 +2,12 @@ import 'dart:async';
 
 import 'package:after_layout/after_layout.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import '../../../common/global_styles.dart';
 import '../../../common/storage/app_prefs.dart';
@@ -38,6 +41,26 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
   bool isFormLogin = true;
   int current = 0;
   final CarouselController controller = CarouselController();
+  late StreamSubscription subscription;
+  bool isDeviceConnected = false;
+  bool isAlertSet = false;
+
+  @override
+  void initState() {
+    getConnectivity();
+    super.initState();
+  }
+
+  getConnectivity() =>
+      subscription = Connectivity().onConnectivityChanged.listen(
+        (ConnectivityResult result) async {
+          isDeviceConnected = await InternetConnectionChecker().hasConnection;
+          if (!isDeviceConnected && isAlertSet == false) {
+            showDialogBox();
+            setState(() => isAlertSet = true);
+          }
+        },
+      );
 
   @override
   FutureOr<void> afterFirstLayout(BuildContext context) {
@@ -46,6 +69,8 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
 
   @override
   void dispose() {
+    subscription.cancel();
+
     _txtEmail.dispose();
     _txtPassword.dispose();
     super.dispose();
@@ -191,68 +216,9 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
                         child: const Text("Đăng nhập"),
                       ),
                       const SizedBox(
-                        height: 57,
+                        height: 100,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: 1,
-                            width: 120,
-                            color: Colors.black54,
-                          ),
-                          const SizedBox(
-                            width: 7,
-                          ),
-                          const Text("hoặc"),
-                          const SizedBox(
-                            width: 7,
-                          ),
-                          Container(
-                            height: 1,
-                            width: 120,
-                            color: Colors.black54,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 24,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              width: 50,
-                              height: 50,
-                              padding: const EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50),
-                                  color: Colors.white),
-                              child: Image.asset('assets/images/google.png'),
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 12,
-                          ),
-                          GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              width: 45,
-                              height: 45,
-                              padding: const EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50),
-                                  color: Colors.white),
-                              child: Image.asset('assets/images/telephone.png'),
-                            ),
-                          )
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 65,
-                      ),
+
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -290,4 +256,27 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
     _txtEmail.text = await getIt<AppPref>().getUsernameInput();
     _txtPassword.text = await getIt<AppPref>().getPasswordInput();
   }
+
+  showDialogBox() => showCupertinoDialog<String>(
+        context: context,
+        builder: (BuildContext context) => CupertinoAlertDialog(
+          title: const Text('Không có kết nối mạng'),
+          content: const Text('Vui lòng kiểm tra lại kết nối mạng của bạn'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () async {
+                Navigator.pop(context, 'Cancel');
+                setState(() => isAlertSet = false);
+                isDeviceConnected =
+                    await InternetConnectionChecker().hasConnection;
+                if (!isDeviceConnected && isAlertSet == false) {
+                  showDialogBox();
+                  setState(() => isAlertSet = true);
+                }
+              },
+              child: const Text('Thử lại'),
+            ),
+          ],
+        ),
+      );
 }

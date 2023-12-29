@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:lottie/lottie.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../common/storage/app_prefs.dart';
@@ -43,15 +45,11 @@ class _SplashScreenState extends State<SplashScreen> with AfterLayoutMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-          child: ScreenTypeLayout.builder(
-        mobile: (BuildContext context) => Image.asset(
-          'assets/images/splash_screen.jpg',
-          width: MediaQuery.of(context).size.width,
-          fit: BoxFit.fill,
-        ),
-      )),
+    return AnimatedSplashScreen(
+      splash: Lottie.asset('assets/vietnam.json'),
+      splashIconSize: 400,
+      backgroundColor: Colors.white,
+      nextScreen: Container(),
     );
   }
 }

@@ -1,12 +1,12 @@
 class ListDocumentResponse {
-  final bool isSuccessed;
-  final String message;
-  final List<ResultObj> resultObj;
+  bool? isSuccessed;
+  String? message;
+  List<ResultObj>? resultObj;
 
   ListDocumentResponse({
-    required this.isSuccessed,
-    required this.message,
-    required this.resultObj,
+    this.isSuccessed,
+    this.message,
+    this.resultObj,
   });
 
   ListDocumentResponse copyWith({
@@ -31,7 +31,7 @@ class ListDocumentResponse {
   Map<String, dynamic> toJson() => {
         "isSuccessed": isSuccessed,
         "message": message,
-        "resultObj": List<dynamic>.from(resultObj.map((x) => x.toJson())),
+        "resultObj": List<dynamic>.from(resultObj!.map((x) => x.toJson())),
       };
 }
 

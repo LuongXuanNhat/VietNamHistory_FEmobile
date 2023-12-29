@@ -33,8 +33,6 @@ class MyDrawer extends StatelessWidget {
                   ),
                   itemCount: data!.resultObj!.length,
                   itemBuilder: (context, index) {
-                    double doubleValue =
-                        data!.resultObj![index].scores!.toDouble() / 100.0;
                     return ListTile(
                       title: Row(
                         children: [
@@ -57,7 +55,8 @@ class MyDrawer extends StatelessWidget {
                           ),
                         ],
                       ),
-                      subtitle: Text('Điểm: ${doubleValue.toStringAsFixed(2)}'),
+                      subtitle: Text(
+                          'Điểm: ${data!.resultObj![index].scores!.toStringAsFixed(2)}'),
                       trailing: Text(
                           'Thời gian: ${data!.resultObj![index].completionTime} phút'),
                     );

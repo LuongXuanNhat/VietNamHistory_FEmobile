@@ -7,7 +7,8 @@
         android:label="Tôi yêu lịch sử"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
-        >
+        android:enableOnBackInvokedCallback="true">
+        
         <activity
             android:name=".MainActivity"
             android:usesCleartextTraffic="true"
@@ -25,28 +26,19 @@
               android:name="io.flutter.embedding.android.NormalTheme"
               android:resource="@style/NormalTheme"
               />
-             <!-- Deep Links -->
-      <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data
-                    android:scheme="unilinks"
-                    android:host="example.com" />
-</intent-filter>
-<intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data
-                    android:scheme="unilinks"
-                    android:host="host"
-                    android:pathPrefix="/path/subpath" />
-</intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+              <meta-data android:name="flutter_deeplinking_enabled" android:value="true" />
+ <intent-filter android:autoVerify="true">
+     <action android:name="android.intent.action.VIEW" />
+     <category android:name="android.intent.category.DEFAULT" />
+     <category android:name="android.intent.category.BROWSABLE" />
+     <data android:scheme="http" android:host="tyls.fun" />
+     <data android:scheme="https" />
+ </intent-filter>
+
         </activity>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->

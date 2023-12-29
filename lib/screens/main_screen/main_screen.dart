@@ -1,18 +1,19 @@
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import '../../common/global_colors.dart';
 import '../discover_sceen/discover_screen.dart';
-import '../document_screen/detail_document/detail_document_screen.dart';
-import '../document_screen/document_screen.dart';
 import '../forum_question_screen/question_screen.dart';
-import '../home_screen/home_screen.dart';
 import '../news_screen/news_screen.dart';
 import '../quiz_screen/quiz_screen.dart';
 import '../user_screen/account_settings_screen.dart';
 
 class MainScreen extends StatefulWidget {
-//  final TextEditingController? txtSearch;
   int currentIndex = 0;
   MainScreen({
     Key? key,
@@ -24,13 +25,39 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  late StreamSubscription subscription;
+  bool isDeviceConnected = false;
+  bool isAlertSet = false;
   List<dynamic> pages = [
     DiscoverScreen.provider(),
-    NewsScreen.provider(),
+    NewsScreen.providers(),
     QuizScreen.provider(),
     QuestionScreen.provider(),
     AccountSettingsScreen.provider(),
   ];
+
+  @override
+  void initState() {
+    getConnectivity();
+    super.initState();
+  }
+
+  getConnectivity() =>
+      subscription = Connectivity().onConnectivityChanged.listen(
+        (ConnectivityResult result) async {
+          isDeviceConnected = await InternetConnectionChecker().hasConnection;
+          if (!isDeviceConnected && isAlertSet == false) {
+            showDialogBox();
+            setState(() => isAlertSet = true);
+          }
+        },
+      );
+
+  @override
+  void dispose() {
+    subscription.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,26 +86,6 @@ class _MainScreenState extends State<MainScreen> {
         ),
       ), // CurvedNavigationBar
     ); // Scaffold
-    // return Scaffold(
-    //   body: pages[widget.currentIndex],
-    //   bottomNavigationBar: BottomNavigationBar(
-    //       unselectedItemColor: GlobalColors.ButtonDefault,
-    //       fixedColor: GlobalColors.ButtonNavigation,
-    //       currentIndex: widget.currentIndex,
-    //       onTap: (index) => changePage(index),
-    //       items: const [
-    //         BottomNavigationBarItem(
-    //             icon: Icon(Icons.public), label: 'Khám phá'),
-    //         BottomNavigationBarItem(
-    //             icon: Icon(Icons.fiber_new_sharp), label: 'Tin tức'),
-    //         BottomNavigationBarItem(
-    //             icon: Icon(Icons.document_scanner_sharp), label: 'Tài liệu'),
-    //         BottomNavigationBarItem(
-    //             icon: Icon(Icons.question_answer), label: 'Hỏi đáp'),
-    //         BottomNavigationBarItem(
-    //             icon: Icon(Icons.person), label: 'Người dùng'),
-    //       ]),
-    // );
   }
 
   changePage(int index) {
@@ -86,4 +93,27 @@ class _MainScreenState extends State<MainScreen> {
       widget.currentIndex = index;
     });
   }
+
+  showDialogBox() => showCupertinoDialog<String>(
+        context: context,
+        builder: (BuildContext context) => CupertinoAlertDialog(
+          title: const Text('Không có kết nối mạng'),
+          content: const Text('Vui lòng kiểm tra lại kết nối mạng của bạn'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () async {
+                Navigator.pop(context, 'Cancel');
+                setState(() => isAlertSet = false);
+                isDeviceConnected =
+                    await InternetConnectionChecker().hasConnection;
+                if (!isDeviceConnected && isAlertSet == false) {
+                  showDialogBox();
+                  setState(() => isAlertSet = true);
+                }
+              },
+              child: const Text('Thử lại'),
+            ),
+          ],
+        ),
+      );
 }

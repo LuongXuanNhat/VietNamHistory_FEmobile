@@ -13,7 +13,7 @@ class _RestClient implements RestClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://localhost:7138/';
+    baseUrl ??= 'https://tyls.fun/';
   }
 
   final Dio _dio;
@@ -81,7 +81,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<UserResponse>(Options(
       method: 'GET',
@@ -202,7 +202,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<ListTopicResponse>(Options(
       method: 'GET',
@@ -229,7 +229,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<SuccesResponse>(Options(
       method: 'GET',
@@ -282,9 +282,9 @@ class _RestClient implements RestClient {
       'TopicId',
       topicId,
     ));
-    for (var i in tag) {
+    tag.forEach((i) {
       _data.fields.add(MapEntry('Tag', i));
-    }
+    });
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<AddPostResponse>(Options(
       method: 'POST',
@@ -312,7 +312,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ListDiscoverResponse>(Options(
       method: 'GET',
@@ -339,7 +339,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'Id': id};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<SuccesResponse>(Options(
       method: 'DELETE',
@@ -366,7 +366,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<AddPostResponse>(Options(
       method: 'GET',
@@ -422,7 +422,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<ListReport>(Options(
       method: 'GET',
@@ -483,9 +483,9 @@ class _RestClient implements RestClient {
       'TopicId',
       topicId,
     ));
-    for (var i in tag) {
+    tag.forEach((i) {
       _data.fields.add(MapEntry('Tag', i));
-    }
+    });
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<AddPostResponse>(Options(
       method: 'PUT',
@@ -556,7 +556,7 @@ class _RestClient implements RestClient {
       r'UserId': userId,
     };
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<SuccesResponseBool>(Options(
       method: 'GET',
@@ -627,7 +627,7 @@ class _RestClient implements RestClient {
       r'UserId': userId,
     };
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<SuccesResponseBool>(Options(
       method: 'GET',
@@ -698,7 +698,7 @@ class _RestClient implements RestClient {
       r'UserId': userId,
     };
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<SuccesResponseBool>(Options(
       method: 'GET',
@@ -754,7 +754,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'PostId': postId};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<CommentResponse>(Options(
       method: 'GET',
@@ -810,7 +810,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<SuccesResponseList>(Options(
       method: 'GET',
@@ -837,7 +837,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'tag': tag};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ListDiscoverResponse>(Options(
       method: 'GET',
@@ -864,7 +864,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'keyWord': keyword};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ListDiscoverResponse>(Options(
       method: 'GET',
@@ -904,9 +904,9 @@ class _RestClient implements RestClient {
       'Content',
       content,
     ));
-    for (var i in tag) {
+    tag.forEach((i) {
       _data.fields.add(MapEntry('Tag', i));
-    }
+    });
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<QuestionResponse>(Options(
       method: 'POST',
@@ -951,9 +951,9 @@ class _RestClient implements RestClient {
       'Content',
       content,
     ));
-    for (var i in tag) {
+    tag.forEach((i) {
       _data.fields.add(MapEntry('Tag', i));
-    }
+    });
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<QuestionResponse>(Options(
       method: 'PUT',
@@ -980,7 +980,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ListQuestionResponse>(Options(
       method: 'GET',
@@ -1007,7 +1007,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ListQuestionResponse>(Options(
       method: 'GET',
@@ -1034,7 +1034,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ListQuestionResponse>(Options(
       method: 'GET',
@@ -1061,7 +1061,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'subId': subId};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<QuestionResponse>(Options(
       method: 'GET',
@@ -1117,7 +1117,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'questionId': questionId};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<ListAnswerResponse>(Options(
       method: 'GET',
@@ -1173,7 +1173,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'idAnswer': id};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<SuccesResponse>(Options(
       method: 'DELETE',
@@ -1258,7 +1258,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<MyPostResponse>(Options(
       method: 'GET',
@@ -1285,7 +1285,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ListDiscoverResponse>(Options(
       method: 'GET',
@@ -1312,7 +1312,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<MyPostResponse>(Options(
       method: 'GET',
@@ -1339,7 +1339,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ListDiscoverResponse>(Options(
       method: 'GET',
@@ -1366,7 +1366,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'idComment': idComment};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<CommentResponse>(Options(
       method: 'DELETE',
@@ -1393,7 +1393,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'email': email};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<SuccesResponse>(Options(
       method: 'POST',
@@ -1420,7 +1420,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'idSubAnswer': idSubAnswer};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<SuccesResponse>(Options(
       method: 'DELETE',
@@ -1447,7 +1447,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'email': email};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ForgotPassSendEmail>(Options(
       method: 'GET',
@@ -1474,7 +1474,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'email': email};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ForgotPassConfirmEmail>(Options(
       method: 'GET',
@@ -1594,7 +1594,7 @@ class _RestClient implements RestClient {
       r'userId': userId,
     };
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<VoteAnswerResponse>(Options(
       method: 'GET',
@@ -1621,7 +1621,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<NewsResponse>(Options(
       method: 'GET',
@@ -1648,7 +1648,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'keyWord': keyword};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ListQuestionResponse>(Options(
       method: 'GET',
@@ -1675,7 +1675,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'numberTag': numberTag};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<SuccesResponseList>(Options(
       method: 'GET',
@@ -1703,7 +1703,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'tag': tag};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ListQuestionResponse>(Options(
       method: 'GET',
@@ -1730,7 +1730,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'Id': id};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<SuccesResponse>(Options(
       method: 'DELETE',
@@ -1757,7 +1757,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MultipleChoiceResponse>(Options(
       method: 'GET',
@@ -1784,7 +1784,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<DetailQuizResponse>(Options(
       method: 'GET',
@@ -1811,7 +1811,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ListDocumentResponse>(Options(
       method: 'GET',
@@ -1838,7 +1838,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DetailDocumentResponse>(Options(
       method: 'GET',
@@ -1865,7 +1865,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<DetailQuizResponse>(Options(
       method: 'GET',
@@ -1945,7 +1945,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<ListHistoryMyExam>(Options(
       method: 'GET',
@@ -1973,7 +1973,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'keyWord': keyword};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MultipleChoiceResponse>(Options(
       method: 'GET',
@@ -1992,6 +1992,33 @@ class _RestClient implements RestClient {
               baseUrl,
             ))));
     final value = MultipleChoiceResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ListDocumentResponse> searchDocument({required String keyword}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'keyWord': keyword};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ListDocumentResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/Document/Search',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = ListDocumentResponse.fromJson(_result.data!);
     return value;
   }
 

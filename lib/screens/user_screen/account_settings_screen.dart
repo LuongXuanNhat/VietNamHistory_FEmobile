@@ -70,13 +70,13 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen>
         builder: (context, state) {
           int? genderValue = state.data!.userResponse?.data!.gender;
 
-          Gender gender;
+          final String gender;
           if (genderValue == 0) {
-            gender = Gender.Male;
+            gender = 'Nam';
           } else if (genderValue == 1) {
-            gender = Gender.Female;
+            gender = 'Nữ';
           } else {
-            gender = Gender.Other;
+            gender = 'Khác';
           }
 
           introduction.text = state.data!.userResponse?.data!.introduction ??
@@ -446,27 +446,6 @@ class _AccountSettingsScreenState extends State<AccountSettingsScreen>
                                       ],
                                     ),
                                   ),
-                                const Padding(
-                                  padding: EdgeInsets.only(left: 7, top: 8),
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        CupertinoIcons.doc_plaintext,
-                                        size: 15,
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text(
-                                        '13 tài liệu',
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w400,
-                                            fontFamily: 'Inter'),
-                                      )
-                                    ],
-                                  ),
-                                ),
                                 const SizedBox(
                                   height: 7,
                                 ),

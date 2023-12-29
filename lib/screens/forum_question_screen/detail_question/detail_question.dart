@@ -203,13 +203,22 @@ class _DetailQuestionScreenState extends State<DetailQuestionScreen>
                                     width: 5,
                                   ),
                                   SizedBox(
-                                    width: size.width * 0.4,
+                                    width: size.width * 0.3,
                                   ),
                                   idUser ==
                                           state.data.questionResponse!.resultObj
                                               .userShort.id
-                                      ? InkWell(
-                                          onTap: () {
+                                      ? ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.transparent,
+                                            elevation: 0.0,
+                                            shadowColor: Colors.transparent,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(50),
+                                            ),
+                                          ),
+                                          onPressed: () {
                                             showDialog(
                                                 context: context,
                                                 builder:
@@ -385,6 +394,7 @@ class _DetailQuestionScreenState extends State<DetailQuestionScreen>
                                           },
                                           child: const FaIcon(
                                             FontAwesomeIcons.ellipsisVertical,
+                                            color: Colors.black54,
                                             size: 20,
                                           ),
                                         )

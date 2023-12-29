@@ -17,9 +17,10 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$QuizStateData {
   String get error => throw _privateConstructorUsedError;
-  MultipleChoiceResponse? get multipleChoiceResponse =>
+  item.MultipleChoiceResponse? get multipleChoiceResponse =>
       throw _privateConstructorUsedError;
-  MultipleChoiceResponse? get listSearch => throw _privateConstructorUsedError;
+  item.MultipleChoiceResponse? get listSearch =>
+      throw _privateConstructorUsedError;
   ListHistoryMyExam? get listHistoryMyExam =>
       throw _privateConstructorUsedError;
 
@@ -36,8 +37,8 @@ abstract class $QuizStateDataCopyWith<$Res> {
   @useResult
   $Res call(
       {String error,
-      MultipleChoiceResponse? multipleChoiceResponse,
-      MultipleChoiceResponse? listSearch,
+      item.MultipleChoiceResponse? multipleChoiceResponse,
+      item.MultipleChoiceResponse? listSearch,
       ListHistoryMyExam? listHistoryMyExam});
 }
 
@@ -67,11 +68,11 @@ class _$QuizStateDataCopyWithImpl<$Res, $Val extends QuizStateData>
       multipleChoiceResponse: freezed == multipleChoiceResponse
           ? _value.multipleChoiceResponse
           : multipleChoiceResponse // ignore: cast_nullable_to_non_nullable
-              as MultipleChoiceResponse?,
+              as item.MultipleChoiceResponse?,
       listSearch: freezed == listSearch
           ? _value.listSearch
           : listSearch // ignore: cast_nullable_to_non_nullable
-              as MultipleChoiceResponse?,
+              as item.MultipleChoiceResponse?,
       listHistoryMyExam: freezed == listHistoryMyExam
           ? _value.listHistoryMyExam
           : listHistoryMyExam // ignore: cast_nullable_to_non_nullable
@@ -90,8 +91,8 @@ abstract class _$$QuizStateDataImplCopyWith<$Res>
   @useResult
   $Res call(
       {String error,
-      MultipleChoiceResponse? multipleChoiceResponse,
-      MultipleChoiceResponse? listSearch,
+      item.MultipleChoiceResponse? multipleChoiceResponse,
+      item.MultipleChoiceResponse? listSearch,
       ListHistoryMyExam? listHistoryMyExam});
 }
 
@@ -119,11 +120,11 @@ class __$$QuizStateDataImplCopyWithImpl<$Res>
       multipleChoiceResponse: freezed == multipleChoiceResponse
           ? _value.multipleChoiceResponse
           : multipleChoiceResponse // ignore: cast_nullable_to_non_nullable
-              as MultipleChoiceResponse?,
+              as item.MultipleChoiceResponse?,
       listSearch: freezed == listSearch
           ? _value.listSearch
           : listSearch // ignore: cast_nullable_to_non_nullable
-              as MultipleChoiceResponse?,
+              as item.MultipleChoiceResponse?,
       listHistoryMyExam: freezed == listHistoryMyExam
           ? _value.listHistoryMyExam
           : listHistoryMyExam // ignore: cast_nullable_to_non_nullable
@@ -145,9 +146,9 @@ class _$QuizStateDataImpl implements _QuizStateData {
   @JsonKey()
   final String error;
   @override
-  final MultipleChoiceResponse? multipleChoiceResponse;
+  final item.MultipleChoiceResponse? multipleChoiceResponse;
   @override
-  final MultipleChoiceResponse? listSearch;
+  final item.MultipleChoiceResponse? listSearch;
   @override
   final ListHistoryMyExam? listHistoryMyExam;
 
@@ -184,16 +185,16 @@ class _$QuizStateDataImpl implements _QuizStateData {
 abstract class _QuizStateData implements QuizStateData {
   const factory _QuizStateData(
       {final String error,
-      final MultipleChoiceResponse? multipleChoiceResponse,
-      final MultipleChoiceResponse? listSearch,
+      final item.MultipleChoiceResponse? multipleChoiceResponse,
+      final item.MultipleChoiceResponse? listSearch,
       final ListHistoryMyExam? listHistoryMyExam}) = _$QuizStateDataImpl;
 
   @override
   String get error;
   @override
-  MultipleChoiceResponse? get multipleChoiceResponse;
+  item.MultipleChoiceResponse? get multipleChoiceResponse;
   @override
-  MultipleChoiceResponse? get listSearch;
+  item.MultipleChoiceResponse? get listSearch;
   @override
   ListHistoryMyExam? get listHistoryMyExam;
   @override

@@ -38,7 +38,7 @@ class ResultObj {
   final String? id;
   final MultipleChoiceResponseDto? multipleChoiceResponseDto;
   final UserShort? userShortDto;
-  final int? scores;
+  final double? scores;
   final int? completionTime;
   final DateTime? starDate;
 
@@ -55,7 +55,7 @@ class ResultObj {
     String? id,
     MultipleChoiceResponseDto? multipleChoiceResponseDto,
     UserShort? userShortDto,
-    int? scores,
+    double? scores,
     int? completionTime,
     DateTime? starDate,
   }) =>

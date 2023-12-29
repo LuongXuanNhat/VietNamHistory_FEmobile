@@ -539,4 +539,9 @@ class DataRepository implements RestClient {
       {required String keyword}) {
     return client!.searchMultipleChoice(keyword: keyword);
   }
+
+  @override
+  Future<ListDocumentResponse> searchDocument({required String keyword}) {
+    return client!.searchDocument(keyword: keyword);
+  }
 }

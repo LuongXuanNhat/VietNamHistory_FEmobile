@@ -12,6 +12,7 @@ import '../../common/global_colors.dart';
 
 import '../../models/user/user_pres.dart';
 import '../../route_generator.dart';
+import '../profile_user_screen/profile_dialog.dart';
 import 'cubit/detail_post_cubit.dart';
 import 'submit/like/cubit/likepost_cubit.dart';
 import 'submit/save/cubit/savepost_cubit.dart';
@@ -104,21 +105,37 @@ class _DetailPostScreenState extends State<DetailPostScreen>
                   children: [
                     Row(
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(50),
-                          child: Image.network(
-                            detail?.resultObj?.userShort?.image ?? '',
-                            errorBuilder: (BuildContext context,
-                                Object exception, StackTrace? stackTrace) {
-                              return const CircleAvatar(
-                                radius: 25,
-                                backgroundImage:
-                                    AssetImage('assets/images/avartar1.png'),
-                              );
-                            },
-                            fit: BoxFit.cover,
-                            width: 50,
-                            height: 50,
+                        GestureDetector(
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return ProfileDialog(
+                                    fullname: detail
+                                            ?.resultObj?.userShort?.fullName ??
+                                        '',
+                                    urlImage:
+                                        detail?.resultObj?.userShort?.image ??
+                                            'https://via.placeholder.com/86x91',
+                                  );
+                                });
+                          },
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(50),
+                            child: Image.network(
+                              detail?.resultObj?.userShort?.image ?? '',
+                              errorBuilder: (BuildContext context,
+                                  Object exception, StackTrace? stackTrace) {
+                                return const CircleAvatar(
+                                  radius: 25,
+                                  backgroundImage:
+                                      AssetImage('assets/images/avartar1.png'),
+                                );
+                              },
+                              fit: BoxFit.cover,
+                              width: 50,
+                              height: 50,
+                            ),
                           ),
                         ),
                         const SizedBox(
@@ -174,10 +191,18 @@ class _DetailPostScreenState extends State<DetailPostScreen>
                                   ],
                                 ),
                                 SizedBox(
-                                  width: size.width * 0.3,
+                                  width: size.width * 0.2,
                                 ),
-                                GestureDetector(
-                                  onTap: () {
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.transparent,
+                                    elevation: 0.0,
+                                    shadowColor: Colors.transparent,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+                                  ),
+                                  onPressed: () {
                                     showDialog(
                                         context: context,
                                         builder: (BuildContext context) {
@@ -362,6 +387,7 @@ class _DetailPostScreenState extends State<DetailPostScreen>
                                   },
                                   child: const FaIcon(
                                     FontAwesomeIcons.ellipsisVertical,
+                                    color: Colors.black54,
                                     size: 20,
                                   ),
                                 ),

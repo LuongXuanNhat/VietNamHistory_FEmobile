@@ -355,4 +355,9 @@ abstract class RestClient {
   Future<MultipleChoiceResponse> searchMultipleChoice({
     @Query('keyWord') required String keyword,
   });
+
+  @GET('/Document/Search')
+  Future<ListDocumentResponse> searchDocument({
+    @Query('keyWord') required String keyword,
+  });
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'models/post/response/add_post_response.dart';
 
 import 'models/user/response/user_response.dart';
@@ -7,8 +8,8 @@ import 'screens/create_post_screen/create_post_screen.dart';
 import 'screens/detail_post_screen/detail_post_screen.dart';
 import 'screens/detail_post_screen/submit/comment/comment_box.dart';
 import 'screens/detail_post_screen/submit/comment/submit/edit_comment.dart';
-import 'screens/document_screen/detail_document/detail_document_screen.dart';
-import 'screens/document_screen/document_screen.dart';
+import 'screens/document_screen/detail_document/detail_documentPDF_screen.dart';
+import 'screens/document_screen/detail_documentDOCX_screen.dart';
 import 'screens/edit_post_screen/edit_post_screen.dart';
 import 'screens/errors_screen/not_found_screen.dart';
 import 'screens/forgot_pass_screen/forgot_pass_screen.dart';
@@ -62,7 +63,7 @@ class RouteGenerator {
   static const String detailQuestionScreen = '/detail_question_screen';
   static const String editCommnetScreen = '/edit_comment';
   static const String updateQuestionScreen = '/update_question_screen';
-  static const String documentScreen = '/document_screen';
+  static const String documentDOCXScreen = '/detail_documentDOCX_screen';
   static const String editAnswerScreen = '/edit_answer_screen';
 
   static const String forgotPassScreen = '/forgot_pass_screen';
@@ -76,8 +77,7 @@ class RouteGenerator {
   static const String quizOverView = '/quiz_overview_screen';
   static const String resultQuizScreen = '/result_screen';
   static const String answerCheckScreen = '/answer_check_screen';
-  static const String deepLinkPrefix = "yourapp://";
-  static const String detailPostDeepLink = '${deepLinkPrefix}detail_post';
+  static const String profileUserScreen = '/profile_user_screen';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -170,6 +170,7 @@ class RouteGenerator {
         return MaterialPageRoute(
             builder: (context) => DiscoverScreen.provider(),
             settings: settings);
+
       case reportPostScreen:
         final args = settings.arguments as Map<String, dynamic>?;
         final postDetail = args!['PostDetail'] as ResultObj;
@@ -229,9 +230,11 @@ class RouteGenerator {
           settings: settings,
         );
 
-      case documentScreen:
+      case documentDOCXScreen:
+        final args = settings.arguments as Map<String, dynamic>?;
+        final idDoc = args!['idDoc'] as String;
         return MaterialPageRoute(
-          builder: (context) => DocumentScreen.provider(),
+          builder: (context) => WordViewer.provider(idDoc: idDoc),
           settings: settings,
         );
 
@@ -265,7 +268,7 @@ class RouteGenerator {
 
       case newsScreen:
         return MaterialPageRoute(
-          builder: (context) => NewsScreen.provider(),
+          builder: (context) => NewsScreen.providers(),
           settings: settings,
         );
 
@@ -273,7 +276,7 @@ class RouteGenerator {
         final args = settings.arguments as Map<String, dynamic>?;
         final idDoc = args!['idDoc'] as String;
         return MaterialPageRoute(
-          builder: (context) => DetailDocumentScreen.provider(idDoc: idDoc),
+          builder: (context) => DetailDocumentPDFScreen.provider(idDoc: idDoc),
           settings: settings,
         );
 

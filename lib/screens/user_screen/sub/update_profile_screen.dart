@@ -222,7 +222,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
                                 fontWeight: FontWeight.w400,
                                 color: Colors.black,
                                 fontFamily: 'Inter'),
-                            items: const ['Male', 'Female', 'Other'],
+                            items: const ['Nam', 'Nữ', 'Khác'],
                             controller: select),
                       ),
                       const SizedBox(
@@ -356,11 +356,11 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
                                         email: widget.userDetail?.email ?? '',
                                         fullname: txtFullname.text,
                                         dateOfBirth: datetime.toIso8601String(),
-                                        gender: select.text == 'Other'
-                                            ? 3
-                                            : select.text == 'Male'
+                                        gender: select.text == 'Khác'
+                                            ? 2
+                                            : select.text == 'Nam'
                                                 ? 0
-                                                : 2,
+                                                : 1,
                                         phoneNumber: txtPhoneNumber.text,
                                         introduction: txtIntroduction.text);
                               },
